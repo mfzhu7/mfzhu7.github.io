@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Tree," />
+  <meta name="keywords" content="String," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="Greater Tree题目描述： 给定一颗二叉搜索树的头结点，将树中的每个节点变大；变大的规则在于：对于某个节点而言，找到树中大于该节点值的所有节点值的和，并将其加到该节点上。  例子： 这是leetcode上的题目  解题思路： 初看题目可能觉得比较麻烦，因为要找到所有的大于某个节点的和。但是注意题目中给定的：这棵树是二叉搜索树。我们可以利用右侧节点大于根节点；左侧节点小于根节点这个特性来解题">
-<meta name="keywords" content="Tree">
+<meta name="description" content="Valid Parentheses(括号构成的字符串有效)题目描述： 给定一个字符串由括号构成；判断其是否有效。  例子：  解题思路： 对于这种题目；主要利用栈的数据结构来判断。我们可以将碰到左括号的字符全部入栈；然后一旦碰到右括号；就从栈顶弹出字符，并且判断这两个字符是否能够构成合法的字符串直到栈为空。需要注意的是，假设字符前部的字符都有效，但是末尾是一个左括号，这样需要在函数末尾判断当前栈是">
+<meta name="keywords" content="String">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Greater Tree">
-<meta property="og:url" content="http://yoursite.com/2017/04/07/变大树/index.html">
+<meta property="og:title" content="Is Valid Parentheses">
+<meta property="og:url" content="http://yoursite.com/2017/04/08/判断由括号构成的字符串是否有效/index.html">
 <meta property="og:site_name" content="Tech">
-<meta property="og:description" content="Greater Tree题目描述： 给定一颗二叉搜索树的头结点，将树中的每个节点变大；变大的规则在于：对于某个节点而言，找到树中大于该节点值的所有节点值的和，并将其加到该节点上。  例子： 这是leetcode上的题目  解题思路： 初看题目可能觉得比较麻烦，因为要找到所有的大于某个节点的和。但是注意题目中给定的：这棵树是二叉搜索树。我们可以利用右侧节点大于根节点；左侧节点小于根节点这个特性来解题">
-<meta property="og:updated_time" content="2017-04-07T13:03:02.000Z">
+<meta property="og:description" content="Valid Parentheses(括号构成的字符串有效)题目描述： 给定一个字符串由括号构成；判断其是否有效。  例子：  解题思路： 对于这种题目；主要利用栈的数据结构来判断。我们可以将碰到左括号的字符全部入栈；然后一旦碰到右括号；就从栈顶弹出字符，并且判断这两个字符是否能够构成合法的字符串直到栈为空。需要注意的是，假设字符前部的字符都有效，但是末尾是一个左括号，这样需要在函数末尾判断当前栈是">
+<meta property="og:updated_time" content="2017-04-08T08:55:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Greater Tree">
-<meta name="twitter:description" content="Greater Tree题目描述： 给定一颗二叉搜索树的头结点，将树中的每个节点变大；变大的规则在于：对于某个节点而言，找到树中大于该节点值的所有节点值的和，并将其加到该节点上。  例子： 这是leetcode上的题目  解题思路： 初看题目可能觉得比较麻烦，因为要找到所有的大于某个节点的和。但是注意题目中给定的：这棵树是二叉搜索树。我们可以利用右侧节点大于根节点；左侧节点小于根节点这个特性来解题">
+<meta name="twitter:title" content="Is Valid Parentheses">
+<meta name="twitter:description" content="Valid Parentheses(括号构成的字符串有效)题目描述： 给定一个字符串由括号构成；判断其是否有效。  例子：  解题思路： 对于这种题目；主要利用栈的数据结构来判断。我们可以将碰到左括号的字符全部入栈；然后一旦碰到右括号；就从栈顶弹出字符，并且判断这两个字符是否能够构成合法的字符串直到栈为空。需要注意的是，假设字符前部的字符都有效，但是末尾是一个左括号，这样需要在函数末尾判断当前栈是">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/07/变大树/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/08/判断由括号构成的字符串是否有效/"/>
 
 
 
 
 
-  <title> Greater Tree | Tech </title>
+  <title> Is Valid Parentheses | Tech </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -250,7 +250,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/07/变大树/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/08/判断由括号构成的字符串是否有效/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mfzhu7">
@@ -271,7 +271,7 @@
             
             
               
-                Greater Tree
+                Is Valid Parentheses
               
             
           </h1>
@@ -286,8 +286,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-07T20:56:02+08:00">
-                2017-04-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-08T14:36:02+08:00">
+                2017-04-08
               </time>
             
 
@@ -344,16 +344,15 @@
       
 
       
-        <h3 id="Greater-Tree"><a href="#Greater-Tree" class="headerlink" title="Greater Tree"></a>Greater Tree</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一颗二叉搜索树的头结点，将树中的每个节点变大；变大的规则在于：对于某个节点而言，找到树中大于该节点值的所有节点值的和，并将其加到该节点上。</p>
+        <h3 id="Valid-Parentheses-括号构成的字符串有效"><a href="#Valid-Parentheses-括号构成的字符串有效" class="headerlink" title="Valid Parentheses(括号构成的字符串有效)"></a>Valid Parentheses(括号构成的字符串有效)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一个字符串由括号构成；判断其是否有效。</p>
 </blockquote>
 <h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>这是leetcode上的<a href="https://leetcode.com/problems/convert-bst-to-greater-tree/" target="_blank" rel="external">题目</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>初看题目可能觉得比较麻烦，因为要找到所有的大于某个节点的和。但是注意题目中给定的：这棵树是二叉搜索树。我们可以利用右侧节点大于根节点；左侧节点小于根节点这个特性来解题。我们从最右侧节点开始，对于最右侧节点而言，其为最大，所以不需要改变；对于这个节点的父母节点我们需要将其右侧的节点的和加上即可；所以在遍历的过程中不断的将遍历的过程节点累加即可。</p>
+<p>对于这种题目；主要利用栈的数据结构来判断。我们可以将碰到左括号的字符全部入栈；然后一旦碰到右括号；就从栈顶弹出字符，并且判断这两个字符是否能够构成合法的字符串直到栈为空。需要注意的是，假设字符前部的字符都有效，但是末尾是一个左括号，这样需要在函数末尾判断当前栈是否为空，不为空的情况也是不合法的字符串。</p>
 </blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">int</span> cur_sum = <span class="number">0</span>;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">convertBST</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        greater(root);</div><div class="line">        <span class="keyword">return</span> root;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">greater</span><span class="params">(TreeNode* &amp;head)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!head) <span class="keyword">return</span>;</div><div class="line">        <span class="keyword">if</span> (head-&gt;right) greater(head-&gt;right);</div><div class="line">        cur_sum += head-&gt;val;<span class="comment">//计算累加和</span></div><div class="line">        head-&gt;val = cur_sum;<span class="comment">//将右侧的和加上到当前节点</span></div><div class="line">        <span class="keyword">if</span> (head-&gt;left) greater(head-&gt;left);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isValid</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (s.size() &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">char</span>&gt; stk;<span class="comment">//定义栈用于保存数据</span></div><div class="line">        stk.push(s[<span class="number">0</span>]);<span class="comment">//先将首字符入栈</span></div><div class="line">        <span class="keyword">int</span> cur = <span class="number">1</span>; <span class="comment">//记录当前遍历字符的位置</span></div><div class="line">        <span class="keyword">while</span>(cur &lt; s.size())&#123;</div><div class="line">            <span class="keyword">if</span> (s[cur] == <span class="string">'('</span> || s[cur] == <span class="string">'&#123;'</span> || s[cur] == <span class="string">'['</span>)&#123;</div><div class="line">                stk.push(s[cur]);</div><div class="line">                cur++;</div><div class="line">                <span class="comment">//左括号入栈</span></div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                <span class="keyword">if</span> (stk.empty()||(s[cur] == <span class="string">')'</span> &amp;&amp; stk.top() != <span class="string">'('</span>) || (s[cur] == <span class="string">']'</span> &amp;&amp; stk.top() != <span class="string">'['</span>) || (s[cur] == <span class="string">'&#125;'</span> &amp;&amp; stk.top() != <span class="string">'&#123;'</span>))<span class="comment">//右括号判断三种不同的情况和空栈的情况</span></div><div class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">                <span class="keyword">else</span>&#123;</div><div class="line">                    cur++;</div><div class="line">                    stk.pop();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (stk.empty()) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        <span class="comment">//需要在最后判断是否是空栈的情况</span></div><div class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -383,7 +382,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Tree/" rel="tag"># Tree</a>
+            <a href="/tags/String/" rel="tag"># String</a>
           
         </div>
       
@@ -396,18 +395,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/08/判断由括号构成的字符串是否有效/" rel="next" title="Is Valid Parentheses">
-                <i class="fa fa-chevron-left"></i> Is Valid Parentheses
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/06/构建搜索二叉树/" rel="prev" title="Binary Search Tree">
-                Binary Search Tree <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/07/变大树/" rel="prev" title="Greater Tree">
+                Greater Tree <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -537,7 +532,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Greater-Tree"><span class="nav-number">1.</span> <span class="nav-text">Greater Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子："><span class="nav-number">3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">4.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">5.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Valid-Parentheses-括号构成的字符串有效"><span class="nav-number">1.</span> <span class="nav-text">Valid Parentheses(括号构成的字符串有效)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子："><span class="nav-number">3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">4.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">5.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
             
 
           </div>
