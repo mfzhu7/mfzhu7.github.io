@@ -250,6 +250,305 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/30/判断树是否包含另外一棵树的全部拓扑结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/30/判断树是否包含另外一棵树的全部拓扑结构/" itemprop="url">
+                  Tree Contain Another Tree
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T13:36:02+08:00">
+                2017-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Tree-Contain-Another-Tree-判断一棵树是否包含另外一棵树的全部拓扑结构"><a href="#Tree-Contain-Another-Tree-判断一棵树是否包含另外一棵树的全部拓扑结构" class="headerlink" title="Tree Contain Another Tree(判断一棵树是否包含另外一棵树的全部拓扑结构)"></a>Tree Contain Another Tree(判断一棵树是否包含另外一棵树的全部拓扑结构)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定两棵树的根节点T1,T2;判断T1中是否包含了T2的全部拓扑结构。</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>主要的想法还是递归解决这个问题。首先我们在寻找两棵树是否相等过程中使用先序遍历的方法。我们可以先判断当前节点的相等关系，如果相等，则递归的判断左节点和右节点；如果不等我们可以判断当前节点的左子树和右子树和目标节点的包含关系。 </p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> treeContains1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">treeContains</span><span class="params">(treeNode* root1, treeNode* root2)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (root2 == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        <span class="keyword">if</span> (root1 == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        <span class="keyword">if</span> (root1-&gt;val == root2-&gt;val)</div><div class="line">            <span class="keyword">return</span> treeContains(root1-&gt;left, root2-&gt;left) &amp;&amp; treeContains(root1-&gt;right, root2-&gt;right);</div><div class="line">           <span class="comment">//如果相等的情况下，我们就各自向下遍历；</span></div><div class="line">        <span class="keyword">if</span> (root1-&gt;val != root2-&gt;val)</div><div class="line">            <span class="keyword">return</span> treeContains(root1-&gt;left, root2) || treeContains(root1-&gt;right, root2);</div><div class="line">            <span class="comment">// 如果不等的情况下，我们就判断当前节点的左节点和右节点和目标节点的依存关系。</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/二叉树的按层遍历/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/29/二叉树的按层遍历/" itemprop="url">
+                  Print Tree By Level
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-29T12:16:02+08:00">
+                2017-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Print-Tree-By-Level-实现树的按层遍历"><a href="#Print-Tree-By-Level-实现树的按层遍历" class="headerlink" title="Print Tree By Level(实现树的按层遍历)"></a>Print Tree By Level(实现树的按层遍历)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一棵树的头结点head，实现按层遍历打印。</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>按层遍历的思路通常是借助于队列数据结构。我们先将节点入队，出队的时候将该节点的左右节点各自入队，当上一层的节点出队结束后，我们继续将刚刚入队的这一层节点出队，实现了按层遍历。我们可以使用两个队列分别来记录上一层和当前层的节点；也可以只用一个队的方法，每次记录当前入队的最后一个节点，下一层遍历的时候我们就只要出队到该节点即可。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> printByLevel1&#123; <span class="comment">//利用两个队的方法</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printByLevel</span><span class="params">(treeNode* root)</span></span>&#123;</div><div class="line">        <span class="built_in">queue</span>&lt;treeNode*&gt; q1;</div><div class="line">        <span class="built_in">queue</span>&lt;treeNode*&gt; q2; <span class="comment">//定义两个队列</span></div><div class="line">        <span class="built_in">queue</span>&lt;treeNode*&gt; tmp;</div><div class="line">        <span class="keyword">int</span> level = <span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        q1.push(root);<span class="comment">//先将根节点入队</span></div><div class="line">        <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Level"</span> &lt;&lt; level &lt;&lt; <span class="string">":"</span>;</div><div class="line">            <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">                <span class="keyword">if</span> (q1.front()-&gt;left != <span class="literal">NULL</span>)&#123;</div><div class="line">                    q2.push(q1.front()-&gt;left);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (q1.front()-&gt;right != <span class="literal">NULL</span>)&#123;</div><div class="line">                    q2.push(q1.front()-&gt;right);</div><div class="line">                &#125;</div><div class="line">                <span class="built_in">cout</span> &lt;&lt; q1.front()-&gt;val &lt;&lt; <span class="string">" "</span>;</div><div class="line">                q1.pop();</div><div class="line">            &#125;<span class="comment">//不断的将当前层的左右节点压入到另外一个队中</span></div><div class="line">            tmp = q2;</div><div class="line">            q2 = q1;</div><div class="line">            q1 = tmp; <span class="comment">//交换当前队和上一层队，对下一层节点遍历</span></div><div class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解法2-只用一个队列的情况"><a href="#解法2-只用一个队列的情况" class="headerlink" title="解法2(只用一个队列的情况)"></a>解法2(只用一个队列的情况)</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">lass printByLevel2&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printByLevel</span><span class="params">(treeNode* head)</span></span>&#123;</div><div class="line">        <span class="built_in">queue</span>&lt;treeNode*&gt; q;</div><div class="line">        treeNode* flag = head; <span class="comment">//保存上一层的最后一个节点</span></div><div class="line">        treeNode* next_flag = <span class="literal">NULL</span>; <span class="comment">//保存当前层的最后一个节点</span></div><div class="line">        q.push(head);</div><div class="line">        <span class="keyword">while</span>(!q.empty())&#123;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; q.front()-&gt;val;</div><div class="line">            <span class="keyword">if</span> (q.front()-&gt;left != <span class="literal">NULL</span>)&#123;</div><div class="line">                q.push(q.front()-&gt;left);</div><div class="line">                next_flag = q.front()-&gt;left; </div><div class="line">                <span class="comment">//左节点入队，更新最后一个节点</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (q.front()-&gt;right != <span class="literal">NULL</span>)&#123;</div><div class="line">                q.push(q.front()-&gt;right);</div><div class="line">                next_flag = q.front()-&gt;right;</div><div class="line">                <span class="comment">//右节点入队，更新最后一个节点</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (q.front() == flag)&#123;</div><div class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">                flag = next_flag;</div><div class="line">                <span class="comment">//如果当前是最后一个节点，输出换行符，更新最后一个节点</span></div><div class="line">            &#125;</div><div class="line">            q.pop();<span class="comment">//出队头节点</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/28/树的序列化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1473,317 +1772,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/23/链表分区/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/23/链表分区/" itemprop="url">
-                  Partition List
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-23T12:36:02+08:00">
-                2017-03-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Partition-List-将链表按照某个值分区"><a href="#Partition-List-将链表按照某个值分区" class="headerlink" title="Partition List(将链表按照某个值分区)"></a>Partition List(将链表按照某个值分区)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个链表的头结点和一个给定值k。将链表按照左侧的节点都小于k，中间的值等于k，右侧的值大于k的排列方式重新连接链表。对于链表各个分区的内部节点并没有要求有序，但是要求和原链表中的节点顺序一致。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 9-&gt;0-&gt;4-&gt;5-&gt;1-&gt;NULL。给定的分区值为3的情况下，我们需要返回的链表为：0-&gt;1-&gt;9-&gt;5-&gt;4-&gt;NULL</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>主要的思路是我们定义3个分区链表，分别保存小于分区值、等于分区值和大于分区值3种。然后遍历链表不断的将链表的节点加入对应的分区链表中，最后再将三个分区链表连接即可。注意的地方有在连接三个分区的时候，需要考虑各个分区中可能是空的情况。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> listPartition1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">listPartition</span><span class="params">(ListNode* head, <span class="keyword">int</span> pivot)</span></span>&#123;</div><div class="line">        ListNode* sh = <span class="literal">NULL</span>;</div><div class="line">        ListNode* se = <span class="literal">NULL</span>; <span class="comment">// 小于分区值的头节点和尾节点</span></div><div class="line">        ListNode* eh = <span class="literal">NULL</span>;</div><div class="line">        ListNode* ee = <span class="literal">NULL</span>; <span class="comment">// 等于分区值的头节点和尾节点</span></div><div class="line">        ListNode* bh = <span class="literal">NULL</span>;</div><div class="line">        ListNode* be = <span class="literal">NULL</span>; <span class="comment">// 大于分区值的头节点和尾节点</span></div><div class="line">        ListNode* next = <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">while</span>(head != <span class="literal">NULL</span>)&#123;</div><div class="line">            next = head-&gt;next;</div><div class="line">            head-&gt;next = <span class="literal">NULL</span>; <span class="comment">// next保存下一个节点后断开当前节点和后续链表的连接</span></div><div class="line">            <span class="keyword">if</span> (head-&gt;val &lt; pivot)&#123;</div><div class="line">                <span class="keyword">if</span> (sh == <span class="literal">NULL</span>)&#123;</div><div class="line">                    sh = head;</div><div class="line">                    se = head;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span>&#123;</div><div class="line">                    se-&gt;next = head;</div><div class="line">                    se = se-&gt;next;</div><div class="line">                &#125;             <span class="comment">// 将符合条件的节点放入对应分区</span></div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (head-&gt;val == pivot)&#123;</div><div class="line">                <span class="keyword">if</span> (eh == <span class="literal">NULL</span>)&#123;</div><div class="line">                    eh = head;</div><div class="line">                    ee = head;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span>&#123;</div><div class="line">                    ee-&gt;next = head;</div><div class="line">                    ee = ee-&gt;next;</div><div class="line">                &#125;          <span class="comment">// 将符合条件的节点放入对应分区</span></div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                <span class="keyword">if</span> (bh == <span class="literal">NULL</span>)&#123;</div><div class="line">                    bh = head;</div><div class="line">                    be = head;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span>&#123;</div><div class="line">                    be-&gt;next = head;</div><div class="line">                    be = be-&gt;next;</div><div class="line">                &#125;        <span class="comment">// 将符合条件的节点放入对应分区</span></div><div class="line">            &#125;</div><div class="line">            head = next; <span class="comment">// 然后head继续遍历</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (sh != <span class="literal">NULL</span>)&#123;</div><div class="line">            <span class="keyword">if</span> (eh != <span class="literal">NULL</span>) &#123;</div><div class="line">                se-&gt;next = eh;</div><div class="line">                ee-&gt;next = bh;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                se-&gt;next = bh;</div><div class="line">            <span class="keyword">return</span> sh;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">if</span> (ee != <span class="literal">NULL</span>) &#123;</div><div class="line">                ee-&gt;next = bh;</div><div class="line">                <span class="keyword">return</span> ee;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> bh;  <span class="comment">//需要注意不同的分区可能为空的情况</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/判断回文链表/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/22/判断回文链表/" itemprop="url">
-                  Palindrome List
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-22T11:52:02+08:00">
-                2017-03-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Palindrome-List-判断链表是否是回文链表"><a href="#Palindrome-List-判断链表是否是回文链表" class="headerlink" title="Palindrome List(判断链表是否是回文链表)"></a>Palindrome List(判断链表是否是回文链表)</h1><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个链表的头结点，判断链表是否是回文结构。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 1-&gt;2-&gt;3-&gt;2-&gt;1-&gt;NULL即为回文链表</p>
-</blockquote>
-<h3 id="解题思路1："><a href="#解题思路1：" class="headerlink" title="解题思路1："></a>解题思路1：</h3><blockquote>
-<p>回文的结构的特点是正序和逆序的访问结果是一致的。所以第一种想法是利用栈结构来逆序链表。首先申请一个栈空间，然后遍历链表，将链表中的数据不断的压栈。然后再次遍历链表和栈，如果出现栈中的数据和链表中的数据不一致的情况即为非回文结构。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> isPalindrome1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(ListNode* head)</span></span>&#123;</div><div class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk; <span class="comment">// 申请栈空间</span></div><div class="line">        ListNode* temp = head;</div><div class="line">        <span class="keyword">while</span>(temp != <span class="literal">NULL</span>)&#123;</div><div class="line">            stk.push(temp-&gt;val);</div><div class="line">            temp = temp-&gt;next;</div><div class="line">        &#125;             <span class="comment">//数据压栈</span></div><div class="line">        <span class="keyword">while</span>(head != <span class="literal">NULL</span>)&#123;</div><div class="line">            <span class="keyword">if</span> (stk.top() != head-&gt;val) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            &#125;          </div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                stk.pop();</div><div class="line">                head = head-&gt;next;</div><div class="line">            &#125;</div><div class="line">        &#125;        <span class="comment">//判断元素是否相同</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="解题思路2"><a href="#解题思路2" class="headerlink" title="解题思路2:"></a>解题思路2:</h3><blockquote>
-<p>在原先的基础上我们可以通过找到链表的中间节点，然后用先前的栈的一半空间即可实现。主要想法是我们可以找到例子中的中间节点3；然后我们可以将后半部分2-&gt;1-&gt;NULL压栈；然后从链表头部和栈顶开始遍历数据判断是否相等即可。</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> isPalindrome2&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(ListNode* head)</span></span>&#123;</div><div class="line">        ListNode* cur = head;</div><div class="line">        ListNode* right = head-&gt;next;</div><div class="line">        <span class="keyword">if</span> (head == <span class="literal">nullptr</span> || right == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        <span class="keyword">while</span>(cur-&gt;next != <span class="literal">nullptr</span> &amp;&amp; cur-&gt;next-&gt;next != <span class="literal">NULL</span>)&#123;</div><div class="line">            right = right-&gt;next;</div><div class="line">            cur = cur-&gt;next-&gt;next;</div><div class="line">        &#125;<span class="comment">//找到中间节点</span></div><div class="line"></div><div class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</div><div class="line">        <span class="keyword">while</span>(right != <span class="literal">NULL</span>)&#123;</div><div class="line">            stk.push(right-&gt;val);</div><div class="line">            right = right-&gt;next;</div><div class="line">        &#125; <span class="comment">//压栈</span></div><div class="line">        <span class="keyword">while</span>(!stk.empty())&#123;</div><div class="line">            <span class="keyword">if</span> (stk.top() != head-&gt;val)</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                stk.pop();</div><div class="line">                head = head-&gt;next;</div><div class="line">            &#125;</div><div class="line">        &#125;<span class="comment">//判断是否相等</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="解题思路3"><a href="#解题思路3" class="headerlink" title="解题思路3:"></a>解题思路3:</h3><blockquote>
-<p>判断回文的过程中，我们遇到的另外一个问题是对于链表我们无法逆序查找，如果可以的话我们就可以直接从链表的头部和尾部同时查找然后判断是否是回文即可。所以基于这个思路，我们可以将链表的后半段改变指针的指向后，然后从左右侧同时开始遍历判断是否相等即可。</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution3 &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome3</span><span class="params">(ListNode* head)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (head-&gt;next == <span class="literal">NULL</span> || head-&gt;next-&gt;next == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        ListNode* n1 = head;</div><div class="line">        ListNode* n2 = head;</div><div class="line">        <span class="keyword">while</span>(n2-&gt;next != <span class="literal">NULL</span> &amp;&amp; n2-&gt;next-&gt;next != <span class="literal">NULL</span>)&#123;</div><div class="line">            n1 = n1-&gt;next;</div><div class="line">            n2 = n2-&gt;next-&gt;next;</div><div class="line">        &#125;             <span class="comment">//快慢指针找到链表的中部节点</span></div><div class="line">        n2 = n1-&gt;next;</div><div class="line">        n1-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        ListNode* n3 = <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">while</span>(n2 != <span class="literal">NULL</span>)&#123;</div><div class="line">            n3 = n2-&gt;next;</div><div class="line">            n2-&gt;next = n1;</div><div class="line">            n1 = n2;</div><div class="line">            n2 = n3;</div><div class="line">        &#125;           <span class="comment">//逆序后半部分链表</span></div><div class="line">        n3 = n1;</div><div class="line">        n2 = head;</div><div class="line">        <span class="keyword">while</span>(n1 != <span class="literal">NULL</span> &amp;&amp; n2 != <span class="literal">NULL</span>)&#123;</div><div class="line">            <span class="keyword">if</span>(n1-&gt;val != n2-&gt;val)&#123;</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                n1 = n1-&gt;next;</div><div class="line">                n2 = n2-&gt;next;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="comment">// 从左右侧同时遍历链表判断值是否相等</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1833,7 +1821,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1844,7 +1832,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
