@@ -260,6 +260,162 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/09/决策树在MNIST数据集上的应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/09/决策树在MNIST数据集上的应用/" itemprop="url">
+                  Decision Tree In MNIST
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T16:45:02+08:00">
+                2017-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="决策树在MNIST数据集上的使用"><a href="#决策树在MNIST数据集上的使用" class="headerlink" title="决策树在MNIST数据集上的使用"></a>决策树在MNIST数据集上的使用</h3><blockquote>
+<p>决策树一个易于实现的分类器，对于很多分类问题我们可以使用它来进行解答。基本的决策树的算法可以参考李航老师的统计机器学习；本文中的主要思路也是基于此。对于决策树而言，主要有三部分的工作需要实现，特征提取，决策树构造和决策树的剪枝。在特征提取部分，常用的是信息增益和信息增益比，分别对应于ID3和C4.5决策树算法，决策树的构造主要是利用递归的思想实现；本文中未涉及到决策树剪枝部分。</p>
+<p>本文中实现的是利用信息增益进行特征提取的ID3决策树。主要需要提及的部分是关于树的节点构造的部分。树的节点中主要包含了节点类型，用于在预测过程中当预测到达叶节点时，返回所属类别；也包含了节点所属类别(只针对叶节点存在)；包含当前节点的最优切分位置(对于非叶节点存在)；以及切分位置取不同值所属的不同子树，用字典保存。</p>
+<p>基本思路是：我们在函数中输入训练数据，训练标签，可切分维度集合和信息增益阈值。</p>
+</blockquote>
+<ul>
+<li><p>首先判断当前训练标签的类数，如果只有一类，我们将其设置为叶节点，节点类别取当前标签，然后返回；然后判断可切分维度的数量，如果不存在切分维度，则取当前训练标签中的最多那一类作为节点的类别，设置节点为叶节点返回；</p>
+</li>
+<li><p>以上情况都不符合的情况下，我们遍历所有的切分点，找到信息增益最大的位置，提取出这一列的值；并根据这一列的不同取值所对应的标签得到下一步的训练数据、训练标签和切分维度集合用于构建子树，并将子树添加到当前树中。</p>
+</li>
+<li>然后不断的递归调用即可</li>
+<li>其中在找到最大信息增益位置的最后需要判断和阈值的关系，在小于阈值的情况下，我们直接构建叶节点和所属类别返回。</li>
+</ul>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> math</div><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div><div class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</div><div class="line"></div><div class="line"><span class="comment"># 容易混淆的是，feature是指用特征中的哪一维进行切分</span></div><div class="line"><span class="comment"># index是指当前还剩下可以用于切分的维数的集合</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tree</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, node_type, category=None, feature=None)</span>:</span></div><div class="line">        self.node_type = node_type</div><div class="line">        <span class="comment"># 节点类型，分为内部节点和叶节点</span></div><div class="line">        self.category = category</div><div class="line">        <span class="comment"># 如果是叶节点的情况，该值记录节点的所属类别</span></div><div class="line">        self.feature = feature</div><div class="line">        <span class="comment"># 如果是内部节点，该值记录切分位置</span></div><div class="line">        self.dic = &#123;&#125;</div><div class="line">        <span class="comment"># 用来保存切分点不同取值所对应的子树</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_tree</span><span class="params">(self, value, tree)</span>:</span></div><div class="line">        self.dic[value] = tree</div><div class="line">        <span class="comment"># 将子树添加到当前树中</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, feature_list)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.node_type == <span class="string">"lef"</span>:</div><div class="line">            <span class="keyword">return</span> self.category</div><div class="line"></div><div class="line">        tree = self.dic[feature_list[self.feature]]</div><div class="line">        <span class="keyword">return</span> tree.predict(feature_list)</div><div class="line">        <span class="comment"># 预测给定特征的所属类别</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary</span><span class="params">(data, threshold)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"></div><div class="line">    :param data: 需要二值化的数据</div><div class="line">    :param threshold: 二值化的阈值</div><div class="line">    :return: 二值化后的数据</div><div class="line">    """</div><div class="line">    data[data &gt; threshold] = <span class="number">255</span></div><div class="line">    data[data &lt;= threshold] = <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calculate_entropy</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"></div><div class="line">    :param x: 待计算的特征向量</div><div class="line">    :return: 返回特征向量的熵</div><div class="line">    """</div><div class="line">    catogory_list = set(x)</div><div class="line">    ent = <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="keyword">for</span> catogory <span class="keyword">in</span> catogory_list:</div><div class="line">        probability = x[x == catogory].shape[<span class="number">0</span>] / x.shape[<span class="number">0</span>]</div><div class="line">        ent = ent + probability * math.log2(probability)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">-1</span> * ent</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">conditonal_entropy</span><span class="params">(x, y)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"></div><div class="line">    :param x: 条件特征向量</div><div class="line">    :param y: 标签特征向量</div><div class="line">    :return: 返回条件熵</div><div class="line">    """</div><div class="line">    catogory_list = set(x)</div><div class="line">    conditional_ent = <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="keyword">for</span> catogory <span class="keyword">in</span> catogory_list:</div><div class="line">        sub_set = y[x == catogory]</div><div class="line">        conditional_ent += (sub_set.shape[<span class="number">0</span>] / x.shape[<span class="number">0</span>]) * calculate_entropy(sub_set)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> conditional_ent</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">information_gain</span><span class="params">(x, y)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :return: 返回信息增益</div><div class="line">    """</div><div class="line">    <span class="keyword">return</span> calculate_entropy(y) - conditonal_entropy(x, y)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">recursive_train</span><span class="params">(train_data, train_label, index, threashold)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"></div><div class="line">    :param train_data: 训练数据</div><div class="line">    :param train_label: 训练的标签</div><div class="line">    :param index: 特征的索引列表</div><div class="line">    :param threashold: 阈值</div><div class="line">    :return: 决策树头结点</div><div class="line">    """</div><div class="line">    most_common = Counter(train_label).most_common(<span class="number">1</span>)</div><div class="line">    <span class="comment"># 得到标签中出现最多的类别</span></div><div class="line">    max_infor_gain = <span class="number">0</span></div><div class="line">    <span class="comment"># 记录最大信息增益</span></div><div class="line">    max_entropy_index = <span class="number">0</span></div><div class="line">    <span class="comment"># 记录最大信息增益所属的列</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> len(set(train_label)) == <span class="number">1</span>:</div><div class="line">        <span class="keyword">return</span> Tree(<span class="string">"lef"</span>, category=train_label[<span class="number">0</span>])</div><div class="line">    <span class="comment"># 如果当前标签只有一类的情况</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> len(index) == <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> Tree(<span class="string">"lef"</span>, category=most_common[<span class="number">0</span>][<span class="number">0</span>])</div><div class="line">    <span class="comment"># 如果没有可以继续切分的特征</span></div><div class="line"></div><div class="line">    <span class="keyword">for</span> col <span class="keyword">in</span> index:</div><div class="line"></div><div class="line">        condition_data = train_data[:, col]</div><div class="line">        current_gain = information_gain(condition_data, train_label)</div><div class="line">        <span class="comment"># 找到每个切分点计算信息增益</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> current_gain &gt; max_infor_gain:</div><div class="line">            max_infor_gain = current_gain</div><div class="line">            max_entropy_index = col</div><div class="line">        <span class="comment"># 找到最大的信息增益和其对应的列</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> max_infor_gain &lt; threashold:</div><div class="line">        <span class="keyword">return</span> Tree(<span class="string">"lef"</span>, category=most_common[<span class="number">0</span>][<span class="number">0</span>])</div><div class="line">    <span class="comment"># 如果小于阈值，直接返回叶节点，类别取出现最多的那个标签</span></div><div class="line"></div><div class="line">    tree = Tree(<span class="string">"internal"</span>, feature=max_entropy_index)</div><div class="line">    <span class="comment"># 构建树，节点类型为内部节点，切分点最大信息增益切分</span></div><div class="line"></div><div class="line">    max_feature_list = train_data[:, max_entropy_index]</div><div class="line">    <span class="comment"># 提取出用于切分的那一列</span></div><div class="line">    feature_value_list = set(max_feature_list)</div><div class="line">    <span class="comment"># 找到切分列中的不同取值列表</span></div><div class="line">    next_index = list(filter(<span class="keyword">lambda</span> x: x != max_entropy_index, index))</div><div class="line">    <span class="comment"># 得到子树的切分列表</span></div><div class="line"></div><div class="line">    <span class="keyword">for</span> value <span class="keyword">in</span> feature_value_list:</div><div class="line">        next_train_set = train_data[max_feature_list == value]</div><div class="line">        <span class="comment"># 得到子树的训练集</span></div><div class="line">        next_train_label = train_label[max_feature_list == value]</div><div class="line">        <span class="comment"># 子树的训练标签</span></div><div class="line">        next_tree = recursive_train(next_train_set, next_train_label, next_index, threashold)</div><div class="line">        <span class="comment"># 得到子树</span></div><div class="line">        tree.add_tree(value, next_tree)</div><div class="line">        <span class="comment"># 将子树按照不同的切分值添加到当前树中</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> tree</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line"></div><div class="line">    raw_path = <span class="string">r'F:\work and learn\ML\dataset\MNIST\train.csv'</span></div><div class="line">    <span class="comment"># 原始数据</span></div><div class="line">    test_path = <span class="string">r'F:\work and learn\ML\dataset\MNIST\test.csv'</span></div><div class="line">    <span class="comment"># 训练数据</span></div><div class="line">    index = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">784</span>)]</div><div class="line">    <span class="comment"># 初始的切分标签列表</span></div><div class="line"></div><div class="line">    raw_data = np.loadtxt(raw_path, delimiter=<span class="string">','</span>, skiprows=<span class="number">1</span>)</div><div class="line">    label = raw_data[:, <span class="number">0</span>]</div><div class="line">    data = raw_data[:, <span class="number">1</span>:]</div><div class="line">    <span class="comment"># 得到标签和训练数据</span></div><div class="line"></div><div class="line">    data = binary(data, <span class="number">100</span>)</div><div class="line">    tree = recursive_train(data, label, index, <span class="number">0.1</span>)</div><div class="line">    <span class="comment"># 二值化后进行训练</span></div><div class="line"></div><div class="line">    test_data = np.loadtxt(test_path, delimiter=<span class="string">','</span>, skiprows=<span class="number">1</span>)</div><div class="line">    test_data = binary(test_data, <span class="number">100</span>)</div><div class="line">    <span class="comment"># 得到测试数据，并进行二值化</span></div><div class="line"></div><div class="line">    result = []</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(test_data.shape[<span class="number">0</span>]):</div><div class="line">        print(i)</div><div class="line">        result.append(tree.predict(test_data[i]))</div><div class="line">    <span class="comment"># 对于每个训练数据进行预测其所属类别</span></div><div class="line"></div><div class="line">    index = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">28001</span>)]</div><div class="line">    res = pd.DataFrame(index, columns=[<span class="string">'ImageId'</span>])</div><div class="line">    res[<span class="string">'Label'</span>] = result</div><div class="line">    res.to_csv(<span class="string">r"C:\Users\PC\Desktop\result12.csv"</span>, index=<span class="keyword">False</span>)</div><div class="line"></div><div class="line">    <span class="comment"># 保存结果</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/09/生存游戏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1662,166 +1818,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/31/字符串中的最长回文子串/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/31/字符串中的最长回文子串/" itemprop="url">
-                  Longest Palindromic Substring
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-31T20:36:02+08:00">
-                2017-03-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Longest-Palindromic-Substring-最长的回文子串"><a href="#Longest-Palindromic-Substring-最长的回文子串" class="headerlink" title="Longest Palindromic Substring(最长的回文子串)"></a>Longest Palindromic Substring(最长的回文子串)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个字符串，找到字符串中的最长回文子串。</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>本题的常见解法有三种。第一种是中心扩展的方法。在遍历字符串的过程，以当前字符串为中心向左右两侧扩展，扩展结束后判断子串的长度。需要注意的是：这种方法中有偶回文串和奇数回文串的区别，遍历的过程需要区别对待。aba奇回文子串，abba是偶回文子串。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">longestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> max_length = <span class="number">1</span>;<span class="comment">//记录最长串的长度</span></div><div class="line">        <span class="built_in">string</span> res = s.substr(<span class="number">0</span>,<span class="number">1</span>);<span class="comment">//以第一个字母为初始值回文串</span></div><div class="line"></div><div class="line">        <span class="keyword">int</span> left = <span class="number">0</span>; <span class="comment">//记录向左扩展的下标</span></div><div class="line">        <span class="keyword">int</span> right = <span class="number">0</span>;<span class="comment">//记录向右扩展的下标</span></div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); i++)&#123;</div><div class="line">            left = i;</div><div class="line">            right = i;</div><div class="line">            <span class="keyword">while</span>((left &gt;= <span class="number">0</span>) &amp;&amp; (right &lt; s.size()) &amp;&amp; (s[left] == s[right]))&#123;</div><div class="line">                left--;</div><div class="line">                right++;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//判断奇回文串；如果下标满足要求并且左右相等的情况，左右扩展</span></div><div class="line">            </div><div class="line">            <span class="keyword">if</span> ((right - left - <span class="number">1</span>) &gt; max_length)&#123;</div><div class="line">                max_length = right - left - <span class="number">1</span>;</div><div class="line">                res = s.substr(left + <span class="number">1</span>, max_length);</div><div class="line">            &#125;<span class="comment">//如果比当前长度长，改变长度和返回值</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size() - <span class="number">1</span>; i++)&#123;</div><div class="line">            <span class="keyword">if</span> (s[i] == s[i + <span class="number">1</span>])&#123;</div><div class="line">                left = i - <span class="number">1</span>;</div><div class="line">                right = i + <span class="number">2</span>;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            &#125;<span class="comment">//如果没有连续的两个字母相等，则当前遍历不可能是偶回文串</span></div><div class="line">            </div><div class="line">            <span class="keyword">while</span>((left &gt;= <span class="number">0</span>) &amp;&amp; (right &lt; s.size()) &amp;&amp; (s[left] == s[right]))&#123;</div><div class="line">                left--;</div><div class="line">                right++;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//符合条件则左右扩展</span></div><div class="line">            <span class="keyword">if</span> ((right - left - <span class="number">1</span>) &gt; max_length)&#123;</div><div class="line">                max_length = right - left - <span class="number">1</span>;</div><div class="line">                res = s.substr(left + <span class="number">1</span>, max_length);</div><div class="line">            &#125;<span class="comment">//改变最长长度和返回值</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="解题思路2："><a href="#解题思路2：" class="headerlink" title="解题思路2："></a>解题思路2：</h3><blockquote>
-<p>第二种思路是使用动态规划的方法。我们用P[i, j]表示字符串中i到j位置的子串；如果这个串是回文字符串则我们设定为1；如果这个子串不是回文字符串我们则设定为0。这样我们构建一个二维的数组用来保存是否是回文的信息；然后根据一下三种情况来进行修改数组中的信息。</p>
-</blockquote>
-<ul>
-<li>如果i = j的情况，则P[i,j]设定为1；</li>
-<li>如果j = i + 1情况，则判断s[i]和s[j]是否相等；相等为1否则为1；</li>
-<li>如果j &gt; i + 1的情况，我们先判断s[i]和s[j]的情况，不相等则设定为1；如果相等的情况下则P[i,j] = P[i+1,j-1]</li>
-</ul>
-<blockquote>
-<p>需要注意的地方是，我们则判断P[i, j]的时候用的是P[i + 1, j - 1]的情况，所以我们需要先知道P[i + 1,j - 1]的情况，这样决定了我们i需要从末尾开始遍历开始，然后j从i位置遍历到字符串的末尾。</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">longestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (s.size() == <span class="number">0</span>) <span class="keyword">return</span> s;</div><div class="line">        <span class="keyword">int</span> max_length = <span class="number">1</span>;<span class="comment">//记录当前的最长长度</span></div><div class="line">        <span class="built_in">string</span> res = s.substr(<span class="number">0</span>, <span class="number">1</span>);<span class="comment">//设定第一个为结果</span></div><div class="line">        <span class="keyword">int</span> dp[s.size()][s.size()] = &#123;<span class="number">0</span>&#125;;<span class="comment">//设定全部动态数组为0</span></div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = s.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</div><div class="line">        <span class="comment">//i从末尾开始遍历起</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; s.size(); j++)&#123;</div><div class="line">            <span class="comment">//j从i开始遍历到字符串末尾</span></div><div class="line">                <span class="keyword">if</span> (s[i] == s[j] &amp;&amp; (j - i &lt;= <span class="number">1</span> || dp[i + <span class="number">1</span>][j - <span class="number">1</span>]))&#123;</div><div class="line">     <span class="comment">//这里面先判断了当前两个位置的字符是否相等的情况，只有相等后才有后序判断</span></div><div class="line">     <span class="comment">//如果相等；间隔小于等于1的情况直接设定为1；不然根据P[i + 1, j - 1]的情况</span></div><div class="line">                    dp[i][j] = <span class="number">1</span>;</div><div class="line">                    <span class="keyword">if</span> (j - i + <span class="number">1</span> &gt; max_length)&#123;</div><div class="line">                        max_length = j - i + <span class="number">1</span>;</div><div class="line">                        res = s.substr(i, j - i + <span class="number">1</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">       <span class="keyword">return</span> res; </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1871,7 +1867,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1882,7 +1878,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1893,7 +1889,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
