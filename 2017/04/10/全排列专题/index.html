@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Matrix," />
+  <meta name="keywords" content="permutation," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="Game Life(生存游戏)题目描述： 给定一个矩阵，矩阵中只包含着0，1数字。有如下游戏规则：   如果矩阵中的一个点当前值为1，且其周围为1的个数大于3或者小于2的时候，下一轮这个点为0； 如果矩阵中的一个点当前值为0，当且仅当周围为1的个数为3的时候，这个点下一轮为1；   要求在O(1)的空间下找到下一轮的每个点的生存情况。  例子： 详细说明见leetcode  解题思路： 本题主要是">
-<meta name="keywords" content="Matrix">
+<meta name="description" content="全排列专题题目描述： 全排列是面试中经常出现的题目，所以这边有需要做一下关于这一类的专题。首先我们从最简单的题目开始。给定一个数组，根据全排列的规律，找到当前排列的下一个全排列。 我们已知对于1，2，3排列而言，它的全排列依次如下： 1-2-3 1-3-2 2-1-3 2-3-1 3-1-2 3-2-1  例子： 以数组[1,3,8,7,6,5,4,2]为例子，我们首先找到第一次出现降序的位置3；">
+<meta name="keywords" content="permutation">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Game Life">
-<meta property="og:url" content="http://yoursite.com/2017/04/09/生存游戏/index.html">
+<meta property="og:title" content="Permutation">
+<meta property="og:url" content="http://yoursite.com/2017/04/10/全排列专题/index.html">
 <meta property="og:site_name" content="Tech">
-<meta property="og:description" content="Game Life(生存游戏)题目描述： 给定一个矩阵，矩阵中只包含着0，1数字。有如下游戏规则：   如果矩阵中的一个点当前值为1，且其周围为1的个数大于3或者小于2的时候，下一轮这个点为0； 如果矩阵中的一个点当前值为0，当且仅当周围为1的个数为3的时候，这个点下一轮为1；   要求在O(1)的空间下找到下一轮的每个点的生存情况。  例子： 详细说明见leetcode  解题思路： 本题主要是">
-<meta property="og:updated_time" content="2017-04-09T06:04:02.000Z">
+<meta property="og:description" content="全排列专题题目描述： 全排列是面试中经常出现的题目，所以这边有需要做一下关于这一类的专题。首先我们从最简单的题目开始。给定一个数组，根据全排列的规律，找到当前排列的下一个全排列。 我们已知对于1，2，3排列而言，它的全排列依次如下： 1-2-3 1-3-2 2-1-3 2-3-1 3-1-2 3-2-1  例子： 以数组[1,3,8,7,6,5,4,2]为例子，我们首先找到第一次出现降序的位置3；">
+<meta property="og:updated_time" content="2017-04-10T06:26:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Game Life">
-<meta name="twitter:description" content="Game Life(生存游戏)题目描述： 给定一个矩阵，矩阵中只包含着0，1数字。有如下游戏规则：   如果矩阵中的一个点当前值为1，且其周围为1的个数大于3或者小于2的时候，下一轮这个点为0； 如果矩阵中的一个点当前值为0，当且仅当周围为1的个数为3的时候，这个点下一轮为1；   要求在O(1)的空间下找到下一轮的每个点的生存情况。  例子： 详细说明见leetcode  解题思路： 本题主要是">
+<meta name="twitter:title" content="Permutation">
+<meta name="twitter:description" content="全排列专题题目描述： 全排列是面试中经常出现的题目，所以这边有需要做一下关于这一类的专题。首先我们从最简单的题目开始。给定一个数组，根据全排列的规律，找到当前排列的下一个全排列。 我们已知对于1，2，3排列而言，它的全排列依次如下： 1-2-3 1-3-2 2-1-3 2-3-1 3-1-2 3-2-1  例子： 以数组[1,3,8,7,6,5,4,2]为例子，我们首先找到第一次出现降序的位置3；">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/09/生存游戏/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/10/全排列专题/"/>
 
 
 
 
 
-  <title> Game Life | Tech </title>
+  <title> Permutation | Tech </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/09/生存游戏/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/10/全排列专题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mfzhu7">
@@ -281,7 +281,7 @@
             
             
               
-                Game Life
+                Permutation
               
             
           </h1>
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T13:56:02+08:00">
-                2017-04-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T14:36:02+08:00">
+                2017-04-10
               </time>
             
 
@@ -354,23 +354,23 @@
       
 
       
-        <h3 id="Game-Life-生存游戏"><a href="#Game-Life-生存游戏" class="headerlink" title="Game Life(生存游戏)"></a>Game Life(生存游戏)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个矩阵，矩阵中只包含着0，1数字。有如下游戏规则：</p>
-</blockquote>
-<ul>
-<li>如果矩阵中的一个点当前值为1，且其周围为1的个数大于3或者小于2的时候，下一轮这个点为0；</li>
-<li>如果矩阵中的一个点当前值为0，当且仅当周围为1的个数为3的时候，这个点下一轮为1；</li>
-</ul>
-<blockquote>
-<p>要求在O(1)的空间下找到下一轮的每个点的生存情况。</p>
+        <h3 id="全排列专题"><a href="#全排列专题" class="headerlink" title="全排列专题"></a>全排列专题</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>全排列是面试中经常出现的题目，所以这边有需要做一下关于这一类的专题。首先我们从最简单的题目开始。给定一个数组，根据全排列的规律，找到当前排列的下一个全排列。</p>
+<p>我们已知对于1，2，3排列而言，它的全排列依次如下：<br> 1-2-3 1-3-2 2-1-3 2-3-1 3-1-2 3-2-1</p>
 </blockquote>
 <h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>详细说明见<a href="https://leetcode.com/problems/game-of-life/" target="_blank" rel="external">leetcode</a></p>
+<p>以数组[1,3,8,7,6,5,4,2]为例子，我们首先找到第一次出现降序的位置3；再找到第一次比3大的位置4；交换二者的数据得到[1,4,8,7,6,5,3,2]；再将4后面的数组逆序即可得到[1,4,2,3,5,6,7,8]</p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>本题主要是在于空间上我们不能利用保存一个和当前矩阵相同的矩阵用来判断下一轮的节点情况；所以这边主要利用的是哈希表，我们建立一个哈希表；分别表示由1变1，由0变0，由1变0，由0变1的4种情况。在遍历矩阵的过程中，找到周围的8个点，从哈希表中找到对应的上一轮的节点情况用来判断当前节点的下一轮的情况。</p>
+<p>初看例子我们还无法看出前后排列之间的关系。通过网上资料查询我们可以知道，从当前排列得到下一个排列的算法：</p>
 </blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">gameOfLife</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; board)</span> </span>&#123;</div><div class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; hash = &#123;&#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">-2</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">0</span>&#125;&#125;;</div><div class="line">        <span class="comment">//表示4种变化情况</span></div><div class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> row = board.size();</div><div class="line">        <span class="keyword">int</span> col = board[<span class="number">0</span>].size();</div><div class="line">        <span class="comment">//找到行和列</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; col; j++)&#123;</div><div class="line">                count = <span class="number">0</span>;</div><div class="line">                count += (i - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; j - <span class="number">1</span> &gt;= <span class="number">0</span>) ? hash[board[i - <span class="number">1</span>][j - <span class="number">1</span>]] : <span class="number">0</span>;</div><div class="line">                count += (i - <span class="number">1</span> &gt;= <span class="number">0</span>) ? hash[board[i - <span class="number">1</span>][j]] : <span class="number">0</span>;</div><div class="line">                count += (i - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; j + <span class="number">1</span> &lt; col) ? hash[board[i - <span class="number">1</span>][j + <span class="number">1</span>]] : <span class="number">0</span>;</div><div class="line">                count += (j - <span class="number">1</span> &gt;= <span class="number">0</span>) ? hash[board[i][j - <span class="number">1</span>]] : <span class="number">0</span>;</div><div class="line">                count += (j + <span class="number">1</span> &lt; col) ? hash[board[i][j + <span class="number">1</span>]] : <span class="number">0</span>;</div><div class="line">                count += (i + <span class="number">1</span> &lt; row &amp;&amp; j - <span class="number">1</span> &gt;= <span class="number">0</span>) ? hash[board[i + <span class="number">1</span>][j - <span class="number">1</span>]] : <span class="number">0</span>;</div><div class="line">                count += (i + <span class="number">1</span> &lt; row) ? hash[board[i + <span class="number">1</span>][j]] : <span class="number">0</span>;</div><div class="line">                count += (i + <span class="number">1</span> &lt; row &amp;&amp; j + <span class="number">1</span> &lt; col) ? hash[board[i + <span class="number">1</span>][j + <span class="number">1</span>]]: <span class="number">0</span>; </div><div class="line">                <span class="comment">//计算周围8个节点的情况</span></div><div class="line">                <span class="keyword">if</span> (board[i][j] == <span class="number">1</span> &amp;&amp; (count &gt; <span class="number">3</span> || count &lt; <span class="number">2</span>))</div><div class="line">                    board[i][j] = <span class="number">-2</span>;</div><div class="line">                    <span class="comment">//针对两种情况进行变化</span></div><div class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (board[i][j] == <span class="number">0</span> &amp;&amp; count == <span class="number">3</span>)</div><div class="line">                    board[i][j] = <span class="number">-1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; col; j++)&#123;</div><div class="line">                <span class="keyword">if</span> (board[i][j] == <span class="number">-1</span>)</div><div class="line">                    board[i][j] = <span class="number">1</span>;</div><div class="line">                <span class="keyword">if</span> (board[i][j] == <span class="number">-2</span>)</div><div class="line">                    board[i][j] = <span class="number">0</span>;</div><div class="line">                    <span class="comment">//根据哈希表重建当前表</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>首先我们从数组的末端开始遍历数组，直到第一次遇到num[i] &lt; num[i + 1]的地方</li>
+<li>然后我们从数组末尾开始找到第一次出现比num[i]大的数的位置num[j]</li>
+<li>交换num[i]和num[j]</li>
+<li>将i后面的数组逆序后即可以得到当前排列的下一个排列</li>
+</ul>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">nextPermutation</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> k = <span class="number">-1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.size() - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--)&#123;</div><div class="line">            <span class="keyword">if</span> (nums[i] &lt; nums[i + <span class="number">1</span>])&#123;</div><div class="line">                k = i;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//先找到第一次降序的位置k，如果k是-1说明整个数组降序即为最后一个全排列，直接逆序全数组得到第一个全排列</span></div><div class="line">        <span class="keyword">if</span> (k == - <span class="number">1</span>)&#123;</div><div class="line">            reverse(nums.begin(), nums.end());</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> l = <span class="number">-1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</div><div class="line">            <span class="keyword">if</span> (nums[i] &gt; nums[k])&#123;</div><div class="line">                l = i;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//从数组末尾开始找到第一次大于待交换数字的位置</span></div><div class="line">        swap(nums[l], nums[k]);</div><div class="line">        <span class="comment">//交换二者的数据</span></div><div class="line">        reverse(nums.begin() + k + <span class="number">1</span>, nums.end());</div><div class="line">        <span class="comment">//逆序从降序位置后开始到数组末尾的数字</span></div><div class="line">        </div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -400,7 +400,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Matrix/" rel="tag"># Matrix</a>
+            <a href="/tags/permutation/" rel="tag"># permutation</a>
           
         </div>
       
@@ -413,18 +413,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/09/决策树在MNIST数据集上的应用/" rel="next" title="Decision Tree In MNIST">
-                <i class="fa fa-chevron-left"></i> Decision Tree In MNIST
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/08/判断由括号构成的字符串是否有效/" rel="prev" title="Is Valid Parentheses">
-                Is Valid Parentheses <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/09/决策树在MNIST数据集上的应用/" rel="prev" title="Decision Tree In MNIST">
+                Decision Tree In MNIST <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -554,7 +550,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Game-Life-生存游戏"><span class="nav-number">1.</span> <span class="nav-text">Game Life(生存游戏)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子："><span class="nav-number">3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">4.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">5.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#全排列专题"><span class="nav-number">1.</span> <span class="nav-text">全排列专题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子："><span class="nav-number">3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">4.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">5.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
             
 
           </div>

@@ -260,6 +260,165 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/10/全排列专题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/10/全排列专题/" itemprop="url">
+                  Permutation
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T14:36:02+08:00">
+                2017-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="全排列专题"><a href="#全排列专题" class="headerlink" title="全排列专题"></a>全排列专题</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>全排列是面试中经常出现的题目，所以这边有需要做一下关于这一类的专题。首先我们从最简单的题目开始。给定一个数组，根据全排列的规律，找到当前排列的下一个全排列。</p>
+<p>我们已知对于1，2，3排列而言，它的全排列依次如下：<br> 1-2-3 1-3-2 2-1-3 2-3-1 3-1-2 3-2-1</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>以数组[1,3,8,7,6,5,4,2]为例子，我们首先找到第一次出现降序的位置3；再找到第一次比3大的位置4；交换二者的数据得到[1,4,8,7,6,5,3,2]；再将4后面的数组逆序即可得到[1,4,2,3,5,6,7,8]</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>初看例子我们还无法看出前后排列之间的关系。通过网上资料查询我们可以知道，从当前排列得到下一个排列的算法：</p>
+</blockquote>
+<ul>
+<li>首先我们从数组的末端开始遍历数组，直到第一次遇到num[i] &lt; num[i + 1]的地方</li>
+<li>然后我们从数组末尾开始找到第一次出现比num[i]大的数的位置num[j]</li>
+<li>交换num[i]和num[j]</li>
+<li>将i后面的数组逆序后即可以得到当前排列的下一个排列</li>
+</ul>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">nextPermutation</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> k = <span class="number">-1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.size() - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--)&#123;</div><div class="line">            <span class="keyword">if</span> (nums[i] &lt; nums[i + <span class="number">1</span>])&#123;</div><div class="line">                k = i;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//先找到第一次降序的位置k，如果k是-1说明整个数组降序即为最后一个全排列，直接逆序全数组得到第一个全排列</span></div><div class="line">        <span class="keyword">if</span> (k == - <span class="number">1</span>)&#123;</div><div class="line">            reverse(nums.begin(), nums.end());</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> l = <span class="number">-1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</div><div class="line">            <span class="keyword">if</span> (nums[i] &gt; nums[k])&#123;</div><div class="line">                l = i;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//从数组末尾开始找到第一次大于待交换数字的位置</span></div><div class="line">        swap(nums[l], nums[k]);</div><div class="line">        <span class="comment">//交换二者的数据</span></div><div class="line">        reverse(nums.begin() + k + <span class="number">1</span>, nums.end());</div><div class="line">        <span class="comment">//逆序从降序位置后开始到数组末尾的数字</span></div><div class="line">        </div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/09/决策树在MNIST数据集上的应用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1659,168 +1818,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/01/最长非公共子序列/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/01/最长非公共子序列/" itemprop="url">
-                  Longest Uncommon Subsequence
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-01T14:13:02+08:00">
-                2017-04-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Longest-Uncommon-Subsequence-最长非公共子序列"><a href="#Longest-Uncommon-Subsequence-最长非公共子序列" class="headerlink" title="Longest Uncommon Subsequence(最长非公共子序列)"></a>Longest Uncommon Subsequence(最长非公共子序列)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定两个字符串，找到两个字符串的最长非公共子序列。其中子序列的定义为：原序列中删除部分字符所得到，即原始序列中的字符顺序不改变。即假设字符串str1和str2。找到str1中的最长子序列，且该序列无法由str2得到。另外我们设定str1和””都是str1的子序列。如果”aa”和”aa”的话，不存在非公共子序列，返回-1.</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>“abc”和”cdc”的最长子序列是”abc”(“cdc”)。所以最长的非公共子序列长度为3.</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>初看题目会陷入困局；想要找到”abc”中的所有子序列然后和”cdc”一一验证。但是其实我们从另外一个角度看，我们可以先将两个字符串相同的情况排除后;在两个字符串不同长度的情况下，肯定是较长的字符串的本身是我们需要的结果。因为较长的字符串肯定无法通过另外一个串得到，所以较长的串就是我们所求的。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findLUSlength</span><span class="params">(<span class="built_in">string</span> a, <span class="built_in">string</span> b)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(a == b) <span class="keyword">return</span> - <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> res = a.size();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.size(); i++)&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; a.size(); j++)&#123;</div><div class="line">                <span class="keyword">if</span> (sub(a.substr(i, j - i + <span class="number">1</span>), b))&#123;</div><div class="line">                    res = max(res, j - i + <span class="number">1</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;<span class="comment">//判断str1的子序列是不是str2的子序列</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; b.size(); i++)&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; b.size(); j++)&#123;</div><div class="line">                <span class="keyword">if</span> (sub(b.substr(i, j - i + <span class="number">1</span>), a))&#123;</div><div class="line">                    res = max(res, j - i + <span class="number">1</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;<span class="comment">//判断str2的子序列是不是str1的子序列</span></div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">sub</span><span class="params">(<span class="built_in">string</span> source, <span class="built_in">string</span> target)</span></span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; source.size(); i++)&#123;</div><div class="line">            <span class="keyword">int</span> j = <span class="number">0</span>;</div><div class="line">            <span class="keyword">while</span>(j &lt; target.size() &amp;&amp; target[j] != source[i])&#123;</div><div class="line">                j++;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (j &gt;= target.size()) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                j++;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        <span class="comment">//判断两个串的互为子序列关系</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findLUSlength</span><span class="params">(<span class="built_in">string</span> a, <span class="built_in">string</span> b)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> (a == b) ? <span class="number">-1</span>: max(a.size(), b.size());</div><div class="line">        <span class="comment">//直接返回较长的串的长度即可。</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="Longest-Uncommon-Subsequence-II-最长非公共子序列"><a href="#Longest-Uncommon-Subsequence-II-最长非公共子序列" class="headerlink" title="Longest Uncommon Subsequence II(最长非公共子序列)"></a>Longest Uncommon Subsequence II(最长非公共子序列)</h3><h3 id="题目描述：-1"><a href="#题目描述：-1" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个字符串数组，找到字符串数组中的最长非公共子序列。</p>
-</blockquote>
-<h3 id="例子：-1"><a href="#例子：-1" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>“abc”, “cde”, “fgh”的最长公共子序列的长度是3，任意的一个字符串都是最长非公共子序列。</p>
-</blockquote>
-<h3 id="解题思路：-1"><a href="#解题思路：-1" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>与上一题类似，我们想直接利用最长的那个字符来作为结果返回；但是”aaa”,”aaa”,”bb”这样的情况导致结果不符合题意；所以需要利用哈希表来过滤掉超过两次的字符串；但是仅仅这样还是不够；因为如果输入是”aaa”,”aaa”,”aa”这样的情况下是不存在所谓的非公共子序列。所以思路是我们找到一个字符串，判断它是否是最长公共子序列的方法是与比它长的字符串比较，只有它不是所有比它长的字符串的子序列才可以成为最长子序列。</p>
-</blockquote>
-<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(pair&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; &amp;a, pair&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt;&amp;b)</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> a.first.size() &gt; b.first.size();</div><div class="line">&#125;</div><div class="line"><span class="comment">//作为sort函数的比较；按照字符串的长度排序，由高到低。</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">s1SubOfs2</span><span class="params">(<span class="built_in">string</span> s1, <span class="built_in">string</span> s2)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> j = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (;i &lt; s1.size(); i++)&#123;</div><div class="line">        <span class="keyword">while</span>(j &lt; s2.size() &amp;&amp; s2[j] != s1[i]) j++;</div><div class="line">        <span class="keyword">if</span> (j == s2.size()) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        j++;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 判断s1是不是s2的子序列函数</span></div><div class="line"></div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findLUSlength</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; strs)</span> </span>&#123;</div><div class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; hash;</div><div class="line">        <span class="built_in">vector</span>&lt;pair&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt;&gt; vec;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> str : strs) hash[str]++;</div><div class="line">        <span class="comment">//用哈希表将字符串保存，value是字符串出现的次数</span></div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = hash.begin(); it != hash.end(); it++)&#123;</div><div class="line">            vec.push_back(*it);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//用vector保存string和次数，便于利用cmp函数的排序</span></div><div class="line">        sort(vec.begin(), vec.end(), cmp);</div><div class="line">        <span class="comment">//利用cmp函数排序</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; vec.size(); i++)&#123;</div><div class="line">            <span class="keyword">if</span> (vec[i].second == <span class="number">1</span>)&#123;</div><div class="line">            <span class="comment">//过滤掉超过两次的字符串</span></div><div class="line">                <span class="keyword">int</span> j = <span class="number">0</span>;</div><div class="line">                <span class="keyword">for</span> (; j &lt; i; j++)&#123;</div><div class="line">                    <span class="keyword">if</span> (s1SubOfs2(vec[i].first, vec[j].first)) <span class="keyword">break</span>;</div><div class="line">                    <span class="comment">//将当前字符串和比它长的串一一比较；</span></div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (j == i) <span class="keyword">return</span> vec[i].first.size();</div><div class="line">                <span class="comment">//当它与比它长的字符串都不是子序列关系后返回</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">        <span class="comment">//如果不存在返回-1.</span></div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1870,7 +1867,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1892,7 +1889,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
