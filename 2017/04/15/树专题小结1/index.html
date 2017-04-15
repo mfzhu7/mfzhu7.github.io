@@ -1,0 +1,741 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Tree," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Tree Specail I题目描述： 关于树的题目非常丰富，也具有一定的挑战性。所以在这边做一下小小的总结。主要是利用题目在总结一些在树题目中常见的思路和方法。首先是给定一棵的头节点，判断这棵树是不是平衡二叉树。关于平衡二叉树，我们需要的主要是关于树的高度，任意节点的左右节点的深度差值不超过2，这样的二叉树我们称为平衡二叉树。  解题思路： 因为各个节点的左右子树都需要判断，所以我们利用递归的思">
+<meta name="keywords" content="Tree">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tree Special I">
+<meta property="og:url" content="http://yoursite.com/2017/04/15/树专题小结1/index.html">
+<meta property="og:site_name" content="Tech">
+<meta property="og:description" content="Tree Specail I题目描述： 关于树的题目非常丰富，也具有一定的挑战性。所以在这边做一下小小的总结。主要是利用题目在总结一些在树题目中常见的思路和方法。首先是给定一棵的头节点，判断这棵树是不是平衡二叉树。关于平衡二叉树，我们需要的主要是关于树的高度，任意节点的左右节点的深度差值不超过2，这样的二叉树我们称为平衡二叉树。  解题思路： 因为各个节点的左右子树都需要判断，所以我们利用递归的思">
+<meta property="og:updated_time" content="2017-04-15T02:39:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tree Special I">
+<meta name="twitter:description" content="Tree Specail I题目描述： 关于树的题目非常丰富，也具有一定的挑战性。所以在这边做一下小小的总结。主要是利用题目在总结一些在树题目中常见的思路和方法。首先是给定一棵的头节点，判断这棵树是不是平衡二叉树。关于平衡二叉树，我们需要的主要是关于树的高度，任意节点的左右节点的深度差值不超过2，这样的二叉树我们称为平衡二叉树。  解题思路： 因为各个节点的左右子树都需要判断，所以我们利用递归的思">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/15/树专题小结1/"/>
+
+
+
+
+
+  <title> Tree Special I | Tech </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tech</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/15/树专题小结1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Tree Special I
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-15T09:56:02+08:00">
+                2017-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Tree-Specail-I"><a href="#Tree-Specail-I" class="headerlink" title="Tree Specail I"></a>Tree Specail I</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>关于树的题目非常丰富，也具有一定的挑战性。所以在这边做一下小小的总结。主要是利用题目在总结一些在树题目中常见的思路和方法。<br>首先是给定一棵的头节点，判断这棵树是不是平衡二叉树。关于平衡二叉树，我们需要的主要是关于树的高度，任意节点的左右节点的深度差值不超过2，这样的二叉树我们称为平衡二叉树。</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>因为各个节点的左右子树都需要判断，所以我们利用递归的思想来解答这道题。通过递归函数判断左右子树深度决定返回当前节点是否是有效的平衡二叉树节点，然后不断递归到上一层即可判断根节点的平衡。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isBalanced</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        <span class="comment">//如果是空节点认为是平横的</span></div><div class="line">        <span class="keyword">int</span> left = height(root-&gt;left);</div><div class="line">        <span class="comment">//找到左子树的深度</span></div><div class="line">        <span class="keyword">int</span> right = height(root-&gt;right);</div><div class="line">        <span class="comment">//找到右节点的深度</span></div><div class="line">        <span class="keyword">if</span> (left - right &gt; <span class="number">1</span> || right - left &gt; <span class="number">1</span>)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            <span class="comment">//差值超过1的情况</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">return</span> isBalanced(root-&gt;left) &amp;&amp; isBalanced(root-&gt;right);</div><div class="line">            <span class="comment">//不然就递归的判断左右节点的平衡性</span></div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">height</span><span class="params">(TreeNode* head)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!head) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="comment">//空节点的情况返回深度为0</span></div><div class="line">        <span class="keyword">int</span> left = height(head-&gt;left) + <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> right = height(head-&gt;right) + <span class="number">1</span>;</div><div class="line">        <span class="comment">//找到左右节点的深度</span></div><div class="line">        <span class="keyword">return</span> (left &gt; right) ? left : right;</div><div class="line">        <span class="comment">//返回其中较大的作为深度返回</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="题目描述2："><a href="#题目描述2：" class="headerlink" title="题目描述2："></a>题目描述2：</h3><blockquote>
+<p>给定一棵树的头结点，找到树中从头节点到叶节点的路径最短的长度。</p>
+</blockquote>
+<h3 id="解题思路：-1"><a href="#解题思路：-1" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>同上一题类似也是利用递归的方法来找到树的深度。但是这个题目中需要注意的地方是，题目要求的是找到从根节点到叶节点的路径最短，所以我们需要特别判断左子树或者右子树为空的情况；并且路径的最终节点必须是叶节点。</p>
+</blockquote>
+<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="comment">//如果是空节点返回0</span></div><div class="line">        <span class="keyword">if</span> (!root-&gt;left &amp;&amp; !root-&gt;right) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">        <span class="comment">//如果只有一个根节点，返回1</span></div><div class="line">        <span class="keyword">if</span> (!root-&gt;left) <span class="keyword">return</span> min(root-&gt;right) + <span class="number">1</span>;</div><div class="line">        <span class="comment">//如果是左节点为空的情况，我们直接找到右节点的最小深度即可</span></div><div class="line">        <span class="keyword">if</span> (!root-&gt;right) <span class="keyword">return</span> min(root-&gt;left) + <span class="number">1</span>;</div><div class="line">        <span class="comment">//如果是右节点为空的情况下，我们直接找到左节点的最小深度</span></div><div class="line">        <span class="keyword">return</span> min(root);</div><div class="line">        <span class="comment">//不然我们就直接返回根节点的最小深度</span></div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">min</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root-&gt;left &amp;&amp; !root-&gt;right) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">        <span class="comment">//如果是叶节点的情况，返回高度为1</span></div><div class="line">        <span class="keyword">int</span> left = (root-&gt;left) ? (min(root-&gt;left) + <span class="number">1</span>) : INT_MAX; </div><div class="line">        <span class="comment">//判断左节点的深度，其中如果是空的情况下，我们设定为INT_MAX,这样在返回的时候我们就不会返回这类节点了。</span></div><div class="line">        <span class="keyword">int</span> right = (root-&gt;right) ? (min(root-&gt;right) + <span class="number">1</span>): INT_MAX;</div><div class="line">        <span class="keyword">return</span> left &gt; right ?  right : left;</div><div class="line">        <span class="comment">//返回其中较小的深度</span></div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="题目描述3："><a href="#题目描述3：" class="headerlink" title="题目描述3："></a>题目描述3：</h3><blockquote>
+<p>另外一种在树中常见的题目是：我们需要根据树的先序遍历、中序遍历和后序遍历重构二叉树。就以用先序遍历和中序遍历来重构二叉树为例。假设一棵树的先序遍历是[1,2,4,5,3,6,7],中序遍历是[4,2,5,1,6,3,7],要求根据这个结果重建二叉树。</p>
+</blockquote>
+<h3 id="解题思路：-2"><a href="#解题思路：-2" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>我们根据先序遍历和中序遍历的定义可以判断根节点是1,并且左节点的集合是[4,2,5]，右节点的集合是[6,3,7]。根据左节点集合的长度我们可以知道对于的先序遍历的集合分别为[2,4,5]和[3,6,7]。这样我们就可以递归的分别根据[4,2,5]和[2,4,5]建立左子树；根据[6,3,7]和[3,6,7]来建立右子树。</p>
+</blockquote>
+<h3 id="代码如下：-2"><a href="#代码如下：-2" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">**</div><div class="line"> * Definition <span class="keyword">for</span> a binary tree node.</div><div class="line"> * <span class="keyword">struct</span> TreeNode &#123;</div><div class="line"> *     <span class="keyword">int</span> val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(<span class="keyword">int</span> x) : val(x), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; preorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (preorder.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">return</span> generate(preorder, inorder, <span class="number">0</span>, preorder.size() - <span class="number">1</span>, <span class="number">0</span>, inorder.size() - <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function">TreeNode* <span class="title">generate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; preorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="keyword">int</span> p_left, <span class="keyword">int</span> p_right, <span class="keyword">int</span> i_left, <span class="keyword">int</span> i_right)</span></span></div><div class="line">    <span class="comment">//我们定义构建树的函数输入为先序遍历结果，中序遍历结果，当前构建子树的先序遍历在先序遍历结果的左右位置，子树中序遍历在中序遍历结果中的左右位置</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (p_left == p_right)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> TreeNode(preorder[p_left]);</div><div class="line">            <span class="comment">//如果左右位置相等，直接构建节点返回</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (p_left &gt; p_right) <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">        <span class="comment">//如果左边大于右边，说明已经没有节点可以用于构建子树，返回空节点</span></div><div class="line">        </div><div class="line">        <span class="keyword">int</span> next = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = i_left; i &lt;= i_right; i++)&#123;</div><div class="line">            <span class="keyword">if</span> (inorder[i] == preorder[p_left]) &#123;</div><div class="line">                next = i;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//用next来记录先序遍历的最左边的数在中序遍历中出现的位置，这个数是子树的根节点</span></div><div class="line">        <span class="keyword">int</span> left_length = next - i_left;</div><div class="line">        <span class="comment">//计算当前左子树的长度</span></div><div class="line">        TreeNode* root = <span class="keyword">new</span> TreeNode(inorder[next]);</div><div class="line">        <span class="comment">//以当前节点构建根节点</span></div><div class="line">        root-&gt;left = generate(preorder, inorder, p_left + <span class="number">1</span>, p_left + left_length, i_left, next - <span class="number">1</span>);</div><div class="line">        <span class="comment">//改变中序遍历和先序遍历中左右位置，递归构建左子树</span></div><div class="line">        root-&gt;right = generate(preorder, inorder, p_left + left_length + <span class="number">1</span>, p_right, next + <span class="number">1</span>, i_right);</div><div class="line">        <span class="comment">//改变中序遍历和先序遍历中左右位置，递归构建左子树</span></div><div class="line">        <span class="keyword">return</span> root;</div><div class="line">           </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>类似的根据中序遍历和后序遍历来构建二叉树的代码如下：</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; postorder)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (inorder.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">return</span> generate(inorder, postorder, <span class="number">0</span>, inorder.size() - <span class="number">1</span>, <span class="number">0</span>, postorder.size() - <span class="number">1</span>);</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function">TreeNode* <span class="title">generate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; postorder, <span class="keyword">int</span> i_left, <span class="keyword">int</span> i_right, <span class="keyword">int</span> p_left, <span class="keyword">int</span> p_right)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (i_left == i_right)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> TreeNode(inorder[i_left]);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(i_left &gt; i_right)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> next = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = i_left; i &lt;= i_right; i++)&#123;</div><div class="line">            <span class="keyword">if</span> (inorder[i] == postorder[p_right])&#123;</div><div class="line">                next = i;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> length = i_right - next;</div><div class="line">        TreeNode* root = <span class="keyword">new</span> TreeNode(inorder[next]);</div><div class="line">        root-&gt;left = generate(inorder, postorder, i_left, next - <span class="number">1</span>, p_left, p_right - length - <span class="number">1</span>);</div><div class="line">        root-&gt;right = generate(inorder, postorder, next + <span class="number">1</span>, i_right, p_right - length, p_right - <span class="number">1</span>);</div><div class="line">        <span class="keyword">return</span> root;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Tree/" rel="tag"># Tree</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/13/数组构建二叉树/" rel="prev" title="Construct Tree From Array">
+                Construct Tree From Array <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80"
+               alt="mfzhu7" />
+          <p class="site-author-name" itemprop="name">mfzhu7</p>
+           
+              <p class="site-description motion-element" itemprop="description">没有钱了 肯定要写代码啊 不写没有钱用 搞科研是不可能的 这辈子不可能搞科研 看paper又看不懂 就是写代码这个东西才能维持得了生活的样子</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tree-Specail-I"><span class="nav-number">1.</span> <span class="nav-text">Tree Specail I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">3.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">4.</span> <span class="nav-text">代码如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述2："><span class="nav-number">5.</span> <span class="nav-text">题目描述2：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路：-1"><span class="nav-number">6.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下：-1"><span class="nav-number">7.</span> <span class="nav-text">代码如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述3："><span class="nav-number">8.</span> <span class="nav-text">题目描述3：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路：-2"><span class="nav-number">9.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下：-2"><span class="nav-number">10.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mfzhu7</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
