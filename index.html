@@ -260,6 +260,163 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/16/树的变胖/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/16/树的变胖/" itemprop="url">
+                  Flatten Tree(树的变胖)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-16T19:06:02+08:00">
+                2017-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Flatten-Tree"><a href="#Flatten-Tree" class="headerlink" title="Flatten Tree"></a>Flatten Tree</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一棵树的头节点，要求将树变成指定的链表形状。具体的描述和例子可以看leetcode<a href="https://leetcode.com/problems/flatten-binary-tree-to-linked-list/#/description" target="_blank" rel="external">网站</a></p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>最直接的一种思路是将链表中的节点按照一定的顺序放入栈或者队列中，然后按照要求将其重新连接就行。可以从题目中发现是类似树的先序遍历的样纸，所以在将树中节点放入队列的时候可以根据这个规律来实现。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flatten</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; q;</div><div class="line">        preOrder(root, q);</div><div class="line">        <span class="comment">//此时队列中保存着树的先序遍历结果</span></div><div class="line">        <span class="keyword">if</span> (root)&#123;</div><div class="line">            q.pop();</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//队列的第一个节点肯定是原来的根节点</span></div><div class="line">        <span class="keyword">while</span>(!q.empty())&#123;</div><div class="line">            root-&gt;right = q.front();</div><div class="line">            <span class="comment">//将树的右节点指向现在队列的头结点</span></div><div class="line">            root-&gt;left = <span class="literal">NULL</span>;</div><div class="line">            <span class="comment">//改变左侧节点指针</span></div><div class="line">            root = root-&gt;right;</div><div class="line">            <span class="comment">//改变当前的root节点便于继续改变下一个节点的指针</span></div><div class="line">            q.pop();</div><div class="line">            <span class="comment">//出队</span></div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(TreeNode* root, <span class="built_in">queue</span>&lt;TreeNode*&gt; &amp;q)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        q.push(root);</div><div class="line">        preOrder(root-&gt;left, q);</div><div class="line">        preOrder(root-&gt;right, q);</div><div class="line">        <span class="comment">//根据先序遍历的方法将树中的节点放入队列中</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解题思路2："><a href="#解题思路2：" class="headerlink" title="解题思路2："></a>解题思路2：</h3><blockquote>
+<p>当然对于树的题目我们依旧可以使用递归的想法来实现。我们的想法是利用一个指针pre来保存不断移动的当前的位置，然后不断的改变指针的指向即可。</p>
+</blockquote>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">TreeNode* pre;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">help</span><span class="params">(TreeNode* root)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        TreeNode* left = <span class="literal">NULL</span>;</div><div class="line">        TreeNode* right = <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">if</span> (root-&gt;left)</div><div class="line">            left = root-&gt;left;</div><div class="line">            <span class="comment">//保存左子树</span></div><div class="line">        <span class="keyword">if</span> (root-&gt;right)</div><div class="line">            right = root-&gt;right;</div><div class="line">            <span class="comment">//保存右子树</span></div><div class="line">        pre-&gt;right = root;</div><div class="line">        pre = pre-&gt;right;</div><div class="line">        <span class="comment">//移动pre到下一个位置</span></div><div class="line">        root-&gt;left = <span class="literal">NULL</span>;</div><div class="line">        <span class="comment">//当前的子树的左指针设定为空</span></div><div class="line">        help(left);</div><div class="line">        <span class="comment">//先遍历左边的子树</span></div><div class="line">        help(right);</div><div class="line">        <span class="comment">//再遍历右边的子树</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flatten</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        pre = <span class="keyword">new</span> TreeNode(<span class="number">-1</span>);</div><div class="line">        help(root);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解题思路3"><a href="#解题思路3" class="headerlink" title="解题思路3"></a>解题思路3</h3><blockquote>
+<p>在可以利用递归的方法的情况下，我们也可以利用非递归的思路来解决这个问题。解决的思路比较难描述，可以画一棵简单树按照代码中的思路就可以知道解法。</p>
+</blockquote>
+<h3 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下:"></a>代码如下:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flatten</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">while</span>(root)&#123;</div><div class="line">            <span class="keyword">if</span> (root-&gt;left &amp;&amp; root-&gt;right)&#123;</div><div class="line">            <span class="comment">//如果左右子树都非空的情况</span></div><div class="line">                TreeNode* l = root-&gt;left;</div><div class="line">                <span class="comment">//记录当前的左子树</span></div><div class="line">                <span class="keyword">while</span>(l-&gt;right)&#123;</div><div class="line">                    l = l-&gt;right;</div><div class="line">                &#125;</div><div class="line">                <span class="comment">//找到左子树的最右节点</span></div><div class="line">                l-&gt;right = root-&gt;right;</div><div class="line">                <span class="comment">//将左子树的最右节点指向root的右节点</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (root-&gt;left)</div><div class="line">                root-&gt;right = root-&gt;left;</div><div class="line">                <span class="comment">//如果当前的root的左子树不为空，将右子树改变为现在的左子树</span></div><div class="line">            root-&gt;left = <span class="literal">NULL</span>;</div><div class="line">            <span class="comment">//当前root的左子树设定为空</span></div><div class="line">            root = root-&gt;right;</div><div class="line">            <span class="comment">//移动root节点到当前的右节点</span></div><div class="line">            </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/15/树专题小结1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1661,162 +1818,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/05/找到树的两个叶节点的最长距离/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/05/找到树的两个叶节点的最长距离/" itemprop="url">
-                  Diameter Of Tree
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-05T16:36:02+08:00">
-                2017-04-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Diameter-Of-Tree-找到树中两个叶节点的最远距离"><a href="#Diameter-Of-Tree-找到树中两个叶节点的最远距离" class="headerlink" title="Diameter Of Tree(找到树中两个叶节点的最远距离)"></a>Diameter Of Tree(找到树中两个叶节点的最远距离)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一棵树的头结点，找到树中的两个节点，要求这两个节点的距离最大，返回该距离。</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>通过分析我们可以知道，一棵树的两个节点的最远距离可能来自两种情况：</p>
-</blockquote>
-<ul>
-<li>左节点的最深深度 + 右节点的最深深度，经过根节点；</li>
-<li>在左节点为根节点中的两个节点存在最远距离；在右节点为根节点中的两个节点存在最远距离；</li>
-</ul>
-<blockquote>
-<p>我们用height函数找到某个节点的深度；用diameter函数找到以某个节点为根中两个叶节点的最远距离。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">diameterOfBinaryTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> lh = height(root-&gt;left);</div><div class="line">        <span class="keyword">int</span> rh = height(root-&gt;right);</div><div class="line">        <span class="comment">//找到左右节点的最深深度</span></div><div class="line">        </div><div class="line">        <span class="keyword">int</span> ld = diameterOfBinaryTree(root-&gt;left);</div><div class="line">        <span class="keyword">int</span> rd = diameterOfBinaryTree(root-&gt;right);</div><div class="line">        <span class="comment">//找到左右节点各自为根中的最远距离</span></div><div class="line">        </div><div class="line">        <span class="keyword">return</span> max(lh + rh, max(ld, rd));</div><div class="line">        <span class="comment">//返回这两种情况中的最远距离即可</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">height</span><span class="params">(TreeNode* head)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span> + max(height(head-&gt;left), height(head-&gt;right));</div><div class="line">        <span class="comment">//递归找到最深深度</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1866,7 +1867,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
