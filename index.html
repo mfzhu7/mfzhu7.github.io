@@ -398,9 +398,10 @@
 </li>
 <li><p><a href="https://leetcode.com/problems/find-bottom-left-tree-value/#/description" target="_blank" rel="external">LeetCode513</a>: 找到树的最左下的那个叶节点。</p>
 </li>
-<li><p><a href="https://leetcode.com/problems/sum-of-left-leaves/#/description" target="_blank" rel="external">LeetCode404</a>: 找到所有的左叶节点的和。</p>
-</li>
 <li><p><a href="https://leetcode.com/problems/binary-tree-right-side-view/#/description" target="_blank" rel="external">LeetCode199</a>: 从右侧看树的结果。</p>
+<blockquote>
+<p>以上题目的具体解答可以看我的另外一篇<a href="">博客</a></p>
+</blockquote>
 </li>
 </ul>
 <h3 id="3-树的路径和问题"><a href="#3-树的路径和问题" class="headerlink" title="3.树的路径和问题"></a>3.树的路径和问题</h3><ul>
@@ -434,6 +435,8 @@
 </li>
 <li><p><a href="https://leetcode.com/problems/minimum-depth-of-binary-tree/#/description" target="_blank" rel="external">LeetCode111</a>:找到树的最浅深度。</p>
 </li>
+<li></li>
+<li><a href="https://leetcode.com/problems/sum-of-left-leaves/#/description" target="_blank" rel="external">LeetCode404</a>: 找到所有的左叶节点的和。</li>
 </ul>
 <h2 id="树的构建问题"><a href="#树的构建问题" class="headerlink" title=" 树的构建问题"></a><a name="树的构建问题"></a> 树的构建问题</h2><blockquote>
 <p>树的构建问题通常是给定一个特定序列的数组，要求根据数组重建二叉树。其中最为经典的题目就是根据两种遍历的结果重建原始的二叉树问题。另外一个常见的问题是通过根据二叉搜索树的性质，给定排序数组要求重建二叉排序树。</p>
@@ -809,165 +812,6 @@
 </blockquote>
 <h3 id="实现代码如下："><a href="#实现代码如下：" class="headerlink" title="实现代码如下："></a>实现代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="comment"># @File  : PerceptionMachine.py</span></div><div class="line"><span class="comment"># @Author: mfzhu</span></div><div class="line"><span class="comment"># @Date  : 2017/4/21</span></div><div class="line"><span class="comment"># @Desc  :</span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> random</div><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</div><div class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</div><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary</span><span class="params">(data, threshold)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :param data: 需要二值化的数据</div><div class="line">    :param threshold: 二值化的阈值</div><div class="line">    :return: 二值化后的数据</div><div class="line">    """</div><div class="line">    index_1 = np.array(data &gt; threshold)</div><div class="line">    index_2 = np.array(data &lt;= threshold)</div><div class="line">    data[index_1] = <span class="number">1</span></div><div class="line">    data[index_2] = <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PerceptionMachine</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.max_iteration = <span class="number">10000</span></div><div class="line">        <span class="comment"># 迭代次数</span></div><div class="line">        self.step = <span class="number">0.001</span></div><div class="line">        <span class="comment"># 迭代步长</span></div><div class="line">        self.weight = []</div><div class="line">        <span class="comment"># 权重向量</span></div><div class="line">        self.bias = <span class="number">1</span></div><div class="line">        <span class="comment"># 偏置</span></div><div class="line">        self.object_num = <span class="number">1</span></div><div class="line">        <span class="comment"># 此处认为标签为1的为+1类，为0的为-1类</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, train_data, train_label)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :param train_data: 训练数据</div><div class="line">        :param train_label: 训练标签</div><div class="line">        :return:</div><div class="line">        """</div><div class="line">        num_sample, num_feature = train_data.shape</div><div class="line">        <span class="comment"># 得到输入训练数据的样本数和每个样本的维度</span></div><div class="line">        self.weight = np.zeros(num_feature, float)</div><div class="line">        <span class="comment"># 初始化权重向量为全0向量</span></div><div class="line">        time = <span class="number">0</span></div><div class="line">        <span class="comment"># 记录当前迭代次数</span></div><div class="line">        <span class="keyword">while</span> time &lt; self.max_iteration:</div><div class="line">            index = random.randint(<span class="number">0</span>, num_sample - <span class="number">1</span>)</div><div class="line">            <span class="comment"># 随机选取一个训练样本</span></div><div class="line">            sample = train_data[index, :]</div><div class="line">            label = train_label[index]</div><div class="line">            <span class="comment"># 得到这个样本的标签和数据</span></div><div class="line"></div><div class="line">            y = int(label == self.object_num) * <span class="number">2</span> - <span class="number">1</span></div><div class="line">            <span class="comment"># 判断是属于+1类还是-1类</span></div><div class="line">            result = (np.dot(sample, self.weight) + self.bias) * y</div><div class="line">            <span class="comment"># 计算是否被误分类</span></div><div class="line">            <span class="keyword">if</span> result &lt;= <span class="number">0</span>:</div><div class="line">                self.weight += self.step * y * sample</div><div class="line">                self.bias += self.step * y</div><div class="line">                time += <span class="number">1</span></div><div class="line">                <span class="comment"># 被误分类的情况下，更新权重和偏置，然后迭代次数加1</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, features)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"></div><div class="line">        :param features: 预测数据集合</div><div class="line">        :return: 返回集合中每个sample的预测标签</div><div class="line">        """</div><div class="line">        res = []</div><div class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> range(features.shape[<span class="number">0</span>]):</div><div class="line">            <span class="keyword">if</span> np.dot(features[index], self.weight) + self.bias &gt; <span class="number">0</span>:</div><div class="line">                <span class="comment"># 如果对应的线性函数大于0，则判断为1</span></div><div class="line">                res.append(<span class="number">1</span>)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                res.append(<span class="number">0</span>)</div><div class="line">        <span class="keyword">return</span> res</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    print(<span class="string">"Start reading the data:"</span>)</div><div class="line">    time1 = time.time()</div><div class="line"></div><div class="line">    raw_path = <span class="string">r'F:\work and learn\ML\dataset\MNIST\train.csv'</span></div><div class="line">    raw_data = np.loadtxt(raw_path, delimiter=<span class="string">','</span>, skiprows=<span class="number">1</span>)</div><div class="line">    <span class="comment"># 读入原始数据</span></div><div class="line">    label = raw_data[:, <span class="number">0</span>]</div><div class="line">    data = raw_data[:, <span class="number">1</span>:]</div><div class="line">    <span class="comment"># 区分标签数据和原始数据</span></div><div class="line">    data = binary(data, <span class="number">125</span>)</div><div class="line">    label[label != <span class="number">0</span>] = <span class="number">1</span></div><div class="line">    <span class="comment"># 进行二值化和对标签二值化（这边做的是二分类）</span></div><div class="line"></div><div class="line">    train_data, test_data, train_label, test_label = train_test_split(data, label, test_size=<span class="number">0.333</span>, random_state=<span class="number">23333</span>)</div><div class="line">    <span class="comment"># 将数据随机切分用于训练和预测</span></div><div class="line">    time2 = time.time()</div><div class="line">    print(<span class="string">"read data cost:"</span>, time2 - time1, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line"></div><div class="line">    print(<span class="string">"Start training:"</span>)</div><div class="line">    perception = PerceptionMachine()</div><div class="line">    perception.train(train_data, train_label)</div><div class="line">    <span class="comment"># 生成感知机模型并进行训练</span></div><div class="line">    time3 = time.time()</div><div class="line">    print(<span class="string">"training cost:"</span>, time3 - time2, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line"></div><div class="line">    print(<span class="string">"Start predicting:"</span>)</div><div class="line">    res = perception.predict(test_data)</div><div class="line">    score = accuracy_score(test_label, res)</div><div class="line">    time4 = time.time()</div><div class="line">    print(<span class="string">"predict cost"</span>, time4 - time3, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line">    <span class="comment"># 对数据进行预测并计算正确率</span></div><div class="line">    print(<span class="string">"the accuracy_score is"</span>, score)</div></pre></td></tr></table></figure>
 <h3 id="代码运行结果："><a href="#代码运行结果：" class="headerlink" title="代码运行结果："></a>代码运行结果：</h3><p><img src="http://oov4rmeff.bkt.clouddn.com/perception.png" alt="img"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/20/树的层遍历应用延伸/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/20/树的层遍历应用延伸/" itemprop="url">
-                  The Layer Of Tree(extension)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T18:56:02+08:00">
-                2017-04-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="树的按层遍历延伸"><a href="#树的按层遍历延伸" class="headerlink" title="树的按层遍历延伸"></a>树的按层遍历延伸</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>定义树中的节点增加一个next节点，要求给定一棵树的头结点，要求每层的树的节点的next指针指向其同层右侧的指针。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>详细的描述说明可以看leetcode上<a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node/" target="_blank" rel="external">题目1</a>，以及<a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/#/description" target="_blank" rel="external">题目2</a>.</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>初看题目可能会觉得思路上会有点卡壳，但是如果之前做过树的按层遍历的话，应该不难想到，我们可以一层一层的遍历树的节点，然后将每一层的树的节点连接起来就可以。至于树的按层遍历可以看我之前的一篇<a href="https://mfzhu7.github.io/2017/03/29/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%8C%89%E5%B1%82%E9%81%8D%E5%8E%86/" target="_blank" rel="external">博客</a>.</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for binary tree with next pointer.</div><div class="line"> * struct TreeLinkNode &#123;</div><div class="line"> *  int val;</div><div class="line"> *  TreeLinkNode *left, *right, *next;</div><div class="line"> *  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">connect</span><span class="params">(TreeLinkNode *root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeLinkNode*&gt; q1;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeLinkNode*&gt; q2;</div><div class="line">        <span class="comment">//定义两个队列用于保存上一层和当前层的树的节点</span></div><div class="line">        q1.push(root);</div><div class="line">        <span class="comment">//先将树的头结点入队</span></div><div class="line">        <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">            TreeLinkNode* pre = q1.front();</div><div class="line">            q1.pop();</div><div class="line">            <span class="keyword">if</span> (pre-&gt;left) q2.push(pre-&gt;left);</div><div class="line">            <span class="keyword">if</span> (pre-&gt;right) q2.push(pre-&gt;right);</div><div class="line">            <span class="comment">//因为要将树的节点连接所以先将当前层的节点作为pre，剩下不断的往下遍历同层节点即可</span></div><div class="line">            <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">                TreeLinkNode* next = q1.front();</div><div class="line">                <span class="keyword">if</span> (next-&gt;left) q2.push(next-&gt;left);</div><div class="line">                <span class="keyword">if</span> (next-&gt;right) q2.push(next-&gt;right);</div><div class="line">                <span class="comment">//每pop一个节点就将其左右节点入队，作为下一层的节点</span></div><div class="line">                pre-&gt;next = next;</div><div class="line">                <span class="comment">//建立新的连接</span></div><div class="line">                pre = next;</div><div class="line">                <span class="comment">//改变pre指针</span></div><div class="line">                q1.pop();</div><div class="line">            &#125;</div><div class="line">            pre-&gt;next = <span class="literal">NULL</span>;</div><div class="line">            <span class="built_in">queue</span>&lt;TreeLinkNode*&gt;tmp = q1;</div><div class="line">            q1 = q2;</div><div class="line">            q2 = tmp;</div><div class="line">            <span class="comment">//这步将下一层的数据保存到当前层的队列中，然后将下一层队列置空</span></div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="题目描述2"><a href="#题目描述2" class="headerlink" title="题目描述2"></a>题目描述2</h3><blockquote>
-<p>类似用到树的按层遍历的性质的有，给定一棵树的头结点，要求输出从右侧看这棵树，从第一层到最后一层所看见的树的节点。其实这题的主要思路也是类似的，因为我们知道每层的节点后，我们只要将当前层的末尾节点保存到结果中就可以了。所以需要举一反三，利用之前的题目的解法可以很快的解答出。</p>
-</blockquote>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子:"></a>例子:</h3><blockquote>
-<p>这题也是leetcode上的题目，具体的题目描述可以看<a href="https://leetcode.com/problems/binary-tree-right-side-view/#/description" target="_blank" rel="external">这边</a>.</p>
-</blockquote>
-<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; rightSideView(TreeNode* root) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> res;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; q1;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; q2;</div><div class="line">        <span class="comment">//同样定义两个队列保存当前层和下一层的节点</span></div><div class="line">        q1.push(root);</div><div class="line">        <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">            res.push_back(q1.back()-&gt;val);</div><div class="line">            <span class="comment">//直接将当前层的末尾入队，即为最右侧的节点</span></div><div class="line">            <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">                TreeNode* front = q1.front();</div><div class="line">                <span class="keyword">if</span> (front-&gt;left) q2.push(front-&gt;left);</div><div class="line">                <span class="keyword">if</span> (front-&gt;right) q2.push(front-&gt;right);</div><div class="line">                q1.pop();</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">queue</span>&lt;TreeNode*&gt; tmp = q1;</div><div class="line">            q1 = q2;</div><div class="line">            q2 = tmp;</div><div class="line">            <span class="comment">//更新当前层和下一层的数据</span></div><div class="line">        &#125;</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
           
         
@@ -1939,6 +1783,155 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/11/构建平衡二叉搜索树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/11/构建平衡二叉搜索树/" itemprop="url">
+                  Balance Binary Search Tree
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-11T18:36:02+08:00">
+                2017-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Balance-Binary-Search-Tree-构建平衡二叉搜索树"><a href="#Balance-Binary-Search-Tree-构建平衡二叉搜索树" class="headerlink" title="Balance Binary Search Tree(构建平衡二叉搜索树)"></a>Balance Binary Search Tree(构建平衡二叉搜索树)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// Created by mfzhu on 2017/4/10.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> TreeNode&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    T value;</div><div class="line">    <span class="keyword">int</span> height;</div><div class="line">    TreeNode&lt;T&gt;* left;</div><div class="line">    TreeNode&lt;T&gt;* right;</div><div class="line">    TreeNode(T key): value(key),height(<span class="number">0</span>),left(<span class="literal">NULL</span>),right(<span class="literal">NULL</span>)&#123;&#125;;</div><div class="line">    TreeNode(T key, <span class="keyword">int</span> h):value(key), height(h), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>)&#123;&#125;;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> AVLTree&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    AVLTree():root(<span class="literal">NULL</span>)&#123;&#125;;</div><div class="line">    ~AVLTree()&#123;&#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">height</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">T <span class="title">maximum</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">T <span class="title">minimum</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inOrder</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(T value)</span></span>;</div><div class="line">    TreeNode&lt;T&gt;* remove(TreeNode&lt;T&gt;* key);</div><div class="line">    TreeNode&lt;T&gt;* search(T value);</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">    TreeNode&lt;T&gt;* root;</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">height</span><span class="params">(TreeNode&lt;T&gt;* node)</span></span>;</div><div class="line">    TreeNode&lt;T&gt;* maximum(TreeNode&lt;T&gt;* node);</div><div class="line">    TreeNode&lt;T&gt;* minimum(TreeNode&lt;T&gt;* node);</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inOrder</span><span class="params">(TreeNode&lt;T&gt;* node)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(TreeNode&lt;T&gt;* node)</span></span>;</div><div class="line"></div><div class="line">    TreeNode&lt;T&gt;* insert(TreeNode&lt;T&gt;* &amp;node, T value);</div><div class="line">    TreeNode&lt;T&gt;* remove(TreeNode&lt;T&gt;* &amp;node, TreeNode&lt;T&gt;* key);</div><div class="line">    TreeNode&lt;T&gt;* search(TreeNode&lt;T&gt;* node, T val);</div><div class="line"></div><div class="line">    TreeNode&lt;T&gt;* leftLeftRotation(TreeNode&lt;T&gt;* &amp;node);</div><div class="line">    TreeNode&lt;T&gt;* leftRightRotation(TreeNode&lt;T&gt;* &amp;node);</div><div class="line">    TreeNode&lt;T&gt;* rightLeftRotation(TreeNode&lt;T&gt;* &amp;node);</div><div class="line">    TreeNode&lt;T&gt;* rightRightRotation(TreeNode&lt;T&gt;* &amp;node);</div><div class="line"></div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">int</span> AVLTree&lt;T&gt;::height(TreeNode&lt;T&gt;* node)&#123;</div><div class="line">    <span class="keyword">if</span> (node) <span class="keyword">return</span> node-&gt;height;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">int</span> AVLTree&lt;T&gt;::height() &#123;</div><div class="line">    <span class="keyword">return</span> height(root);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">TreeNode&lt;T&gt;* AVLTree&lt;T&gt;::maximum(TreeNode&lt;T&gt; *node) &#123;</div><div class="line">    <span class="keyword">if</span> (!node)</div><div class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">    <span class="keyword">while</span>(node-&gt;right)&#123;</div><div class="line">        node = node-&gt;right;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> node;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T AVLTree&lt;T&gt;::maximum() &#123;</div><div class="line">    TreeNode&lt;T&gt;* p = maximum(root);</div><div class="line">    <span class="keyword">if</span> (p) <span class="keyword">return</span> p-&gt;value;</div><div class="line">    <span class="keyword">return</span> T(<span class="literal">NULL</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">TreeNode&lt;T&gt;* AVLTree&lt;T&gt;::minimum(TreeNode&lt;T&gt; *node) &#123;</div><div class="line">    <span class="keyword">if</span> (!node)</div><div class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">    <span class="keyword">while</span>(node-&gt;left)&#123;</div><div class="line">        node = node-&gt;left;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> node;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T AVLTree&lt;T&gt;::minimum()&#123;</div><div class="line">    TreeNode&lt;T&gt;* p = minimum(root);</div><div class="line">    <span class="keyword">if</span> (p) <span class="keyword">return</span> p-&gt;value;</div><div class="line">    <span class="keyword">return</span> T(<span class="literal">NULL</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> AVLTree&lt;T&gt;::inOrder(TreeNode&lt;T&gt; *node) &#123;</div><div class="line">    <span class="keyword">if</span> (node)&#123;</div><div class="line">        inOrder(node-&gt;left);</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; node-&gt;value &lt;&lt; <span class="string">" "</span>;</div><div class="line">        inOrder(node-&gt;right);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> AVLTree&lt;T&gt;::inOrder() &#123;</div><div class="line">    inOrder(root);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> AVLTree&lt;T&gt;::preOrder(TreeNode&lt;T&gt;* node) &#123;</div><div class="line">    <span class="keyword">if</span> (node)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; node-&gt;value &lt;&lt; <span class="string">" "</span>;</div><div class="line">        preOrder(node-&gt;left);</div><div class="line">        preOrder(node-&gt;right);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> AVLTree&lt;T&gt;::preOrder() &#123;</div><div class="line">    preOrder(root);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">TreeNode&lt;T&gt;* AVLTree&lt;T&gt;::insert(TreeNode&lt;T&gt;* &amp;node, T value) &#123;</div><div class="line">    <span class="keyword">if</span> (node == <span class="literal">NULL</span>)&#123;</div><div class="line">        node = <span class="keyword">new</span> TreeNode&lt;T&gt;(value);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (value &lt; node-&gt;value)&#123;</div><div class="line">        node-&gt;left = insert(node-&gt;left, value);</div><div class="line">        <span class="keyword">if</span> (height(node-&gt;left) - height(node-&gt;right) == <span class="number">2</span>)&#123;</div><div class="line">            <span class="keyword">if</span> (value &lt; node-&gt;left-&gt;value)&#123;</div><div class="line">                node = leftLeftRotation(node);</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                node = leftRightRotation(node);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (value &gt; node-&gt;value)&#123;</div><div class="line">        node-&gt;right = insert(node-&gt;right, value);</div><div class="line">        <span class="keyword">if</span> (height(node-&gt;right) - height(node-&gt;left) == <span class="number">2</span>)&#123;</div><div class="line">            <span class="keyword">if</span> (value &gt; node-&gt;right-&gt;value)&#123;</div><div class="line">                node = rightRightRotation(node);</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                node = rightLeftRotation(node);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"can not insert existed value"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    node-&gt;height = max(height(node-&gt;left), height(node-&gt;right)) + <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> node;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> AVLTree&lt;T&gt;::insert(T value) &#123;</div><div class="line">    insert(root, value);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">TreeNode&lt;T&gt;* AVLTree&lt;T&gt;::remove(TreeNode&lt;T&gt; *&amp;node, TreeNode&lt;T&gt;* key) &#123;</div><div class="line">    <span class="keyword">if</span> (node == <span class="literal">NULL</span> || key == <span class="literal">NULL</span>)</div><div class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">    <span class="keyword">if</span> (key-&gt;value &lt; node-&gt;value)&#123;</div><div class="line">        node-&gt;left = remove(node-&gt;left, key);</div><div class="line">        <span class="keyword">if</span> (height(node-&gt;right) - height(node-&gt;left) == <span class="number">2</span>)&#123;</div><div class="line">            TreeNode&lt;T&gt;* l = node-&gt;right;</div><div class="line">            <span class="keyword">if</span> (height(l-&gt;right) &gt; height(l-&gt;left))&#123;</div><div class="line">                node = rightRightRotation(node);</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                node = rightLeftRotation(node);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (key-&gt;value &gt; node-&gt;value)&#123;</div><div class="line">        node-&gt;right = remove(node-&gt;right, key);</div><div class="line">        <span class="keyword">if</span> (height(node-&gt;left) - height(node-&gt;right) == <span class="number">2</span>)&#123;</div><div class="line">            TreeNode&lt;T&gt;* l = node-&gt;left;</div><div class="line">            <span class="keyword">if</span> (height(l-&gt;left) &gt; height(l-&gt;right))&#123;</div><div class="line">                node = leftLeftRotation(node);</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                node = leftRightRotation(node);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">if</span> (node-&gt;left &amp;&amp; node-&gt;right)&#123;</div><div class="line">            <span class="keyword">if</span> (height(node-&gt;left) &gt; height(node-&gt;right))&#123;</div><div class="line">                TreeNode&lt;T&gt;* max = maximum(node-&gt;left);</div><div class="line">                node-&gt;value = max-&gt;value;</div><div class="line">                node-&gt;left = remove(node-&gt;left, max);</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                TreeNode&lt;T&gt;* min = minimum(node-&gt;right);</div><div class="line">                node-&gt;value = min-&gt;value;</div><div class="line">                node-&gt;right = remove(node-&gt;right, min);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">            TreeNode&lt;T&gt;* tmp = node;</div><div class="line">            node = node-&gt;left ? node-&gt;right : node-&gt;left;</div><div class="line">            <span class="keyword">delete</span>(tmp);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> node;</div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">TreeNode&lt;T&gt;* AVLTree&lt;T&gt;::remove(TreeNode&lt;T&gt;* key) &#123;</div><div class="line">    <span class="keyword">return</span> remove(root, key);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">TreeNode&lt;T&gt;* AVLTree&lt;T&gt;::search(TreeNode&lt;T&gt; *node, T val) &#123;</div><div class="line">    <span class="keyword">if</span> (!node)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the value is not in the tree"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (node-&gt;value == val) &#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the value is in the tree"</span> &lt;&lt;<span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">return</span> node;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (val &lt; node-&gt;value)&#123;</div><div class="line">        <span class="keyword">return</span> search(node-&gt;left, val);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span> search(node-&gt;right, val);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">TreeNode&lt;T&gt;* AVLTree&lt;T&gt;::search(T value) &#123;</div><div class="line">    <span class="keyword">return</span> search(root, value);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">TreeNode&lt;T&gt;* AVLTree&lt;T&gt;::leftLeftRotation(TreeNode&lt;T&gt;* &amp;node) &#123;</div><div class="line">    TreeNode&lt;T&gt;* leftNode = node-&gt;left;</div><div class="line">    node-&gt;left = leftNode-&gt;right;</div><div class="line">    leftNode-&gt;right = node;</div><div class="line"></div><div class="line">    node-&gt;height = max(height(node-&gt;left), height(node-&gt;right)) + <span class="number">1</span>;</div><div class="line">    leftNode-&gt;height = max(height(leftNode-&gt;left), node-&gt;height) + <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> leftNode;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">TreeNode&lt;T&gt;* AVLTree&lt;T&gt;::rightRightRotation(TreeNode&lt;T&gt;* &amp;node) &#123;</div><div class="line">    TreeNode&lt;T&gt;* rightNode = node-&gt;right;</div><div class="line">    node-&gt;right = rightNode-&gt;left;</div><div class="line">    rightNode-&gt;left = node;</div><div class="line"></div><div class="line">    node-&gt;height = max(height(node-&gt;left), height(node-&gt;right)) + <span class="number">1</span>;</div><div class="line">    rightNode-&gt;height = max(node-&gt;height, height(rightNode-&gt;right)) + <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> rightNode;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">TreeNode&lt;T&gt;* AVLTree&lt;T&gt;::leftRightRotation(TreeNode&lt;T&gt;* &amp;node) &#123;</div><div class="line">    node-&gt;left = rightRightRotation(node-&gt;left);</div><div class="line">    <span class="keyword">return</span> leftLeftRotation(node);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">TreeNode&lt;T&gt;* AVLTree&lt;T&gt;::rightLeftRotation(TreeNode&lt;T&gt;* &amp;node) &#123;</div><div class="line">    node-&gt;right = leftLeftRotation(node-&gt;right);</div><div class="line">    <span class="keyword">return</span> rightRightRotation(node);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1988,7 +1981,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
