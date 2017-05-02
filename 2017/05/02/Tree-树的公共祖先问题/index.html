@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="String," />
+  <meta name="keywords" content="List," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="String To Num题目描述： 给定一个字符串，将其转化为对应的合法的数字。其中字符串可能的输入存在多种情况，需要考虑。如果是非法的转化，返回0；如果是大于2147483647则返回INT_MAX(2147483647)；如果是小于-2147483648则返回INT_MIN(-2147483648).  解题思路： 题目的整体思路不难，主要利用’9’-‘0’来得到对应位数代表的数字，用上一位">
-<meta name="keywords" content="String">
+<meta name="description" content="LCA In Tree题目描述： 给定一棵树和树中的两个节点，要求返回这两个节点的最近公共祖先节点.  例子： leetcode上有两道题目是关于公共祖先问题的，具体描述可以看LeetCode235和LeetCode236  解题思路： 主要的思路是这样的：我们遍历当前节点为cur，如果cur为空，或者cur是等于目标结点之一的情况下，我们就直接返回这个节点即可；如果不是的情况下，我们继续下一层的">
+<meta name="keywords" content="List">
 <meta property="og:type" content="article">
-<meta property="og:title" content="String To Num">
-<meta property="og:url" content="http://yoursite.com/2017/04/18/将字符串转化为数字/index.html">
+<meta property="og:title" content="LCA In Tree">
+<meta property="og:url" content="http://yoursite.com/2017/05/02/Tree-树的公共祖先问题/index.html">
 <meta property="og:site_name" content="Tech">
-<meta property="og:description" content="String To Num题目描述： 给定一个字符串，将其转化为对应的合法的数字。其中字符串可能的输入存在多种情况，需要考虑。如果是非法的转化，返回0；如果是大于2147483647则返回INT_MAX(2147483647)；如果是小于-2147483648则返回INT_MIN(-2147483648).  解题思路： 题目的整体思路不难，主要利用’9’-‘0’来得到对应位数代表的数字，用上一位">
-<meta property="og:updated_time" content="2017-04-17T11:56:43.000Z">
+<meta property="og:description" content="LCA In Tree题目描述： 给定一棵树和树中的两个节点，要求返回这两个节点的最近公共祖先节点.  例子： leetcode上有两道题目是关于公共祖先问题的，具体描述可以看LeetCode235和LeetCode236  解题思路： 主要的思路是这样的：我们遍历当前节点为cur，如果cur为空，或者cur是等于目标结点之一的情况下，我们就直接返回这个节点即可；如果不是的情况下，我们继续下一层的">
+<meta property="og:updated_time" content="2017-05-02T11:53:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="String To Num">
-<meta name="twitter:description" content="String To Num题目描述： 给定一个字符串，将其转化为对应的合法的数字。其中字符串可能的输入存在多种情况，需要考虑。如果是非法的转化，返回0；如果是大于2147483647则返回INT_MAX(2147483647)；如果是小于-2147483648则返回INT_MIN(-2147483648).  解题思路： 题目的整体思路不难，主要利用’9’-‘0’来得到对应位数代表的数字，用上一位">
+<meta name="twitter:title" content="LCA In Tree">
+<meta name="twitter:description" content="LCA In Tree题目描述： 给定一棵树和树中的两个节点，要求返回这两个节点的最近公共祖先节点.  例子： leetcode上有两道题目是关于公共祖先问题的，具体描述可以看LeetCode235和LeetCode236  解题思路： 主要的思路是这样的：我们遍历当前节点为cur，如果cur为空，或者cur是等于目标结点之一的情况下，我们就直接返回这个节点即可；如果不是的情况下，我们继续下一层的">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/18/将字符串转化为数字/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/02/Tree-树的公共祖先问题/"/>
 
 
 
 
 
-  <title> String To Num | Tech </title>
+  <title> LCA In Tree | Tech </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/18/将字符串转化为数字/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/02/Tree-树的公共祖先问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mfzhu7">
@@ -281,7 +281,7 @@
             
             
               
-                String To Num
+                LCA In Tree
               
             
           </h1>
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-18T19:36:02+08:00">
-                2017-04-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-02T18:36:02+08:00">
+                2017-05-02
               </time>
             
 
@@ -354,13 +354,20 @@
       
 
       
-        <h3 id="String-To-Num"><a href="#String-To-Num" class="headerlink" title="String To Num"></a>String To Num</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个字符串，将其转化为对应的合法的数字。其中字符串可能的输入存在多种情况，需要考虑。如果是非法的转化，返回0；如果是大于2147483647则返回INT_MAX(2147483647)；如果是小于-2147483648则返回INT_MIN(-2147483648).</p>
+        <h3 id="LCA-In-Tree"><a href="#LCA-In-Tree" class="headerlink" title="LCA In Tree"></a>LCA In Tree</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一棵树和树中的两个节点，要求返回这两个节点的最近公共祖先节点.</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>leetcode上有两道题目是关于公共祖先问题的，具体描述可以看<a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/#/description" target="_blank" rel="external">LeetCode235</a>和<a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/#/description" target="_blank" rel="external">LeetCode236</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>题目的整体思路不难，主要利用’9’-‘0’来得到对应位数代表的数字，用上一位的累加和乘以10加上当前位数得到结果。需要考虑的部分有：输入的开头可能是空格，我们需要跳过这些字符；当到达第一位非空格的时候，记录下数字的符号；最后需要考虑的是超过整形数字的范围；我们的做法是用base=INT_MAX/10来作为标记；如果在还没到达最后一位的时候，当前已经大于base，则结果一定溢出，所以返回对应符号的数即可，如果是当前值等于base的情况下，判断当前为是否大于7，如果大于7也是同样的做法。当然好几种情况在返回0的情况可以全部合并，写入注释用于提醒。所以做题之前需要多考虑Corner case。</p>
+<p>主要的思路是这样的：我们遍历当前节点为cur，如果cur为空，或者cur是等于目标结点之一的情况下，我们就直接返回这个节点即可；如果不是的情况下，我们继续下一层的遍历，记left是左侧返回的结果，right是右侧的返回的结果；如果左侧和右侧均不为空，则说明在当前节点的情况下，左侧或者右侧找到了两个目标节点，则当前节点即为最近的公共祖先；如果其中一个为空的情况下；说明某侧找到了其中的一个节点或者当前的cur即为公共祖先且为目标节点中的一个。</p>
 </blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">myAtoi</span><span class="params">(<span class="built_in">string</span> str)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> cur = <span class="number">0</span>;<span class="comment">//记录当前遍历的位置</span></div><div class="line">        <span class="keyword">int</span> base = INT_MAX / <span class="number">10</span>;<span class="comment">//对比大小</span></div><div class="line">        <span class="keyword">int</span> sign = <span class="number">1</span>;<span class="comment">//记录符号</span></div><div class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;<span class="comment">//保存结果</span></div><div class="line">        <span class="keyword">while</span>(str[cur] == <span class="string">' '</span>)&#123;</div><div class="line">            cur++;</div><div class="line">        &#125;<span class="comment">//过滤掉空格</span></div><div class="line">        <span class="keyword">if</span> (str[cur] == <span class="string">'-'</span> || str[cur] == <span class="string">'+'</span>)&#123;</div><div class="line">            sign = (str[cur] == <span class="string">'+'</span>) ? <span class="number">1</span> : <span class="number">-1</span>;</div><div class="line">            cur++;</div><div class="line">        &#125;<span class="comment">//记录符号</span></div><div class="line">        <span class="keyword">while</span>(cur &lt; str.size() &amp;&amp; <span class="built_in">isdigit</span>(str[cur]))&#123;</div><div class="line">            <span class="keyword">if</span> (res &gt; base || (res == base &amp;&amp; str[cur] - <span class="string">'0'</span> &gt; <span class="number">7</span>))</div><div class="line">                <span class="keyword">return</span> sign &gt; <span class="number">0</span> ? INT_MAX : INT_MIN;</div><div class="line">                <span class="comment">//判断是否溢出的情况</span></div><div class="line">            res = res * <span class="number">10</span> + str[cur] - <span class="string">'0'</span>;</div><div class="line">            cur++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res * sign;</div><div class="line">        <span class="comment">//返回结果</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">        <span class="comment">// if (str[cur] == str.size()) return 0;</span></div><div class="line">        <span class="comment">//全部是空格的情况</span></div><div class="line">        <span class="comment">// if (cur == str.size() || str[cur] &lt; 48 || str[cur] &gt; 57) return 0;</span></div><div class="line">        <span class="comment">//如果是非数字的情况</span></div><div class="line">        <span class="comment">// while(str[cur] == '0')&#123;</span></div><div class="line">        <span class="comment">//     cur++;</span></div><div class="line">        <span class="comment">// &#125;</span></div><div class="line">        <span class="comment">//字符开头是0的情况</span></div></pre></td></tr></table></figure>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span> || root == q || root == p)</div><div class="line">            <span class="keyword">return</span> root;</div><div class="line">        TreeNode* left = lowestCommonAncestor(root-&gt;left, p, q);</div><div class="line">        TreeNode* right = lowestCommonAncestor(root-&gt;right, p, q);</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (left != <span class="literal">NULL</span> &amp;&amp; right != <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> root;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> left != <span class="literal">NULL</span> ? left : right;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解法2"><a href="#解法2" class="headerlink" title="解法2"></a>解法2</h3><blockquote>
+<p>当然在需要多次查询公共祖先的情况下，我们可以采用另外一种方法来查找树的公共祖先。首先我们构造一个哈希表，表中的key是某个节点，value是其父节点。当要查询a1和a2的公共祖先的时候，先从表中查询到从a1到根节点上的所有节点构成父节点集合，然后我们开始从a2查找是否在该集合中，存在即为祖先节点，不存在则继续向上查找。</p>
+</blockquote>
+<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</div><div class="line">        <span class="built_in">map</span>&lt;TreeNode*, TreeNode*&gt; hash;</div><div class="line">        hash[root] = <span class="literal">NULL</span>;</div><div class="line">        helper(root, hash);</div><div class="line">        <span class="built_in">set</span>&lt;TreeNode*&gt; ancestor;</div><div class="line">        ancestor.insert(p);</div><div class="line">        TreeNode* cur = p;</div><div class="line">        <span class="keyword">while</span>(cur != <span class="literal">NULL</span>)&#123;</div><div class="line">            ancestor.insert(hash[cur]);</div><div class="line">            cur = hash[cur];</div><div class="line">        &#125;</div><div class="line">        cur = q;</div><div class="line">        <span class="keyword">while</span>(ancestor.find(cur) == ancestor.end())&#123;</div><div class="line">            cur = hash[cur];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> cur;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">helper</span><span class="params">(TreeNode* root, <span class="built_in">map</span>&lt;TreeNode*, TreeNode*&gt;&amp; hash)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        <span class="keyword">if</span> (root-&gt;left)</div><div class="line">            hash[root-&gt;left] = root;</div><div class="line">        <span class="keyword">if</span> (root-&gt;right)</div><div class="line">            hash[root-&gt;right] = root;</div><div class="line">        helper(root-&gt;left, hash);</div><div class="line">        helper(root-&gt;right, hash);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -390,7 +397,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/String/" rel="tag"># String</a>
+            <a href="/tags/List/" rel="tag"># List</a>
           
         </div>
       
@@ -403,18 +410,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/19/找到数组的全排列/" rel="next" title="Array Permutation">
-                <i class="fa fa-chevron-left"></i> Array Permutation
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/17/数组中除法的最优切分/" rel="prev" title="Optimal Division In Array">
-                Optimal Division In Array <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/01/adaboost在MNIST上的应用/" rel="prev" title="Adaboost In MNIST">
+                Adaboost In MNIST <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -544,7 +547,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#String-To-Num"><span class="nav-number">1.</span> <span class="nav-text">String To Num</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">3.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">4.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#LCA-In-Tree"><span class="nav-number">1.</span> <span class="nav-text">LCA In Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子："><span class="nav-number">3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">4.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">5.</span> <span class="nav-text">代码如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法2"><span class="nav-number">6.</span> <span class="nav-text">解法2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下：-1"><span class="nav-number">7.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
             
 
           </div>

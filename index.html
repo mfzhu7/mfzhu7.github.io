@@ -260,6 +260,162 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/02/Tree-树的公共祖先问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/02/Tree-树的公共祖先问题/" itemprop="url">
+                  LCA In Tree
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-02T18:36:02+08:00">
+                2017-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="LCA-In-Tree"><a href="#LCA-In-Tree" class="headerlink" title="LCA In Tree"></a>LCA In Tree</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一棵树和树中的两个节点，要求返回这两个节点的最近公共祖先节点.</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>leetcode上有两道题目是关于公共祖先问题的，具体描述可以看<a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/#/description" target="_blank" rel="external">LeetCode235</a>和<a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/#/description" target="_blank" rel="external">LeetCode236</a></p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>主要的思路是这样的：我们遍历当前节点为cur，如果cur为空，或者cur是等于目标结点之一的情况下，我们就直接返回这个节点即可；如果不是的情况下，我们继续下一层的遍历，记left是左侧返回的结果，right是右侧的返回的结果；如果左侧和右侧均不为空，则说明在当前节点的情况下，左侧或者右侧找到了两个目标节点，则当前节点即为最近的公共祖先；如果其中一个为空的情况下；说明某侧找到了其中的一个节点或者当前的cur即为公共祖先且为目标节点中的一个。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span> || root == q || root == p)</div><div class="line">            <span class="keyword">return</span> root;</div><div class="line">        TreeNode* left = lowestCommonAncestor(root-&gt;left, p, q);</div><div class="line">        TreeNode* right = lowestCommonAncestor(root-&gt;right, p, q);</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (left != <span class="literal">NULL</span> &amp;&amp; right != <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> root;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> left != <span class="literal">NULL</span> ? left : right;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解法2"><a href="#解法2" class="headerlink" title="解法2"></a>解法2</h3><blockquote>
+<p>当然在需要多次查询公共祖先的情况下，我们可以采用另外一种方法来查找树的公共祖先。首先我们构造一个哈希表，表中的key是某个节点，value是其父节点。当要查询a1和a2的公共祖先的时候，先从表中查询到从a1到根节点上的所有节点构成父节点集合，然后我们开始从a2查找是否在该集合中，存在即为祖先节点，不存在则继续向上查找。</p>
+</blockquote>
+<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</div><div class="line">        <span class="built_in">map</span>&lt;TreeNode*, TreeNode*&gt; hash;</div><div class="line">        hash[root] = <span class="literal">NULL</span>;</div><div class="line">        helper(root, hash);</div><div class="line">        <span class="built_in">set</span>&lt;TreeNode*&gt; ancestor;</div><div class="line">        ancestor.insert(p);</div><div class="line">        TreeNode* cur = p;</div><div class="line">        <span class="keyword">while</span>(cur != <span class="literal">NULL</span>)&#123;</div><div class="line">            ancestor.insert(hash[cur]);</div><div class="line">            cur = hash[cur];</div><div class="line">        &#125;</div><div class="line">        cur = q;</div><div class="line">        <span class="keyword">while</span>(ancestor.find(cur) == ancestor.end())&#123;</div><div class="line">            cur = hash[cur];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> cur;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">helper</span><span class="params">(TreeNode* root, <span class="built_in">map</span>&lt;TreeNode*, TreeNode*&gt;&amp; hash)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        <span class="keyword">if</span> (root-&gt;left)</div><div class="line">            hash[root-&gt;left] = root;</div><div class="line">        <span class="keyword">if</span> (root-&gt;right)</div><div class="line">            hash[root-&gt;right] = root;</div><div class="line">        helper(root-&gt;left, hash);</div><div class="line">        helper(root-&gt;right, hash);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/adaboost在MNIST上的应用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -544,7 +700,7 @@
 </li>
 <li><p><a href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/#/description" target="_blank" rel="external">LeetCode103</a>: 按照Z字型遍历一棵树的节点并返回结果。</p>
 </li>
-<li><p><a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node/#/description" target="_blank" rel="external">LeetCode116</a>:树的层指针的实现。</p>
+<li><p><a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node/#/description" target="_blank" rel="external">LeetCode116</a>: 树的层指针的实现。</p>
 </li>
 <li><p><a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/#/description" target="_blank" rel="external">LeetCode117</a>: 树的层指针实现。</p>
 </li>
@@ -577,7 +733,7 @@
 </li>
 </ul>
 <blockquote>
-<p>以上的树的路径问题可以看我的另外一篇<a href="https://mfzhu7.github.io/2017/04/04/%E6%A0%91%E7%9A%84%E8%B7%AF%E5%BE%84%E5%92%8C%E4%B8%93%E9%A2%98/" target="_blank" rel="external">博客</a>。</p>
+<p>以上的树的路径问题可以看我的另外两篇<a href="https://mfzhu7.github.io/2017/04/04/%E6%A0%91%E7%9A%84%E8%B7%AF%E5%BE%84%E5%92%8C%E4%B8%93%E9%A2%98/" target="_blank" rel="external">博客1</a>和<a href="https://mfzhu7.github.io/2017/04/05/%E6%89%BE%E5%88%B0%E6%A0%91%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%8F%B6%E8%8A%82%E7%82%B9%E7%9A%84%E6%9C%80%E9%95%BF%E8%B7%9D%E7%A6%BB/" target="_blank" rel="external">博客2</a></p>
 </blockquote>
 <h3 id="4-其他树的遍历问题"><a href="#4-其他树的遍历问题" class="headerlink" title="4.其他树的遍历问题"></a>4.其他树的遍历问题</h3><ul>
 <li><p><a href="https://leetcode.com/problems/find-mode-in-binary-search-tree/#/description" target="_blank" rel="external">LeetCode501</a>: 找到一棵树中出现次数最多的那个数。</p>
@@ -599,9 +755,9 @@
 <p>树的构建问题通常是给定一个特定序列的数组，要求根据数组重建二叉树。其中最为经典的题目就是根据两种遍历的结果重建原始的二叉树问题。另外一个常见的问题是通过根据二叉搜索树的性质，给定排序数组要求重建二叉排序树。</p>
 </blockquote>
 <ul>
-<li><p><a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/#/description" target="_blank" rel="external">LeetCode105</a>:从先序遍历和中序遍历重建二叉树。</p>
+<li><p><a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/#/description" target="_blank" rel="external">LeetCode105</a>: 从先序遍历和中序遍历重建二叉树。</p>
 </li>
-<li><p><a href="https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/#/description" target="_blank" rel="external">LeetCode106</a>:从中序遍历和后序遍历重建二叉树。</p>
+<li><p><a href="https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/#/description" target="_blank" rel="external">LeetCode106</a>: 从中序遍历和后序遍历重建二叉树。</p>
 </li>
 <li><p><a href="https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/#/description" target="_blank" rel="external">LeetCode108</a>: 给定一个排序后的数组，要求根据数组重建二叉搜索树。</p>
 </li>
@@ -627,7 +783,7 @@
 </li>
 </ul>
 <blockquote>
-<p>以上关于树的类型问题的总结可以看我的另外一篇<a href="">博客</a></p>
+<p>以上关于树的类型问题的总结可以看我的另外一篇<a href="https://mfzhu7.github.io/2017/03/31/%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/" target="_blank" rel="external">博客</a></p>
 </blockquote>
 <h2 id="树的形态变换问题"><a href="#树的形态变换问题" class="headerlink" title=" 树的形态变换问题"></a><a name="树的形态变换"></a> 树的形态变换问题</h2><blockquote>
 <p>树的形态变化问题较为灵活，通常要根据题目的要求来进行操作。常见的解题思路是递归和回溯的使用。</p>
@@ -648,7 +804,7 @@
 <h2 id="树的公共祖先问题"><a href="#树的公共祖先问题" class="headerlink" title=" 树的公共祖先问题"></a><a name="树的公共祖先问题"></a> 树的公共祖先问题</h2><ul>
 <li><p><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/#/description" target="_blank" rel="external">LeetCode235</a>: 最近公共祖先问题。</p>
 </li>
-<li><p><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/#/description" target="_blank" rel="external">LeetCode236</a>:最近公共祖先问题。</p>
+<li><p><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/#/description" target="_blank" rel="external">LeetCode236</a>: 最近公共祖先问题。</p>
 </li>
 </ul>
 <p>##<a name="树的序列化问题"></a> 树的序列化问题</p>
@@ -658,9 +814,12 @@
 <ul>
 <li><a href="https://leetcode.com/problems/serialize-and-deserialize-bst/#/description" target="_blank" rel="external">LeetCode449</a>:二叉搜索树的序列化问题。</li>
 </ul>
+<blockquote>
+<p>树的序列化问题可以看的另外一篇<a href="https://mfzhu7.github.io/2017/03/28/%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96/" target="_blank" rel="external">博客</a></p>
+</blockquote>
 <p>##<a name="树的其他问题"></a> 树的其他问题</p>
 <ul>
-<li><p><a href="https://leetcode.com/problems/diameter-of-binary-tree/#/description" target="_blank" rel="external">LeetCode543</a>: 二叉树的周长。</p>
+<li><p><a href="https://leetcode.com/problems/diameter-of-binary-tree/#/description" target="_blank" rel="external">LeetCode543</a>: 二叉树的周长</p>
 </li>
 <li><p><a href="https://leetcode.com/problems/binary-tree-tilt/#/description" target="_blank" rel="external">LeetCode563</a></p>
 </li>
@@ -1809,162 +1968,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/13/数组构建二叉树/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/13/数组构建二叉树/" itemprop="url">
-                  Construct Tree From Array
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-13T19:23:02+08:00">
-                2017-04-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Construct-Tree-From-Array"><a href="#Construct-Tree-From-Array" class="headerlink" title="Construct Tree From Array"></a>Construct Tree From Array</h3><h3 id="题目描述1："><a href="#题目描述1：" class="headerlink" title="题目描述1："></a>题目描述1：</h3><blockquote>
-<p>给定一个数字n，要求得到根据这个数字所得到的数组[1,2,3…..n]，从这个数组中构建搜索二叉树的个数。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 给定数字假设为3，通过计算分别以1，2，3为头结点的有效的搜索二叉树的个数可以知道，其结果为5。</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>通过从1开始计算其可能的二叉树个数，可以发现规律：当n=1，二叉树的个数为1；当n=2的时候，二叉树的个数为2；当n=3的时候，二叉树的个数为5。分析n=3的情况：以1为头结点，用于构建左子树的数字为空，用于构建右子树的数字为[2,3]，所以总的个数为h(0) <em> h(2) = 2；同理在以2为头结点的情况下，个数为h(1) </em> h(1) = 1；以3为头结点情况，h(2) <em> h(0) = 1;所以一共有5种。通过推广到n；我们用h(i)表示用i个数构建二叉树的个数，h(0)=1,h(1)=1,h(2)=2…则h(n) = h(n-1) </em> h(0) + h(n-2) * h(1)…这样所得到的序列称为卡特兰数序列。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numTrees</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;vec;</div><div class="line">        vec.push_back(<span class="number">1</span>);</div><div class="line">        vec.push_back(<span class="number">1</span>);</div><div class="line">        vec.push_back(<span class="number">2</span>);<span class="comment">//定义初始的数</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; i++)&#123;</div><div class="line">            <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; j++)&#123;</div><div class="line">                res = res + vec[j - <span class="number">1</span>] * vec[i - j];</div><div class="line">            &#125;</div><div class="line">            vec.push_back(res);<span class="comment">//计算第i个位置的卡特兰数</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> vec[n];</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="题目描述2："><a href="#题目描述2：" class="headerlink" title="题目描述2："></a>题目描述2：</h3><blockquote>
-<p>根据上一题的描述，我们要求返回所有有效的二叉树的头结点的集合。解题的思路，主要是利用递归构建树的想法，直接上代码。</p>
-</blockquote>
-<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;TreeNode*&gt; generateTrees(<span class="keyword">int</span> n) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; res;</div><div class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> res;</div><div class="line">        <span class="keyword">return</span> helper(<span class="number">1</span>, n);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">vector</span>&lt;TreeNode*&gt;helper(<span class="keyword">int</span> start, <span class="keyword">int</span> end)&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt;res;</div><div class="line">        <span class="comment">//用来保存当前递归层的可能二叉树的头节点</span></div><div class="line">        <span class="keyword">if</span> (start &gt; end) res.push_back(<span class="literal">NULL</span>);</div><div class="line">        <span class="comment">//此时直接构建空树</span></div><div class="line">        <span class="keyword">if</span> (start == end) res.push_back(<span class="keyword">new</span> TreeNode(start));</div><div class="line">        <span class="comment">// 此时返回以当前数的节点</span></div><div class="line">        <span class="keyword">if</span> (start &lt; end)&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt;= end; i++)&#123;</div><div class="line">            <span class="comment">//遍历以当前范围中各个数为头结点的可能</span></div><div class="line">                <span class="built_in">vector</span>&lt;TreeNode*&gt;lefts = helper(start, i - <span class="number">1</span>);</div><div class="line">                <span class="built_in">vector</span>&lt;TreeNode*&gt;rights = helper(i + <span class="number">1</span>, end);</div><div class="line">                <span class="comment">//找到该情况下左右子树的头结点的集合</span></div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; (<span class="keyword">int</span>)lefts.size(); j++)&#123;</div><div class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; (<span class="keyword">int</span>)rights.size(); k++)&#123;</div><div class="line">                        TreeNode* root = <span class="keyword">new</span> TreeNode(i);</div><div class="line">                        root-&gt;left = lefts[j];</div><div class="line">                        root-&gt;right = rights[k];</div><div class="line">                        <span class="comment">//指向左右子树</span></div><div class="line">                        res.push_back(root);</div><div class="line">                        <span class="comment">//保存结果</span></div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2014,7 +2017,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
