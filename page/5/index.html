@@ -260,6 +260,468 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/23/Combination-Sum-III/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/23/Combination-Sum-III/" itemprop="url">
+                  Combination Sum III
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-23T19:36:02+08:00">
+                2017-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Combination-Sum-III"><a href="#Combination-Sum-III" class="headerlink" title="Combination Sum III"></a>Combination Sum III</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一个目标值，以及表示累加和数字的个数k。要求得到找到1-9中k个数为目标值的所有可能，要求结果中不存在重复值，且各个数字只能用一次。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p> 给定k=3,target=7，则结果为[[1,2,4]];给定k=3,target=9,则结果为[[1,2,6],[1,3,5],[2,3,4]]</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>首先已知我们只能用1-9的数，所以用过的数不能再次使用。这样相当于构建一棵树，新的节点的可能只能在上一个节点较大值中取。例如我们当前取值了5，则下一个节点的可能值只有6，7，8，9。基于以上事实，我们使用回溯的算法，在不断寻找的过程中，如果条件不满足则返回，如果满足题意则加入到结果中。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; combinationSum3(<span class="keyword">int</span> k, <span class="keyword">int</span> n) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res; <span class="comment">// 保存返回结果</span></div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; record;   <span class="comment">// 保存当前遍历结果</span></div><div class="line">        dfs(res, k, n, record); <span class="comment">//其中用k保存已经使用几个数</span></div><div class="line">        								<span class="comment">// n表示我们还需要多少满足目标值</span></div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="keyword">int</span> k, <span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; record)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (k == <span class="number">0</span> &amp;&amp; n == <span class="number">0</span>)&#123;</div><div class="line">            res.push_back(record);</div><div class="line">            <span class="keyword">return</span>; <span class="comment">// 如果满足条件，则加入结果并返回</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">0</span> || k == <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span>;    <span class="comment">// 不满足的情况下，我们直接返回</span></div><div class="line">        <span class="keyword">int</span> start = record.size() == <span class="number">0</span> ? <span class="number">1</span> : record.back() + <span class="number">1</span>;</div><div class="line">        <span class="comment">// 如果当前的遍历结果是空则从0开始</span></div><div class="line">        <span class="comment">// 否则从当前遍历结果中最后一个数的下一个数开始寻找</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt;= <span class="number">9</span>; i++)&#123;</div><div class="line">            record.push_back(i); <span class="comment">// 将当前遍历值加入遍历结果</span></div><div class="line">            dfs(res, k - <span class="number">1</span>, n - i, record); <span class="comment">// 递归寻找</span></div><div class="line">            record.pop_back();   <span class="comment">// 回溯一步不然record里面会不断添加所有遍历过的数</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/23/链表分区/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/23/链表分区/" itemprop="url">
+                  Partition List
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-23T12:36:02+08:00">
+                2017-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Partition-List-将链表按照某个值分区"><a href="#Partition-List-将链表按照某个值分区" class="headerlink" title="Partition List(将链表按照某个值分区)"></a>Partition List(将链表按照某个值分区)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一个链表的头结点和一个给定值k。将链表按照左侧的节点都小于k，中间的值等于k，右侧的值大于k的排列方式重新连接链表。对于链表各个分区的内部节点并没有要求有序，但是要求和原链表中的节点顺序一致。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p> 9-&gt;0-&gt;4-&gt;5-&gt;1-&gt;NULL。给定的分区值为3的情况下，我们需要返回的链表为：0-&gt;1-&gt;9-&gt;5-&gt;4-&gt;NULL</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>主要的思路是我们定义3个分区链表，分别保存小于分区值、等于分区值和大于分区值3种。然后遍历链表不断的将链表的节点加入对应的分区链表中，最后再将三个分区链表连接即可。注意的地方有在连接三个分区的时候，需要考虑各个分区中可能是空的情况。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> listPartition1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">listPartition</span><span class="params">(ListNode* head, <span class="keyword">int</span> pivot)</span></span>&#123;</div><div class="line">        ListNode* sh = <span class="literal">NULL</span>;</div><div class="line">        ListNode* se = <span class="literal">NULL</span>; <span class="comment">// 小于分区值的头节点和尾节点</span></div><div class="line">        ListNode* eh = <span class="literal">NULL</span>;</div><div class="line">        ListNode* ee = <span class="literal">NULL</span>; <span class="comment">// 等于分区值的头节点和尾节点</span></div><div class="line">        ListNode* bh = <span class="literal">NULL</span>;</div><div class="line">        ListNode* be = <span class="literal">NULL</span>; <span class="comment">// 大于分区值的头节点和尾节点</span></div><div class="line">        ListNode* next = <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">while</span>(head != <span class="literal">NULL</span>)&#123;</div><div class="line">            next = head-&gt;next;</div><div class="line">            head-&gt;next = <span class="literal">NULL</span>; <span class="comment">// next保存下一个节点后断开当前节点和后续链表的连接</span></div><div class="line">            <span class="keyword">if</span> (head-&gt;val &lt; pivot)&#123;</div><div class="line">                <span class="keyword">if</span> (sh == <span class="literal">NULL</span>)&#123;</div><div class="line">                    sh = head;</div><div class="line">                    se = head;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span>&#123;</div><div class="line">                    se-&gt;next = head;</div><div class="line">                    se = se-&gt;next;</div><div class="line">                &#125;             <span class="comment">// 将符合条件的节点放入对应分区</span></div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (head-&gt;val == pivot)&#123;</div><div class="line">                <span class="keyword">if</span> (eh == <span class="literal">NULL</span>)&#123;</div><div class="line">                    eh = head;</div><div class="line">                    ee = head;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span>&#123;</div><div class="line">                    ee-&gt;next = head;</div><div class="line">                    ee = ee-&gt;next;</div><div class="line">                &#125;          <span class="comment">// 将符合条件的节点放入对应分区</span></div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                <span class="keyword">if</span> (bh == <span class="literal">NULL</span>)&#123;</div><div class="line">                    bh = head;</div><div class="line">                    be = head;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span>&#123;</div><div class="line">                    be-&gt;next = head;</div><div class="line">                    be = be-&gt;next;</div><div class="line">                &#125;        <span class="comment">// 将符合条件的节点放入对应分区</span></div><div class="line">            &#125;</div><div class="line">            head = next; <span class="comment">// 然后head继续遍历</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (sh != <span class="literal">NULL</span>)&#123;</div><div class="line">            <span class="keyword">if</span> (eh != <span class="literal">NULL</span>) &#123;</div><div class="line">                se-&gt;next = eh;</div><div class="line">                ee-&gt;next = bh;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                se-&gt;next = bh;</div><div class="line">            <span class="keyword">return</span> sh;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">if</span> (ee != <span class="literal">NULL</span>) &#123;</div><div class="line">                ee-&gt;next = bh;</div><div class="line">                <span class="keyword">return</span> ee;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> bh;  <span class="comment">//需要注意不同的分区可能为空的情况</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/判断回文链表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/22/判断回文链表/" itemprop="url">
+                  Palindrome List
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-22T11:52:02+08:00">
+                2017-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Palindrome-List-判断链表是否是回文链表"><a href="#Palindrome-List-判断链表是否是回文链表" class="headerlink" title="Palindrome List(判断链表是否是回文链表)"></a>Palindrome List(判断链表是否是回文链表)</h1><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一个链表的头结点，判断链表是否是回文结构。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p> 1-&gt;2-&gt;3-&gt;2-&gt;1-&gt;NULL即为回文链表</p>
+</blockquote>
+<h3 id="解题思路1："><a href="#解题思路1：" class="headerlink" title="解题思路1："></a>解题思路1：</h3><blockquote>
+<p>回文的结构的特点是正序和逆序的访问结果是一致的。所以第一种想法是利用栈结构来逆序链表。首先申请一个栈空间，然后遍历链表，将链表中的数据不断的压栈。然后再次遍历链表和栈，如果出现栈中的数据和链表中的数据不一致的情况即为非回文结构。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> isPalindrome1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(ListNode* head)</span></span>&#123;</div><div class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk; <span class="comment">// 申请栈空间</span></div><div class="line">        ListNode* temp = head;</div><div class="line">        <span class="keyword">while</span>(temp != <span class="literal">NULL</span>)&#123;</div><div class="line">            stk.push(temp-&gt;val);</div><div class="line">            temp = temp-&gt;next;</div><div class="line">        &#125;             <span class="comment">//数据压栈</span></div><div class="line">        <span class="keyword">while</span>(head != <span class="literal">NULL</span>)&#123;</div><div class="line">            <span class="keyword">if</span> (stk.top() != head-&gt;val) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            &#125;          </div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                stk.pop();</div><div class="line">                head = head-&gt;next;</div><div class="line">            &#125;</div><div class="line">        &#125;        <span class="comment">//判断元素是否相同</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解题思路2"><a href="#解题思路2" class="headerlink" title="解题思路2:"></a>解题思路2:</h3><blockquote>
+<p>在原先的基础上我们可以通过找到链表的中间节点，然后用先前的栈的一半空间即可实现。主要想法是我们可以找到例子中的中间节点3；然后我们可以将后半部分2-&gt;1-&gt;NULL压栈；然后从链表头部和栈顶开始遍历数据判断是否相等即可。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> isPalindrome2&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(ListNode* head)</span></span>&#123;</div><div class="line">        ListNode* cur = head;</div><div class="line">        ListNode* right = head-&gt;next;</div><div class="line">        <span class="keyword">if</span> (head == <span class="literal">nullptr</span> || right == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        <span class="keyword">while</span>(cur-&gt;next != <span class="literal">nullptr</span> &amp;&amp; cur-&gt;next-&gt;next != <span class="literal">NULL</span>)&#123;</div><div class="line">            right = right-&gt;next;</div><div class="line">            cur = cur-&gt;next-&gt;next;</div><div class="line">        &#125;<span class="comment">//找到中间节点</span></div><div class="line"></div><div class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</div><div class="line">        <span class="keyword">while</span>(right != <span class="literal">NULL</span>)&#123;</div><div class="line">            stk.push(right-&gt;val);</div><div class="line">            right = right-&gt;next;</div><div class="line">        &#125; <span class="comment">//压栈</span></div><div class="line">        <span class="keyword">while</span>(!stk.empty())&#123;</div><div class="line">            <span class="keyword">if</span> (stk.top() != head-&gt;val)</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                stk.pop();</div><div class="line">                head = head-&gt;next;</div><div class="line">            &#125;</div><div class="line">        &#125;<span class="comment">//判断是否相等</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解题思路3"><a href="#解题思路3" class="headerlink" title="解题思路3:"></a>解题思路3:</h3><blockquote>
+<p>判断回文的过程中，我们遇到的另外一个问题是对于链表我们无法逆序查找，如果可以的话我们就可以直接从链表的头部和尾部同时查找然后判断是否是回文即可。所以基于这个思路，我们可以将链表的后半段改变指针的指向后，然后从左右侧同时开始遍历判断是否相等即可。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution3 &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome3</span><span class="params">(ListNode* head)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (head-&gt;next == <span class="literal">NULL</span> || head-&gt;next-&gt;next == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        ListNode* n1 = head;</div><div class="line">        ListNode* n2 = head;</div><div class="line">        <span class="keyword">while</span>(n2-&gt;next != <span class="literal">NULL</span> &amp;&amp; n2-&gt;next-&gt;next != <span class="literal">NULL</span>)&#123;</div><div class="line">            n1 = n1-&gt;next;</div><div class="line">            n2 = n2-&gt;next-&gt;next;</div><div class="line">        &#125;             <span class="comment">//快慢指针找到链表的中部节点</span></div><div class="line">        n2 = n1-&gt;next;</div><div class="line">        n1-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        ListNode* n3 = <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">while</span>(n2 != <span class="literal">NULL</span>)&#123;</div><div class="line">            n3 = n2-&gt;next;</div><div class="line">            n2-&gt;next = n1;</div><div class="line">            n1 = n2;</div><div class="line">            n2 = n3;</div><div class="line">        &#125;           <span class="comment">//逆序后半部分链表</span></div><div class="line">        n3 = n1;</div><div class="line">        n2 = head;</div><div class="line">        <span class="keyword">while</span>(n1 != <span class="literal">NULL</span> &amp;&amp; n2 != <span class="literal">NULL</span>)&#123;</div><div class="line">            <span class="keyword">if</span>(n1-&gt;val != n2-&gt;val)&#123;</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                n1 = n1-&gt;next;</div><div class="line">                n2 = n2-&gt;next;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="comment">// 从左右侧同时遍历链表判断值是否相等</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/21/链表中每k个节点逆序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1369,164 +1831,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/15/AddList/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/15/AddList/" itemprop="url">
-                  AddLists
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-15T10:36:02+08:00">
-                2017-03-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="AddLists-将两个链表相加"><a href="#AddLists-将两个链表相加" class="headerlink" title="AddLists(将两个链表相加)"></a>AddLists(将两个链表相加)</h1><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>两个链表中保存中一系列整数，分别代表着两个整数；例如1-&gt;2-&gt;3；给定两个链表的头结点，返回两个链表中数相加后的结果。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 例如给定1-&gt;2-&gt;3和2-&gt;4-&gt;5;则返回头结点，其指向的链表内容为3-&gt;6-&gt;8。</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>解题思路为：因为数据的相加需要从尾部开始，所以第一个想法是利用栈结构。将数据分别导入到两个栈中，不断的从栈顶提取出数据，相加后新建一个节点，用相加的初始值初始化该节点，并记录是否进位；下一次的相加后的新建的节点指向上一个节点即可。另外也可以将结果导入到一个新栈中，在全部计算完成之后，从栈顶取元素初始化即可。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><h4 id="其中关于链表类的定义如下："><a href="#其中关于链表类的定义如下：" class="headerlink" title="其中关于链表类的定义如下："></a>其中关于链表类的定义如下：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> ListNode&#123;</div><div class="line">    <span class="keyword">int</span> val;</div><div class="line">    ListNode* next;</div><div class="line">    ListNode(<span class="keyword">int</span> x): val(x), next(<span class="literal">NULL</span>) &#123;&#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h4 id="解法一：利用三个栈来实现，需要注意的是进位的保存和计算完成之后需要判断进位来决定头结点是否为1"><a href="#解法一：利用三个栈来实现，需要注意的是进位的保存和计算完成之后需要判断进位来决定头结点是否为1" class="headerlink" title="解法一：利用三个栈来实现，需要注意的是进位的保存和计算完成之后需要判断进位来决定头结点是否为1."></a>解法一：利用三个栈来实现，需要注意的是进位的保存和计算完成之后需要判断进位来决定头结点是否为1.</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ListNode.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"reverseList.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">class</span> addLists1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">addLists</span><span class="params">(ListNode* head1, ListNode* head2)</span> </span>&#123;</div><div class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk1;</div><div class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk2;</div><div class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk3;</div><div class="line">        <span class="keyword">int</span> n1 = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> n2 = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> ca = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span> (head1 != <span class="literal">NULL</span>) &#123;</div><div class="line">            stk1.push(head1-&gt;val);</div><div class="line">            head1 = head1-&gt;next;</div><div class="line">        &#125;                      <span class="comment">//第一链表数据进栈</span></div><div class="line">        <span class="keyword">while</span> (head2 != <span class="literal">NULL</span>) &#123;</div><div class="line">            stk2.push(head2-&gt;val);</div><div class="line">            head2 = head2-&gt;next;</div><div class="line">        &#125;                     <span class="comment">//第二个链表数据进栈</span></div><div class="line">        <span class="keyword">while</span> (!stk1.empty() || !stk2.empty()) &#123;</div><div class="line">            n1 = stk1.empty() ? <span class="number">0</span> : stk1.top();</div><div class="line">            stk1.pop();</div><div class="line">            n2 = stk2.empty() ? <span class="number">0</span> : stk2.top();</div><div class="line">            stk2.pop();</div><div class="line">            stk3.push((n1 + n2 + ca) % <span class="number">10</span>);</div><div class="line">            ca = ((n1 + n2 + ca) &gt;= <span class="number">10</span>) ? <span class="number">1</span> : <span class="number">0</span>;</div><div class="line">        &#125;                    <span class="comment">//相加结果进栈保存</span></div><div class="line">        ListNode* pre = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</div><div class="line">        ListNode* cur = pre;</div><div class="line">        <span class="keyword">while</span> (!stk3.empty()) &#123;</div><div class="line">            cur-&gt;next = <span class="keyword">new</span> ListNode(stk3.top());</div><div class="line">            stk3.pop();</div><div class="line">            cur = cur-&gt;next;</div><div class="line">        &#125;                   <span class="comment">//将栈中元素初始化并连接</span></div><div class="line">        <span class="keyword">if</span> (ca == <span class="number">1</span>)&#123;</div><div class="line">            pre-&gt;val = <span class="number">1</span>;</div><div class="line">            <span class="keyword">return</span> pre;</div><div class="line">        &#125;                   <span class="comment">//最后判断最高位是否存在进位</span></div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="keyword">return</span> pre-&gt;next;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h4 id="解法二：直接将链表逆序后计算和的值并连接链表"><a href="#解法二：直接将链表逆序后计算和的值并连接链表" class="headerlink" title="解法二：直接将链表逆序后计算和的值并连接链表"></a>解法二：直接将链表逆序后计算和的值并连接链表</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> addLists2&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">addLists</span><span class="params">(ListNode* head1, ListNode* head2)</span></span>&#123;</div><div class="line">        reverseList1 re;</div><div class="line">        head1 = re.reverseList(head1);</div><div class="line">        head2 = re.reverseList(head2);<span class="comment">//链表的逆序处理</span></div><div class="line">        <span class="keyword">int</span> n1 = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> n2 = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> ca = <span class="number">0</span>;</div><div class="line">        ListNode* cur = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</div><div class="line">        ListNode* backup = cur;</div><div class="line">        <span class="keyword">while</span>(head1 != <span class="literal">NULL</span> || head2 != <span class="literal">NULL</span>)&#123;</div><div class="line">            n1 = (head1 == <span class="literal">NULL</span>) ? <span class="number">0</span> : head1-&gt;val;</div><div class="line">            n2 = (head2 == <span class="literal">NULL</span>) ? <span class="number">0</span> : head2-&gt;val;</div><div class="line">            cur-&gt;next = <span class="keyword">new</span> ListNode((n1 + n2 + ca) % <span class="number">10</span>);</div><div class="line">            ca = (n1 + n2 + ca&gt;= <span class="number">10</span>) ? <span class="number">1</span> : <span class="number">0</span>;</div><div class="line">            cur = cur-&gt;next;         <span class="comment">//从头开始相加并记录进位</span></div><div class="line">            head1 = (head1 == <span class="literal">NULL</span>) ? <span class="literal">NULL</span> : head1-&gt;next;</div><div class="line">            head2 = (head2 == <span class="literal">NULL</span>) ? <span class="literal">NULL</span> : head2-&gt;next;</div><div class="line">        &#125;                           </div><div class="line">        <span class="keyword">if</span> (ca == <span class="number">1</span>)&#123;</div><div class="line">            cur-&gt;next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</div><div class="line">        &#125;                           <span class="comment">//判断最高位的进位</span></div><div class="line">        cur = backup-&gt;next;</div><div class="line">        backup-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        cur = re.reverseList(cur); <span class="comment">//将结果逆序后返回</span></div><div class="line">        <span class="keyword">return</span> cur;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1571,7 +1880,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
