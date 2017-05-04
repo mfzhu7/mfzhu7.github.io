@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="String," />
+  <meta name="keywords" content="Tree," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="Longest Substring Without Repeating Characters题目描述： 给定一个字符串，找到字符串中最长的子串的长度，其子串中的所有字母不重复。  例子： ‘abcabcbb’其中最长的不重复子串的长度是3；’abba’其中最长的不重复的子串的长度是2。  解题思路： 我们在遍历字符串的过程中，每遍历一个新的位置需要知道当前位置的字母是否曾经在前面中出现，因此我们需">
-<meta name="keywords" content="String">
+<meta name="description" content="Invert Tree题目描述： 给定一棵树的头结点，要求对树中的节点进行操作，即将左节点变为右节点；右节点变为左节点。  例子： 见LeetCode226.  解题思路： 主要的思路还是递归的想法：我们不断遍历树的节点，碰到空节点和叶节点返回；不然交换其左右节点，然后递归在左右子树上调用该函数。  代码如下：12345678910111213141516171819202122232425262">
+<meta name="keywords" content="Tree">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Longest Substring Without Repeating Characters">
-<meta property="og:url" content="http://yoursite.com/2017/03/25/最长不重复子串/index.html">
+<meta property="og:title" content="Invert Tree">
+<meta property="og:url" content="http://yoursite.com/2017/04/28/20170428-Tree-InvertTree/index.html">
 <meta property="og:site_name" content="Tech">
-<meta property="og:description" content="Longest Substring Without Repeating Characters题目描述： 给定一个字符串，找到字符串中最长的子串的长度，其子串中的所有字母不重复。  例子： ‘abcabcbb’其中最长的不重复子串的长度是3；’abba’其中最长的不重复的子串的长度是2。  解题思路： 我们在遍历字符串的过程中，每遍历一个新的位置需要知道当前位置的字母是否曾经在前面中出现，因此我们需">
-<meta property="og:updated_time" content="2017-03-25T11:06:33.000Z">
+<meta property="og:description" content="Invert Tree题目描述： 给定一棵树的头结点，要求对树中的节点进行操作，即将左节点变为右节点；右节点变为左节点。  例子： 见LeetCode226.  解题思路： 主要的思路还是递归的想法：我们不断遍历树的节点，碰到空节点和叶节点返回；不然交换其左右节点，然后递归在左右子树上调用该函数。  代码如下：12345678910111213141516171819202122232425262">
+<meta property="og:updated_time" content="2017-05-04T05:59:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Longest Substring Without Repeating Characters">
-<meta name="twitter:description" content="Longest Substring Without Repeating Characters题目描述： 给定一个字符串，找到字符串中最长的子串的长度，其子串中的所有字母不重复。  例子： ‘abcabcbb’其中最长的不重复子串的长度是3；’abba’其中最长的不重复的子串的长度是2。  解题思路： 我们在遍历字符串的过程中，每遍历一个新的位置需要知道当前位置的字母是否曾经在前面中出现，因此我们需">
+<meta name="twitter:title" content="Invert Tree">
+<meta name="twitter:description" content="Invert Tree题目描述： 给定一棵树的头结点，要求对树中的节点进行操作，即将左节点变为右节点；右节点变为左节点。  例子： 见LeetCode226.  解题思路： 主要的思路还是递归的想法：我们不断遍历树的节点，碰到空节点和叶节点返回；不然交换其左右节点，然后递归在左右子树上调用该函数。  代码如下：12345678910111213141516171819202122232425262">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/25/最长不重复子串/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/28/20170428-Tree-InvertTree/"/>
 
 
 
 
 
-  <title> Longest Substring Without Repeating Characters | Tech </title>
+  <title> Invert Tree | Tech </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/25/最长不重复子串/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/28/20170428-Tree-InvertTree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mfzhu7">
@@ -281,7 +281,7 @@
             
             
               
-                Longest Substring Without Repeating Characters
+                Invert Tree
               
             
           </h1>
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-25T18:56:02+08:00">
-                2017-03-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-28T12:36:02+08:00">
+                2017-04-28
               </time>
             
 
@@ -354,16 +354,16 @@
       
 
       
-        <h3 id="Longest-Substring-Without-Repeating-Characters"><a href="#Longest-Substring-Without-Repeating-Characters" class="headerlink" title="Longest Substring Without Repeating Characters"></a>Longest Substring Without Repeating Characters</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个字符串，找到字符串中最长的子串的长度，其子串中的所有字母不重复。</p>
+        <h3 id="Invert-Tree"><a href="#Invert-Tree" class="headerlink" title="Invert Tree"></a>Invert Tree</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一棵树的头结点，要求对树中的节点进行操作，即将左节点变为右节点；右节点变为左节点。</p>
 </blockquote>
 <h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>‘abcabcbb’其中最长的不重复子串的长度是3；’abba’其中最长的不重复的子串的长度是2。</p>
+<p>见<a href="https://leetcode.com/problems/invert-binary-tree/#/description" target="_blank" rel="external">LeetCode226</a>.</p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>我们在遍历字符串的过程中，每遍历一个新的位置需要知道当前位置的字母是否曾经在前面中出现，因此我们需要一个哈希表来记录我们先前遍历字母和字母所在的位置；其次在遇到与先前的字母重复时，我们需要找到最靠右侧的那个位置；所以我们需要在哈希表中保存着这个字母在字符串中最右侧的位置。综上整体的思路是，我们定义start和end来代表当前子串的头和尾；用哈希表来保存先前遍历过程中所遇到的字母和字母所在的最右的位置；遍历过程中，如果是不重复的字母，则需要end++并更新当前的最长子串长度；如果是重复的，需要判断该字母出现的位置在start的左侧还是右侧，如果是左侧则不影响当前子串；如果是右侧需要更新start到该位置的下一个地方；然后更新子串的长度。</p>
+<p>主要的思路还是递归的想法：我们不断遍历树的节点，碰到空节点和叶节点返回；不然交换其左右节点，然后递归在左右子树上调用该函数。</p>
 </blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (s.size() == <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">// 字符串为空的情况</span></div><div class="line">            </div><div class="line">        <span class="keyword">int</span> length = <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> end = <span class="number">0</span>;</div><div class="line">        <span class="built_in">map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; hash; <span class="comment">//定义所需要的变量</span></div><div class="line">        <span class="keyword">while</span>(start &lt; s.size() &amp;&amp; end &lt; s.size())&#123;</div><div class="line">            <span class="keyword">if</span> (hash.find(s[end]) == hash.end())&#123;</div><div class="line">                hash.insert(&#123;s[end], end&#125;);</div><div class="line">                <span class="comment">// 如果不存在，更新哈希表</span></div><div class="line">                length = max(end - start + <span class="number">1</span>, length);</div><div class="line">                <span class="comment">//更新长度</span></div><div class="line">                end++;</div><div class="line">                <span class="comment">//遍历下一个字母</span></div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                <span class="keyword">if</span> (start &lt; hash[s[end]] + <span class="number">1</span>)</div><div class="line">                    start = hash[s[end]] + <span class="number">1</span>;</div><div class="line">                 <span class="comment">// 判断该位置在start的左侧或者右侧决定是否更新</span></div><div class="line">                hash[s[end]] = end;</div><div class="line">                <span class="comment">// 更新该字母到最右侧的位置</span></div><div class="line">                length = max(end - start + <span class="number">1</span>, length);</div><div class="line">                end++;</div><div class="line">                <span class="comment">// 更新长度和继续遍历下一个位置</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> length;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">invertTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        invert(root);</div><div class="line">        <span class="keyword">return</span> root;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">invert</span><span class="params">(TreeNode* &amp;node)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!node) <span class="keyword">return</span>;</div><div class="line">        <span class="keyword">if</span> (!node-&gt;left &amp;&amp; !node-&gt;right) <span class="keyword">return</span>;</div><div class="line">        TreeNode* tmp = node-&gt;left;</div><div class="line">        node-&gt;left = node-&gt;right;</div><div class="line">        node-&gt;right = tmp;</div><div class="line">        <span class="comment">//改变左右子树</span></div><div class="line">        invert(node-&gt;left);</div><div class="line">        invert(node-&gt;right);</div><div class="line">        <span class="comment">//递归调用</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -393,7 +393,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/String/" rel="tag"># String</a>
+            <a href="/tags/Tree/" rel="tag"># Tree</a>
           
         </div>
       
@@ -406,8 +406,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/26/向环链表中插入节点/" rel="next" title="Insert Num in Circle List">
-                <i class="fa fa-chevron-left"></i> Insert Num in Circle List
+              <a href="/2017/04/29/20170429-Tree-DeleteNodeInBST/" rel="next" title="Delete Node In Tree">
+                <i class="fa fa-chevron-left"></i> Delete Node In Tree
               </a>
             
           </div>
@@ -416,8 +416,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/25/删除链表中指定节点的值/" rel="prev" title="Delete Node In List">
-                Delete Node In List <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/26/20170504-Tree-TreeSpecial/" rel="prev" title="Tree Theme">
+                Tree Theme <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -547,7 +547,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Longest-Substring-Without-Repeating-Characters"><span class="nav-number">1.</span> <span class="nav-text">Longest Substring Without Repeating Characters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子："><span class="nav-number">3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">4.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">5.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Invert-Tree"><span class="nav-number">1.</span> <span class="nav-text">Invert Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子："><span class="nav-number">3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">4.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">5.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
             
 
           </div>
