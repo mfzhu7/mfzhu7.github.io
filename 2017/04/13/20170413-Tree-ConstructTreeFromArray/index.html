@@ -1,0 +1,758 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Tree," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Construct Tree From Array题目描述1： 给定树的不同的遍历方式来重建树。第一种是根据先序遍历和中序遍历的结果来重建树。  例子：  这道题是leetcode上的题目,具体描述可以看这个。  解题思路： 根据先序遍历的结果我们可以知道树的根节点，根据中序遍历中该根节点的位置，我们可以知道左右子树的节点。假设先序遍历的结果是[1,2,4,5,3,6,7],中序遍历的结果是[4,">
+<meta name="keywords" content="Tree">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reconstruct Tree">
+<meta property="og:url" content="http://yoursite.com/2017/04/13/20170413-Tree-ConstructTreeFromArray/index.html">
+<meta property="og:site_name" content="Tech">
+<meta property="og:description" content="Construct Tree From Array题目描述1： 给定树的不同的遍历方式来重建树。第一种是根据先序遍历和中序遍历的结果来重建树。  例子：  这道题是leetcode上的题目,具体描述可以看这个。  解题思路： 根据先序遍历的结果我们可以知道树的根节点，根据中序遍历中该根节点的位置，我们可以知道左右子树的节点。假设先序遍历的结果是[1,2,4,5,3,6,7],中序遍历的结果是[4,">
+<meta property="og:updated_time" content="2017-05-05T07:43:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Reconstruct Tree">
+<meta name="twitter:description" content="Construct Tree From Array题目描述1： 给定树的不同的遍历方式来重建树。第一种是根据先序遍历和中序遍历的结果来重建树。  例子：  这道题是leetcode上的题目,具体描述可以看这个。  解题思路： 根据先序遍历的结果我们可以知道树的根节点，根据中序遍历中该根节点的位置，我们可以知道左右子树的节点。假设先序遍历的结果是[1,2,4,5,3,6,7],中序遍历的结果是[4,">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/13/20170413-Tree-ConstructTreeFromArray/"/>
+
+
+
+
+
+  <title> Reconstruct Tree | Tech </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tech</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/13/20170413-Tree-ConstructTreeFromArray/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Reconstruct Tree
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-13T12:36:02+08:00">
+                2017-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Construct-Tree-From-Array"><a href="#Construct-Tree-From-Array" class="headerlink" title="Construct Tree From Array"></a>Construct Tree From Array</h3><h3 id="题目描述1："><a href="#题目描述1：" class="headerlink" title="题目描述1："></a>题目描述1：</h3><blockquote>
+<p>给定树的不同的遍历方式来重建树。第一种是根据先序遍历和中序遍历的结果来重建树。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p> 这道题是leetcode上的<a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/#/description" target="_blank" rel="external">题目</a>,具体描述可以看这个。</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>根据先序遍历的结果我们可以知道树的根节点，根据中序遍历中该根节点的位置，我们可以知道左右子树的节点。假设先序遍历的结果是[1,2,4,5,3,6,7],中序遍历的结果是[4,2,5,1,6,3,7]。我们根据先序遍历的第一个节点是1，所以知道左子树的节点集合是[4,2,5],右子树的节点集合是[6,3,7];然后根据左子树的长度是3知道[2,4,5]是对应左子树的先序遍历的结果;而[3,6,7]则是右子树的先序遍历的结果。如此不断递归构建即可得到树的结果。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; preorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (preorder.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">return</span> generate(preorder, inorder, <span class="number">0</span>, preorder.size() - <span class="number">1</span>, <span class="number">0</span>, inorder.size() - <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function">TreeNode* <span class="title">generate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; preorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="keyword">int</span> p_left, <span class="keyword">int</span> p_right, <span class="keyword">int</span> i_left, <span class="keyword">int</span> i_right)</span></span>&#123;</div><div class="line">    <span class="comment">//构建树的函数里面有6个参数，主要是先序遍历结果，中序遍历结果以及当前构建树对应节点在遍历结果的开始位置和结束位置</span></div><div class="line">    <span class="comment">//p_left表示先序遍历的起始，p_right表示先序遍历的结束</span></div><div class="line">    <span class="comment">//i_left表示中序遍历的起始，i_right表示中序遍历的结束</span></div><div class="line">        <span class="keyword">if</span> (p_left == p_right)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> TreeNode(preorder[p_left]);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//如果起始和结束位置相同，表示只有一个节点，直接新建节点返回</span></div><div class="line">        <span class="keyword">if</span> (p_left &gt; p_right) <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">        <span class="comment">//如果起始超过结束，表示无节点，即为空节点</span></div><div class="line">        <span class="keyword">int</span> next = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = i_left; i &lt;= i_right; i++)&#123;</div><div class="line">            <span class="keyword">if</span> (inorder[i] == preorder[p_left]) &#123;</div><div class="line">                next = i;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//找到先序遍历起始节点在中序遍历中的位置，用next保存</span></div><div class="line">        </div><div class="line">        <span class="keyword">int</span> left_length = next - i_left;</div><div class="line">        <span class="comment">//计算左子树的长度</span></div><div class="line">        TreeNode* root = <span class="keyword">new</span> TreeNode(inorder[next]);</div><div class="line">        <span class="comment">//新建根节点用起始节点的数值</span></div><div class="line">        root-&gt;left = generate(preorder, inorder, p_left + <span class="number">1</span>, p_left + left_length, i_left, next - <span class="number">1</span>);</div><div class="line">        <span class="comment">//递归调用函数来构建树，主要需要注意关于树的起始位置和结束位置的变化</span></div><div class="line">        root-&gt;right = generate(preorder, inorder, p_left + left_length + <span class="number">1</span>, p_right, next + <span class="number">1</span>, i_right);</div><div class="line">        <span class="keyword">return</span> root;        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="题目描述2："><a href="#题目描述2：" class="headerlink" title="题目描述2："></a>题目描述2：</h3><blockquote>
+<p>当然，也可以根据中序遍历和后序遍历来重建树。解题的思路和上一题类似，我们主要需要注意的是，在递归函数中，起始位置和终止位置的变化如何计算的问题。</p>
+</blockquote>
+<h3 id="例子：-1"><a href="#例子：-1" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>这题也是leetcode上的<a href="https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/#/description" target="_blank" rel="external">题目</a>.</p>
+</blockquote>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现:"></a>代码实现:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; postorder)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (inorder.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">return</span> generate(inorder, postorder, <span class="number">0</span>, inorder.size() - <span class="number">1</span>, <span class="number">0</span>, postorder.size() - <span class="number">1</span>);</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function">TreeNode* <span class="title">generate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; postorder, <span class="keyword">int</span> i_left, <span class="keyword">int</span> i_right, <span class="keyword">int</span> p_left, <span class="keyword">int</span> p_right)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (i_left == i_right)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> TreeNode(inorder[i_left]);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(i_left &gt; i_right)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> next = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = i_left; i &lt;= i_right; i++)&#123;</div><div class="line">            <span class="keyword">if</span> (inorder[i] == postorder[p_right])&#123;</div><div class="line">                next = i;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> length = i_right - next;</div><div class="line">        TreeNode* root = <span class="keyword">new</span> TreeNode(inorder[next]);</div><div class="line">        root-&gt;left = generate(inorder, postorder, i_left, next - <span class="number">1</span>, p_left, p_right - length - <span class="number">1</span>);</div><div class="line">        root-&gt;right = generate(inorder, postorder, next + <span class="number">1</span>, i_right, p_right - length, p_right - <span class="number">1</span>);</div><div class="line">        <span class="keyword">return</span> root;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="题目描述3："><a href="#题目描述3：" class="headerlink" title="题目描述3："></a>题目描述3：</h3><blockquote>
+<p>给定一个数字n，要求得到根据这个数字所得到的数组[1,2,3…..n]，从这个数组中构建搜索二叉树的个数。</p>
+</blockquote>
+<h3 id="例子：-2"><a href="#例子：-2" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p> 给定数字假设为3，通过计算分别以1，2，3为头结点的有效的搜索二叉树的个数可以知道，其结果为5。</p>
+</blockquote>
+<h3 id="解题思路：-1"><a href="#解题思路：-1" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>通过从1开始计算其可能的二叉树个数，可以发现规律：当n=1，二叉树的个数为1；当n=2的时候，二叉树的个数为2；当n=3的时候，二叉树的个数为5。分析n=3的情况：以1为头结点，用于构建左子树的数字为空，用于构建右子树的数字为[2,3]，所以总的个数为h(0) <em> h(2) = 2；同理在以2为头结点的情况下，个数为h(1) </em> h(1) = 1；以3为头结点情况，h(2) <em> h(0) = 1;所以一共有5种。通过推广到n；我们用h(i)表示用i个数构建二叉树的个数，h(0)=1,h(1)=1,h(2)=2…则h(n) = h(n-1) </em> h(0) + h(n-2) * h(1)…这样所得到的序列称为卡特兰数序列。</p>
+</blockquote>
+<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numTrees</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;vec;</div><div class="line">        vec.push_back(<span class="number">1</span>);</div><div class="line">        vec.push_back(<span class="number">1</span>);</div><div class="line">        vec.push_back(<span class="number">2</span>);<span class="comment">//定义初始的数</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; i++)&#123;</div><div class="line">            <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; j++)&#123;</div><div class="line">                res = res + vec[j - <span class="number">1</span>] * vec[i - j];</div><div class="line">            &#125;</div><div class="line">            vec.push_back(res);<span class="comment">//计算第i个位置的卡特兰数</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> vec[n];</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="题目描述4："><a href="#题目描述4：" class="headerlink" title="题目描述4："></a>题目描述4：</h3><blockquote>
+<p>根据上一题的描述，我们要求返回所有有效的二叉树的头结点的集合。解题的思路，主要是利用递归构建树的想法，直接上代码。</p>
+</blockquote>
+<h3 id="代码如下：-2"><a href="#代码如下：-2" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;TreeNode*&gt; generateTrees(<span class="keyword">int</span> n) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; res;</div><div class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> res;</div><div class="line">        <span class="keyword">return</span> helper(<span class="number">1</span>, n);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">vector</span>&lt;TreeNode*&gt;helper(<span class="keyword">int</span> start, <span class="keyword">int</span> end)&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt;res;</div><div class="line">        <span class="comment">//用来保存当前递归层的可能二叉树的头节点</span></div><div class="line">        <span class="keyword">if</span> (start &gt; end) res.push_back(<span class="literal">NULL</span>);</div><div class="line">        <span class="comment">//此时直接构建空树</span></div><div class="line">        <span class="keyword">if</span> (start == end) res.push_back(<span class="keyword">new</span> TreeNode(start));</div><div class="line">        <span class="comment">// 此时返回以当前数的节点</span></div><div class="line">        <span class="keyword">if</span> (start &lt; end)&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt;= end; i++)&#123;</div><div class="line">            <span class="comment">//遍历以当前范围中各个数为头结点的可能</span></div><div class="line">                <span class="built_in">vector</span>&lt;TreeNode*&gt;lefts = helper(start, i - <span class="number">1</span>);</div><div class="line">                <span class="built_in">vector</span>&lt;TreeNode*&gt;rights = helper(i + <span class="number">1</span>, end);</div><div class="line">                <span class="comment">//找到该情况下左右子树的头结点的集合</span></div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; (<span class="keyword">int</span>)lefts.size(); j++)&#123;</div><div class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; (<span class="keyword">int</span>)rights.size(); k++)&#123;</div><div class="line">                        TreeNode* root = <span class="keyword">new</span> TreeNode(i);</div><div class="line">                        root-&gt;left = lefts[j];</div><div class="line">                        root-&gt;right = rights[k];</div><div class="line">                        <span class="comment">//指向左右子树</span></div><div class="line">                        res.push_back(root);</div><div class="line">                        <span class="comment">//保存结果</span></div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="题目描述5"><a href="#题目描述5" class="headerlink" title="题目描述5:"></a>题目描述5:</h3><blockquote>
+<p>给定一个已经排序的数组，要求根据数组构建一棵平衡二叉搜索树.<br>具体的题目描述可以看<a href="https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/#/description" target="_blank" rel="external">LeetCode108</a>。</p>
+</blockquote>
+<h3 id="解题思路：-2"><a href="#解题思路：-2" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>因为要构建平衡二叉搜索树，所以我们可以从数组的中间取出作为根节点，然后递归的建立左右子树即可。</p>
+</blockquote>
+<h3 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下:"></a>代码如下:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//构建平衡二叉搜索树</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (nums.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">return</span> constructTree(<span class="number">0</span>, nums.size() - <span class="number">1</span>, nums);</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function">TreeNode* <span class="title">constructTree</span><span class="params">(<span class="keyword">int</span> low, <span class="keyword">int</span> high, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (low == high)&#123;</div><div class="line">            TreeNode* p = <span class="keyword">new</span> TreeNode(nums[low]);</div><div class="line">            <span class="keyword">return</span> p;</div><div class="line">            <span class="comment">//当left==right代表只剩下一个数用于构建树，所以直接构建新节点然后返回</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (low &gt; high)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//这种情况，说明已经没有节点用于构建树</span></div><div class="line">        <span class="keyword">int</span> mid = low + (high - low) / <span class="number">2</span>;</div><div class="line">        TreeNode* root = <span class="keyword">new</span> TreeNode(nums[mid]);</div><div class="line">        <span class="comment">//找到中间节点构建根节点</span></div><div class="line">        root-&gt;left = constructTree(low, mid - <span class="number">1</span>, nums);</div><div class="line">        root-&gt;right = constructTree(mid + <span class="number">1</span>, high, nums);</div><div class="line">        <span class="comment">//递归构建左右子树</span></div><div class="line">        <span class="keyword">return</span> root;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Tree/" rel="tag"># Tree</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/14/20170414-Array-CombinationSum/" rel="next" title="Combination Sum">
+                <i class="fa fa-chevron-left"></i> Combination Sum
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/12/20170412-Array-FindTheDuplicateNumber/" rel="prev" title="Find The Duplicate Number">
+                Find The Duplicate Number <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80"
+               alt="mfzhu7" />
+          <p class="site-author-name" itemprop="name">mfzhu7</p>
+           
+              <p class="site-description motion-element" itemprop="description">没有钱了 肯定要写代码啊 不写没有钱用 搞科研是不可能的 这辈子不可能搞科研 看paper又看不懂 就是写代码这个东西才能维持得了生活的样子</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Construct-Tree-From-Array"><span class="nav-number">1.</span> <span class="nav-text">Construct Tree From Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述1："><span class="nav-number">2.</span> <span class="nav-text">题目描述1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子："><span class="nav-number">3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">4.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">5.</span> <span class="nav-text">代码如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述2："><span class="nav-number">6.</span> <span class="nav-text">题目描述2：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子：-1"><span class="nav-number">7.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">8.</span> <span class="nav-text">代码实现:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述3："><span class="nav-number">9.</span> <span class="nav-text">题目描述3：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子：-2"><span class="nav-number">10.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路：-1"><span class="nav-number">11.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下：-1"><span class="nav-number">12.</span> <span class="nav-text">代码如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述4："><span class="nav-number">13.</span> <span class="nav-text">题目描述4：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下：-2"><span class="nav-number">14.</span> <span class="nav-text">代码如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述5"><span class="nav-number">15.</span> <span class="nav-text">题目描述5:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路：-2"><span class="nav-number">16.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下"><span class="nav-number">17.</span> <span class="nav-text">代码如下:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mfzhu7</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
