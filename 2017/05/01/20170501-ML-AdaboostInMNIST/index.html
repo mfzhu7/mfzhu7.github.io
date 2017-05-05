@@ -1,0 +1,734 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ML," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Adaboost In MNISTadaboost模型简介 boosting(提升)方法是一种常用的统计学习方法。在分类问题中，它通过改变训练样本的权重，学习多个分类器，并将这些分类器进行线性组合，提高分类的性能。本文中所介绍的adaboost就是在boost中具有代表性的方法。我们学习分类器的基本思想是：因为相对于强分类器，弱分类器更加容易发现；所以我们通过学习一系列的弱分类器，通过对弱分类器的">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Adaboost In MNIST">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/20170501-ML-AdaboostInMNIST/index.html">
+<meta property="og:site_name" content="Tech">
+<meta property="og:description" content="Adaboost In MNISTadaboost模型简介 boosting(提升)方法是一种常用的统计学习方法。在分类问题中，它通过改变训练样本的权重，学习多个分类器，并将这些分类器进行线性组合，提高分类的性能。本文中所介绍的adaboost就是在boost中具有代表性的方法。我们学习分类器的基本思想是：因为相对于强分类器，弱分类器更加容易发现；所以我们通过学习一系列的弱分类器，通过对弱分类器的">
+<meta property="og:image" content="http://oov4rmeff.bkt.clouddn.com/adaboost.png">
+<meta property="og:updated_time" content="2017-05-05T07:07:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Adaboost In MNIST">
+<meta name="twitter:description" content="Adaboost In MNISTadaboost模型简介 boosting(提升)方法是一种常用的统计学习方法。在分类问题中，它通过改变训练样本的权重，学习多个分类器，并将这些分类器进行线性组合，提高分类的性能。本文中所介绍的adaboost就是在boost中具有代表性的方法。我们学习分类器的基本思想是：因为相对于强分类器，弱分类器更加容易发现；所以我们通过学习一系列的弱分类器，通过对弱分类器的">
+<meta name="twitter:image" content="http://oov4rmeff.bkt.clouddn.com/adaboost.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/20170501-ML-AdaboostInMNIST/"/>
+
+
+
+
+
+  <title> Adaboost In MNIST | Tech </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tech</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/20170501-ML-AdaboostInMNIST/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Adaboost In MNIST
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T10:36:02+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Adaboost-In-MNIST"><a href="#Adaboost-In-MNIST" class="headerlink" title="Adaboost In MNIST"></a>Adaboost In MNIST</h3><h3 id="adaboost模型简介"><a href="#adaboost模型简介" class="headerlink" title="adaboost模型简介"></a>adaboost模型简介</h3><blockquote>
+<p>boosting(提升)方法是一种常用的统计学习方法。在分类问题中，它通过改变训练样本的权重，学习多个分类器，并将这些分类器进行线性组合，提高分类的性能。本文中所介绍的adaboost就是在boost中具有代表性的方法。<br>我们学习分类器的基本思想是：因为相对于强分类器，弱分类器更加容易发现；所以我们通过学习一系列的弱分类器，通过对弱分类器的线性组合构成一个强分类器。其实就是”三个臭皮匠顶个诸葛亮”的基本思想。</p>
+</blockquote>
+<h3 id="其中adaboost方法中的特点有："><a href="#其中adaboost方法中的特点有：" class="headerlink" title="其中adaboost方法中的特点有："></a>其中adaboost方法中的特点有：</h3><ul>
+<li>我们通过上一轮学习到的弱分类器来对下一轮的数据集权重进行改变。当前学习的分类器的误分类误差率越大的其分类器权重越高，反之则不然。</li>
+<li>在通过当前分类器更改数据集的权重的时候，误分类的数据样本权重增大，正确分类的样本权重降低。</li>
+</ul>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="comment"># @File  : adaBoost.py</span></div><div class="line"><span class="comment"># @Author: mfzhu</span></div><div class="line"><span class="comment"># @Date  : 2017/4/29</span></div><div class="line"><span class="comment"># @Desc  :</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> math</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</div><div class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary</span><span class="params">(data, threshold)</span>:</span></div><div class="line">    <span class="comment"># 二值化函数</span></div><div class="line"></div><div class="line">    index_1 = np.array(data &gt; threshold)</div><div class="line">    index_2 = np.array(data &lt;= threshold)</div><div class="line">    data[index_1] = <span class="number">1</span></div><div class="line">    data[index_2] = <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">sign</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="comment"># 阈值函数类</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, sample, label, weight)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"></div><div class="line">        :param sample: 输入一个样本找到最优的切分位置，样本为全体数据的某一列</div><div class="line">        :param label:  这一列样本数据所对应的标签</div><div class="line">        :param weight: 需要输入初始的权重来确定分类函数</div><div class="line">        """</div><div class="line"></div><div class="line">        self.sample = sample</div><div class="line">        <span class="comment"># 初始样本</span></div><div class="line">        self.label = label</div><div class="line">        <span class="comment"># 初始标签</span></div><div class="line">        self.weight = weight</div><div class="line">        <span class="comment"># 初始权重</span></div><div class="line"></div><div class="line">        self.segment_value = <span class="number">-1</span></div><div class="line">        <span class="comment"># 分类函数的切分值</span></div><div class="line">        self.less_index = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</div><div class="line">        <span class="comment"># 小于函数的切分位置集合</span></div><div class="line">        self.more_index = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</div><div class="line">        <span class="comment"># 大于函数的切分位置集合</span></div><div class="line">        self.is_less = <span class="keyword">False</span></div><div class="line">        self.is_more = <span class="keyword">False</span></div><div class="line">        <span class="comment"># 标签用于表示是大于函数还是小于函数</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train_less_than</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># 训练小于函数</span></div><div class="line"></div><div class="line">        less_seg_value = <span class="number">-1</span></div><div class="line">        <span class="comment"># 小于函数的切分值</span></div><div class="line">        error_score = <span class="number">100000</span></div><div class="line">        <span class="comment"># 初始化分类误差率</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> seg_value <span class="keyword">in</span> self.less_index:</div><div class="line">            <span class="comment"># 遍历每个切分值找到最优的</span></div><div class="line">            score = <span class="number">0.0</span></div><div class="line">            <span class="comment"># 对于每个切分值保存分类误差率</span></div><div class="line">            <span class="keyword">for</span> index <span class="keyword">in</span> range(len(self.sample)):</div><div class="line">                val = <span class="number">-1</span></div><div class="line">                <span class="keyword">if</span> self.sample[index] &lt; seg_value:</div><div class="line">                    val = <span class="number">1</span></div><div class="line">                <span class="keyword">if</span> val * self.label[index] &lt; <span class="number">0</span>:</div><div class="line">                    score += self.weight[index]</div><div class="line"></div><div class="line">            <span class="keyword">if</span> score &lt; error_score:</div><div class="line">                less_seg_value = seg_value</div><div class="line">                error_score = score</div><div class="line">                <span class="comment"># 如果比当前的分类误差要小，更新切分值和分类误差率</span></div><div class="line"></div><div class="line">        <span class="keyword">return</span> less_seg_value, error_score</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train_more_than</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># 训练大于函数</span></div><div class="line">        more_seg_value = <span class="number">-1</span></div><div class="line">        <span class="comment"># 大于函数的初始切分值</span></div><div class="line">        error_score = <span class="number">100000</span></div><div class="line">        <span class="comment"># 初始误差分类率</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> seg_value <span class="keyword">in</span> self.more_index:</div><div class="line">            <span class="comment"># 对于每个切分值找到最优的切分</span></div><div class="line">            score = <span class="number">0.0</span></div><div class="line">            <span class="comment"># 保存每个切分的误差分类率</span></div><div class="line">            <span class="keyword">for</span> index <span class="keyword">in</span> range(len(self.sample)):</div><div class="line">                val = <span class="number">1</span></div><div class="line">                <span class="keyword">if</span> self.sample[index] &lt; seg_value:</div><div class="line">                    val = <span class="number">-1</span></div><div class="line">                <span class="keyword">if</span> val * self.label[index] &lt; <span class="number">0</span>:</div><div class="line">                    score += self.weight[index]</div><div class="line"></div><div class="line">            <span class="keyword">if</span> score &lt; error_score:</div><div class="line">                more_seg_value = seg_value</div><div class="line">                error_score = score</div><div class="line">                <span class="comment"># 保存最优的切分值和误差分类率</span></div><div class="line"></div><div class="line">        <span class="keyword">return</span> more_seg_value, error_score</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self)</span>:</span></div><div class="line">        less_seg, less_score = self.train_less_than()</div><div class="line">        more_seg, more_score = self.train_more_than()</div><div class="line">        <span class="comment"># 分别训练大于和小于函数</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> less_score &lt; more_score:</div><div class="line">            self.is_less = <span class="keyword">True</span></div><div class="line">            self.segment_value = less_seg</div><div class="line">            <span class="keyword">return</span> less_score</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            self.is_more = <span class="keyword">True</span></div><div class="line">            self.segment_value = more_seg</div><div class="line">            <span class="keyword">return</span> more_score</div><div class="line">        <span class="comment"># 选择误差分类率小的那个函数，并且标注分类函数是大于还是小于</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, feature)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.is_less:</div><div class="line">            <span class="keyword">if</span> feature &lt; self.segment_value:</div><div class="line">                <span class="keyword">return</span> <span class="number">1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">return</span> <span class="number">-1</span></div><div class="line">        <span class="comment"># 确定用小于分类函数</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">if</span> feature &lt; self.segment_value:</div><div class="line">                <span class="keyword">return</span> <span class="number">-1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">return</span> <span class="number">1</span></div><div class="line">        <span class="comment"># 确定用大于分类函数</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">adaBoost</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="comment"># adaboost类</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init_parameter_</span><span class="params">(self, train_data, label_data)</span>:</span></div><div class="line">        self.train_data = train_data</div><div class="line">        self.label_data = label_data</div><div class="line">        <span class="comment"># 初始化训练数据和训练标签</span></div><div class="line">        self.sample_num = len(train_data)</div><div class="line">        <span class="comment"># 训练数据的数量</span></div><div class="line">        self.dimension = len(train_data[<span class="number">0</span>])</div><div class="line">        <span class="comment"># 每个训练数据的维度</span></div><div class="line">        self.weight = [<span class="number">1.0</span> / self.sample_num] * self.sample_num</div><div class="line">        <span class="comment"># 初始化权重向量</span></div><div class="line"></div><div class="line">        self.num_classifier = <span class="number">50</span></div><div class="line">        <span class="comment"># 使用50个弱分类函数</span></div><div class="line">        self.alpha = []</div><div class="line">        <span class="comment"># 记录每个分类函数的系数</span></div><div class="line">        self.classifier = []</div><div class="line">        <span class="comment"># 保存每个分类器，其中包括了分类器和对应的分类对应的维度</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">normalization_z</span><span class="params">(self, classifier, index)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"></div><div class="line">        :param classifier: 当前分类函数</div><div class="line">        :param index: 分类函数所切分的位置</div><div class="line">        :return: 规范化因子</div><div class="line">        """</div><div class="line">        <span class="comment"># 计算规范化因子</span></div><div class="line">        zm = <span class="number">0</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.sample_num):</div><div class="line">            zm += self.weight[i] * math.exp(</div><div class="line">                <span class="number">-1</span> * self.alpha[<span class="number">-1</span>] * self.label_data[i] * classifier.predict(self.train_data[i][index]))</div><div class="line">        <span class="comment"># 对于训练数据中的每个样本，计算其是否被误分类计算得到规范化因子</span></div><div class="line">        <span class="keyword">return</span> zm</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">updata_weight</span><span class="params">(self, classifier, index, zm)</span>:</span></div><div class="line">        <span class="comment"># 更新权重</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(self.weight)):</div><div class="line">            self.weight[i] = (self.weight[i] * math.exp(</div><div class="line">                <span class="number">-1</span> * self.alpha[<span class="number">-1</span>] * self.label_data[i] * classifier.predict(self.train_data[i][index]))) / zm</div><div class="line"></div><div class="line">        <span class="comment"># 遍历权重向量的每个位置，然后根据分类器和切分位置更新权重</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, train_data, label_data)</span>:</span></div><div class="line">        self.__init_parameter_(train_data, label_data)</div><div class="line">        <span class="comment"># 初始各项数据</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> range(self.num_classifier):</div><div class="line">            <span class="comment"># 训练10个分类函数</span></div><div class="line">            print(<span class="string">"the "</span> + str(num) + <span class="string">"weak classifier"</span>)</div><div class="line"></div><div class="line">            best_classifier = (<span class="keyword">None</span>, <span class="keyword">None</span>, <span class="number">100000</span>)</div><div class="line">            <span class="comment"># 初始化一个空的分类函数</span></div><div class="line">            <span class="keyword">for</span> index <span class="keyword">in</span> range(self.dimension):</div><div class="line">                <span class="comment"># 对于每一个维度都进行训练一个分类器</span></div><div class="line">                classifier = sign(self.train_data[:, index], self.label_data, self.weight)</div><div class="line">                score = classifier.train()</div><div class="line"></div><div class="line">                <span class="keyword">if</span> score &lt; best_classifier[<span class="number">2</span>]:</div><div class="line">                    best_classifier = (classifier, index, score)</div><div class="line"></div><div class="line">            <span class="comment"># 保存下所有维度中分类误差率最小的那个</span></div><div class="line"></div><div class="line">            em = best_classifier[<span class="number">2</span>]</div><div class="line">            <span class="keyword">if</span> em == <span class="number">0</span>:</div><div class="line">                self.alpha.append(<span class="number">100</span>)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                self.alpha.append(<span class="number">0.5</span> * math.log((<span class="number">1</span> - em) / em))</div><div class="line"></div><div class="line">            self.classifier.append([best_classifier[<span class="number">0</span>], best_classifier[<span class="number">1</span>]])</div><div class="line">            <span class="comment"># 保存分类器和切分位置</span></div><div class="line"></div><div class="line">            zm = self.normalization_z(best_classifier[<span class="number">0</span>], best_classifier[<span class="number">1</span>])</div><div class="line">            <span class="comment"># 计算规范化因子</span></div><div class="line"></div><div class="line">            self.updata_weight(best_classifier[<span class="number">0</span>], best_classifier[<span class="number">1</span>], zm)</div><div class="line">            <span class="comment"># 更新权重向量</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_predict_</span><span class="params">(self, feature)</span>:</span></div><div class="line">        <span class="comment"># 预测单个样本的便签</span></div><div class="line">        result = <span class="number">0.0</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.num_classifier):</div><div class="line">            <span class="comment"># 取出一个一个的分类器</span></div><div class="line">            classifier = self.classifier[i][<span class="number">0</span>]</div><div class="line">            <span class="comment"># 取出切分位置</span></div><div class="line">            index = self.classifier[i][<span class="number">1</span>]</div><div class="line">            <span class="comment"># 计算所有分类器的和</span></div><div class="line">            result += self.alpha[i] * classifier.predict(feature[index])</div><div class="line"></div><div class="line">        <span class="keyword">if</span> result &gt; <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="number">-1</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, features)</span>:</span></div><div class="line">        <span class="comment"># 计算所有样本的预测</span></div><div class="line">        results = []</div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(features)):</div><div class="line">            results.append(self._predict_(features[i]))</div><div class="line"></div><div class="line">        <span class="keyword">return</span> results</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    print(<span class="string">"Start reading the data:"</span>)</div><div class="line">    time1 = time.time()</div><div class="line"></div><div class="line">    raw_path = <span class="string">r'F:\work and learn\ML\dataset\MNIST\train.csv'</span></div><div class="line">    raw_data = np.loadtxt(raw_path, delimiter=<span class="string">','</span>, skiprows=<span class="number">1</span>)</div><div class="line">    <span class="comment"># 读入原始数据</span></div><div class="line">    label = raw_data[:, <span class="number">0</span>]</div><div class="line">    data = raw_data[:, <span class="number">1</span>:]</div><div class="line">    <span class="comment"># 区分标签数据和原始数据</span></div><div class="line">    data = binary(data, <span class="number">80</span>)</div><div class="line">    label[label != <span class="number">1</span>] = <span class="number">-1</span></div><div class="line">    <span class="comment"># 进行二值化和对标签二值化（这边做的是二分类）</span></div><div class="line"></div><div class="line">    train_data, test_data, train_label, test_label = train_test_split(data, label, test_size=<span class="number">0.333</span>, random_state=<span class="number">23333</span>)</div><div class="line">    <span class="comment"># 将数据随机切分用于训练和预测</span></div><div class="line">    time2 = time.time()</div><div class="line">    print(<span class="string">"read data cost:"</span>, time2 - time1, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line"></div><div class="line">    print(<span class="string">"Start training:"</span>)</div><div class="line">    ada = adaBoost()</div><div class="line">    ada.train(train_data, train_label)</div><div class="line">    time3 = time.time()</div><div class="line">    print(<span class="string">"training cost: "</span>, time3 - time2, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line">    <span class="comment"># 训练模型并打印训练模型所用时间</span></div><div class="line"></div><div class="line">    print(<span class="string">"start predicting:"</span>)</div><div class="line">    result = ada.predict(test_data)</div><div class="line">    time4 = time.time()</div><div class="line">    print(<span class="string">"predict cost: "</span>, time4 - time3, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line">    <span class="comment"># 预测测试数据的标签</span></div><div class="line"></div><div class="line">    score = accuracy_score(result, test_label)</div><div class="line">    print(<span class="string">"the accuracy is: "</span>, score)</div><div class="line">    <span class="comment"># 打印正确率</span></div></pre></td></tr></table></figure>
+<h3 id="预测结果："><a href="#预测结果：" class="headerlink" title="预测结果："></a>预测结果：</h3><blockquote>
+<p>在设定弱分类器个数为50个的情况下，adaboost模型在mnist上的表现还是不错的：</p>
+</blockquote>
+<p><img src="http://oov4rmeff.bkt.clouddn.com/adaboost.png" alt="img"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/02/20170503-Tree-OtherTraversalInTree/" rel="next" title="Other Traversal Problem">
+                <i class="fa fa-chevron-left"></i> Other Traversal Problem
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/30/20170430-Tree-CountNodeInCBT/" rel="prev" title="Count Node In CBT">
+                Count Node In CBT <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80"
+               alt="mfzhu7" />
+          <p class="site-author-name" itemprop="name">mfzhu7</p>
+           
+              <p class="site-description motion-element" itemprop="description">没有钱了 肯定要写代码啊 不写没有钱用 搞科研是不可能的 这辈子不可能搞科研 看paper又看不懂 就是写代码这个东西才能维持得了生活的样子</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Adaboost-In-MNIST"><span class="nav-number">1.</span> <span class="nav-text">Adaboost In MNIST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#adaboost模型简介"><span class="nav-number">2.</span> <span class="nav-text">adaboost模型简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其中adaboost方法中的特点有："><span class="nav-number">3.</span> <span class="nav-text">其中adaboost方法中的特点有：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">4.</span> <span class="nav-text">代码如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预测结果："><span class="nav-number">5.</span> <span class="nav-text">预测结果：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mfzhu7</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
