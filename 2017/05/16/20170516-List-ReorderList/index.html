@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="Rotate List题目描述： 给定一个链表的头节点和一个整数k，其中整数k表示从尾部向左k个节点进行旋转。要求返回旋转后的链表头结点。  例子：  具体描述见LeetCode61。  解题思路： 主要是通过将链表连接成环状，然后通过和链表长度的比较找到目标节点断开链表。主要注意的是：在链表中有时候可以通过连接成环来处理问题；问题中k可以大于链表长度的情况的处理，通过求余即可。  代码如下：12">
+<meta name="description" content="Reorder List题目描述： 给定一个链表的头节点，然后将原来链表顺序为L1-&amp;gt;L2-&amp;gt;L3…..-&amp;gt;Ln-1-&amp;gt;Ln的链表重现排序为L1-&amp;gt;Ln-&amp;gt;L2-&amp;gt;Ln-1….  例子：  具体描述可以看LeetCode143  解题思路： 本题的思路很简单，主要是过程中涉及到链表的多种操作需要认真学习。首先是我们找到链表的中间节点主要利用的是快慢指针的方">
 <meta name="keywords" content="List">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Rotate List">
-<meta property="og:url" content="http://yoursite.com/2017/05/11/20170511-List-RotateList/index.html">
+<meta property="og:title" content="Reorder List">
+<meta property="og:url" content="http://yoursite.com/2017/05/16/20170516-List-ReorderList/index.html">
 <meta property="og:site_name" content="Tech">
-<meta property="og:description" content="Rotate List题目描述： 给定一个链表的头节点和一个整数k，其中整数k表示从尾部向左k个节点进行旋转。要求返回旋转后的链表头结点。  例子：  具体描述见LeetCode61。  解题思路： 主要是通过将链表连接成环状，然后通过和链表长度的比较找到目标节点断开链表。主要注意的是：在链表中有时候可以通过连接成环来处理问题；问题中k可以大于链表长度的情况的处理，通过求余即可。  代码如下：12">
-<meta property="og:updated_time" content="2017-05-19T05:16:47.000Z">
+<meta property="og:description" content="Reorder List题目描述： 给定一个链表的头节点，然后将原来链表顺序为L1-&amp;gt;L2-&amp;gt;L3…..-&amp;gt;Ln-1-&amp;gt;Ln的链表重现排序为L1-&amp;gt;Ln-&amp;gt;L2-&amp;gt;Ln-1….  例子：  具体描述可以看LeetCode143  解题思路： 本题的思路很简单，主要是过程中涉及到链表的多种操作需要认真学习。首先是我们找到链表的中间节点主要利用的是快慢指针的方">
+<meta property="og:updated_time" content="2017-05-19T08:35:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rotate List">
-<meta name="twitter:description" content="Rotate List题目描述： 给定一个链表的头节点和一个整数k，其中整数k表示从尾部向左k个节点进行旋转。要求返回旋转后的链表头结点。  例子：  具体描述见LeetCode61。  解题思路： 主要是通过将链表连接成环状，然后通过和链表长度的比较找到目标节点断开链表。主要注意的是：在链表中有时候可以通过连接成环来处理问题；问题中k可以大于链表长度的情况的处理，通过求余即可。  代码如下：12">
+<meta name="twitter:title" content="Reorder List">
+<meta name="twitter:description" content="Reorder List题目描述： 给定一个链表的头节点，然后将原来链表顺序为L1-&amp;gt;L2-&amp;gt;L3…..-&amp;gt;Ln-1-&amp;gt;Ln的链表重现排序为L1-&amp;gt;Ln-&amp;gt;L2-&amp;gt;Ln-1….  例子：  具体描述可以看LeetCode143  解题思路： 本题的思路很简单，主要是过程中涉及到链表的多种操作需要认真学习。首先是我们找到链表的中间节点主要利用的是快慢指针的方">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/11/20170511-List-RotateList/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/16/20170516-List-ReorderList/"/>
 
 
 
 
 
-  <title> Rotate List | Tech </title>
+  <title> Reorder List | Tech </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/11/20170511-List-RotateList/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/16/20170516-List-ReorderList/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mfzhu7">
@@ -281,7 +281,7 @@
             
             
               
-                Rotate List
+                Reorder List
               
             
           </h1>
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-11T19:36:02+08:00">
-                2017-05-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-16T17:36:02+08:00">
+                2017-05-16
               </time>
             
 
@@ -354,16 +354,16 @@
       
 
       
-        <h3 id="Rotate-List"><a href="#Rotate-List" class="headerlink" title="Rotate List"></a>Rotate List</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个链表的头节点和一个整数k，其中整数k表示从尾部向左k个节点进行旋转。要求返回旋转后的链表头结点。</p>
+        <h3 id="Reorder-List"><a href="#Reorder-List" class="headerlink" title="Reorder List"></a>Reorder List</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一个链表的头节点，然后将原来链表顺序为L1-&gt;L2-&gt;L3…..-&gt;Ln-1-&gt;Ln的链表重现排序为L1-&gt;Ln-&gt;L2-&gt;Ln-1….</p>
 </blockquote>
 <h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 具体描述见<a href="https://leetcode.com/problems/rotate-list/#/description" target="_blank" rel="external">LeetCode61</a>。</p>
+<p> 具体描述可以看<a href="https://leetcode.com/problems/reorder-list/#/description" target="_blank" rel="external">LeetCode143</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>主要是通过将链表连接成环状，然后通过和链表长度的比较找到目标节点断开链表。主要注意的是：在链表中有时候可以通过连接成环来处理问题；问题中k可以大于链表长度的情况的处理，通过求余即可。</p>
+<p>本题的思路很简单，主要是过程中涉及到链表的多种操作需要认真学习。首先是我们找到链表的中间节点主要利用的是快慢指针的方式，这个过程中需要注意在while部分我们需要考虑fast和fast-&gt;next;然后找到后半段链表后，将其逆序;这个过程中主要是定义pre=NULL的方式能帮助代码简洁一些;最后是两个链表的重新连接;主要是保存当前指针的下一个节点用于遍历即可。</p>
 </blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for singly-linked list.</div><div class="line"> * struct ListNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     ListNode *next;</div><div class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">rotateRight</span><span class="params">(ListNode* head, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!head) <span class="keyword">return</span> head;</div><div class="line">        <span class="comment">// 空节点直接返回</span></div><div class="line">        <span class="keyword">int</span> length = <span class="number">1</span>;</div><div class="line">        ListNode* cur = head;</div><div class="line">        <span class="keyword">while</span>(cur-&gt;next)&#123;</div><div class="line">            cur = cur-&gt;next;</div><div class="line">            length++;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 计算出链表的长度</span></div><div class="line">        cur-&gt;next = head;</div><div class="line">        <span class="comment">// 将链表连接成环状</span></div><div class="line">        <span class="keyword">if</span> (k %= length)&#123;</div><div class="line">        <span class="comment">// 当k大于链表的长度的时候</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; length - k; i++)</div><div class="line">                cur = cur-&gt;next;</div><div class="line">                <span class="comment">//找到需要断开的位置</span></div><div class="line">        &#125;</div><div class="line">        ListNode* newhead = cur-&gt;next;</div><div class="line">        cur-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        <span class="comment">//断开并且修改尾部节点指向</span></div><div class="line">        <span class="keyword">return</span> newhead;</div><div class="line">        </div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for singly-linked list.</div><div class="line"> * struct ListNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     ListNode *next;</div><div class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">reorderList</span><span class="params">(ListNode* head)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!head) <span class="keyword">return</span>;</div><div class="line">        <span class="comment">//空链表的情况直接返回</span></div><div class="line">        ListNode* fast = head-&gt;next;</div><div class="line">        ListNode* slow = head;</div><div class="line">        <span class="comment">//快慢指针找到链表的中间节点</span></div><div class="line">        <span class="keyword">while</span>(fast &amp;&amp; fast-&gt;next)&#123;</div><div class="line">        <span class="comment">// 注意判断fast和fast-&gt;next</span></div><div class="line">            slow = slow-&gt;next;</div><div class="line">            fast = fast-&gt;next-&gt;next;</div><div class="line">        &#125;</div><div class="line">        ListNode* pre = <span class="literal">NULL</span>;</div><div class="line">        <span class="comment">//逆序常用技巧定义pre=NULL</span></div><div class="line">        ListNode* mid = slow-&gt;next;</div><div class="line">        slow-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">while</span>(mid)&#123;</div><div class="line">            ListNode* tmp = mid-&gt;next;</div><div class="line">            mid-&gt;next = pre;</div><div class="line">            pre = mid;</div><div class="line">            mid = tmp;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//通过找到的中间节点将后半部分链表逆序</span></div><div class="line">        ListNode* right = pre;</div><div class="line">        ListNode* left = head;</div><div class="line">        <span class="keyword">while</span>(left &amp;&amp; right)&#123;</div><div class="line">            ListNode* tmp1 = left-&gt;next;</div><div class="line">            ListNode* tmp2 = right-&gt;next;</div><div class="line">            <span class="comment">//同时保存下一个节点的信息</span></div><div class="line">            left-&gt;next = right;</div><div class="line">            right-&gt;next = tmp1;</div><div class="line">            left = tmp1;</div><div class="line">            right = tmp2;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 重现连接两个链表       </span></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -406,8 +406,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/12/20170512-ML-SVM/" rel="next" title="SVM In MNIST">
-                <i class="fa fa-chevron-left"></i> SVM In MNIST
+              <a href="/2017/05/17/20170517-List-ReversePartList/" rel="next" title="Reverse Part List">
+                <i class="fa fa-chevron-left"></i> Reverse Part List
               </a>
             
           </div>
@@ -416,8 +416,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/10/20170510-String-PermutationInString/" rel="prev" title="Permutation In String">
-                Permutation In String <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/15/20170515-List-ListTheme/" rel="prev" title="List Theme">
+                List Theme <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -547,7 +547,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Rotate-List"><span class="nav-number">1.</span> <span class="nav-text">Rotate List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子："><span class="nav-number">3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">4.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">5.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reorder-List"><span class="nav-number">1.</span> <span class="nav-text">Reorder List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子："><span class="nav-number">3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">4.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">5.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
             
 
           </div>
