@@ -260,6 +260,469 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/07/20170507-ML-HMM-Viterbi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/07/20170507-ML-HMM-Viterbi/" itemprop="url">
+                  HMM_Viterbi
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-07T18:36:02+08:00">
+                2017-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="HMM-Viterbi"><a href="#HMM-Viterbi" class="headerlink" title="HMM_Viterbi"></a>HMM_Viterbi</h3><h3 id="算法原理简述："><a href="#算法原理简述：" class="headerlink" title="算法原理简述："></a>算法原理简述：</h3><blockquote>
+<p>本篇博客中主要介绍的是关于HMM算法中的维特比算法。该算法主要是给定A,B,PI参数和观测序列的情况下要求求出最有可能出现的状态序列。利用的思想还是动态规划的思想。<br>主要是定义了两个函数:</p>
+</blockquote>
+<ul>
+<li>delta(t, i),表示在所有到t时刻的状态为i的状态序列中概率最大的那个状态序列。</li>
+<li>psi(t, i)表示在到t时刻状态为i的所有状态序列中概率最大序列的t-1时刻的状态。</li>
+</ul>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="comment"># @File  : HMM_Viterbi.py</span></div><div class="line"><span class="comment"># @Author: mfzhu</span></div><div class="line"><span class="comment"># @Date  : 2017/5/7</span></div><div class="line"><span class="comment"># @Desc  :</span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HMM_Vtterbi</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, state2state, state2observation, pi)</span>:</span></div><div class="line">        self.state2state = state2state</div><div class="line">        <span class="comment"># 初始化状态转移矩阵</span></div><div class="line">        self.state2observation = state2observation</div><div class="line">        <span class="comment"># 初始化观测转移矩阵</span></div><div class="line">        self.pi = pi</div><div class="line">        <span class="comment"># 初始化初始状态概率向量</span></div><div class="line">        self.num_state = len(state2state)</div><div class="line">        <span class="comment"># 确定模型中的状态数</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, sequence)</span>:</span></div><div class="line">        <span class="comment"># 预测序列的可能状态</span></div><div class="line">        res = []</div><div class="line">        <span class="comment"># 保存结果</span></div><div class="line">        delta = self.pi * self.state2observation[:, sequence[<span class="number">0</span>]]</div><div class="line">        <span class="comment"># 初始化delta函数向量</span></div><div class="line">        psi = np.zeros([self.num_state, len(sequence)], int)</div><div class="line">        <span class="comment"># 初始化psi函数矩阵</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">1</span>, len(sequence)):</div><div class="line">            <span class="comment"># 从时刻1开始迭代</span></div><div class="line">            new_delta = []</div><div class="line">            psi_col = []</div><div class="line">            <span class="comment"># 保存当前轮迭代的delta和psi</span></div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(self.num_state):</div><div class="line">                tmp = delta * self.state2state[:, i]</div><div class="line">                index = tmp.argmax()</div><div class="line">                <span class="comment"># 找到最大值所对应的index</span></div><div class="line">                psi_col.append(index)</div><div class="line">                new_delta.append(tmp[index] * self.state2observation[i, sequence[t]])</div><div class="line">                <span class="comment"># 更新当前轮的delta和psi</span></div><div class="line">            psi[:, t] = psi_col</div><div class="line">            delta = np.array(new_delta)</div><div class="line">            <span class="comment"># 保存结果</span></div><div class="line"></div><div class="line">        last = delta.argmax()</div><div class="line">        res.insert(<span class="number">0</span>, last)</div><div class="line">        <span class="comment"># 回溯找到最大概率所对应的状态序列</span></div><div class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> range(len(sequence) - <span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>):</div><div class="line">            res.insert(<span class="number">0</span>, psi[last, t])</div><div class="line">            last = int(psi[last, t])</div><div class="line">        <span class="keyword">return</span> res</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    state2state = np.array([[<span class="number">0.5</span>, <span class="number">0.2</span>, <span class="number">0.3</span>], [<span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.2</span>], [<span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.5</span>]])</div><div class="line">    state2observation = np.array([[<span class="number">0.5</span>, <span class="number">0.5</span>], [<span class="number">0.4</span>, <span class="number">0.6</span>], [<span class="number">0.7</span>, <span class="number">0.3</span>]])</div><div class="line">    pi = np.array([<span class="number">0.2</span>, <span class="number">0.4</span>, <span class="number">0.4</span>])</div><div class="line">    sequence = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>]</div><div class="line">    <span class="comment"># 以上数据初始化模型</span></div><div class="line">    v = HMM_Vtterbi(state2state, state2observation, pi)</div><div class="line">    print(v.predict(sequence))</div><div class="line">    <span class="comment"># 训练模型并预测对应的状态序列</span></div></pre></td></tr></table></figure>
+<h3 id="代码结果："><a href="#代码结果：" class="headerlink" title="代码结果："></a>代码结果：</h3><blockquote>
+<p>通过与李航老师书本上的例子进行比较可知，当前算法的运算结果是正确的。</p>
+</blockquote>
+<p><img src="http://oov4rmeff.bkt.clouddn.com/HMM_viterbi.png" alt="img"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/06/20170506-ML-HMM-Forward-Backward/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/06/20170506-ML-HMM-Forward-Backward/" itemprop="url">
+                  HMM_Forward_Backward
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-06T18:36:02+08:00">
+                2017-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="HMM-Forward-Backward"><a href="#HMM-Forward-Backward" class="headerlink" title="HMM_Forward_Backward"></a>HMM_Forward_Backward</h3><h3 id="算法原理简述："><a href="#算法原理简述：" class="headerlink" title="算法原理简述："></a>算法原理简述：</h3><blockquote>
+<p>本篇博客主要是介绍隐马尔科夫算法中在给定A,B,PI参数的情况下，计算观测序列出现概率的算法。主要包括了前向算法和后向算法。<br>其中前向算法主要是定义函数alpha(t, i),表示在t时刻，其处在状态i,且(t1,t2,…t)的观测序列为(o1, o2,…)的概率；而后通过递推式，利用动态规划的方法来计算即可。<br>后向算法是定义函数beta(t, i);表示在t时刻处在状态i,且(t+1, t+2,…T)的观测序列为(o(t+1), o(t+2),…o(T))的概率；也是通过递归公式和动态规划的思想来实现计算过程。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># @File  : HMM_forward_backward.py</span></div><div class="line"><span class="comment"># @Author: mfzhu</span></div><div class="line"><span class="comment"># @Date  : 2017/5/4</span></div><div class="line"><span class="comment"># @Desc  :</span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> copy</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HMM_forward</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, state2state, state2observation, pi)</span>:</span></div><div class="line">        self.state2state = state2state</div><div class="line">        <span class="comment"># 初始化状态转移矩阵</span></div><div class="line">        self.state2observation = state2observation</div><div class="line">        <span class="comment"># 初始化观测转移矩阵</span></div><div class="line">        self.pi = pi</div><div class="line">        <span class="comment"># 初始化初始状态概率向量</span></div><div class="line">        self.num_state = len(state2state)</div><div class="line">        <span class="comment"># 确定模型中的状态数</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">alpha_func</span><span class="params">(self, time, sequence)</span>:</span></div><div class="line">        alpha = pi * self.state2observation[:, sequence[<span class="number">0</span>]]</div><div class="line">        <span class="comment"># 初始化time=1的alpha向量</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, time):</div><div class="line">            nextAlpha = []</div><div class="line">            <span class="comment"># 保存下一轮迭代的alpha向量</span></div><div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(self.num_state):</div><div class="line">                perState = alpha * self.state2state[:, j]</div><div class="line">                <span class="comment"># 计算每种状态转移的值</span></div><div class="line">                nextAlpha.append(np.sum(perState) * self.state2observation[j, sequence[i]])</div><div class="line">                <span class="comment"># 当前状态转移的结果保存</span></div><div class="line">            alpha = copy.deepcopy(nextAlpha)</div><div class="line">            <span class="comment"># 更新alpha向量</span></div><div class="line"></div><div class="line">        <span class="keyword">return</span> np.array(alpha)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HMM_backward</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, state2state, state2observation, pi)</span>:</span></div><div class="line">        self.state2state = state2state</div><div class="line">        <span class="comment"># 初始化状态转移矩阵</span></div><div class="line">        self.state2observation = state2observation</div><div class="line">        <span class="comment"># 初始化观测转移矩阵</span></div><div class="line">        self.pi = pi</div><div class="line">        <span class="comment"># 初始化初始状态概率向量</span></div><div class="line">        self.num_state = len(state2state)</div><div class="line">        <span class="comment"># 确定模型中的状态数</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">beta_func</span><span class="params">(self, time, sequence)</span>:</span></div><div class="line">        beta = np.ones([<span class="number">1</span>, self.num_state])[<span class="number">0</span>]</div><div class="line">        <span class="comment"># 初始化beta向量</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(sequence), time, <span class="number">-1</span>):</div><div class="line">            prebeta = []</div><div class="line">            <span class="comment"># 保存下一轮的beta向量</span></div><div class="line">            <span class="keyword">if</span> i == <span class="number">1</span>:</div><div class="line">                beta = beta * pi * self.state2observation[:, sequence[<span class="number">0</span>]]</div><div class="line">                <span class="comment"># 当time=1的时候和pi向量进行乘积</span></div><div class="line">                <span class="keyword">break</span></div><div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(self.num_state):</div><div class="line">                prebeta.append(np.sum(self.state2state[j, :] * self.state2observation[:, sequence[i - <span class="number">1</span>]] * beta))</div><div class="line">            beta = copy.deepcopy(prebeta)</div><div class="line">            <span class="comment"># 更新beta向量</span></div><div class="line">        <span class="keyword">return</span> np.array(beta)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    state2state = np.array([[<span class="number">0.5</span>, <span class="number">0.2</span>, <span class="number">0.3</span>], [<span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.2</span>], [<span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.5</span>]])</div><div class="line">    state2observation = np.array([[<span class="number">0.5</span>, <span class="number">0.5</span>], [<span class="number">0.4</span>, <span class="number">0.6</span>], [<span class="number">0.7</span>, <span class="number">0.3</span>]])</div><div class="line">    pi = np.array([<span class="number">0.2</span>, <span class="number">0.4</span>, <span class="number">0.4</span>])</div><div class="line">    sequence = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>]</div><div class="line"></div><div class="line">    forward = HMM_forward(state2state, state2observation, pi)</div><div class="line">    backward = HMM_backward(state2state, state2observation, pi)</div><div class="line">    print(<span class="string">"the alpha matrix:"</span>)</div><div class="line">    print(forward.alpha_func(<span class="number">1</span>, sequence))</div><div class="line">    print(forward.alpha_func(<span class="number">2</span>, sequence))</div><div class="line">    print(forward.alpha_func(<span class="number">3</span>, sequence))</div><div class="line">    print(<span class="string">"the beta matrix: "</span>)</div><div class="line">    print(backward.beta_func(<span class="number">1</span>, sequence))</div><div class="line">    print(backward.beta_func(<span class="number">2</span>, sequence))</div><div class="line">    print(backward.beta_func(<span class="number">3</span>, sequence))</div></pre></td></tr></table></figure>
+<h3 id="代码结果："><a href="#代码结果：" class="headerlink" title="代码结果："></a>代码结果：</h3><blockquote>
+<p>通过与李航老师书本的结果比较可以知道算法的正确性。</p>
+</blockquote>
+<p><img src="http://oov4rmeff.bkt.clouddn.com/HMM_forward_backward.png" alt="img"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/05/20170505-ML-mixGaussianInEM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/05/20170505-ML-mixGaussianInEM/" itemprop="url">
+                  Mix Gaussian In EM
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-05T12:39:02+08:00">
+                2017-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Mix-Gaussian-In-EM"><a href="#Mix-Gaussian-In-EM" class="headerlink" title="Mix Gaussian In EM"></a>Mix Gaussian In EM</h3><h3 id="算法原理简述："><a href="#算法原理简述：" class="headerlink" title="算法原理简述："></a>算法原理简述：</h3><blockquote>
+<p>概率模型有时即含有观测变量，又含有隐变量或者潜在变量。如果概率模型的变量都是观测变量，那么给定数据，可以直接用最大似然估计的方法或者贝叶斯估计法估计参数模型。当含有隐变量时，我们就不能直接使用这些方法，EM方法就是含有隐含变量的概率模型参数的极大似然估计法。<br>EM算法主要包括了:</p>
+</blockquote>
+<ul>
+<li>得到    Q函数</li>
+<li>E步计算</li>
+<li>Q步计算</li>
+</ul>
+<blockquote>
+<p>其中Q函数是完全数据的对数似然函数在给定观测数据和当前参数下，对未观测数据的条件概率分布的期望。</p>
+<p>本文中实现的是利用EM算法对高斯混合模型的进行参数估计.</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="comment"># @File  : MixGaussianInEM.py</span></div><div class="line"><span class="comment"># @Author: mfzhu</span></div><div class="line"><span class="comment"># @Date  : 2017/5/3</span></div><div class="line"><span class="comment"># @Desc  :</span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> copy</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">mixGaussianInEM</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, train_data, num_Gaussian)</span>:</span></div><div class="line">        self.epsilon = <span class="number">0.0000001</span></div><div class="line">        <span class="comment"># 设定模型停止迭代的阈值</span></div><div class="line">        self.num = num_Gaussian</div><div class="line">        <span class="comment"># 设定高斯函数的个数</span></div><div class="line">        self.num_sample = len(train_data)</div><div class="line">        <span class="comment"># 初始化训练数据个数</span></div><div class="line">        self.sample = train_data</div><div class="line">        <span class="comment"># 初始化训练数据</span></div><div class="line">        self.mean = np.array([<span class="number">15</span>, <span class="number">35</span>], float)</div><div class="line">        <span class="comment"># 初始化高斯函数的均值</span></div><div class="line">        self.var = np.array([<span class="number">15</span>, <span class="number">35</span>], float)</div><div class="line">        <span class="comment"># 初始化高斯函数的方差</span></div><div class="line">        self.alpha = np.array([<span class="number">0.4</span>, <span class="number">0.6</span>], float)</div><div class="line">        <span class="comment"># 初始化高斯函数的系数</span></div><div class="line">        self.gamma = np.zeros([self.num_sample, self.num], float)</div><div class="line">        <span class="comment"># 初始化每个观测值在每个高斯函数上的分量</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">norm_pdf</span><span class="params">(self, miu, sigma, value)</span>:</span></div><div class="line"></div><div class="line">        <span class="comment"># 计算某个均值和方差下的value对应的概率值</span></div><div class="line">        <span class="keyword">return</span> (<span class="number">1</span> / (np.sqrt(<span class="number">2</span> * np.pi) * sigma)) * np.exp(<span class="number">-1</span> * (value - miu) ** <span class="number">2</span> / (<span class="number">2</span> * (sigma ** <span class="number">2</span>)))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">E_step</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># E步函数更新gamma矩阵中的各个系数</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.num_sample):</div><div class="line">            demon = <span class="number">0</span></div><div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(self.num):</div><div class="line">                demon += self.alpha[j] * self.norm_pdf(self.mean[j], np.sqrt(self.var[j]), self.sample[i])</div><div class="line">                <span class="comment"># 计算某个观测值在所有高斯函数上分量的和</span></div><div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(self.num):</div><div class="line">                self.gamma[i][j] = self.alpha[j] * self.norm_pdf(self.mean[j], np.sqrt(self.var[j]), self.sample[i]) / demon</div><div class="line">                <span class="comment"># 计算某个高斯函数的分量</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Q_step</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment">#  Q步函数更新均值、方差和系数</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.num):</div><div class="line">            <span class="comment"># 更新方差</span></div><div class="line">            difference = np.square(self.sample - self.mean[i])</div><div class="line">            self.var[i] = np.sum(difference * self.gamma[:, i]) / np.sum(self.gamma[:, i])</div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.num):</div><div class="line">            <span class="comment"># 更新均值</span></div><div class="line">            self.mean[i] = (np.sum(self.gamma[:, i] * self.sample)) / np.sum(self.gamma[:, i])</div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.num):</div><div class="line">            <span class="comment"># 更新系数</span></div><div class="line">            self.alpha[i] = np.sum(self.gamma[:, i]) / self.num_sample</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self)</span>:</span></div><div class="line">        time = <span class="number">0</span></div><div class="line">        <span class="comment"># 训练次数</span></div><div class="line">        <span class="keyword">while</span> time &lt; <span class="number">1000</span>:</div><div class="line">            <span class="comment"># print(self.mean, self.var, self.alpha, time)</span></div><div class="line">            old_mean = copy.deepcopy(self.mean)</div><div class="line">            old_var = copy.deepcopy(self.var)</div><div class="line">            <span class="comment"># 记录上一次的均值和方差</span></div><div class="line">            self.E_step()</div><div class="line">            self.Q_step()</div><div class="line">            <span class="comment"># 训练</span></div><div class="line">            <span class="keyword">if</span> np.sum(np.abs(self.mean - old_mean)) &lt; self.epsilon\</div><div class="line">                    <span class="keyword">or</span> np.sum(np.abs(self.var - old_var)) &lt; self.epsilon:</div><div class="line">                <span class="keyword">break</span></div><div class="line">                <span class="comment"># 如果两次结果的差值小于阈值则结束训练</span></div><div class="line">            time += <span class="number">1</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">output</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># 输出训练结果</span></div><div class="line">        print(<span class="string">"the estimation of mean:"</span>)</div><div class="line">        print(self.mean)</div><div class="line">        print(<span class="string">"the estimation of var:"</span>)</div><div class="line">        print(self.var)</div><div class="line">        print(<span class="string">"the estimation of alpha:"</span>)</div><div class="line">        print(self.alpha)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    test_data = []</div><div class="line">    sigma = [<span class="number">20</span>, <span class="number">40</span>]</div><div class="line">    miu = [<span class="number">20</span>, <span class="number">40</span>]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000</span>):</div><div class="line">        <span class="keyword">if</span> np.random.random(<span class="number">1</span>) &gt; <span class="number">0.5</span>:</div><div class="line">            test_data.append(np.random.normal() * sigma[<span class="number">0</span>] + miu[<span class="number">0</span>])</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            test_data.append(np.random.normal() * sigma[<span class="number">1</span>] + miu[<span class="number">1</span>])</div><div class="line">    <span class="comment"># 初始化训练数据</span></div><div class="line">    test_data = np.array(test_data)</div><div class="line">    mix = mixGaussianInEM(test_data, <span class="number">2</span>)</div><div class="line">    mix.train()</div><div class="line">    mix.output()</div></pre></td></tr></table></figure>
+<h3 id="结果说明："><a href="#结果说明：" class="headerlink" title="结果说明："></a>结果说明：</h3><blockquote>
+<p>在利用两个高斯分布分别为N(20, 20)和N(40, 40)的情况下，按照概率0.5和0.5分别产生10000个数据。通过EM算法的估计结果如下：<br><img src="http://oov4rmeff.bkt.clouddn.com/mixGaussian.png" alt="img"></p>
+<p>可以看到对于参数的估计还是相当准确的。需要注意的是在训练模型的初始值的设定时，偏离与待估计参数太大的情况容易导致估计失败，即EM算法对于初始值敏感，并且不能保证收敛到全局最优。所以我们可以多次选取初始值而后对估计结果取平均来保证参加估计的正确性。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/04/20170504-Tree-TreeSpecial/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1516,443 +1979,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/27/20170427-DS-UndirectedWeightedGraph/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/27/20170427-DS-UndirectedWeightedGraph/" itemprop="url">
-                  UndirectedWeightedGraph
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-27T13:36:02+08:00">
-                2017-04-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="UndirectedWeightedGraph"><a href="#UndirectedWeightedGraph" class="headerlink" title="UndirectedWeightedGraph"></a>UndirectedWeightedGraph</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// Created by mfzhu on 2017/4/19.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ALGORITHM_DIJKSTRA_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> ALGORITHM_DIJKSTRA_H</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">class</span> Edge;</div><div class="line"><span class="keyword">struct</span> CmpByValue&#123;</div><div class="line">  <span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> pair&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt;&amp; lhs, <span class="keyword">const</span> pair&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt;&amp; rhs)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> lhs.second &lt; rhs.second;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">class</span> undirectedGraphNode&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> label;</div><div class="line">    <span class="built_in">vector</span>&lt;Edge*&gt; neighbors;</div><div class="line">    undirectedGraphNode(<span class="keyword">int</span> l): label(l) &#123;&#125;;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">class</span> Edge&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> weight;</div><div class="line">    undirectedGraphNode* start;</div><div class="line">    undirectedGraphNode* end;</div><div class="line">    Edge(undirectedGraphNode* s, undirectedGraphNode* e, <span class="keyword">int</span> w): weight(w), start(s), end(e)&#123;&#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> undirectedWeightedGraph&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    undirectedWeightedGraph();</div><div class="line">    ~undirectedWeightedGraph()&#123;&#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">prime</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">kruskal</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertEdge</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> weight)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertNode</span><span class="params">(<span class="keyword">int</span> val)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">int</span> nNode;</div><div class="line">    <span class="keyword">int</span> nEdge;</div><div class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; nodeTable;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertNode</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; &amp;nodeTable, <span class="keyword">int</span> val)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertEdge</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; &amp;nodeTable, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> val)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">kruskal</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; nodeTable)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">prime</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; nodeTable)</span></span>;</div><div class="line"></div><div class="line">&#125;;</div><div class="line">undirectedWeightedGraph::undirectedWeightedGraph() &#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the number of vertex:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cin</span> &gt;&gt; nNode;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the number of edge:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cin</span> &gt;&gt; nEdge;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nNode; i++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the label of vertex:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">int</span> label;</div><div class="line">        <span class="built_in">cin</span> &gt;&gt; label;</div><div class="line">        undirectedGraphNode* node = <span class="keyword">new</span> undirectedGraphNode(label);</div><div class="line">        nodeTable.insert(&#123;label, node&#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nEdge; i++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the info of Edge:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">int</span> start;</div><div class="line">        <span class="keyword">int</span> end;</div><div class="line">        <span class="keyword">int</span> weight;</div><div class="line">        <span class="built_in">cin</span> &gt;&gt; start &gt;&gt; end &gt;&gt; weight;</div><div class="line">        Edge* edge1 = <span class="keyword">new</span> Edge(nodeTable[start], nodeTable[end], weight);</div><div class="line">        nodeTable[start]-&gt;neighbors.push_back(edge1);</div><div class="line">        Edge* edge2 = <span class="keyword">new</span> Edge(nodeTable[end], nodeTable[start], weight);</div><div class="line">        nodeTable[end]-&gt;neighbors.push_back(edge2);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::print() &#123;</div><div class="line">    <span class="keyword">auto</span> it = nodeTable.begin();</div><div class="line">    <span class="keyword">while</span>(it != nodeTable.end())&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the node label is :"</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the node info is:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : it-&gt;second-&gt;neighbors)&#123;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; i-&gt;start-&gt;label &lt;&lt; <span class="string">"-&gt;"</span> &lt;&lt; i-&gt;end-&gt;label &lt;&lt; <span class="string">"  weight:"</span> &lt;&lt; i-&gt;weight &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        &#125;</div><div class="line">        it++;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::insertNode(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode *&gt; &amp;nodeTable, <span class="keyword">int</span> val) &#123;</div><div class="line">    <span class="keyword">if</span> (nodeTable.find(val) == nodeTable.end())&#123;</div><div class="line">        undirectedGraphNode* node = <span class="keyword">new</span> undirectedGraphNode(val);</div><div class="line">        nodeTable.insert(&#123;val, node&#125;);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the node is existed"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::insertNode(<span class="keyword">int</span> node) &#123;</div><div class="line">    insertNode(nodeTable, node);</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::insertEdge(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode *&gt; &amp;nodeTable, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> w) &#123;</div><div class="line">    Edge* e = <span class="keyword">new</span> Edge(nodeTable[start], nodeTable[end], w);</div><div class="line">    nodeTable[start]-&gt;neighbors.push_back(e);</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::insertEdge(<span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> weight) &#123;</div><div class="line">    insertEdge(nodeTable, start, end, weight);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::kruskal(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; nodeTable) &#123;</div><div class="line">    <span class="keyword">int</span> union_array[nNode + <span class="number">1</span>];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nNode + <span class="number">1</span>; i++)&#123;</div><div class="line">        union_array[i] = i;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; result;</div><div class="line">    <span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; Edge_map;</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it = nodeTable.begin(); it != nodeTable.end(); it++)&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> edge: it-&gt;second-&gt;neighbors)&#123;</div><div class="line">            pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; forward&#123;edge-&gt;start-&gt;label, edge-&gt;end-&gt;label&#125;;</div><div class="line">            pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; backward&#123;edge-&gt;end-&gt;label, edge-&gt;start-&gt;label&#125;;</div><div class="line">            <span class="keyword">if</span> (Edge_map.find(forward) == Edge_map.end() &amp;&amp; Edge_map.find(backward) == Edge_map.end())&#123;</div><div class="line">                Edge_map.insert(&#123;forward, edge-&gt;weight&#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">vector</span>&lt;pair&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt;&gt; Edge_vec(Edge_map.begin(), Edge_map.end());</div><div class="line">    sort(Edge_vec.begin(), Edge_vec.end(), CmpByValue());</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = Edge_vec.begin(); result.size() != nNode - <span class="number">1</span>; it++)&#123;</div><div class="line">        <span class="keyword">int</span> start = it-&gt;first.first;</div><div class="line">        <span class="keyword">int</span> end = it-&gt;first.second;</div><div class="line">        <span class="keyword">int</span> weight = it-&gt;second;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (union_array[start] == union_array[end])&#123;</div><div class="line">            <span class="keyword">continue</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            result.insert(&#123;&#123;start, end&#125;, weight&#125;);</div><div class="line">            <span class="keyword">int</span> head = union_array[start];</div><div class="line">            <span class="keyword">int</span> tail = union_array[end];</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nNode + <span class="number">1</span>; i++)&#123;</div><div class="line">                <span class="keyword">if</span> (union_array[i] == head || union_array[i] == tail)&#123;</div><div class="line">                    union_array[i] = head;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = result.begin(); it != result.end(); it++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; it-&gt;first.first &lt;&lt; <span class="string">"-&gt;"</span> &lt;&lt; it-&gt;first.second &lt;&lt; <span class="string">": "</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::kruskal() &#123;</div><div class="line">    kruskal(nodeTable);</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::prime(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode *&gt; nodeTable) &#123;</div><div class="line">    <span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; result;</div><div class="line">    <span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; Edge_set;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = nodeTable.begin(); it != nodeTable.end(); it++)&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> edge : it-&gt;second-&gt;neighbors)&#123;</div><div class="line">            Edge_set.insert(&#123;&#123;edge-&gt;start-&gt;label, edge-&gt;end-&gt;label&#125;, edge-&gt;weight&#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">auto</span> index = nodeTable.begin();</div><div class="line">    <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; visited&#123;index-&gt;first&#125;;</div><div class="line">    <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; unvisited;</div><div class="line">    <span class="keyword">while</span>(++index != nodeTable.end())&#123;</div><div class="line">        unvisited.insert(index-&gt;first);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> cur_min_distance = INT8_MAX;</div><div class="line">    <span class="keyword">int</span> v_node = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> u_node = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(!unvisited.empty())&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i = visited.begin(); i != visited.end(); i++)&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> j = unvisited.begin(); j != unvisited.end(); j++)&#123;</div><div class="line">                pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; tmp&#123;*i,*j&#125;;</div><div class="line">                <span class="keyword">if</span> (Edge_set.find(tmp) != Edge_set.end() &amp;&amp; Edge_set[tmp] &lt; cur_min_distance)&#123;</div><div class="line">                    cur_min_distance = Edge_set[tmp];</div><div class="line">                    v_node = *i;</div><div class="line">                    u_node = *j;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        result.insert(&#123;&#123;v_node, u_node&#125;, cur_min_distance&#125;);</div><div class="line">        cur_min_distance = INT8_MAX;</div><div class="line">        visited.insert(u_node);</div><div class="line">        unvisited.erase(u_node);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = result.begin(); iter != result.end(); iter++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first.first &lt;&lt; <span class="string">"-&gt;"</span> &lt;&lt; iter-&gt;first.second &lt;&lt; <span class="string">": "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::prime() &#123;</div><div class="line">    prime(nodeTable);</div><div class="line">&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//ALGORITHM_DIJKSTRA_H</span></span></div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/26/20170426-DS-DirectedWeightedGraph/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/26/20170426-DS-DirectedWeightedGraph/" itemprop="url">
-                  DirectedWeightedGraph
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-26T18:36:02+08:00">
-                2017-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="DirectedWeightedGraph"><a href="#DirectedWeightedGraph" class="headerlink" title="DirectedWeightedGraph"></a>DirectedWeightedGraph</h3><h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// Created by mfzhu on 2017/4/19.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ALGORITHM_DIJKSTRA_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> ALGORITHM_DIJKSTRA_H</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">class</span> Edge;</div><div class="line"><span class="keyword">class</span> directedGraphNode&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> label;</div><div class="line">    <span class="built_in">vector</span>&lt;Edge*&gt; neighbors;</div><div class="line">    directedGraphNode(<span class="keyword">int</span> l): label(l) &#123;&#125;;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">class</span> Edge&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> weight;</div><div class="line">    directedGraphNode* start;</div><div class="line">    directedGraphNode* end;</div><div class="line">    Edge(directedGraphNode* s, directedGraphNode* e, <span class="keyword">int</span> w): weight(w), start(s), end(e)&#123;&#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> directedWeightedGraph&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    directedWeightedGraph();</div><div class="line">    ~directedWeightedGraph()&#123;&#125;;</div><div class="line"></div><div class="line"><span class="comment">//    void dfs();</span></div><div class="line"><span class="comment">//    void bfs();</span></div><div class="line"><span class="comment">//    void prime();</span></div><div class="line"><span class="comment">//    void kruskal();</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> start)</span></span>;</div><div class="line"><span class="comment">//    void Bellman_Ford();</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertEdge</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> weight)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertNode</span><span class="params">(<span class="keyword">int</span> val)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">int</span> nNode;</div><div class="line">    <span class="keyword">int</span> nEdge;</div><div class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>, directedGraphNode*&gt; nodeTable;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertNode</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, directedGraphNode*&gt; &amp;nodeTable, <span class="keyword">int</span> val)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertEdge</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, directedGraphNode*&gt; &amp;nodeTable, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> val)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, directedGraphNode*&gt; nodeTable, <span class="keyword">int</span> start)</span></span>;</div><div class="line">&#125;;</div><div class="line">directedWeightedGraph::directedWeightedGraph() &#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the number of vertex:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cin</span> &gt;&gt; nNode;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the number of edge:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cin</span> &gt;&gt; nEdge;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nNode; i++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the label of vertex:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">int</span> label;</div><div class="line">        <span class="built_in">cin</span> &gt;&gt; label;</div><div class="line">        directedGraphNode* node = <span class="keyword">new</span> directedGraphNode(label);</div><div class="line">        nodeTable.insert(&#123;label, node&#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nEdge; i++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the info of Edge:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">int</span> start;</div><div class="line">        <span class="keyword">int</span> end;</div><div class="line">        <span class="keyword">int</span> weight;</div><div class="line">        <span class="built_in">cin</span> &gt;&gt; start &gt;&gt; end &gt;&gt; weight;</div><div class="line">        Edge* edge = <span class="keyword">new</span> Edge(nodeTable[start], nodeTable[end], weight);</div><div class="line">        nodeTable[start]-&gt;neighbors.push_back(edge);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> directedWeightedGraph::print() &#123;</div><div class="line">    <span class="keyword">auto</span> it = nodeTable.begin();</div><div class="line">    <span class="keyword">while</span>(it != nodeTable.end())&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the node label is :"</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the node info is:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : it-&gt;second-&gt;neighbors)&#123;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; i-&gt;start-&gt;label &lt;&lt; <span class="string">"-&gt;"</span> &lt;&lt; i-&gt;end-&gt;label &lt;&lt; <span class="string">"  weight:"</span> &lt;&lt; i-&gt;weight &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        &#125;</div><div class="line">        it++;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> directedWeightedGraph::insertNode(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, directedGraphNode *&gt; &amp;nodeTable, <span class="keyword">int</span> val) &#123;</div><div class="line">    <span class="keyword">if</span> (nodeTable.find(val) == nodeTable.end())&#123;</div><div class="line">        directedGraphNode* node = <span class="keyword">new</span> directedGraphNode(val);</div><div class="line">        nodeTable.insert(&#123;val, node&#125;);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the node is existed"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> directedWeightedGraph::insertNode(<span class="keyword">int</span> node) &#123;</div><div class="line">    insertNode(nodeTable, node);</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> directedWeightedGraph::insertEdge(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, directedGraphNode *&gt; &amp;nodeTable, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> w) &#123;</div><div class="line">    Edge* e = <span class="keyword">new</span> Edge(nodeTable[start], nodeTable[end], w);</div><div class="line">    nodeTable[start]-&gt;neighbors.push_back(e);</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> directedWeightedGraph::insertEdge(<span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> weight) &#123;</div><div class="line">    insertEdge(nodeTable, start, end, weight);</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> directedWeightedGraph::dijkstra(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, directedGraphNode *&gt; nodeTable, <span class="keyword">int</span> start) &#123;</div><div class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; visited&#123;&#123;start, <span class="number">0</span>&#125;&#125;;</div><div class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; unvisted;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i : nodeTable)&#123;</div><div class="line">        <span class="keyword">if</span> (i.first != start) unvisted.insert(&#123;i.first, INT8_MAX&#125;);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> i: nodeTable[start]-&gt;neighbors)&#123;</div><div class="line">        unvisted[i-&gt;end-&gt;label] = i-&gt;weight;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span>(!unvisted.empty())&#123;</div><div class="line">        <span class="keyword">int</span> cur_min_label = unvisted.begin()-&gt;first;</div><div class="line">        <span class="keyword">int</span> cur_min_weight = unvisted.begin()-&gt;second;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = unvisted.begin(); it != unvisted.end(); it++)&#123;</div><div class="line">            <span class="keyword">if</span> (it-&gt;second &lt; cur_min_weight)&#123;</div><div class="line">                cur_min_label = it-&gt;first;</div><div class="line">                cur_min_weight = it-&gt;second;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        visited.insert(&#123;cur_min_label, cur_min_weight&#125;);</div><div class="line">        unvisted.erase(cur_min_label);</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = unvisted.begin(); it != unvisted.end(); it++)&#123;</div><div class="line">            <span class="keyword">int</span> cur_distance = it-&gt;second;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> edge: nodeTable[it-&gt;first]-&gt;neighbors)&#123;</div><div class="line">                <span class="keyword">if</span> (edge-&gt;end-&gt;label == cur_min_label &amp;&amp; (edge-&gt;weight + cur_min_weight) &lt; cur_distance)&#123;</div><div class="line">                    it-&gt;second = edge-&gt;weight + cur_min_weight;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it = visited.begin(); it != visited.end(); it++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; start &lt;&lt; <span class="string">" "</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="string">":"</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> directedWeightedGraph::dijkstra(<span class="keyword">int</span> start) &#123;</div><div class="line">    dijkstra(nodeTable, start);</div><div class="line">&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//ALGORITHM_DIJKSTRA_H</span></span></div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/25/20170425-ML-LogisticInMNIST/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/25/20170425-ML-LogisticInMNIST/" itemprop="url">
-                  Logistic In MNIST
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-25T12:36:02+08:00">
-                2017-04-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Logistic-In-MNIST"><a href="#Logistic-In-MNIST" class="headerlink" title="Logistic In MNIST"></a>Logistic In MNIST</h3><h3 id="算法原理简述："><a href="#算法原理简述：" class="headerlink" title="算法原理简述："></a>算法原理简述：</h3><blockquote>
-<p>二项逻辑斯蒂回归模型是一种分类模型，有条件概率P(Y|X)表示，形式为参数化的逻辑斯蒂分布。</p>
-<p>在本实验中，对于该模型的二项形式，因为只能做二分类，所以我们对数据集的标签进行的改变只剩下0和1;而后输入的依旧是图像的向量，主要需要掌握的是关于该模型的推导和如何迭代得到近似最优解。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="comment"># @File  : LogisticRegression.py</span></div><div class="line"><span class="comment"># @Author: mfzhu</span></div><div class="line"><span class="comment"># @Date  : 2017/4/15</span></div><div class="line"><span class="comment"># @Desc  :</span></div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</div><div class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary</span><span class="params">(data, threshold)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"></div><div class="line">    :param data: 需要二值化的数据</div><div class="line">    :param threshold: 二值化的阈值</div><div class="line">    :return: 二值化后的数据</div><div class="line">    """</div><div class="line">    index_1 = np.array(data &gt; threshold)</div><div class="line">    index_2 = np.array(data &lt;= threshold)</div><div class="line">    data[index_1] = <span class="number">1</span></div><div class="line">    data[index_2] = <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogisticRegression</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.max_iteration = <span class="number">10000</span></div><div class="line">        <span class="comment"># 定义权重的迭代次数</span></div><div class="line">        self.step = <span class="number">0.00001</span></div><div class="line">        <span class="comment"># 定义每次迭代的步长</span></div><div class="line">        self.weights = []</div><div class="line">        <span class="comment"># 定义权重</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(self, x)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"></div><div class="line">        :param x: 样本数据</div><div class="line">        :return: 该样本数据对应的sigmoid函数值</div><div class="line">        """</div><div class="line">        <span class="keyword">return</span> np.exp(x) / (<span class="number">1</span> + np.exp(x))</div><div class="line">    <span class="comment"># 定义计算Logit函数值</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_predict</span><span class="params">(self, feature)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"></div><div class="line">        :param feature: 内部预测函数用于调用，预测样本为feature的结果</div><div class="line">        :return: 返回该样本对应的标签</div><div class="line">        """</div><div class="line">        wx = sum([self.weights[i] * feature[i] <span class="keyword">for</span> i <span class="keyword">in</span> range(len(feature))])</div><div class="line">        predict1 = self.sigmoid(wx)</div><div class="line">        predict0 = <span class="number">1</span> - predict1</div><div class="line"></div><div class="line">        <span class="keyword">if</span> predict1 &gt; predict0:</div><div class="line">            <span class="keyword">return</span> <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    <span class="comment"># 内部预测函数用于调用，先计算权重和输入向量的乘积，然后计算sigmoid值</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, train_data, label_data)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"></div><div class="line">        :param train_data: 训练数据</div><div class="line">        :param label_data: 训练数据对应的标签</div><div class="line">        :return:</div><div class="line">        """</div><div class="line">        self.weights = np.ones(train_data.shape[<span class="number">1</span>] + <span class="number">1</span>, float)</div><div class="line">        <span class="comment"># 权重加上一维截距项</span></div><div class="line">        self.weights.shape = (train_data.shape[<span class="number">1</span>] + <span class="number">1</span>, <span class="number">1</span>)</div><div class="line">        <span class="comment"># 定义权重的行和列（python中列值为空）</span></div><div class="line"></div><div class="line">        train_data = np.column_stack((train_data, np.ones(train_data.shape[<span class="number">0</span>])))</div><div class="line">        <span class="comment"># 训练数据在末尾加上一列全1的数据</span></div><div class="line">        train_data = np.matrix(train_data)</div><div class="line">        <span class="comment"># 转化为矩阵方便计算</span></div><div class="line">        time = <span class="number">0</span></div><div class="line">        <span class="comment"># 计算当前迭代次数</span></div><div class="line"></div><div class="line">        <span class="keyword">while</span> time &lt; self.max_iteration:</div><div class="line">            wx_matrix = train_data * self.weights</div><div class="line">            <span class="comment"># 计算权重和训练数据的乘积</span></div><div class="line">            exp_wx = self.sigmoid(wx_matrix)</div><div class="line">            <span class="comment"># 计算sigmoid值</span></div><div class="line">            difference = np.matrix(label_data) - exp_wx.T</div><div class="line">            <span class="comment"># 计算sigmoid值和标签值的差</span></div><div class="line">            self.weights += self.step * (difference * train_data).T</div><div class="line">            <span class="comment"># 改变权重值</span></div><div class="line">            time += <span class="number">1</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, features)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"></div><div class="line">        :param features:</div><div class="line">        :return:</div><div class="line">        """</div><div class="line">        label = []</div><div class="line">        <span class="keyword">for</span> feature <span class="keyword">in</span> features:</div><div class="line">            x = list(feature)</div><div class="line">            x.append(<span class="number">1</span>)</div><div class="line">            label.append(self._predict(x))</div><div class="line">            <span class="comment"># 调用先前定义的内部预测函数用来预测测试数据的标签</span></div><div class="line">        <span class="keyword">return</span> label</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    time1 = time.time()</div><div class="line">    print(<span class="string">"start reading the data:"</span>)</div><div class="line">    raw_path = <span class="string">r'F:\work and learn\ML\dataset\MNIST\train.csv'</span></div><div class="line">    raw_data = np.loadtxt(raw_path, delimiter=<span class="string">','</span>, skiprows=<span class="number">1</span>)</div><div class="line">    <span class="comment"># 读入原始数据</span></div><div class="line">    label = raw_data[:, <span class="number">0</span>]</div><div class="line">    data = raw_data[:, <span class="number">1</span>:]</div><div class="line">    <span class="comment"># 区分标签数据和原始数据</span></div><div class="line">    data = binary(data, <span class="number">100</span>)</div><div class="line">    label[label != <span class="number">0</span>] = <span class="number">1</span></div><div class="line">    <span class="comment"># 进行二值化和对标签二值化（这边做的是二分类）</span></div><div class="line"></div><div class="line">    train_data, test_data, train_label, test_label = train_test_split(data, label, test_size=<span class="number">0.33</span>, random_state=<span class="number">23323</span>)</div><div class="line"></div><div class="line">    time2 = time.time()</div><div class="line">    print(<span class="string">"read data cost:"</span>, time2 - time1, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line">    <span class="comment"># 将训练数据切分成三块用于训练和测试</span></div><div class="line">    print(<span class="string">"start training the model:"</span>)</div><div class="line">    lr = LogisticRegression()</div><div class="line">    lr.train(train_data, train_label)</div><div class="line">    time3 = time.time()</div><div class="line">    print(<span class="string">"training cost:"</span>, time3 - time2, <span class="string">' seconds'</span>, <span class="string">'\n'</span>)</div><div class="line"></div><div class="line">    print(<span class="string">"start predicting:"</span>)</div><div class="line">    <span class="comment"># 定义logit类然后训练</span></div><div class="line">    test_predict = lr.predict(test_data)</div><div class="line">    score = accuracy_score(test_label, test_predict)</div><div class="line">    time4 = time.time()</div><div class="line">    print(<span class="string">"predicting cost:"</span>, time4 - time3, <span class="string">' seconds'</span>, <span class="string">'\n'</span>)</div><div class="line">    <span class="comment"># 利用训练到的模型预测测试集的标签</span></div><div class="line">    print(<span class="string">"the accuracy_score is:"</span>, score)</div></pre></td></tr></table></figure>
-<h3 id="模型的训练结果："><a href="#模型的训练结果：" class="headerlink" title="模型的训练结果："></a>模型的训练结果：</h3><blockquote>
-<p>可以看到，逻辑斯蒂的正确率很高，但是相对的，训练的时间也较长。</p>
-</blockquote>
-<p><img src="http://oov4rmeff.bkt.clouddn.com/logit.png" alt="img"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2002,7 +2028,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-count">65</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

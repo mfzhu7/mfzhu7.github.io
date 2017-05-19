@@ -260,6 +260,443 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/27/20170427-DS-UndirectedWeightedGraph/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/27/20170427-DS-UndirectedWeightedGraph/" itemprop="url">
+                  UndirectedWeightedGraph
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-27T13:36:02+08:00">
+                2017-04-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="UndirectedWeightedGraph"><a href="#UndirectedWeightedGraph" class="headerlink" title="UndirectedWeightedGraph"></a>UndirectedWeightedGraph</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// Created by mfzhu on 2017/4/19.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ALGORITHM_DIJKSTRA_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> ALGORITHM_DIJKSTRA_H</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">class</span> Edge;</div><div class="line"><span class="keyword">struct</span> CmpByValue&#123;</div><div class="line">  <span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> pair&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt;&amp; lhs, <span class="keyword">const</span> pair&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt;&amp; rhs)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> lhs.second &lt; rhs.second;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">class</span> undirectedGraphNode&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> label;</div><div class="line">    <span class="built_in">vector</span>&lt;Edge*&gt; neighbors;</div><div class="line">    undirectedGraphNode(<span class="keyword">int</span> l): label(l) &#123;&#125;;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">class</span> Edge&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> weight;</div><div class="line">    undirectedGraphNode* start;</div><div class="line">    undirectedGraphNode* end;</div><div class="line">    Edge(undirectedGraphNode* s, undirectedGraphNode* e, <span class="keyword">int</span> w): weight(w), start(s), end(e)&#123;&#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> undirectedWeightedGraph&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    undirectedWeightedGraph();</div><div class="line">    ~undirectedWeightedGraph()&#123;&#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">prime</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">kruskal</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertEdge</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> weight)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertNode</span><span class="params">(<span class="keyword">int</span> val)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">int</span> nNode;</div><div class="line">    <span class="keyword">int</span> nEdge;</div><div class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; nodeTable;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertNode</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; &amp;nodeTable, <span class="keyword">int</span> val)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertEdge</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; &amp;nodeTable, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> val)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">kruskal</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; nodeTable)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">prime</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; nodeTable)</span></span>;</div><div class="line"></div><div class="line">&#125;;</div><div class="line">undirectedWeightedGraph::undirectedWeightedGraph() &#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the number of vertex:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cin</span> &gt;&gt; nNode;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the number of edge:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cin</span> &gt;&gt; nEdge;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nNode; i++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the label of vertex:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">int</span> label;</div><div class="line">        <span class="built_in">cin</span> &gt;&gt; label;</div><div class="line">        undirectedGraphNode* node = <span class="keyword">new</span> undirectedGraphNode(label);</div><div class="line">        nodeTable.insert(&#123;label, node&#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nEdge; i++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the info of Edge:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">int</span> start;</div><div class="line">        <span class="keyword">int</span> end;</div><div class="line">        <span class="keyword">int</span> weight;</div><div class="line">        <span class="built_in">cin</span> &gt;&gt; start &gt;&gt; end &gt;&gt; weight;</div><div class="line">        Edge* edge1 = <span class="keyword">new</span> Edge(nodeTable[start], nodeTable[end], weight);</div><div class="line">        nodeTable[start]-&gt;neighbors.push_back(edge1);</div><div class="line">        Edge* edge2 = <span class="keyword">new</span> Edge(nodeTable[end], nodeTable[start], weight);</div><div class="line">        nodeTable[end]-&gt;neighbors.push_back(edge2);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::print() &#123;</div><div class="line">    <span class="keyword">auto</span> it = nodeTable.begin();</div><div class="line">    <span class="keyword">while</span>(it != nodeTable.end())&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the node label is :"</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the node info is:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : it-&gt;second-&gt;neighbors)&#123;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; i-&gt;start-&gt;label &lt;&lt; <span class="string">"-&gt;"</span> &lt;&lt; i-&gt;end-&gt;label &lt;&lt; <span class="string">"  weight:"</span> &lt;&lt; i-&gt;weight &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        &#125;</div><div class="line">        it++;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::insertNode(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode *&gt; &amp;nodeTable, <span class="keyword">int</span> val) &#123;</div><div class="line">    <span class="keyword">if</span> (nodeTable.find(val) == nodeTable.end())&#123;</div><div class="line">        undirectedGraphNode* node = <span class="keyword">new</span> undirectedGraphNode(val);</div><div class="line">        nodeTable.insert(&#123;val, node&#125;);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the node is existed"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::insertNode(<span class="keyword">int</span> node) &#123;</div><div class="line">    insertNode(nodeTable, node);</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::insertEdge(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode *&gt; &amp;nodeTable, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> w) &#123;</div><div class="line">    Edge* e = <span class="keyword">new</span> Edge(nodeTable[start], nodeTable[end], w);</div><div class="line">    nodeTable[start]-&gt;neighbors.push_back(e);</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::insertEdge(<span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> weight) &#123;</div><div class="line">    insertEdge(nodeTable, start, end, weight);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::kruskal(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; nodeTable) &#123;</div><div class="line">    <span class="keyword">int</span> union_array[nNode + <span class="number">1</span>];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nNode + <span class="number">1</span>; i++)&#123;</div><div class="line">        union_array[i] = i;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; result;</div><div class="line">    <span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; Edge_map;</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it = nodeTable.begin(); it != nodeTable.end(); it++)&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> edge: it-&gt;second-&gt;neighbors)&#123;</div><div class="line">            pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; forward&#123;edge-&gt;start-&gt;label, edge-&gt;end-&gt;label&#125;;</div><div class="line">            pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; backward&#123;edge-&gt;end-&gt;label, edge-&gt;start-&gt;label&#125;;</div><div class="line">            <span class="keyword">if</span> (Edge_map.find(forward) == Edge_map.end() &amp;&amp; Edge_map.find(backward) == Edge_map.end())&#123;</div><div class="line">                Edge_map.insert(&#123;forward, edge-&gt;weight&#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">vector</span>&lt;pair&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt;&gt; Edge_vec(Edge_map.begin(), Edge_map.end());</div><div class="line">    sort(Edge_vec.begin(), Edge_vec.end(), CmpByValue());</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = Edge_vec.begin(); result.size() != nNode - <span class="number">1</span>; it++)&#123;</div><div class="line">        <span class="keyword">int</span> start = it-&gt;first.first;</div><div class="line">        <span class="keyword">int</span> end = it-&gt;first.second;</div><div class="line">        <span class="keyword">int</span> weight = it-&gt;second;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (union_array[start] == union_array[end])&#123;</div><div class="line">            <span class="keyword">continue</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            result.insert(&#123;&#123;start, end&#125;, weight&#125;);</div><div class="line">            <span class="keyword">int</span> head = union_array[start];</div><div class="line">            <span class="keyword">int</span> tail = union_array[end];</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nNode + <span class="number">1</span>; i++)&#123;</div><div class="line">                <span class="keyword">if</span> (union_array[i] == head || union_array[i] == tail)&#123;</div><div class="line">                    union_array[i] = head;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = result.begin(); it != result.end(); it++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; it-&gt;first.first &lt;&lt; <span class="string">"-&gt;"</span> &lt;&lt; it-&gt;first.second &lt;&lt; <span class="string">": "</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::kruskal() &#123;</div><div class="line">    kruskal(nodeTable);</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::prime(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode *&gt; nodeTable) &#123;</div><div class="line">    <span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; result;</div><div class="line">    <span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; Edge_set;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = nodeTable.begin(); it != nodeTable.end(); it++)&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> edge : it-&gt;second-&gt;neighbors)&#123;</div><div class="line">            Edge_set.insert(&#123;&#123;edge-&gt;start-&gt;label, edge-&gt;end-&gt;label&#125;, edge-&gt;weight&#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">auto</span> index = nodeTable.begin();</div><div class="line">    <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; visited&#123;index-&gt;first&#125;;</div><div class="line">    <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; unvisited;</div><div class="line">    <span class="keyword">while</span>(++index != nodeTable.end())&#123;</div><div class="line">        unvisited.insert(index-&gt;first);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> cur_min_distance = INT8_MAX;</div><div class="line">    <span class="keyword">int</span> v_node = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> u_node = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(!unvisited.empty())&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i = visited.begin(); i != visited.end(); i++)&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> j = unvisited.begin(); j != unvisited.end(); j++)&#123;</div><div class="line">                pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; tmp&#123;*i,*j&#125;;</div><div class="line">                <span class="keyword">if</span> (Edge_set.find(tmp) != Edge_set.end() &amp;&amp; Edge_set[tmp] &lt; cur_min_distance)&#123;</div><div class="line">                    cur_min_distance = Edge_set[tmp];</div><div class="line">                    v_node = *i;</div><div class="line">                    u_node = *j;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        result.insert(&#123;&#123;v_node, u_node&#125;, cur_min_distance&#125;);</div><div class="line">        cur_min_distance = INT8_MAX;</div><div class="line">        visited.insert(u_node);</div><div class="line">        unvisited.erase(u_node);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = result.begin(); iter != result.end(); iter++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first.first &lt;&lt; <span class="string">"-&gt;"</span> &lt;&lt; iter-&gt;first.second &lt;&lt; <span class="string">": "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::prime() &#123;</div><div class="line">    prime(nodeTable);</div><div class="line">&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//ALGORITHM_DIJKSTRA_H</span></span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/26/20170426-DS-DirectedWeightedGraph/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/26/20170426-DS-DirectedWeightedGraph/" itemprop="url">
+                  DirectedWeightedGraph
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-26T18:36:02+08:00">
+                2017-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="DirectedWeightedGraph"><a href="#DirectedWeightedGraph" class="headerlink" title="DirectedWeightedGraph"></a>DirectedWeightedGraph</h3><h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// Created by mfzhu on 2017/4/19.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ALGORITHM_DIJKSTRA_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> ALGORITHM_DIJKSTRA_H</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">class</span> Edge;</div><div class="line"><span class="keyword">class</span> directedGraphNode&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> label;</div><div class="line">    <span class="built_in">vector</span>&lt;Edge*&gt; neighbors;</div><div class="line">    directedGraphNode(<span class="keyword">int</span> l): label(l) &#123;&#125;;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">class</span> Edge&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> weight;</div><div class="line">    directedGraphNode* start;</div><div class="line">    directedGraphNode* end;</div><div class="line">    Edge(directedGraphNode* s, directedGraphNode* e, <span class="keyword">int</span> w): weight(w), start(s), end(e)&#123;&#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> directedWeightedGraph&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    directedWeightedGraph();</div><div class="line">    ~directedWeightedGraph()&#123;&#125;;</div><div class="line"></div><div class="line"><span class="comment">//    void dfs();</span></div><div class="line"><span class="comment">//    void bfs();</span></div><div class="line"><span class="comment">//    void prime();</span></div><div class="line"><span class="comment">//    void kruskal();</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> start)</span></span>;</div><div class="line"><span class="comment">//    void Bellman_Ford();</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertEdge</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> weight)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertNode</span><span class="params">(<span class="keyword">int</span> val)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">int</span> nNode;</div><div class="line">    <span class="keyword">int</span> nEdge;</div><div class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>, directedGraphNode*&gt; nodeTable;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertNode</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, directedGraphNode*&gt; &amp;nodeTable, <span class="keyword">int</span> val)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertEdge</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, directedGraphNode*&gt; &amp;nodeTable, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> val)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, directedGraphNode*&gt; nodeTable, <span class="keyword">int</span> start)</span></span>;</div><div class="line">&#125;;</div><div class="line">directedWeightedGraph::directedWeightedGraph() &#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the number of vertex:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cin</span> &gt;&gt; nNode;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the number of edge:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cin</span> &gt;&gt; nEdge;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nNode; i++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the label of vertex:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">int</span> label;</div><div class="line">        <span class="built_in">cin</span> &gt;&gt; label;</div><div class="line">        directedGraphNode* node = <span class="keyword">new</span> directedGraphNode(label);</div><div class="line">        nodeTable.insert(&#123;label, node&#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nEdge; i++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the info of Edge:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">int</span> start;</div><div class="line">        <span class="keyword">int</span> end;</div><div class="line">        <span class="keyword">int</span> weight;</div><div class="line">        <span class="built_in">cin</span> &gt;&gt; start &gt;&gt; end &gt;&gt; weight;</div><div class="line">        Edge* edge = <span class="keyword">new</span> Edge(nodeTable[start], nodeTable[end], weight);</div><div class="line">        nodeTable[start]-&gt;neighbors.push_back(edge);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> directedWeightedGraph::print() &#123;</div><div class="line">    <span class="keyword">auto</span> it = nodeTable.begin();</div><div class="line">    <span class="keyword">while</span>(it != nodeTable.end())&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the node label is :"</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the node info is:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : it-&gt;second-&gt;neighbors)&#123;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; i-&gt;start-&gt;label &lt;&lt; <span class="string">"-&gt;"</span> &lt;&lt; i-&gt;end-&gt;label &lt;&lt; <span class="string">"  weight:"</span> &lt;&lt; i-&gt;weight &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        &#125;</div><div class="line">        it++;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> directedWeightedGraph::insertNode(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, directedGraphNode *&gt; &amp;nodeTable, <span class="keyword">int</span> val) &#123;</div><div class="line">    <span class="keyword">if</span> (nodeTable.find(val) == nodeTable.end())&#123;</div><div class="line">        directedGraphNode* node = <span class="keyword">new</span> directedGraphNode(val);</div><div class="line">        nodeTable.insert(&#123;val, node&#125;);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the node is existed"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> directedWeightedGraph::insertNode(<span class="keyword">int</span> node) &#123;</div><div class="line">    insertNode(nodeTable, node);</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> directedWeightedGraph::insertEdge(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, directedGraphNode *&gt; &amp;nodeTable, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> w) &#123;</div><div class="line">    Edge* e = <span class="keyword">new</span> Edge(nodeTable[start], nodeTable[end], w);</div><div class="line">    nodeTable[start]-&gt;neighbors.push_back(e);</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> directedWeightedGraph::insertEdge(<span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> weight) &#123;</div><div class="line">    insertEdge(nodeTable, start, end, weight);</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> directedWeightedGraph::dijkstra(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, directedGraphNode *&gt; nodeTable, <span class="keyword">int</span> start) &#123;</div><div class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; visited&#123;&#123;start, <span class="number">0</span>&#125;&#125;;</div><div class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; unvisted;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i : nodeTable)&#123;</div><div class="line">        <span class="keyword">if</span> (i.first != start) unvisted.insert(&#123;i.first, INT8_MAX&#125;);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> i: nodeTable[start]-&gt;neighbors)&#123;</div><div class="line">        unvisted[i-&gt;end-&gt;label] = i-&gt;weight;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span>(!unvisted.empty())&#123;</div><div class="line">        <span class="keyword">int</span> cur_min_label = unvisted.begin()-&gt;first;</div><div class="line">        <span class="keyword">int</span> cur_min_weight = unvisted.begin()-&gt;second;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = unvisted.begin(); it != unvisted.end(); it++)&#123;</div><div class="line">            <span class="keyword">if</span> (it-&gt;second &lt; cur_min_weight)&#123;</div><div class="line">                cur_min_label = it-&gt;first;</div><div class="line">                cur_min_weight = it-&gt;second;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        visited.insert(&#123;cur_min_label, cur_min_weight&#125;);</div><div class="line">        unvisted.erase(cur_min_label);</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = unvisted.begin(); it != unvisted.end(); it++)&#123;</div><div class="line">            <span class="keyword">int</span> cur_distance = it-&gt;second;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> edge: nodeTable[it-&gt;first]-&gt;neighbors)&#123;</div><div class="line">                <span class="keyword">if</span> (edge-&gt;end-&gt;label == cur_min_label &amp;&amp; (edge-&gt;weight + cur_min_weight) &lt; cur_distance)&#123;</div><div class="line">                    it-&gt;second = edge-&gt;weight + cur_min_weight;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it = visited.begin(); it != visited.end(); it++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; start &lt;&lt; <span class="string">" "</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="string">":"</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> directedWeightedGraph::dijkstra(<span class="keyword">int</span> start) &#123;</div><div class="line">    dijkstra(nodeTable, start);</div><div class="line">&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//ALGORITHM_DIJKSTRA_H</span></span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/25/20170425-ML-LogisticInMNIST/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/25/20170425-ML-LogisticInMNIST/" itemprop="url">
+                  Logistic In MNIST
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-25T12:36:02+08:00">
+                2017-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Logistic-In-MNIST"><a href="#Logistic-In-MNIST" class="headerlink" title="Logistic In MNIST"></a>Logistic In MNIST</h3><h3 id="算法原理简述："><a href="#算法原理简述：" class="headerlink" title="算法原理简述："></a>算法原理简述：</h3><blockquote>
+<p>二项逻辑斯蒂回归模型是一种分类模型，有条件概率P(Y|X)表示，形式为参数化的逻辑斯蒂分布。</p>
+<p>在本实验中，对于该模型的二项形式，因为只能做二分类，所以我们对数据集的标签进行的改变只剩下0和1;而后输入的依旧是图像的向量，主要需要掌握的是关于该模型的推导和如何迭代得到近似最优解。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="comment"># @File  : LogisticRegression.py</span></div><div class="line"><span class="comment"># @Author: mfzhu</span></div><div class="line"><span class="comment"># @Date  : 2017/4/15</span></div><div class="line"><span class="comment"># @Desc  :</span></div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</div><div class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary</span><span class="params">(data, threshold)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"></div><div class="line">    :param data: 需要二值化的数据</div><div class="line">    :param threshold: 二值化的阈值</div><div class="line">    :return: 二值化后的数据</div><div class="line">    """</div><div class="line">    index_1 = np.array(data &gt; threshold)</div><div class="line">    index_2 = np.array(data &lt;= threshold)</div><div class="line">    data[index_1] = <span class="number">1</span></div><div class="line">    data[index_2] = <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogisticRegression</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.max_iteration = <span class="number">10000</span></div><div class="line">        <span class="comment"># 定义权重的迭代次数</span></div><div class="line">        self.step = <span class="number">0.00001</span></div><div class="line">        <span class="comment"># 定义每次迭代的步长</span></div><div class="line">        self.weights = []</div><div class="line">        <span class="comment"># 定义权重</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(self, x)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"></div><div class="line">        :param x: 样本数据</div><div class="line">        :return: 该样本数据对应的sigmoid函数值</div><div class="line">        """</div><div class="line">        <span class="keyword">return</span> np.exp(x) / (<span class="number">1</span> + np.exp(x))</div><div class="line">    <span class="comment"># 定义计算Logit函数值</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_predict</span><span class="params">(self, feature)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"></div><div class="line">        :param feature: 内部预测函数用于调用，预测样本为feature的结果</div><div class="line">        :return: 返回该样本对应的标签</div><div class="line">        """</div><div class="line">        wx = sum([self.weights[i] * feature[i] <span class="keyword">for</span> i <span class="keyword">in</span> range(len(feature))])</div><div class="line">        predict1 = self.sigmoid(wx)</div><div class="line">        predict0 = <span class="number">1</span> - predict1</div><div class="line"></div><div class="line">        <span class="keyword">if</span> predict1 &gt; predict0:</div><div class="line">            <span class="keyword">return</span> <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    <span class="comment"># 内部预测函数用于调用，先计算权重和输入向量的乘积，然后计算sigmoid值</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, train_data, label_data)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"></div><div class="line">        :param train_data: 训练数据</div><div class="line">        :param label_data: 训练数据对应的标签</div><div class="line">        :return:</div><div class="line">        """</div><div class="line">        self.weights = np.ones(train_data.shape[<span class="number">1</span>] + <span class="number">1</span>, float)</div><div class="line">        <span class="comment"># 权重加上一维截距项</span></div><div class="line">        self.weights.shape = (train_data.shape[<span class="number">1</span>] + <span class="number">1</span>, <span class="number">1</span>)</div><div class="line">        <span class="comment"># 定义权重的行和列（python中列值为空）</span></div><div class="line"></div><div class="line">        train_data = np.column_stack((train_data, np.ones(train_data.shape[<span class="number">0</span>])))</div><div class="line">        <span class="comment"># 训练数据在末尾加上一列全1的数据</span></div><div class="line">        train_data = np.matrix(train_data)</div><div class="line">        <span class="comment"># 转化为矩阵方便计算</span></div><div class="line">        time = <span class="number">0</span></div><div class="line">        <span class="comment"># 计算当前迭代次数</span></div><div class="line"></div><div class="line">        <span class="keyword">while</span> time &lt; self.max_iteration:</div><div class="line">            wx_matrix = train_data * self.weights</div><div class="line">            <span class="comment"># 计算权重和训练数据的乘积</span></div><div class="line">            exp_wx = self.sigmoid(wx_matrix)</div><div class="line">            <span class="comment"># 计算sigmoid值</span></div><div class="line">            difference = np.matrix(label_data) - exp_wx.T</div><div class="line">            <span class="comment"># 计算sigmoid值和标签值的差</span></div><div class="line">            self.weights += self.step * (difference * train_data).T</div><div class="line">            <span class="comment"># 改变权重值</span></div><div class="line">            time += <span class="number">1</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, features)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"></div><div class="line">        :param features:</div><div class="line">        :return:</div><div class="line">        """</div><div class="line">        label = []</div><div class="line">        <span class="keyword">for</span> feature <span class="keyword">in</span> features:</div><div class="line">            x = list(feature)</div><div class="line">            x.append(<span class="number">1</span>)</div><div class="line">            label.append(self._predict(x))</div><div class="line">            <span class="comment"># 调用先前定义的内部预测函数用来预测测试数据的标签</span></div><div class="line">        <span class="keyword">return</span> label</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    time1 = time.time()</div><div class="line">    print(<span class="string">"start reading the data:"</span>)</div><div class="line">    raw_path = <span class="string">r'F:\work and learn\ML\dataset\MNIST\train.csv'</span></div><div class="line">    raw_data = np.loadtxt(raw_path, delimiter=<span class="string">','</span>, skiprows=<span class="number">1</span>)</div><div class="line">    <span class="comment"># 读入原始数据</span></div><div class="line">    label = raw_data[:, <span class="number">0</span>]</div><div class="line">    data = raw_data[:, <span class="number">1</span>:]</div><div class="line">    <span class="comment"># 区分标签数据和原始数据</span></div><div class="line">    data = binary(data, <span class="number">100</span>)</div><div class="line">    label[label != <span class="number">0</span>] = <span class="number">1</span></div><div class="line">    <span class="comment"># 进行二值化和对标签二值化（这边做的是二分类）</span></div><div class="line"></div><div class="line">    train_data, test_data, train_label, test_label = train_test_split(data, label, test_size=<span class="number">0.33</span>, random_state=<span class="number">23323</span>)</div><div class="line"></div><div class="line">    time2 = time.time()</div><div class="line">    print(<span class="string">"read data cost:"</span>, time2 - time1, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line">    <span class="comment"># 将训练数据切分成三块用于训练和测试</span></div><div class="line">    print(<span class="string">"start training the model:"</span>)</div><div class="line">    lr = LogisticRegression()</div><div class="line">    lr.train(train_data, train_label)</div><div class="line">    time3 = time.time()</div><div class="line">    print(<span class="string">"training cost:"</span>, time3 - time2, <span class="string">' seconds'</span>, <span class="string">'\n'</span>)</div><div class="line"></div><div class="line">    print(<span class="string">"start predicting:"</span>)</div><div class="line">    <span class="comment"># 定义logit类然后训练</span></div><div class="line">    test_predict = lr.predict(test_data)</div><div class="line">    score = accuracy_score(test_label, test_predict)</div><div class="line">    time4 = time.time()</div><div class="line">    print(<span class="string">"predicting cost:"</span>, time4 - time3, <span class="string">' seconds'</span>, <span class="string">'\n'</span>)</div><div class="line">    <span class="comment"># 利用训练到的模型预测测试集的标签</span></div><div class="line">    print(<span class="string">"the accuracy_score is:"</span>, score)</div></pre></td></tr></table></figure>
+<h3 id="模型的训练结果："><a href="#模型的训练结果：" class="headerlink" title="模型的训练结果："></a>模型的训练结果：</h3><blockquote>
+<p>可以看到，逻辑斯蒂的正确率很高，但是相对的，训练的时间也较长。</p>
+</blockquote>
+<p><img src="http://oov4rmeff.bkt.clouddn.com/logit.png" alt="img"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/24/20170424-ML-DecisionTreeInMNIST/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1323,467 +1760,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/17/20170417-Array-OptimalDivisionInArray/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/17/20170417-Array-OptimalDivisionInArray/" itemprop="url">
-                  Optimal Division In Array
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-17T12:36:02+08:00">
-                2017-04-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="题目描述：Optimal-Division-In-Array-数组中除法的最优切分"><a href="#题目描述：Optimal-Division-In-Array-数组中除法的最优切分" class="headerlink" title="题目描述：Optimal Division In Array(数组中除法的最优切分)"></a>题目描述：Optimal Division In Array(数组中除法的最优切分)</h3><blockquote>
-<p>给定一个数组[x1,x2,x3….xn]。我们定义其为连除模式，即x1/x2/x3/x4..xn。在这个序列中我们可以在任意位置中加上括号改变其计算顺序。要求找到其中所有加入括号的结果中最大的那个加入括号的方式，并返回加入括号所形成的字符串。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> [1000,100,10,2],我们可以加入括号形成(1000/100)/(10/2),或者1000/(100/(10/2))等。详细解释可以看 <a href="https://leetcode.com/problems/optimal-division/#/description" target="_blank" rel="external">leetcode</a></p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>初看这个题目会觉得非常的难，因为需要考虑到所有的情况中最大的那一种；并且需要在不同的位置上加上括号形成字符串。但是其实仔细考虑后我们就会发下：即不管在任意位置上加上括号，x1永远是除数，而x2永远中是被除数中的一个。所以我们就可以写成等价的方式x1/(x2/y)，其中y的方式可以是任意的。通过调整分子分母可以发现：x1/(x2/y) = x1<em>y/(x2).所以最大值的情况在y最大的情况下出现，而y的最大化即为(x3 </em> x4 * x5….)。所以最后的最大结果肯定是：x1/(x2/(x3/x4/x5….xn))，所以我们直接返回这样的结果即可。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">optimalDivision</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = nums.size();</div><div class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> to_string(nums[<span class="number">0</span>]);</div><div class="line">        <span class="keyword">if</span> (n == <span class="number">2</span>) <span class="keyword">return</span> to_string(nums[<span class="number">0</span>]) + <span class="string">"/"</span> + to_string(nums[<span class="number">1</span>]);</div><div class="line">        <span class="comment">//分别判断数组长度只有0，1，2的情况</span></div><div class="line">        <span class="built_in">string</span> res;</div><div class="line">        res = res + to_string(nums[<span class="number">0</span>]) + <span class="string">"/("</span> + to_string(nums[<span class="number">1</span>]);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; nums.size(); i++)&#123;</div><div class="line">            res = res + <span class="string">"/"</span> + to_string(nums[i]);</div><div class="line">        &#125;</div><div class="line">        res = res + <span class="string">")"</span>;</div><div class="line">        <span class="comment">//构造所需要的字符串即可</span></div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/16/20170416-Tree-FlattenTree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/16/20170416-Tree-FlattenTree/" itemprop="url">
-                  Flatten Tree
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-16T19:06:02+08:00">
-                2017-04-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Flatten-Tree"><a href="#Flatten-Tree" class="headerlink" title="Flatten Tree"></a>Flatten Tree</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一棵树的头节点，要求将树变成指定的链表形状。具体的描述和例子可以看leetcode<a href="https://leetcode.com/problems/flatten-binary-tree-to-linked-list/#/description" target="_blank" rel="external">网站</a></p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>最直接的一种思路是将链表中的节点按照一定的顺序放入栈或者队列中，然后按照要求将其重新连接就行。可以从题目中发现是类似树的先序遍历的样纸，所以在将树中节点放入队列的时候可以根据这个规律来实现。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flatten</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; q;</div><div class="line">        preOrder(root, q);</div><div class="line">        <span class="comment">//此时队列中保存着树的先序遍历结果</span></div><div class="line">        <span class="keyword">if</span> (root)&#123;</div><div class="line">            q.pop();</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//队列的第一个节点肯定是原来的根节点</span></div><div class="line">        <span class="keyword">while</span>(!q.empty())&#123;</div><div class="line">            root-&gt;right = q.front();</div><div class="line">            <span class="comment">//将树的右节点指向现在队列的头结点</span></div><div class="line">            root-&gt;left = <span class="literal">NULL</span>;</div><div class="line">            <span class="comment">//改变左侧节点指针</span></div><div class="line">            root = root-&gt;right;</div><div class="line">            <span class="comment">//改变当前的root节点便于继续改变下一个节点的指针</span></div><div class="line">            q.pop();</div><div class="line">            <span class="comment">//出队</span></div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(TreeNode* root, <span class="built_in">queue</span>&lt;TreeNode*&gt; &amp;q)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        q.push(root);</div><div class="line">        preOrder(root-&gt;left, q);</div><div class="line">        preOrder(root-&gt;right, q);</div><div class="line">        <span class="comment">//根据先序遍历的方法将树中的节点放入队列中</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="解题思路2："><a href="#解题思路2：" class="headerlink" title="解题思路2："></a>解题思路2：</h3><blockquote>
-<p>当然对于树的题目我们依旧可以使用递归的想法来实现。我们的想法是利用一个指针pre来保存不断移动的当前的位置，然后不断的改变指针的指向即可。</p>
-</blockquote>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">TreeNode* pre;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">help</span><span class="params">(TreeNode* root)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        TreeNode* left = <span class="literal">NULL</span>;</div><div class="line">        TreeNode* right = <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">if</span> (root-&gt;left)</div><div class="line">            left = root-&gt;left;</div><div class="line">            <span class="comment">//保存左子树</span></div><div class="line">        <span class="keyword">if</span> (root-&gt;right)</div><div class="line">            right = root-&gt;right;</div><div class="line">            <span class="comment">//保存右子树</span></div><div class="line">        pre-&gt;right = root;</div><div class="line">        pre = pre-&gt;right;</div><div class="line">        <span class="comment">//移动pre到下一个位置</span></div><div class="line">        root-&gt;left = <span class="literal">NULL</span>;</div><div class="line">        <span class="comment">//当前的子树的左指针设定为空</span></div><div class="line">        help(left);</div><div class="line">        <span class="comment">//先遍历左边的子树</span></div><div class="line">        help(right);</div><div class="line">        <span class="comment">//再遍历右边的子树</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flatten</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        pre = <span class="keyword">new</span> TreeNode(<span class="number">-1</span>);</div><div class="line">        help(root);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="解题思路3"><a href="#解题思路3" class="headerlink" title="解题思路3"></a>解题思路3</h3><blockquote>
-<p>在可以利用递归的方法的情况下，我们也可以利用非递归的思路来解决这个问题。解决的思路比较难描述，可以画一棵简单树按照代码中的思路就可以知道解法。</p>
-</blockquote>
-<h3 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下:"></a>代码如下:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flatten</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">while</span>(root)&#123;</div><div class="line">            <span class="keyword">if</span> (root-&gt;left &amp;&amp; root-&gt;right)&#123;</div><div class="line">            <span class="comment">//如果左右子树都非空的情况</span></div><div class="line">                TreeNode* l = root-&gt;left;</div><div class="line">                <span class="comment">//记录当前的左子树</span></div><div class="line">                <span class="keyword">while</span>(l-&gt;right)&#123;</div><div class="line">                    l = l-&gt;right;</div><div class="line">                &#125;</div><div class="line">                <span class="comment">//找到左子树的最右节点</span></div><div class="line">                l-&gt;right = root-&gt;right;</div><div class="line">                <span class="comment">//将左子树的最右节点指向root的右节点</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (root-&gt;left)</div><div class="line">                root-&gt;right = root-&gt;left;</div><div class="line">                <span class="comment">//如果当前的root的左子树不为空，将右子树改变为现在的左子树</span></div><div class="line">            root-&gt;left = <span class="literal">NULL</span>;</div><div class="line">            <span class="comment">//当前root的左子树设定为空</span></div><div class="line">            root = root-&gt;right;</div><div class="line">            <span class="comment">//移动root节点到当前的右节点</span></div><div class="line">            </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/15/20170415-String-LongestSubstringWithoutRepeatingCharacters/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/15/20170415-String-LongestSubstringWithoutRepeatingCharacters/" itemprop="url">
-                  Longest Substring Without Repeating Characters
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-15T18:56:02+08:00">
-                2017-04-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Longest-Substring-Without-Repeating-Characters"><a href="#Longest-Substring-Without-Repeating-Characters" class="headerlink" title="Longest Substring Without Repeating Characters"></a>Longest Substring Without Repeating Characters</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个字符串，找到字符串中最长的子串的长度，其子串中的所有字母不重复。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>‘abcabcbb’其中最长的不重复子串的长度是3；’abba’其中最长的不重复的子串的长度是2。</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>我们在遍历字符串的过程中，每遍历一个新的位置需要知道当前位置的字母是否曾经在前面中出现，因此我们需要一个哈希表来记录我们先前遍历字母和字母所在的位置；其次在遇到与先前的字母重复时，我们需要找到最靠右侧的那个位置；所以我们需要在哈希表中保存着这个字母在字符串中最右侧的位置。综上整体的思路是，我们定义start和end来代表当前子串的头和尾；用哈希表来保存先前遍历过程中所遇到的字母和字母所在的最右的位置；遍历过程中，如果是不重复的字母，则需要end++并更新当前的最长子串长度；如果是重复的，需要判断该字母出现的位置在start的左侧还是右侧，如果是左侧则不影响当前子串；如果是右侧需要更新start到该位置的下一个地方；然后更新子串的长度。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (s.size() == <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">// 字符串为空的情况</span></div><div class="line">            </div><div class="line">        <span class="keyword">int</span> length = <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> end = <span class="number">0</span>;</div><div class="line">        <span class="built_in">map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; hash; <span class="comment">//定义所需要的变量</span></div><div class="line">        <span class="keyword">while</span>(start &lt; s.size() &amp;&amp; end &lt; s.size())&#123;</div><div class="line">            <span class="keyword">if</span> (hash.find(s[end]) == hash.end())&#123;</div><div class="line">                hash.insert(&#123;s[end], end&#125;);</div><div class="line">                <span class="comment">// 如果不存在，更新哈希表</span></div><div class="line">                length = max(end - start + <span class="number">1</span>, length);</div><div class="line">                <span class="comment">//更新长度</span></div><div class="line">                end++;</div><div class="line">                <span class="comment">//遍历下一个字母</span></div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                <span class="keyword">if</span> (start &lt; hash[s[end]] + <span class="number">1</span>)</div><div class="line">                    start = hash[s[end]] + <span class="number">1</span>;</div><div class="line">                 <span class="comment">// 判断该位置在start的左侧或者右侧决定是否更新</span></div><div class="line">                hash[s[end]] = end;</div><div class="line">                <span class="comment">// 更新该字母到最右侧的位置</span></div><div class="line">                length = max(end - start + <span class="number">1</span>, length);</div><div class="line">                end++;</div><div class="line">                <span class="comment">// 更新长度和继续遍历下一个位置</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> length;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1833,7 +1809,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-count">65</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

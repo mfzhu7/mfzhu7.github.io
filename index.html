@@ -260,6 +260,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/18/20170518-List-RelocateListByOddOrEven/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/18/20170518-List-RelocateListByOddOrEven/" itemprop="url">
+                  Relocate List By Odd Or Even
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-18T12:36:02+08:00">
+                2017-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Relocate-List-By-Odd-Or-Even"><a href="#Relocate-List-By-Odd-Or-Even" class="headerlink" title="Relocate List By Odd Or Even"></a>Relocate List By Odd Or Even</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定链表的头节点，然后要求根据链表节点所处的位置的奇偶性重新排列链表。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p> 具体描述可以看<a href="https://leetcode.com/problems/odd-even-linked-list/#/description" target="_blank" rel="external">LeetCode328</a></p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>本题的解题思路是将原始链表中的奇数位置节点连接成奇数链表，偶数位置连接成偶数链表；然后重新连接这两个链表即可。主要需要注意的是：在遍历next节点的时候，我们需要判断链表的下一个节点是否为空。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for singly-linked list.</div><div class="line"> * struct ListNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     ListNode *next;</div><div class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">oddEvenList</span><span class="params">(ListNode* head)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!head || !head-&gt;next) <span class="keyword">return</span> head;</div><div class="line">        <span class="comment">// 单个节点或者空链表直接返回</span></div><div class="line">        ListNode* odd = head;</div><div class="line">        ListNode* even = head-&gt;next;</div><div class="line">        <span class="comment">// 定义奇偶链表的头节点</span></div><div class="line">        ListNode* even_head = even;</div><div class="line">        ListNode* odd_head = odd;</div><div class="line">        <span class="comment">// 保存奇偶链表的头节点用于最后的连接</span></div><div class="line">        <span class="keyword">while</span>(odd-&gt;next &amp;&amp; even-&gt;next)&#123;</div><div class="line">            <span class="keyword">if</span> (even-&gt;next)&#123;</div><div class="line">                odd-&gt;next = even-&gt;next;</div><div class="line">                odd = odd-&gt;next;</div><div class="line">                <span class="comment">// 连接奇数链表</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (odd-&gt;next)&#123;</div><div class="line">                even-&gt;next = odd-&gt;next;</div><div class="line">                even = even-&gt;next;</div><div class="line">                <span class="comment">//连接偶数链表</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        even-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        odd-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        <span class="comment">// 定义链表尾部节点</span></div><div class="line">        odd-&gt;next = even_head;</div><div class="line">        <span class="keyword">return</span> odd_head;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/17/20170517-List-ReversePartList/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -632,6 +784,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/14/20170514-List-SwapListNode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/14/20170514-List-SwapListNode/" itemprop="url">
+                  Swap List Node
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-14T15:36:02+08:00">
+                2017-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Swap-List-Node"><a href="#Swap-List-Node" class="headerlink" title="Swap List Node"></a>Swap List Node</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定链表的头节点，交换链表中两两链表节点。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p> 具体描述可以看<a href="https://leetcode.com/problems/swap-nodes-in-pairs/#/description" target="_blank" rel="external">LeetCode24</a></p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>解题的思路很直接，我们直接交换节点即可。主要需要注意的是：我们需要用到虚拟头节点的技巧便于处理链表头部；改变链表指向的时候需要注意顺序；到达链表尾部的判断。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for singly-linked list.</div><div class="line"> * struct ListNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     ListNode *next;</div><div class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">swapPairs</span><span class="params">(ListNode* head)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!head) <span class="keyword">return</span> head;</div><div class="line">        <span class="comment">//空节点直接返回</span></div><div class="line">        ListNode* dummy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</div><div class="line">        dummy-&gt;next = head;</div><div class="line">        <span class="comment">//定义虚拟头结点指向链表头部</span></div><div class="line">        ListNode* first = dummy;</div><div class="line">        ListNode* second = first-&gt;next;</div><div class="line">        ListNode* third = second-&gt;next;</div><div class="line">        <span class="comment">//定义三个节点的初始位置</span></div><div class="line">        <span class="keyword">while</span>(second &amp;&amp; third)&#123;</div><div class="line">            ListNode* next = third-&gt;next;</div><div class="line">            <span class="comment">//保存下一个节点</span></div><div class="line">            third-&gt;next = second;</div><div class="line">            <span class="comment">//第二个节点指向改变</span></div><div class="line">            second-&gt;next = next;</div><div class="line">            <span class="comment">//第一个节点指向改变</span></div><div class="line">            first-&gt;next = third;</div><div class="line">            <span class="comment">// 重连交换后节点</span></div><div class="line">            first = second;</div><div class="line">            second = next;</div><div class="line">            third = !second ? <span class="literal">NULL</span> : second-&gt;next;</div><div class="line">            <span class="comment">//节点往下移动用于遍历</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> dummy-&gt;next;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/13/20170513-String-ValidIPAddress/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -898,6 +1202,158 @@
 <h3 id="代码运行结果："><a href="#代码运行结果：" class="headerlink" title="代码运行结果："></a>代码运行结果：</h3><blockquote>
 <p>从运行结果可以知道，训练的时间较长，且预测的正确率较低。通过与sklearn的包的内置函数比较，正确率和训练时间等方面都较差于sklearn的svm。<br><img src="http://oov4rmeff.bkt.clouddn.com/svm.png" alt="img"></p>
 </blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/11/20170511-List-RotateList/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/11/20170511-List-RotateList/" itemprop="url">
+                  Rotate List
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-11T19:36:02+08:00">
+                2017-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Rotate-List"><a href="#Rotate-List" class="headerlink" title="Rotate List"></a>Rotate List</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一个链表的头节点和一个整数k，其中整数k表示从尾部向左k个节点进行旋转。要求返回旋转后的链表头结点。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p> 具体描述见<a href="https://leetcode.com/problems/rotate-list/#/description" target="_blank" rel="external">LeetCode61</a>。</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>主要是通过将链表连接成环状，然后通过和链表长度的比较找到目标节点断开链表。主要注意的是：在链表中有时候可以通过连接成环来处理问题；问题中k可以大于链表长度的情况的处理，通过求余即可。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for singly-linked list.</div><div class="line"> * struct ListNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     ListNode *next;</div><div class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">rotateRight</span><span class="params">(ListNode* head, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!head) <span class="keyword">return</span> head;</div><div class="line">        <span class="comment">// 空节点直接返回</span></div><div class="line">        <span class="keyword">int</span> length = <span class="number">1</span>;</div><div class="line">        ListNode* cur = head;</div><div class="line">        <span class="keyword">while</span>(cur-&gt;next)&#123;</div><div class="line">            cur = cur-&gt;next;</div><div class="line">            length++;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 计算出链表的长度</span></div><div class="line">        cur-&gt;next = head;</div><div class="line">        <span class="comment">// 将链表连接成环状</span></div><div class="line">        <span class="keyword">if</span> (k %= length)&#123;</div><div class="line">        <span class="comment">// 当k大于链表的长度的时候</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; length - k; i++)</div><div class="line">                cur = cur-&gt;next;</div><div class="line">                <span class="comment">//找到需要断开的位置</span></div><div class="line">        &#125;</div><div class="line">        ListNode* newhead = cur-&gt;next;</div><div class="line">        cur-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        <span class="comment">//断开并且修改尾部节点指向</span></div><div class="line">        <span class="keyword">return</span> newhead;</div><div class="line">        </div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
           
         
@@ -1385,469 +1841,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/07/20170507-ML-HMM-Viterbi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/07/20170507-ML-HMM-Viterbi/" itemprop="url">
-                  HMM_Viterbi
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-07T18:36:02+08:00">
-                2017-05-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="HMM-Viterbi"><a href="#HMM-Viterbi" class="headerlink" title="HMM_Viterbi"></a>HMM_Viterbi</h3><h3 id="算法原理简述："><a href="#算法原理简述：" class="headerlink" title="算法原理简述："></a>算法原理简述：</h3><blockquote>
-<p>本篇博客中主要介绍的是关于HMM算法中的维特比算法。该算法主要是给定A,B,PI参数和观测序列的情况下要求求出最有可能出现的状态序列。利用的思想还是动态规划的思想。<br>主要是定义了两个函数:</p>
-</blockquote>
-<ul>
-<li>delta(t, i),表示在所有到t时刻的状态为i的状态序列中概率最大的那个状态序列。</li>
-<li>psi(t, i)表示在到t时刻状态为i的所有状态序列中概率最大序列的t-1时刻的状态。</li>
-</ul>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="comment"># @File  : HMM_Viterbi.py</span></div><div class="line"><span class="comment"># @Author: mfzhu</span></div><div class="line"><span class="comment"># @Date  : 2017/5/7</span></div><div class="line"><span class="comment"># @Desc  :</span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HMM_Vtterbi</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, state2state, state2observation, pi)</span>:</span></div><div class="line">        self.state2state = state2state</div><div class="line">        <span class="comment"># 初始化状态转移矩阵</span></div><div class="line">        self.state2observation = state2observation</div><div class="line">        <span class="comment"># 初始化观测转移矩阵</span></div><div class="line">        self.pi = pi</div><div class="line">        <span class="comment"># 初始化初始状态概率向量</span></div><div class="line">        self.num_state = len(state2state)</div><div class="line">        <span class="comment"># 确定模型中的状态数</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, sequence)</span>:</span></div><div class="line">        <span class="comment"># 预测序列的可能状态</span></div><div class="line">        res = []</div><div class="line">        <span class="comment"># 保存结果</span></div><div class="line">        delta = self.pi * self.state2observation[:, sequence[<span class="number">0</span>]]</div><div class="line">        <span class="comment"># 初始化delta函数向量</span></div><div class="line">        psi = np.zeros([self.num_state, len(sequence)], int)</div><div class="line">        <span class="comment"># 初始化psi函数矩阵</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">1</span>, len(sequence)):</div><div class="line">            <span class="comment"># 从时刻1开始迭代</span></div><div class="line">            new_delta = []</div><div class="line">            psi_col = []</div><div class="line">            <span class="comment"># 保存当前轮迭代的delta和psi</span></div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(self.num_state):</div><div class="line">                tmp = delta * self.state2state[:, i]</div><div class="line">                index = tmp.argmax()</div><div class="line">                <span class="comment"># 找到最大值所对应的index</span></div><div class="line">                psi_col.append(index)</div><div class="line">                new_delta.append(tmp[index] * self.state2observation[i, sequence[t]])</div><div class="line">                <span class="comment"># 更新当前轮的delta和psi</span></div><div class="line">            psi[:, t] = psi_col</div><div class="line">            delta = np.array(new_delta)</div><div class="line">            <span class="comment"># 保存结果</span></div><div class="line"></div><div class="line">        last = delta.argmax()</div><div class="line">        res.insert(<span class="number">0</span>, last)</div><div class="line">        <span class="comment"># 回溯找到最大概率所对应的状态序列</span></div><div class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> range(len(sequence) - <span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>):</div><div class="line">            res.insert(<span class="number">0</span>, psi[last, t])</div><div class="line">            last = int(psi[last, t])</div><div class="line">        <span class="keyword">return</span> res</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    state2state = np.array([[<span class="number">0.5</span>, <span class="number">0.2</span>, <span class="number">0.3</span>], [<span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.2</span>], [<span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.5</span>]])</div><div class="line">    state2observation = np.array([[<span class="number">0.5</span>, <span class="number">0.5</span>], [<span class="number">0.4</span>, <span class="number">0.6</span>], [<span class="number">0.7</span>, <span class="number">0.3</span>]])</div><div class="line">    pi = np.array([<span class="number">0.2</span>, <span class="number">0.4</span>, <span class="number">0.4</span>])</div><div class="line">    sequence = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>]</div><div class="line">    <span class="comment"># 以上数据初始化模型</span></div><div class="line">    v = HMM_Vtterbi(state2state, state2observation, pi)</div><div class="line">    print(v.predict(sequence))</div><div class="line">    <span class="comment"># 训练模型并预测对应的状态序列</span></div></pre></td></tr></table></figure>
-<h3 id="代码结果："><a href="#代码结果：" class="headerlink" title="代码结果："></a>代码结果：</h3><blockquote>
-<p>通过与李航老师书本上的例子进行比较可知，当前算法的运算结果是正确的。</p>
-</blockquote>
-<p><img src="http://oov4rmeff.bkt.clouddn.com/HMM_viterbi.png" alt="img"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/06/20170506-ML-HMM-Forward-Backward/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/06/20170506-ML-HMM-Forward-Backward/" itemprop="url">
-                  HMM_Forward_Backward
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-06T18:36:02+08:00">
-                2017-05-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="HMM-Forward-Backward"><a href="#HMM-Forward-Backward" class="headerlink" title="HMM_Forward_Backward"></a>HMM_Forward_Backward</h3><h3 id="算法原理简述："><a href="#算法原理简述：" class="headerlink" title="算法原理简述："></a>算法原理简述：</h3><blockquote>
-<p>本篇博客主要是介绍隐马尔科夫算法中在给定A,B,PI参数的情况下，计算观测序列出现概率的算法。主要包括了前向算法和后向算法。<br>其中前向算法主要是定义函数alpha(t, i),表示在t时刻，其处在状态i,且(t1,t2,…t)的观测序列为(o1, o2,…)的概率；而后通过递推式，利用动态规划的方法来计算即可。<br>后向算法是定义函数beta(t, i);表示在t时刻处在状态i,且(t+1, t+2,…T)的观测序列为(o(t+1), o(t+2),…o(T))的概率；也是通过递归公式和动态规划的思想来实现计算过程。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># @File  : HMM_forward_backward.py</span></div><div class="line"><span class="comment"># @Author: mfzhu</span></div><div class="line"><span class="comment"># @Date  : 2017/5/4</span></div><div class="line"><span class="comment"># @Desc  :</span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> copy</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HMM_forward</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, state2state, state2observation, pi)</span>:</span></div><div class="line">        self.state2state = state2state</div><div class="line">        <span class="comment"># 初始化状态转移矩阵</span></div><div class="line">        self.state2observation = state2observation</div><div class="line">        <span class="comment"># 初始化观测转移矩阵</span></div><div class="line">        self.pi = pi</div><div class="line">        <span class="comment"># 初始化初始状态概率向量</span></div><div class="line">        self.num_state = len(state2state)</div><div class="line">        <span class="comment"># 确定模型中的状态数</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">alpha_func</span><span class="params">(self, time, sequence)</span>:</span></div><div class="line">        alpha = pi * self.state2observation[:, sequence[<span class="number">0</span>]]</div><div class="line">        <span class="comment"># 初始化time=1的alpha向量</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, time):</div><div class="line">            nextAlpha = []</div><div class="line">            <span class="comment"># 保存下一轮迭代的alpha向量</span></div><div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(self.num_state):</div><div class="line">                perState = alpha * self.state2state[:, j]</div><div class="line">                <span class="comment"># 计算每种状态转移的值</span></div><div class="line">                nextAlpha.append(np.sum(perState) * self.state2observation[j, sequence[i]])</div><div class="line">                <span class="comment"># 当前状态转移的结果保存</span></div><div class="line">            alpha = copy.deepcopy(nextAlpha)</div><div class="line">            <span class="comment"># 更新alpha向量</span></div><div class="line"></div><div class="line">        <span class="keyword">return</span> np.array(alpha)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HMM_backward</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, state2state, state2observation, pi)</span>:</span></div><div class="line">        self.state2state = state2state</div><div class="line">        <span class="comment"># 初始化状态转移矩阵</span></div><div class="line">        self.state2observation = state2observation</div><div class="line">        <span class="comment"># 初始化观测转移矩阵</span></div><div class="line">        self.pi = pi</div><div class="line">        <span class="comment"># 初始化初始状态概率向量</span></div><div class="line">        self.num_state = len(state2state)</div><div class="line">        <span class="comment"># 确定模型中的状态数</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">beta_func</span><span class="params">(self, time, sequence)</span>:</span></div><div class="line">        beta = np.ones([<span class="number">1</span>, self.num_state])[<span class="number">0</span>]</div><div class="line">        <span class="comment"># 初始化beta向量</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(sequence), time, <span class="number">-1</span>):</div><div class="line">            prebeta = []</div><div class="line">            <span class="comment"># 保存下一轮的beta向量</span></div><div class="line">            <span class="keyword">if</span> i == <span class="number">1</span>:</div><div class="line">                beta = beta * pi * self.state2observation[:, sequence[<span class="number">0</span>]]</div><div class="line">                <span class="comment"># 当time=1的时候和pi向量进行乘积</span></div><div class="line">                <span class="keyword">break</span></div><div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(self.num_state):</div><div class="line">                prebeta.append(np.sum(self.state2state[j, :] * self.state2observation[:, sequence[i - <span class="number">1</span>]] * beta))</div><div class="line">            beta = copy.deepcopy(prebeta)</div><div class="line">            <span class="comment"># 更新beta向量</span></div><div class="line">        <span class="keyword">return</span> np.array(beta)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    state2state = np.array([[<span class="number">0.5</span>, <span class="number">0.2</span>, <span class="number">0.3</span>], [<span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.2</span>], [<span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.5</span>]])</div><div class="line">    state2observation = np.array([[<span class="number">0.5</span>, <span class="number">0.5</span>], [<span class="number">0.4</span>, <span class="number">0.6</span>], [<span class="number">0.7</span>, <span class="number">0.3</span>]])</div><div class="line">    pi = np.array([<span class="number">0.2</span>, <span class="number">0.4</span>, <span class="number">0.4</span>])</div><div class="line">    sequence = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>]</div><div class="line"></div><div class="line">    forward = HMM_forward(state2state, state2observation, pi)</div><div class="line">    backward = HMM_backward(state2state, state2observation, pi)</div><div class="line">    print(<span class="string">"the alpha matrix:"</span>)</div><div class="line">    print(forward.alpha_func(<span class="number">1</span>, sequence))</div><div class="line">    print(forward.alpha_func(<span class="number">2</span>, sequence))</div><div class="line">    print(forward.alpha_func(<span class="number">3</span>, sequence))</div><div class="line">    print(<span class="string">"the beta matrix: "</span>)</div><div class="line">    print(backward.beta_func(<span class="number">1</span>, sequence))</div><div class="line">    print(backward.beta_func(<span class="number">2</span>, sequence))</div><div class="line">    print(backward.beta_func(<span class="number">3</span>, sequence))</div></pre></td></tr></table></figure>
-<h3 id="代码结果："><a href="#代码结果：" class="headerlink" title="代码结果："></a>代码结果：</h3><blockquote>
-<p>通过与李航老师书本的结果比较可以知道算法的正确性。</p>
-</blockquote>
-<p><img src="http://oov4rmeff.bkt.clouddn.com/HMM_forward_backward.png" alt="img"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/05/20170505-ML-mixGaussianInEM/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/05/20170505-ML-mixGaussianInEM/" itemprop="url">
-                  Mix Gaussian In EM
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-05T12:39:02+08:00">
-                2017-05-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Mix-Gaussian-In-EM"><a href="#Mix-Gaussian-In-EM" class="headerlink" title="Mix Gaussian In EM"></a>Mix Gaussian In EM</h3><h3 id="算法原理简述："><a href="#算法原理简述：" class="headerlink" title="算法原理简述："></a>算法原理简述：</h3><blockquote>
-<p>概率模型有时即含有观测变量，又含有隐变量或者潜在变量。如果概率模型的变量都是观测变量，那么给定数据，可以直接用最大似然估计的方法或者贝叶斯估计法估计参数模型。当含有隐变量时，我们就不能直接使用这些方法，EM方法就是含有隐含变量的概率模型参数的极大似然估计法。<br>EM算法主要包括了:</p>
-</blockquote>
-<ul>
-<li>得到    Q函数</li>
-<li>E步计算</li>
-<li>Q步计算</li>
-</ul>
-<blockquote>
-<p>其中Q函数是完全数据的对数似然函数在给定观测数据和当前参数下，对未观测数据的条件概率分布的期望。</p>
-<p>本文中实现的是利用EM算法对高斯混合模型的进行参数估计.</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="comment"># @File  : MixGaussianInEM.py</span></div><div class="line"><span class="comment"># @Author: mfzhu</span></div><div class="line"><span class="comment"># @Date  : 2017/5/3</span></div><div class="line"><span class="comment"># @Desc  :</span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> copy</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">mixGaussianInEM</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, train_data, num_Gaussian)</span>:</span></div><div class="line">        self.epsilon = <span class="number">0.0000001</span></div><div class="line">        <span class="comment"># 设定模型停止迭代的阈值</span></div><div class="line">        self.num = num_Gaussian</div><div class="line">        <span class="comment"># 设定高斯函数的个数</span></div><div class="line">        self.num_sample = len(train_data)</div><div class="line">        <span class="comment"># 初始化训练数据个数</span></div><div class="line">        self.sample = train_data</div><div class="line">        <span class="comment"># 初始化训练数据</span></div><div class="line">        self.mean = np.array([<span class="number">15</span>, <span class="number">35</span>], float)</div><div class="line">        <span class="comment"># 初始化高斯函数的均值</span></div><div class="line">        self.var = np.array([<span class="number">15</span>, <span class="number">35</span>], float)</div><div class="line">        <span class="comment"># 初始化高斯函数的方差</span></div><div class="line">        self.alpha = np.array([<span class="number">0.4</span>, <span class="number">0.6</span>], float)</div><div class="line">        <span class="comment"># 初始化高斯函数的系数</span></div><div class="line">        self.gamma = np.zeros([self.num_sample, self.num], float)</div><div class="line">        <span class="comment"># 初始化每个观测值在每个高斯函数上的分量</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">norm_pdf</span><span class="params">(self, miu, sigma, value)</span>:</span></div><div class="line"></div><div class="line">        <span class="comment"># 计算某个均值和方差下的value对应的概率值</span></div><div class="line">        <span class="keyword">return</span> (<span class="number">1</span> / (np.sqrt(<span class="number">2</span> * np.pi) * sigma)) * np.exp(<span class="number">-1</span> * (value - miu) ** <span class="number">2</span> / (<span class="number">2</span> * (sigma ** <span class="number">2</span>)))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">E_step</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># E步函数更新gamma矩阵中的各个系数</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.num_sample):</div><div class="line">            demon = <span class="number">0</span></div><div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(self.num):</div><div class="line">                demon += self.alpha[j] * self.norm_pdf(self.mean[j], np.sqrt(self.var[j]), self.sample[i])</div><div class="line">                <span class="comment"># 计算某个观测值在所有高斯函数上分量的和</span></div><div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(self.num):</div><div class="line">                self.gamma[i][j] = self.alpha[j] * self.norm_pdf(self.mean[j], np.sqrt(self.var[j]), self.sample[i]) / demon</div><div class="line">                <span class="comment"># 计算某个高斯函数的分量</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Q_step</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment">#  Q步函数更新均值、方差和系数</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.num):</div><div class="line">            <span class="comment"># 更新方差</span></div><div class="line">            difference = np.square(self.sample - self.mean[i])</div><div class="line">            self.var[i] = np.sum(difference * self.gamma[:, i]) / np.sum(self.gamma[:, i])</div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.num):</div><div class="line">            <span class="comment"># 更新均值</span></div><div class="line">            self.mean[i] = (np.sum(self.gamma[:, i] * self.sample)) / np.sum(self.gamma[:, i])</div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.num):</div><div class="line">            <span class="comment"># 更新系数</span></div><div class="line">            self.alpha[i] = np.sum(self.gamma[:, i]) / self.num_sample</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self)</span>:</span></div><div class="line">        time = <span class="number">0</span></div><div class="line">        <span class="comment"># 训练次数</span></div><div class="line">        <span class="keyword">while</span> time &lt; <span class="number">1000</span>:</div><div class="line">            <span class="comment"># print(self.mean, self.var, self.alpha, time)</span></div><div class="line">            old_mean = copy.deepcopy(self.mean)</div><div class="line">            old_var = copy.deepcopy(self.var)</div><div class="line">            <span class="comment"># 记录上一次的均值和方差</span></div><div class="line">            self.E_step()</div><div class="line">            self.Q_step()</div><div class="line">            <span class="comment"># 训练</span></div><div class="line">            <span class="keyword">if</span> np.sum(np.abs(self.mean - old_mean)) &lt; self.epsilon\</div><div class="line">                    <span class="keyword">or</span> np.sum(np.abs(self.var - old_var)) &lt; self.epsilon:</div><div class="line">                <span class="keyword">break</span></div><div class="line">                <span class="comment"># 如果两次结果的差值小于阈值则结束训练</span></div><div class="line">            time += <span class="number">1</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">output</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># 输出训练结果</span></div><div class="line">        print(<span class="string">"the estimation of mean:"</span>)</div><div class="line">        print(self.mean)</div><div class="line">        print(<span class="string">"the estimation of var:"</span>)</div><div class="line">        print(self.var)</div><div class="line">        print(<span class="string">"the estimation of alpha:"</span>)</div><div class="line">        print(self.alpha)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    test_data = []</div><div class="line">    sigma = [<span class="number">20</span>, <span class="number">40</span>]</div><div class="line">    miu = [<span class="number">20</span>, <span class="number">40</span>]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000</span>):</div><div class="line">        <span class="keyword">if</span> np.random.random(<span class="number">1</span>) &gt; <span class="number">0.5</span>:</div><div class="line">            test_data.append(np.random.normal() * sigma[<span class="number">0</span>] + miu[<span class="number">0</span>])</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            test_data.append(np.random.normal() * sigma[<span class="number">1</span>] + miu[<span class="number">1</span>])</div><div class="line">    <span class="comment"># 初始化训练数据</span></div><div class="line">    test_data = np.array(test_data)</div><div class="line">    mix = mixGaussianInEM(test_data, <span class="number">2</span>)</div><div class="line">    mix.train()</div><div class="line">    mix.output()</div></pre></td></tr></table></figure>
-<h3 id="结果说明："><a href="#结果说明：" class="headerlink" title="结果说明："></a>结果说明：</h3><blockquote>
-<p>在利用两个高斯分布分别为N(20, 20)和N(40, 40)的情况下，按照概率0.5和0.5分别产生10000个数据。通过EM算法的估计结果如下：<br><img src="http://oov4rmeff.bkt.clouddn.com/mixGaussian.png" alt="img"></p>
-<p>可以看到对于参数的估计还是相当准确的。需要注意的是在训练模型的初始值的设定时，偏离与待估计参数太大的情况容易导致估计失败，即EM算法对于初始值敏感，并且不能保证收敛到全局最优。所以我们可以多次选取初始值而后对估计结果取平均来保证参加估计的正确性。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1897,7 +1890,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-count">65</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
