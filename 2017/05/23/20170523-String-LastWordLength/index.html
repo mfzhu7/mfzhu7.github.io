@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="Last Word Length题目描述： 给定一个字符串，找到字符串中最后一个单词的长度。  例子：  见LeetCode  解题思路： 本题主要的难点在于各种边界条件的判断。首先是字符串是空的情况；其次字符串结尾是空格的情况；找到非空格字符后我们需要判断是不是已经到达字符的首位；最后是找到结尾单词的起始位置。  代码如下：12345678910111213class Solution &amp;#12">
+<meta name="description" content="Last Word Length题目描述： 给定一个字符串，找到字符串中最后一个单词的长度。  例子：  具体描述见LeetCode58  解题思路： 本题主要的难点在于各种边界条件的判断。首先是字符串是空的情况；其次字符串结尾是空格的情况；找到非空格字符后我们需要判断是不是已经到达字符的首位；最后是找到结尾单词的起始位置。  代码如下：1234567891011121314151617class">
 <meta name="keywords" content="List">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Last Word Length">
 <meta property="og:url" content="http://yoursite.com/2017/05/23/20170523-String-LastWordLength/index.html">
 <meta property="og:site_name" content="Tech">
-<meta property="og:description" content="Last Word Length题目描述： 给定一个字符串，找到字符串中最后一个单词的长度。  例子：  见LeetCode  解题思路： 本题主要的难点在于各种边界条件的判断。首先是字符串是空的情况；其次字符串结尾是空格的情况；找到非空格字符后我们需要判断是不是已经到达字符的首位；最后是找到结尾单词的起始位置。  代码如下：12345678910111213class Solution &amp;#12">
-<meta property="og:updated_time" content="2017-05-31T07:45:35.000Z">
+<meta property="og:description" content="Last Word Length题目描述： 给定一个字符串，找到字符串中最后一个单词的长度。  例子：  具体描述见LeetCode58  解题思路： 本题主要的难点在于各种边界条件的判断。首先是字符串是空的情况；其次字符串结尾是空格的情况；找到非空格字符后我们需要判断是不是已经到达字符的首位；最后是找到结尾单词的起始位置。  代码如下：1234567891011121314151617class">
+<meta property="og:updated_time" content="2017-06-01T08:35:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Last Word Length">
-<meta name="twitter:description" content="Last Word Length题目描述： 给定一个字符串，找到字符串中最后一个单词的长度。  例子：  见LeetCode  解题思路： 本题主要的难点在于各种边界条件的判断。首先是字符串是空的情况；其次字符串结尾是空格的情况；找到非空格字符后我们需要判断是不是已经到达字符的首位；最后是找到结尾单词的起始位置。  代码如下：12345678910111213class Solution &amp;#12">
+<meta name="twitter:description" content="Last Word Length题目描述： 给定一个字符串，找到字符串中最后一个单词的长度。  例子：  具体描述见LeetCode58  解题思路： 本题主要的难点在于各种边界条件的判断。首先是字符串是空的情况；其次字符串结尾是空格的情况；找到非空格字符后我们需要判断是不是已经到达字符的首位；最后是找到结尾单词的起始位置。  代码如下：1234567891011121314151617class">
 
 
 
@@ -358,12 +358,12 @@
 <p>给定一个字符串，找到字符串中最后一个单词的长度。</p>
 </blockquote>
 <h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 见LeetCode</p>
+<p> 具体描述见<a href="https://leetcode.com/problems/length-of-last-word/#/description" target="_blank" rel="external">LeetCode58</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
 <p>本题主要的难点在于各种边界条件的判断。首先是字符串是空的情况；其次字符串结尾是空格的情况；找到非空格字符后我们需要判断是不是已经到达字符的首位；最后是找到结尾单词的起始位置。</p>
 </blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLastWord</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (s.size() == <span class="number">0</span> || s == <span class="string">" "</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> end = s.size() - <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(end &gt;= <span class="number">0</span> &amp;&amp; s[end] == <span class="string">' '</span>) end--;</div><div class="line">        <span class="keyword">if</span> (end == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">        <span class="keyword">int</span> left = end;</div><div class="line">        <span class="keyword">while</span>(end &gt;= <span class="number">0</span> &amp;&amp;s[end] != <span class="string">' '</span>) end--;</div><div class="line">        <span class="keyword">return</span> left - end;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLastWord</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (s.size() == <span class="number">0</span> || s == <span class="string">" "</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="comment">//字符串为空的情况</span></div><div class="line">        <span class="keyword">int</span> end = s.size() - <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(end &gt;= <span class="number">0</span> &amp;&amp; s[end] == <span class="string">' '</span>) end--;</div><div class="line">        <span class="comment">//先找到结尾开始的非空字符</span></div><div class="line">        <span class="keyword">if</span> (end == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">        <span class="comment">//如果整个字符为空返回0</span></div><div class="line">        <span class="keyword">int</span> left = end;</div><div class="line">        <span class="keyword">while</span>(end &gt;= <span class="number">0</span> &amp;&amp;s[end] != <span class="string">' '</span>) end--;</div><div class="line">        <span class="comment">//找到单词的另外一侧</span></div><div class="line">        <span class="keyword">return</span> left - end;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
       
     </div>
