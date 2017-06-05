@@ -260,6 +260,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/17/20170317-List-RelocateList/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/17/20170317-List-RelocateList/" itemprop="url">
+                  Relocate List
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-17T13:16:00+08:00">
+                2017-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="根据左右半区重新排列链表"><a href="#根据左右半区重新排列链表" class="headerlink" title="根据左右半区重新排列链表"></a>根据左右半区重新排列链表</h1><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一个链表的头结点，其长度为N。如果长度为偶数的情况下，认为前N/2为左半区，后N/2为右半区；如果N为奇数，则认为前N/2为左半区，后N/2+1为右半区。根据如下例子中规则重新排列链表。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>假设原链表为1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL,调整后为1-&gt;3-&gt;2-&gt;4-&gt;5-&gt;NULL。</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>主要的解题思路在于找到链表的中间节点。中间节点即为右区开始节点的上一个节点。而后一个指针指向左半区开始节点，一个指针指向右半区开始节点；不断调整链表的指向即可。需要注意的地方是根据规则找到中间节点，和找到中间节点后需要将左右半区断开。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ListNode.h"</span></span></div><div class="line"><span class="keyword">class</span> relocateList1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">relocateList</span><span class="params">(ListNode* head)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> head;</div><div class="line"></div><div class="line">        ListNode* right = head-&gt;next;</div><div class="line">        ListNode* left = head;</div><div class="line">        <span class="keyword">while</span>(right-&gt;next != <span class="literal">NULL</span> &amp;&amp; right-&gt;next-&gt;next != <span class="literal">NULL</span>)&#123;</div><div class="line">            left = left-&gt;next;</div><div class="line">            right = right-&gt;next-&gt;next;</div><div class="line">        &#125;                  <span class="comment">// 找到链表的中间节点。</span></div><div class="line">        right = left-&gt;next;</div><div class="line">        left-&gt;next = <span class="literal">NULL</span>; <span class="comment">// 断开左右半区的连接</span></div><div class="line">        left = head;</div><div class="line">        ListNode* next1 = <span class="literal">NULL</span>;</div><div class="line">        ListNode* next2 = <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">while</span>(left-&gt;next != <span class="literal">NULL</span>)&#123;</div><div class="line">            next1 = left-&gt;next;  <span class="comment">//记录左当前节点的下一个节点</span></div><div class="line">            next2 = right-&gt;next; <span class="comment">//记录右当前节点的下一个节点</span></div><div class="line">            left-&gt;next = right;</div><div class="line">            right-&gt;next = next1; <span class="comment">// 重新调整链表的指向</span></div><div class="line">            left = next1;</div><div class="line">            right = next2;       <span class="comment">//进行下一次的遍历</span></div><div class="line">        &#125;</div><div class="line">        left-&gt;next = right;</div><div class="line">        <span class="keyword">return</span> head;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/16/20170519-Array-CountPrime/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -778,7 +930,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
