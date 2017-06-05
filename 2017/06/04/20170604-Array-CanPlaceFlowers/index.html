@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Tree," />
+  <meta name="keywords" content="Array," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="Find The Boundary Of Tree(找到树的边界节点)题目描述： 来自leetcode的contest。具体的题目描述可以在这里找到。  解题思路： 本题主要的难点有：怎么找到左侧边界；怎么找到右侧边界；怎么找到下边界；以及如何将边界连接已经右侧边界的逆序。 根据代码解释一下思路；首先判断根节点是否为空决定是否返回空的vector；其次定义用于保存边界的vector并将根节点的值导">
-<meta name="keywords" content="Tree">
+<meta name="description" content="Can Place Flowers题目描述： 给定一个数组，数组中1表示该位置栽花；0则代表没有。则要求返回该数组是否能种n株花，在花的栽种间隔为1的情况下。  例子： 具体描述看LeetCode605  解题思路： 本题中的主要难点有两个(1)0的个数和栽种花的数量的关系(2)如何处理好数组头部和尾部的情况和全0的情况。代码中先设置的c=1是为了处理开头为0的情况；在循环的外部是为了处理尾部结尾">
+<meta name="keywords" content="Array">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Find The Boundary Of Tree">
-<meta property="og:url" content="http://yoursite.com/2017/04/20/20170420-Tree-TheBoundaryOfTree/index.html">
+<meta property="og:title" content="Can Place Flowers">
+<meta property="og:url" content="http://yoursite.com/2017/06/04/20170604-Array-CanPlaceFlowers/index.html">
 <meta property="og:site_name" content="Tech">
-<meta property="og:description" content="Find The Boundary Of Tree(找到树的边界节点)题目描述： 来自leetcode的contest。具体的题目描述可以在这里找到。  解题思路： 本题主要的难点有：怎么找到左侧边界；怎么找到右侧边界；怎么找到下边界；以及如何将边界连接已经右侧边界的逆序。 根据代码解释一下思路；首先判断根节点是否为空决定是否返回空的vector；其次定义用于保存边界的vector并将根节点的值导">
-<meta property="og:updated_time" content="2017-05-05T07:43:06.000Z">
+<meta property="og:description" content="Can Place Flowers题目描述： 给定一个数组，数组中1表示该位置栽花；0则代表没有。则要求返回该数组是否能种n株花，在花的栽种间隔为1的情况下。  例子： 具体描述看LeetCode605  解题思路： 本题中的主要难点有两个(1)0的个数和栽种花的数量的关系(2)如何处理好数组头部和尾部的情况和全0的情况。代码中先设置的c=1是为了处理开头为0的情况；在循环的外部是为了处理尾部结尾">
+<meta property="og:updated_time" content="2017-06-05T07:14:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Find The Boundary Of Tree">
-<meta name="twitter:description" content="Find The Boundary Of Tree(找到树的边界节点)题目描述： 来自leetcode的contest。具体的题目描述可以在这里找到。  解题思路： 本题主要的难点有：怎么找到左侧边界；怎么找到右侧边界；怎么找到下边界；以及如何将边界连接已经右侧边界的逆序。 根据代码解释一下思路；首先判断根节点是否为空决定是否返回空的vector；其次定义用于保存边界的vector并将根节点的值导">
+<meta name="twitter:title" content="Can Place Flowers">
+<meta name="twitter:description" content="Can Place Flowers题目描述： 给定一个数组，数组中1表示该位置栽花；0则代表没有。则要求返回该数组是否能种n株花，在花的栽种间隔为1的情况下。  例子： 具体描述看LeetCode605  解题思路： 本题中的主要难点有两个(1)0的个数和栽种花的数量的关系(2)如何处理好数组头部和尾部的情况和全0的情况。代码中先设置的c=1是为了处理开头为0的情况；在循环的外部是为了处理尾部结尾">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/20/20170420-Tree-TheBoundaryOfTree/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/04/20170604-Array-CanPlaceFlowers/"/>
 
 
 
 
 
-  <title> Find The Boundary Of Tree | Tech </title>
+  <title> Can Place Flowers | Tech </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/20/20170420-Tree-TheBoundaryOfTree/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/04/20170604-Array-CanPlaceFlowers/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mfzhu7">
@@ -281,7 +281,7 @@
             
             
               
-                Find The Boundary Of Tree
+                Can Place Flowers
               
             
           </h1>
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T20:46:02+08:00">
-                2017-04-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-04T11:13:02+08:00">
+                2017-06-04
               </time>
             
 
@@ -354,13 +354,16 @@
       
 
       
-        <h3 id="Find-The-Boundary-Of-Tree-找到树的边界节点"><a href="#Find-The-Boundary-Of-Tree-找到树的边界节点" class="headerlink" title="Find The Boundary Of Tree(找到树的边界节点)"></a>Find The Boundary Of Tree(找到树的边界节点)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>来自leetcode的contest。具体的题目描述可以在<a href="https://leetcode.com/contest/leetcode-weekly-contest-25/problems/boundary-of-binary-tree/" target="_blank" rel="external">这里</a>找到。</p>
+        <h3 id="Can-Place-Flowers"><a href="#Can-Place-Flowers" class="headerlink" title="Can Place Flowers"></a>Can Place Flowers</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一个数组，数组中1表示该位置栽花；0则代表没有。则要求返回该数组是否能种n株花，在花的栽种间隔为1的情况下。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>具体描述看<a href="https://leetcode.com/contest/leetcode-weekly-contest-35/problems/can-place-flowers/" target="_blank" rel="external">LeetCode605</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>本题主要的难点有：怎么找到左侧边界；怎么找到右侧边界；怎么找到下边界；以及如何将边界连接已经右侧边界的逆序。 根据代码解释一下思路；首先判断根节点是否为空决定是否返回空的vector；其次定义用于保存边界的vector并将根节点的值导入；定义用于保存遍历过程节点的集合，将根节点导入；分别定义vector用于保存左侧边界、右侧边界和下边界；根据遍历函数得到的左右下边界，遍历其中的节点找到不重复的节点连接即为整颗树的边界。</p>
+<p>本题中的主要难点有两个(1)0的个数和栽种花的数量的关系(2)如何处理好数组头部和尾部的情况和全0的情况。代码中先设置的c=1是为了处理开头为0的情况；在循环的外部是为了处理尾部结尾为0的情况。因为在开头为0和结尾为0的情况，0的个数和栽花数量的关系较为特殊。</p>
 </blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; boundaryOfBinaryTree(TreeNode* root) &#123;</div><div class="line">        <span class="keyword">if</span> (!root)</div><div class="line">            <span class="keyword">return</span> &#123;&#125;; <span class="comment">// 返回空边界</span></div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res = &#123;root-&gt;val&#125;;<span class="comment">//导入根值到边界结果</span></div><div class="line">        <span class="built_in">unordered_set</span>&lt;TreeNode*&gt; hash = &#123;root&#125;;<span class="comment">//导入根到遍历节点集合</span></div><div class="line">        </div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; left;</div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; right;</div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; leaf;<span class="comment">// 定义三个边界的vector</span></div><div class="line">        </div><div class="line">        leftBoundary(root-&gt;left, left);</div><div class="line">        leafNode(root, leaf);</div><div class="line">        rightBoundary(root-&gt;right, right);</div><div class="line">        <span class="comment">// 通过遍历函数找到各自边界的集合，其中集合可能存在重合</span></div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> l : left)&#123;<span class="keyword">if</span> (hash.count(l)) <span class="keyword">continue</span>; res.push_back(l-&gt;val); hash.insert(l);&#125;</div><div class="line">        <span class="comment">//连接左侧边界</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> m : leaf)&#123;<span class="keyword">if</span> (hash.count(m)) <span class="keyword">continue</span>; res.push_back(m-&gt;val); hash.insert(m);&#125;</div><div class="line">        <span class="comment">//连接下侧边界</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> r: right)&#123;<span class="keyword">if</span> (hash.count(r)) <span class="keyword">continue</span>; res.push_back(r-&gt;val); hash.insert(r);&#125;</div><div class="line">        <span class="comment">// 连接右侧边界</span></div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">leftBoundary</span><span class="params">(TreeNode* node, <span class="built_in">vector</span>&lt;TreeNode*&gt;&amp; left)</span></span>&#123;</div><div class="line">        <span class="keyword">while</span>(node)&#123;</div><div class="line">            left.push_back(node);</div><div class="line">            <span class="keyword">if</span> (node-&gt;left) node = node-&gt;left;</div><div class="line">            <span class="keyword">else</span> node = node-&gt;right;</div><div class="line">            <span class="comment">// 找到最左侧的边界；不断向左侧遍历，为空就向右侧遍历知道为空</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">leafNode</span><span class="params">(TreeNode* root, <span class="built_in">vector</span>&lt;TreeNode*&gt;&amp;leaf)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        <span class="keyword">if</span> (root-&gt;left == <span class="literal">NULL</span> &amp;&amp; root-&gt;right == <span class="literal">NULL</span>) leaf.push_back(root);</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            leafNode(root-&gt;left, leaf);</div><div class="line">            leafNode(root-&gt;right, leaf);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//找到所有叶节点的集合即为下边界集合；先判断是否是空节点；然后判断是否是叶节点；然后递归左侧和右侧节点。</span></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rightBoundary</span><span class="params">(TreeNode* node, <span class="built_in">vector</span>&lt;TreeNode*&gt;&amp; right)</span></span>&#123;</div><div class="line">        <span class="keyword">while</span>(node)&#123;</div><div class="line">            right.push_back(node);</div><div class="line">            <span class="keyword">if</span> (node-&gt;right) node = node-&gt;right;</div><div class="line">            <span class="keyword">else</span> node = node-&gt;left;</div><div class="line">        &#125;<span class="comment">//找到右侧边界；同左侧；需要注意的是需要将结果逆序。</span></div><div class="line">        reverse(right.begin(), right.end());</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canPlaceFlowers</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; flowerbed, <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> c = <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> m = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : flowerbed)&#123;</div><div class="line">            <span class="keyword">if</span> (i == <span class="number">0</span>)&#123;</div><div class="line">                c++;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                m += (c - <span class="number">1</span>) / <span class="number">2</span>;</div><div class="line">                c = <span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        c++;</div><div class="line">        m += (c - <span class="number">1</span>) / <span class="number">2</span>;</div><div class="line">        <span class="keyword">return</span> m &gt;= n;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -390,7 +393,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Tree/" rel="tag"># Tree</a>
+            <a href="/tags/Array/" rel="tag"># Array</a>
           
         </div>
       
@@ -403,8 +406,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/21/20170421-ML-PerceptionInMNIST/" rel="next" title="Perception Machine In MNIST">
-                <i class="fa fa-chevron-left"></i> Perception Machine In MNIST
+              <a href="/2017/06/05/20170605-Tree-ConstructStringfromBinaryTree/" rel="next" title="Construct String from Binary Tree">
+                <i class="fa fa-chevron-left"></i> Construct String from Binary Tree
               </a>
             
           </div>
@@ -413,8 +416,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/19/20170419-Array-PermutationII/" rel="prev" title="Permutation II">
-                Permutation II <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/01/20170601-String-PermutationInString/" rel="prev" title="Permutation In String">
+                Permutation In String <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -544,7 +547,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Find-The-Boundary-Of-Tree-找到树的边界节点"><span class="nav-number">1.</span> <span class="nav-text">Find The Boundary Of Tree(找到树的边界节点)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">3.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">4.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Can-Place-Flowers"><span class="nav-number">1.</span> <span class="nav-text">Can Place Flowers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子："><span class="nav-number">3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">4.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">5.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
             
 
           </div>
