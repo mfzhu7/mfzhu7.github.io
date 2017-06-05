@@ -260,6 +260,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/25/20170525-String-FindRepeatedDnaSequences/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/25/20170525-String-FindRepeatedDnaSequences/" itemprop="url">
+                  Find Repeated DNA Sequences
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-25T20:41:02+08:00">
+                2017-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Find-Repeated-DNA-Sequences"><a href="#Find-Repeated-DNA-Sequences" class="headerlink" title="Find Repeated DNA Sequences"></a>Find Repeated DNA Sequences</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>定义长度为10的DNA片段，找到给定字符串中所有出现超过1次的DNA字符串片段。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>具体描述可以看<a href="https://leetcode.com/problems/repeated-dna-sequences/#/description" target="_blank" rel="external">LeetCode187</a></p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>我们用一个哈希表保存该字符串是否出现，用一个哈希表来表示是否已经保存到结果中即可。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; findRepeatedDnaSequences(<span class="built_in">string</span> s) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</div><div class="line">        <span class="keyword">if</span> (s.size() &lt;= <span class="number">10</span>) <span class="keyword">return</span> res;</div><div class="line">        <span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; hash;</div><div class="line">        <span class="comment">//保存该字符串是否已经出现</span></div><div class="line">        <span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; table;</div><div class="line">        <span class="comment">//保存该字符串是否已经保存到结果res中</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= s.size() - <span class="number">10</span>; i++)&#123;</div><div class="line">            <span class="keyword">if</span> (hash.find(s.substr(i, <span class="number">10</span>)) == hash.end())&#123;</div><div class="line">                hash.insert(s.substr(i, <span class="number">10</span>));</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                <span class="keyword">if</span> (table.find(s.substr(i, <span class="number">10</span>)) == table.end())&#123;</div><div class="line">                    table.insert(s.substr(i, <span class="number">10</span>));</div><div class="line">                    res.push_back(s.substr(i, <span class="number">10</span>));</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/24/20170524-String-SimplifyPath/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1618,226 +1770,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/15/20170515-List-ListTheme/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/15/20170515-List-ListTheme/" itemprop="url">
-                  List Theme
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-15T11:36:02+08:00">
-                2017-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="List-Theme"><a href="#List-Theme" class="headerlink" title="List Theme"></a>List Theme</h3><blockquote>
-<p>本篇博客主要是对LeetCode上关于链表题目的总结。对于链表类的题目主要包括以下几类：</p>
-</blockquote>
-<ul>
-<li>链表的查找</li>
-<li>链表节点的逆序</li>
-<li>链表节点的删除</li>
-<li>不同链表间的操作</li>
-<li>链表中的环问题</li>
-</ul>
-<blockquote>
-<p>根据以上专题，下面列出了LeetCode中链表题目的分类</p>
-</blockquote>
-<h2 id="链表中节点的逆序"><a href="#链表中节点的逆序" class="headerlink" title=" 链表中节点的逆序"></a><a name="链表中节点的逆序"></a> 链表中节点的逆序</h2><ul>
-<li><p><a href="https://leetcode.com/problems/reverse-linked-list/#/description" target="_blank" rel="external">LeetCode206</a>: 逆序链表,见<a href="https://mfzhu7.github.io/2017/05/09/20170509-List-ReverseWholeList/" target="_blank" rel="external">博客</a>.</p>
-</li>
-<li><p><a href="https://leetcode.com/problems/reverse-linked-list-ii/#/description" target="_blank" rel="external">LeetCode92</a>: 逆序链表中的指定部分,见<a href="https://mfzhu7.github.io/2017/05/17/20170517-List-ReversePartList/" target="_blank" rel="external">博客</a></p>
-</li>
-<li><p><a href="https://leetcode.com/problems/reverse-nodes-in-k-group/#/description" target="_blank" rel="external">LeetCode25</a>: 链表中每k个节点逆序,见<a href="https://mfzhu7.github.io/2017/03/21/20170321-List-ReverseEveryKNode/" target="_blank" rel="external">博客</a></p>
-</li>
-</ul>
-<h2 id="链表中节点的重新连接"><a href="#链表中节点的重新连接" class="headerlink" title=" 链表中节点的重新连接"></a><a name="链表中节点的重新连接"></a> 链表中节点的重新连接</h2><ul>
-<li><p><a href="https://leetcode.com/problems/odd-even-linked-list/#/description" target="_blank" rel="external">LeetCode328</a>: 根据链表中节点所处位置的奇偶性，重连链表,见<a href="https://mfzhu7.github.io/2017/05/18/20170518-List-RelocateListByOddOrEven/" target="_blank" rel="external">博客</a></p>
-</li>
-<li><p><a href="https://leetcode.com/problems/sort-list/#/description" target="_blank" rel="external">LeetCode148</a>: 重新排序链表</p>
-</li>
-<li><p><a href="https://leetcode.com/problems/insertion-sort-list/#/description" target="_blank" rel="external">LeetCode147</a>: 使用插入排序排序链表</p>
-</li>
-<li><p><a href="https://leetcode.com/problems/reorder-list/#/description" target="_blank" rel="external">LeetCode143</a>: 链表的头部和尾部同时取一个节点连接；然后头节点向后移动，尾节点向前移动，返回结果。见<a href="https://mfzhu7.github.io/2017/05/16/20170516-List-ReorderList/" target="_blank" rel="external">博客</a></p>
-</li>
-<li><p><a href="https://leetcode.com/problems/partition-list/#/description" target="_blank" rel="external">LeetCode86</a>: 链表中按照指定值进行划分,见<a href="https://mfzhu7.github.io/2017/03/23/20170323-List-PartitionList/" target="_blank" rel="external">博客</a></p>
-</li>
-<li><p><a href="https://leetcode.com/problems/rotate-list/#/description" target="_blank" rel="external">LeetCode61</a>: 按照链表的指定位置向右旋转链表,见<a href="https://mfzhu7.github.io/2017/05/11/20170511-List-RotateList/" target="_blank" rel="external">博客</a></p>
-</li>
-<li><p><a href="https://leetcode.com/problems/swap-nodes-in-pairs/#/description" target="_blank" rel="external">LeetCode24</a>: 链表中两两节点进行交换,见<a href="https://mfzhu7.github.io/2017/05/14/20170514-List-SwapListNode/" target="_blank" rel="external">博客</a></p>
-</li>
-</ul>
-<h2 id="链表节点的删除"><a href="#链表节点的删除" class="headerlink" title=" 链表节点的删除"></a><a name="链表节点的删除"></a> 链表节点的删除</h2><ul>
-<li><p><a href="https://leetcode.com/problems/delete-node-in-a-linked-list/#/description" target="_blank" rel="external">LeetCode237</a>: 删除链表中的某个节点</p>
-</li>
-<li><p><a href="https://leetcode.com/problems/remove-linked-list-elements/#/description" target="_blank" rel="external">LeetCode203</a>: 删除链表中指定值的节点.以上两个问题见<a href="https://mfzhu7.github.io/2017/03/25/20170325-List-DeleteNode/" target="_blank" rel="external">博客</a></p>
-</li>
-<li><p><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list/#/description" target="_blank" rel="external">LeetCode83</a>: 删除链表中的重复节点</p>
-</li>
-<li><p><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/#/description" target="_blank" rel="external">LeetCode82</a>: 删除链表中只要重复的所有节点,<br>以上两个问题见<a href="https://mfzhu7.github.io/2017/03/24/20170324-List-RemoveDuplicate/" target="_blank" rel="external">博客</a></p>
-</li>
-<li><p><a href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/#/description" target="_blank" rel="external">LeetCode19</a>: 删除链表的倒数第n个节点,见<a href="https://mfzhu7.github.io/2017/03/19/20170319-List-DeleteKthNode/" target="_blank" rel="external">博客</a></p>
-</li>
-</ul>
-<h2 id="不同链表间的操作"><a href="#不同链表间的操作" class="headerlink" title=" 不同链表间的操作"></a><a name="不同链表间的操作"></a> 不同链表间的操作</h2><ul>
-<li><p><a href="https://leetcode.com/problems/add-two-numbers/#/description" target="_blank" rel="external">Leetcode2</a>: 两个链表代表不同的整数，要求返回其整数相加后的结果.见<a href="https://mfzhu7.github.io/2017/03/15/20170315-List-AddLists/" target="_blank" rel="external">博客</a></p>
-</li>
-<li><p><a href="https://leetcode.com/problems/add-two-numbers-ii/#/description" target="_blank" rel="external">LeetCode445</a>: 同上</p>
-</li>
-<li><p><a href="https://leetcode.com/problems/merge-two-sorted-lists/#/description" target="_blank" rel="external">LeetCode21</a>: 合并两个有序链表,见<a href="https://mfzhu7.github.io/2017/05/19/20170519-List-MergeList/" target="_blank" rel="external">博客</a></p>
-</li>
-<li><p><a href="https://leetcode.com/problems/merge-k-sorted-lists/#/description" target="_blank" rel="external">LeetCode23</a>: 合并k个有序链表</p>
-</li>
-</ul>
-<h2 id="链表中的环问题"><a href="#链表中的环问题" class="headerlink" title="  链表中的环问题"></a><a name="链表中的环问题"></a>  链表中的环问题</h2><ul>
-<li><p><a href="https://leetcode.com/problems/intersection-of-two-linked-lists/#/description" target="_blank" rel="external">LeetCode160</a>: 找到两个无环链表中的相交节点</p>
-</li>
-<li><p><a href="https://leetcode.com/problems/linked-list-cycle-ii/#/description" target="_blank" rel="external">LeetCode142</a>: 判断一个链表是否存在环。</p>
-</li>
-<li><p><a href="https://leetcode.com/problems/linked-list-cycle/#/description" target="_blank" rel="external">LeetCode141</a>: 同上</p>
-</li>
-</ul>
-<blockquote>
-<p>以上问题的具体解法和思路和看<a href="https://mfzhu7.github.io/2017/03/16/20170316-List-CircleInList/" target="_blank" rel="external">博客</a>.</p>
-</blockquote>
-<h2 id="链表中的其他问题"><a href="#链表中的其他问题" class="headerlink" title=" 链表中的其他问题"></a><a name="链表中节点的其他问题"></a> 链表中的其他问题</h2><ul>
-<li><p><a href="https://leetcode.com/problems/copy-list-with-random-pointer/#/description" target="_blank" rel="external">LeetCode138</a>: 复制含有随机节点的链表,见<a href="https://mfzhu7.github.io/2017/03/18/20170318-List-CopyRandomListNode/" target="_blank" rel="external">博客</a></p>
-</li>
-<li><p><a href="https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/#/description" target="_blank" rel="external">LeetCode109</a>: 将一个链表转为二叉搜索树</p>
-</li>
-<li><p><a href="https://leetcode.com/problems/palindrome-linked-list/#/description" target="_blank" rel="external">LeetCode234</a>: 判断链表是否是回文链表,见<a href="https://mfzhu7.github.io/2017/03/22/20170322-List-PalindromeList/" target="_blank" rel="external">博客</a></p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1887,7 +1819,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
