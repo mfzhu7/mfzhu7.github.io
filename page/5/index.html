@@ -260,6 +260,620 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/02/20170502-Tree-LCAInTree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/02/20170502-Tree-LCAInTree/" itemprop="url">
+                  LCA In Tree
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-02T18:36:02+08:00">
+                2017-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="LCA-In-Tree"><a href="#LCA-In-Tree" class="headerlink" title="LCA In Tree"></a>LCA In Tree</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一棵树和树中的两个节点，要求返回这两个节点的最近公共祖先节点.</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>leetcode上有两道题目是关于公共祖先问题的，具体描述可以看<a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/#/description" target="_blank" rel="external">LeetCode235</a>和<a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/#/description" target="_blank" rel="external">LeetCode236</a></p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>主要的思路是这样的：我们遍历当前节点为cur，如果cur为空，或者cur是等于目标结点之一的情况下，我们就直接返回这个节点即可；如果不是的情况下，我们继续下一层的遍历，记left是左侧返回的结果，right是右侧的返回的结果；如果左侧和右侧均不为空，则说明在当前节点的情况下，左侧或者右侧找到了两个目标节点，则当前节点即为最近的公共祖先；如果其中一个为空的情况下；说明某侧找到了其中的一个节点或者当前的cur即为公共祖先且为目标节点中的一个。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span> || root == q || root == p)</div><div class="line">            <span class="keyword">return</span> root;</div><div class="line">        TreeNode* left = lowestCommonAncestor(root-&gt;left, p, q);</div><div class="line">        TreeNode* right = lowestCommonAncestor(root-&gt;right, p, q);</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (left != <span class="literal">NULL</span> &amp;&amp; right != <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> root;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> left != <span class="literal">NULL</span> ? left : right;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解法2"><a href="#解法2" class="headerlink" title="解法2"></a>解法2</h3><blockquote>
+<p>当然在需要多次查询公共祖先的情况下，我们可以采用另外一种方法来查找树的公共祖先。首先我们构造一个哈希表，表中的key是某个节点，value是其父节点。当要查询a1和a2的公共祖先的时候，先从表中查询到从a1到根节点上的所有节点构成父节点集合，然后我们开始从a2查找是否在该集合中，存在即为祖先节点，不存在则继续向上查找。</p>
+</blockquote>
+<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</div><div class="line">        <span class="built_in">map</span>&lt;TreeNode*, TreeNode*&gt; hash;</div><div class="line">        hash[root] = <span class="literal">NULL</span>;</div><div class="line">        helper(root, hash);</div><div class="line">        <span class="built_in">set</span>&lt;TreeNode*&gt; ancestor;</div><div class="line">        ancestor.insert(p);</div><div class="line">        TreeNode* cur = p;</div><div class="line">        <span class="keyword">while</span>(cur != <span class="literal">NULL</span>)&#123;</div><div class="line">            ancestor.insert(hash[cur]);</div><div class="line">            cur = hash[cur];</div><div class="line">        &#125;</div><div class="line">        cur = q;</div><div class="line">        <span class="keyword">while</span>(ancestor.find(cur) == ancestor.end())&#123;</div><div class="line">            cur = hash[cur];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> cur;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">helper</span><span class="params">(TreeNode* root, <span class="built_in">map</span>&lt;TreeNode*, TreeNode*&gt;&amp; hash)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        <span class="keyword">if</span> (root-&gt;left)</div><div class="line">            hash[root-&gt;left] = root;</div><div class="line">        <span class="keyword">if</span> (root-&gt;right)</div><div class="line">            hash[root-&gt;right] = root;</div><div class="line">        helper(root-&gt;left, hash);</div><div class="line">        helper(root-&gt;right, hash);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/20170501-ML-AdaboostInMNIST/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/01/20170501-ML-AdaboostInMNIST/" itemprop="url">
+                  Adaboost In MNIST
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T10:36:02+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Adaboost-In-MNIST"><a href="#Adaboost-In-MNIST" class="headerlink" title="Adaboost In MNIST"></a>Adaboost In MNIST</h3><h3 id="adaboost模型简介"><a href="#adaboost模型简介" class="headerlink" title="adaboost模型简介"></a>adaboost模型简介</h3><blockquote>
+<p>boosting(提升)方法是一种常用的统计学习方法。在分类问题中，它通过改变训练样本的权重，学习多个分类器，并将这些分类器进行线性组合，提高分类的性能。本文中所介绍的adaboost就是在boost中具有代表性的方法。<br>我们学习分类器的基本思想是：因为相对于强分类器，弱分类器更加容易发现；所以我们通过学习一系列的弱分类器，通过对弱分类器的线性组合构成一个强分类器。其实就是”三个臭皮匠顶个诸葛亮”的基本思想。</p>
+</blockquote>
+<h3 id="其中adaboost方法中的特点有："><a href="#其中adaboost方法中的特点有：" class="headerlink" title="其中adaboost方法中的特点有："></a>其中adaboost方法中的特点有：</h3><ul>
+<li>我们通过上一轮学习到的弱分类器来对下一轮的数据集权重进行改变。当前学习的分类器的误分类误差率越大的其分类器权重越高，反之则不然。</li>
+<li>在通过当前分类器更改数据集的权重的时候，误分类的数据样本权重增大，正确分类的样本权重降低。</li>
+</ul>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="comment"># @File  : adaBoost.py</span></div><div class="line"><span class="comment"># @Author: mfzhu</span></div><div class="line"><span class="comment"># @Date  : 2017/4/29</span></div><div class="line"><span class="comment"># @Desc  :</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> math</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</div><div class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary</span><span class="params">(data, threshold)</span>:</span></div><div class="line">    <span class="comment"># 二值化函数</span></div><div class="line"></div><div class="line">    index_1 = np.array(data &gt; threshold)</div><div class="line">    index_2 = np.array(data &lt;= threshold)</div><div class="line">    data[index_1] = <span class="number">1</span></div><div class="line">    data[index_2] = <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">sign</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="comment"># 阈值函数类</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, sample, label, weight)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"></div><div class="line">        :param sample: 输入一个样本找到最优的切分位置，样本为全体数据的某一列</div><div class="line">        :param label:  这一列样本数据所对应的标签</div><div class="line">        :param weight: 需要输入初始的权重来确定分类函数</div><div class="line">        """</div><div class="line"></div><div class="line">        self.sample = sample</div><div class="line">        <span class="comment"># 初始样本</span></div><div class="line">        self.label = label</div><div class="line">        <span class="comment"># 初始标签</span></div><div class="line">        self.weight = weight</div><div class="line">        <span class="comment"># 初始权重</span></div><div class="line"></div><div class="line">        self.segment_value = <span class="number">-1</span></div><div class="line">        <span class="comment"># 分类函数的切分值</span></div><div class="line">        self.less_index = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</div><div class="line">        <span class="comment"># 小于函数的切分位置集合</span></div><div class="line">        self.more_index = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</div><div class="line">        <span class="comment"># 大于函数的切分位置集合</span></div><div class="line">        self.is_less = <span class="keyword">False</span></div><div class="line">        self.is_more = <span class="keyword">False</span></div><div class="line">        <span class="comment"># 标签用于表示是大于函数还是小于函数</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train_less_than</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># 训练小于函数</span></div><div class="line"></div><div class="line">        less_seg_value = <span class="number">-1</span></div><div class="line">        <span class="comment"># 小于函数的切分值</span></div><div class="line">        error_score = <span class="number">100000</span></div><div class="line">        <span class="comment"># 初始化分类误差率</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> seg_value <span class="keyword">in</span> self.less_index:</div><div class="line">            <span class="comment"># 遍历每个切分值找到最优的</span></div><div class="line">            score = <span class="number">0.0</span></div><div class="line">            <span class="comment"># 对于每个切分值保存分类误差率</span></div><div class="line">            <span class="keyword">for</span> index <span class="keyword">in</span> range(len(self.sample)):</div><div class="line">                val = <span class="number">-1</span></div><div class="line">                <span class="keyword">if</span> self.sample[index] &lt; seg_value:</div><div class="line">                    val = <span class="number">1</span></div><div class="line">                <span class="keyword">if</span> val * self.label[index] &lt; <span class="number">0</span>:</div><div class="line">                    score += self.weight[index]</div><div class="line"></div><div class="line">            <span class="keyword">if</span> score &lt; error_score:</div><div class="line">                less_seg_value = seg_value</div><div class="line">                error_score = score</div><div class="line">                <span class="comment"># 如果比当前的分类误差要小，更新切分值和分类误差率</span></div><div class="line"></div><div class="line">        <span class="keyword">return</span> less_seg_value, error_score</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train_more_than</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># 训练大于函数</span></div><div class="line">        more_seg_value = <span class="number">-1</span></div><div class="line">        <span class="comment"># 大于函数的初始切分值</span></div><div class="line">        error_score = <span class="number">100000</span></div><div class="line">        <span class="comment"># 初始误差分类率</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> seg_value <span class="keyword">in</span> self.more_index:</div><div class="line">            <span class="comment"># 对于每个切分值找到最优的切分</span></div><div class="line">            score = <span class="number">0.0</span></div><div class="line">            <span class="comment"># 保存每个切分的误差分类率</span></div><div class="line">            <span class="keyword">for</span> index <span class="keyword">in</span> range(len(self.sample)):</div><div class="line">                val = <span class="number">1</span></div><div class="line">                <span class="keyword">if</span> self.sample[index] &lt; seg_value:</div><div class="line">                    val = <span class="number">-1</span></div><div class="line">                <span class="keyword">if</span> val * self.label[index] &lt; <span class="number">0</span>:</div><div class="line">                    score += self.weight[index]</div><div class="line"></div><div class="line">            <span class="keyword">if</span> score &lt; error_score:</div><div class="line">                more_seg_value = seg_value</div><div class="line">                error_score = score</div><div class="line">                <span class="comment"># 保存最优的切分值和误差分类率</span></div><div class="line"></div><div class="line">        <span class="keyword">return</span> more_seg_value, error_score</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self)</span>:</span></div><div class="line">        less_seg, less_score = self.train_less_than()</div><div class="line">        more_seg, more_score = self.train_more_than()</div><div class="line">        <span class="comment"># 分别训练大于和小于函数</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> less_score &lt; more_score:</div><div class="line">            self.is_less = <span class="keyword">True</span></div><div class="line">            self.segment_value = less_seg</div><div class="line">            <span class="keyword">return</span> less_score</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            self.is_more = <span class="keyword">True</span></div><div class="line">            self.segment_value = more_seg</div><div class="line">            <span class="keyword">return</span> more_score</div><div class="line">        <span class="comment"># 选择误差分类率小的那个函数，并且标注分类函数是大于还是小于</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, feature)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.is_less:</div><div class="line">            <span class="keyword">if</span> feature &lt; self.segment_value:</div><div class="line">                <span class="keyword">return</span> <span class="number">1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">return</span> <span class="number">-1</span></div><div class="line">        <span class="comment"># 确定用小于分类函数</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">if</span> feature &lt; self.segment_value:</div><div class="line">                <span class="keyword">return</span> <span class="number">-1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">return</span> <span class="number">1</span></div><div class="line">        <span class="comment"># 确定用大于分类函数</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">adaBoost</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="comment"># adaboost类</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init_parameter_</span><span class="params">(self, train_data, label_data)</span>:</span></div><div class="line">        self.train_data = train_data</div><div class="line">        self.label_data = label_data</div><div class="line">        <span class="comment"># 初始化训练数据和训练标签</span></div><div class="line">        self.sample_num = len(train_data)</div><div class="line">        <span class="comment"># 训练数据的数量</span></div><div class="line">        self.dimension = len(train_data[<span class="number">0</span>])</div><div class="line">        <span class="comment"># 每个训练数据的维度</span></div><div class="line">        self.weight = [<span class="number">1.0</span> / self.sample_num] * self.sample_num</div><div class="line">        <span class="comment"># 初始化权重向量</span></div><div class="line"></div><div class="line">        self.num_classifier = <span class="number">50</span></div><div class="line">        <span class="comment"># 使用50个弱分类函数</span></div><div class="line">        self.alpha = []</div><div class="line">        <span class="comment"># 记录每个分类函数的系数</span></div><div class="line">        self.classifier = []</div><div class="line">        <span class="comment"># 保存每个分类器，其中包括了分类器和对应的分类对应的维度</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">normalization_z</span><span class="params">(self, classifier, index)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"></div><div class="line">        :param classifier: 当前分类函数</div><div class="line">        :param index: 分类函数所切分的位置</div><div class="line">        :return: 规范化因子</div><div class="line">        """</div><div class="line">        <span class="comment"># 计算规范化因子</span></div><div class="line">        zm = <span class="number">0</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.sample_num):</div><div class="line">            zm += self.weight[i] * math.exp(</div><div class="line">                <span class="number">-1</span> * self.alpha[<span class="number">-1</span>] * self.label_data[i] * classifier.predict(self.train_data[i][index]))</div><div class="line">        <span class="comment"># 对于训练数据中的每个样本，计算其是否被误分类计算得到规范化因子</span></div><div class="line">        <span class="keyword">return</span> zm</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">updata_weight</span><span class="params">(self, classifier, index, zm)</span>:</span></div><div class="line">        <span class="comment"># 更新权重</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(self.weight)):</div><div class="line">            self.weight[i] = (self.weight[i] * math.exp(</div><div class="line">                <span class="number">-1</span> * self.alpha[<span class="number">-1</span>] * self.label_data[i] * classifier.predict(self.train_data[i][index]))) / zm</div><div class="line"></div><div class="line">        <span class="comment"># 遍历权重向量的每个位置，然后根据分类器和切分位置更新权重</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, train_data, label_data)</span>:</span></div><div class="line">        self.__init_parameter_(train_data, label_data)</div><div class="line">        <span class="comment"># 初始各项数据</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> range(self.num_classifier):</div><div class="line">            <span class="comment"># 训练10个分类函数</span></div><div class="line">            print(<span class="string">"the "</span> + str(num) + <span class="string">"weak classifier"</span>)</div><div class="line"></div><div class="line">            best_classifier = (<span class="keyword">None</span>, <span class="keyword">None</span>, <span class="number">100000</span>)</div><div class="line">            <span class="comment"># 初始化一个空的分类函数</span></div><div class="line">            <span class="keyword">for</span> index <span class="keyword">in</span> range(self.dimension):</div><div class="line">                <span class="comment"># 对于每一个维度都进行训练一个分类器</span></div><div class="line">                classifier = sign(self.train_data[:, index], self.label_data, self.weight)</div><div class="line">                score = classifier.train()</div><div class="line"></div><div class="line">                <span class="keyword">if</span> score &lt; best_classifier[<span class="number">2</span>]:</div><div class="line">                    best_classifier = (classifier, index, score)</div><div class="line"></div><div class="line">            <span class="comment"># 保存下所有维度中分类误差率最小的那个</span></div><div class="line"></div><div class="line">            em = best_classifier[<span class="number">2</span>]</div><div class="line">            <span class="keyword">if</span> em == <span class="number">0</span>:</div><div class="line">                self.alpha.append(<span class="number">100</span>)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                self.alpha.append(<span class="number">0.5</span> * math.log((<span class="number">1</span> - em) / em))</div><div class="line"></div><div class="line">            self.classifier.append([best_classifier[<span class="number">0</span>], best_classifier[<span class="number">1</span>]])</div><div class="line">            <span class="comment"># 保存分类器和切分位置</span></div><div class="line"></div><div class="line">            zm = self.normalization_z(best_classifier[<span class="number">0</span>], best_classifier[<span class="number">1</span>])</div><div class="line">            <span class="comment"># 计算规范化因子</span></div><div class="line"></div><div class="line">            self.updata_weight(best_classifier[<span class="number">0</span>], best_classifier[<span class="number">1</span>], zm)</div><div class="line">            <span class="comment"># 更新权重向量</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_predict_</span><span class="params">(self, feature)</span>:</span></div><div class="line">        <span class="comment"># 预测单个样本的便签</span></div><div class="line">        result = <span class="number">0.0</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.num_classifier):</div><div class="line">            <span class="comment"># 取出一个一个的分类器</span></div><div class="line">            classifier = self.classifier[i][<span class="number">0</span>]</div><div class="line">            <span class="comment"># 取出切分位置</span></div><div class="line">            index = self.classifier[i][<span class="number">1</span>]</div><div class="line">            <span class="comment"># 计算所有分类器的和</span></div><div class="line">            result += self.alpha[i] * classifier.predict(feature[index])</div><div class="line"></div><div class="line">        <span class="keyword">if</span> result &gt; <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="number">-1</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, features)</span>:</span></div><div class="line">        <span class="comment"># 计算所有样本的预测</span></div><div class="line">        results = []</div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(features)):</div><div class="line">            results.append(self._predict_(features[i]))</div><div class="line"></div><div class="line">        <span class="keyword">return</span> results</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    print(<span class="string">"Start reading the data:"</span>)</div><div class="line">    time1 = time.time()</div><div class="line"></div><div class="line">    raw_path = <span class="string">r'F:\work and learn\ML\dataset\MNIST\train.csv'</span></div><div class="line">    raw_data = np.loadtxt(raw_path, delimiter=<span class="string">','</span>, skiprows=<span class="number">1</span>)</div><div class="line">    <span class="comment"># 读入原始数据</span></div><div class="line">    label = raw_data[:, <span class="number">0</span>]</div><div class="line">    data = raw_data[:, <span class="number">1</span>:]</div><div class="line">    <span class="comment"># 区分标签数据和原始数据</span></div><div class="line">    data = binary(data, <span class="number">80</span>)</div><div class="line">    label[label != <span class="number">1</span>] = <span class="number">-1</span></div><div class="line">    <span class="comment"># 进行二值化和对标签二值化（这边做的是二分类）</span></div><div class="line"></div><div class="line">    train_data, test_data, train_label, test_label = train_test_split(data, label, test_size=<span class="number">0.333</span>, random_state=<span class="number">23333</span>)</div><div class="line">    <span class="comment"># 将数据随机切分用于训练和预测</span></div><div class="line">    time2 = time.time()</div><div class="line">    print(<span class="string">"read data cost:"</span>, time2 - time1, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line"></div><div class="line">    print(<span class="string">"Start training:"</span>)</div><div class="line">    ada = adaBoost()</div><div class="line">    ada.train(train_data, train_label)</div><div class="line">    time3 = time.time()</div><div class="line">    print(<span class="string">"training cost: "</span>, time3 - time2, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line">    <span class="comment"># 训练模型并打印训练模型所用时间</span></div><div class="line"></div><div class="line">    print(<span class="string">"start predicting:"</span>)</div><div class="line">    result = ada.predict(test_data)</div><div class="line">    time4 = time.time()</div><div class="line">    print(<span class="string">"predict cost: "</span>, time4 - time3, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line">    <span class="comment"># 预测测试数据的标签</span></div><div class="line"></div><div class="line">    score = accuracy_score(result, test_label)</div><div class="line">    print(<span class="string">"the accuracy is: "</span>, score)</div><div class="line">    <span class="comment"># 打印正确率</span></div></pre></td></tr></table></figure>
+<h3 id="预测结果："><a href="#预测结果：" class="headerlink" title="预测结果："></a>预测结果：</h3><blockquote>
+<p>在设定弱分类器个数为50个的情况下，adaboost模型在mnist上的表现还是不错的：</p>
+</blockquote>
+<p><img src="http://oov4rmeff.bkt.clouddn.com/adaboost.png" alt="img"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/20170430-Tree-CountNodeInCBT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/30/20170430-Tree-CountNodeInCBT/" itemprop="url">
+                  Count Node In CBT
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T15:36:02+08:00">
+                2017-04-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Count-Node-In-CBT"><a href="#Count-Node-In-CBT" class="headerlink" title="Count Node In CBT"></a>Count Node In CBT</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一棵完全二叉树，要求返回这棵树中的节点的个数。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>见<a href="https://leetcode.com/problems/count-complete-tree-nodes/#/description" target="_blank" rel="external">LeetCode222</a>.</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>如果按照普通遍历的方式，会TLE；所以我们在找某个节点的左右子树的个数的时候，先判断其左右节点的深度，如果一样，说明当前节点一棵完全二叉子树，直接可以得到节点数量；否则则继续递归调用计算节点个数。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getleft</span><span class="params">(TreeNode* root)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(root)&#123;</div><div class="line">            root = root-&gt;left;</div><div class="line">            res++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">        <span class="comment">//左侧深度</span></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getright</span><span class="params">(TreeNode* root)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(root)&#123;</div><div class="line">            root = root-&gt;right;</div><div class="line">            res++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">        <span class="comment">//右侧深度</span></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countNodes</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> l = getleft(root);</div><div class="line">        <span class="keyword">int</span> r = getright(root);</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (l == r) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="built_in">pow</span>(<span class="number">2</span>, l) - <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">return</span> countNodes(root-&gt;left) + countNodes(root-&gt;right) + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/29/20170429-Tree-DeleteNodeInBST/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/29/20170429-Tree-DeleteNodeInBST/" itemprop="url">
+                  Delete Node In Tree
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-29T12:46:02+08:00">
+                2017-04-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Delete-Node-In-Tree"><a href="#Delete-Node-In-Tree" class="headerlink" title="Delete Node In Tree"></a>Delete Node In Tree</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一棵树的头结点，要求删除树中的某个节点。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p> 见<a href="https://leetcode.com/problems/delete-node-in-a-bst/#/description" target="_blank" rel="external">LeetCode450</a>.</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>递归调用；首先如果是空节点直接返回；如果当前节点是目标节点，且右子树为空的情况下，我们返回左子树节点；如果右子树不为空，我们找到右子树的最小值，即最左侧节点，将其与当前节点交换后再继续递归。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">deleteNode</span><span class="params">(TreeNode* root, <span class="keyword">int</span> key)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="literal">nullptr</span>;</div><div class="line">        <span class="keyword">if</span> (root-&gt;val == key)&#123;</div><div class="line">            <span class="keyword">if</span> (!root-&gt;right)&#123;</div><div class="line">                TreeNode* left = root-&gt;left;</div><div class="line">                <span class="keyword">delete</span> root;</div><div class="line">                <span class="keyword">return</span> left;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                TreeNode* right = root-&gt;right;</div><div class="line">                <span class="keyword">while</span>(right-&gt;left)&#123;</div><div class="line">                    right = right-&gt;left;</div><div class="line">                &#125;</div><div class="line">                swap(root-&gt;val, right-&gt;val);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        root-&gt;left = deleteNode(root-&gt;left, key);</div><div class="line">        root-&gt;right = deleteNode(root-&gt;right, key);</div><div class="line">        <span class="keyword">return</span> root;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/28/20170428-Tree-InvertTree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1159,609 +1773,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/22/20170422-ML-NaiveBayesInMNIST/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/22/20170422-ML-NaiveBayesInMNIST/" itemprop="url">
-                  Naive Bayes In MNIST
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-22T18:36:02+08:00">
-                2017-04-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Naive-Bayes-In-MNIST"><a href="#Naive-Bayes-In-MNIST" class="headerlink" title="Naive Bayes In MNIST"></a>Naive Bayes In MNIST</h3><h3 id="算法简述："><a href="#算法简述：" class="headerlink" title="算法简述："></a>算法简述：</h3><blockquote>
-<p>朴素贝叶斯方法是基于贝叶斯定理与特征条件独立假设的分类方法。对于给定的训练数据集，首先基于特征条件独立假设学习输入和输出的联合概率分布；然后基于此模型，对给定的输入利用贝叶斯定理求出后验概率最大的输出。模型的优点是实现简单学习和预测的效率都很高，是一种常用的方法。 </p>
-<p>在MNIST数据集中，我们的特征是输入图像每一维的数据，根据已有的输入和输出估计联合概率分布；在输出新的数据集的情况下，我们根据训练好的模型，计算最大后验概率来对数据集进行分类。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line">@Author: mfzhu</div><div class="line">"""</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</div><div class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary</span><span class="params">(data, threshold)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"></div><div class="line">    :param data: the data need to be binary</div><div class="line">    :param threshold: threshold value for binaryzation</div><div class="line">    :return:the data after binaryzation</div><div class="line">    """</div><div class="line">    data[data &gt; threshold] = <span class="number">255</span></div><div class="line">    data[data &lt;= threshold] = <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_the_prior_probability</span><span class="params">(label)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"></div><div class="line">    :param label: label data</div><div class="line">    :return: the dict contains the prior probability</div><div class="line">    """</div><div class="line">    prior_pro = Counter(label)</div><div class="line">    sample_num = len(label)</div><div class="line"></div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> prior_pro.keys():</div><div class="line">        prior_pro[key] = (prior_pro[key] + <span class="number">1</span>) / (sample_num + <span class="number">10</span>)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> prior_pro</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_the_conditional_probability</span><span class="params">(data, label)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"></div><div class="line">    :param data: the binaryzation data</div><div class="line">    :param label: label data</div><div class="line">    :return: the conditional probability</div><div class="line">    """</div><div class="line">    per_label_data = &#123;&#125;</div><div class="line">    condition_pro = &#123;&#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</div><div class="line">        per_label_data[i] = data[np.where(label == i)]</div><div class="line"></div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> per_label_data.keys():</div><div class="line">        pro_array = []</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">784</span>):</div><div class="line">            pro_array.append(</div><div class="line">                (np.count_nonzero(per_label_data[key][:, j]) + <span class="number">1</span>) / (per_label_data[key].shape[<span class="number">0</span>] + <span class="number">2</span>))</div><div class="line">        condition_pro[key] = pro_array</div><div class="line"></div><div class="line">    <span class="keyword">return</span> condition_pro</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample_map</span><span class="params">(input_data, condition_pro, prior_pro)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"></div><div class="line">    :param input_data: singal sample data</div><div class="line">    :param condition_pro: conditional probability</div><div class="line">    :param prior_pro: prior probability</div><div class="line">    :return: the tag of sample data according map</div><div class="line">    """</div><div class="line">    result = &#123;&#125;</div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> prior_pro.keys():</div><div class="line">        pro = prior_pro[key]</div><div class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(len(input_data)):</div><div class="line">            <span class="keyword">if</span> input_data[k] != <span class="number">0</span>:</div><div class="line">                pro *= condition_pro[key][k]</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                pro *= (<span class="number">1</span> - condition_pro[key][k])</div><div class="line">        result[key] = pro</div><div class="line">    <span class="keyword">return</span> max(zip(result.values(), result.keys()))[<span class="number">1</span>]</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">data_set_map</span><span class="params">(data, condition_pro, prior_pro)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"></div><div class="line">    :param data: data set</div><div class="line">    :param condition_pro:</div><div class="line">    :param prior_pro:</div><div class="line">    :return: a list contains the tags of input data set</div><div class="line">    """</div><div class="line">    result = []</div><div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(data.shape[<span class="number">0</span>]):</div><div class="line">        result.append(sample_map(data[j, :], condition_pro, prior_pro))</div><div class="line">    <span class="keyword">return</span> result</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line"></div><div class="line">    raw_path = <span class="string">r'F:\work and learn\ML\dataset\MNIST\train.csv'</span></div><div class="line">    <span class="comment"># raw data file path</span></div><div class="line">    test_path = <span class="string">r'F:\work and learn\ML\dataset\MNIST\test.csv'</span></div><div class="line">    <span class="comment"># test data file path</span></div><div class="line">    print(<span class="string">"start read data:"</span>)</div><div class="line">    time1 = time.time()</div><div class="line">    raw_data = np.loadtxt(raw_path, delimiter=<span class="string">','</span>, skiprows=<span class="number">1</span>)</div><div class="line"></div><div class="line">    label = raw_data[:, <span class="number">0</span>]</div><div class="line">    data = raw_data[:, <span class="number">1</span>:]</div><div class="line">    <span class="comment"># extract the label data and image data</span></div><div class="line"></div><div class="line">    data = binary(data, <span class="number">50</span>)</div><div class="line">    <span class="comment"># binary the image data</span></div><div class="line">    data_train, data_test, label_train, label_test = train_test_split(data, label, test_size=<span class="number">0.33</span>,</div><div class="line">                                                                      random_state=<span class="number">23333</span>)</div><div class="line">    <span class="comment"># split the train data for training and testing</span></div><div class="line">    time2 = time.time()</div><div class="line">    print(<span class="string">"read data cost:"</span>, time2 - time1, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line">    print(<span class="string">"start training:"</span>)</div><div class="line">    prior_pro = get_the_prior_probability(label_train)</div><div class="line">    condition_pro = get_the_conditional_probability(data_train, label_train)</div><div class="line">    time3 = time.time()</div><div class="line">    print(<span class="string">"training cost: "</span>, time3 - time2, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line">    <span class="comment"># using the train data and train label to calculate the prior probability</span></div><div class="line">    <span class="comment"># and conditional probability</span></div><div class="line">    print(<span class="string">"start predicting:"</span>)</div><div class="line">    predict = data_set_map(data_test, condition_pro, prior_pro)</div><div class="line">    train_result = accuracy_score(label_test, predict)</div><div class="line">    time4 = time.time()</div><div class="line">    print(<span class="string">"predict cost: "</span>, time4 - time3, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line"></div><div class="line">    print(<span class="string">"the accuracy is: "</span>, train_result)</div></pre></td></tr></table></figure>
-<h3 id="模型训练结果："><a href="#模型训练结果：" class="headerlink" title="模型训练结果："></a>模型训练结果：</h3><blockquote>
-<p>相比之下朴素贝叶斯的正确较差，但是胜在模型简单，并且训练速度快。</p>
-</blockquote>
-<p><img src="http://oov4rmeff.bkt.clouddn.com/naiveBayes.png" alt="img"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/21/20170421-ML-PerceptionInMNIST/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/21/20170421-ML-PerceptionInMNIST/" itemprop="url">
-                  Perception Machine In MNIST
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-21T19:42:02+08:00">
-                2017-04-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="感知机模型在MNIST数据集上的应用"><a href="#感知机模型在MNIST数据集上的应用" class="headerlink" title="感知机模型在MNIST数据集上的应用"></a>感知机模型在MNIST数据集上的应用</h3><h3 id="感知机模型简介："><a href="#感知机模型简介：" class="headerlink" title="感知机模型简介："></a>感知机模型简介：</h3><blockquote>
-<p>感知机模型是二类分类的线性分类模型，其输入为实例的特征向量，输出为实例的类别，取{+1，-1}二者。感知机对应于输入空间中将实例划分为正负两类的分离超平面，属于判别模型。感知机学习旨在求出将训练数据进行线性划分的分离超平面，为此，导入基于误分类的损失函数，利用梯度下降法对损失函数进行极小化，求得感知机模型。感知机学习算法具有简单而易实现的优点。<br>感知机模型选择的是误分类点到超平面的总距离为损失函数。直觉上我们选择误分类的总点数作为损失函数，但是这样的损失函数不是参数的可导函数。<br>感知机模型中一个实例点被误分类的时候，我们调整w和b的参数，使得分类超平面向误分类点的一侧移动以减少误分类点到分类超平面的距离。</p>
-</blockquote>
-<h3 id="实现代码如下："><a href="#实现代码如下：" class="headerlink" title="实现代码如下："></a>实现代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="comment"># @File  : PerceptionMachine.py</span></div><div class="line"><span class="comment"># @Author: mfzhu</span></div><div class="line"><span class="comment"># @Date  : 2017/4/21</span></div><div class="line"><span class="comment"># @Desc  :</span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> random</div><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</div><div class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</div><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary</span><span class="params">(data, threshold)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :param data: 需要二值化的数据</div><div class="line">    :param threshold: 二值化的阈值</div><div class="line">    :return: 二值化后的数据</div><div class="line">    """</div><div class="line">    index_1 = np.array(data &gt; threshold)</div><div class="line">    index_2 = np.array(data &lt;= threshold)</div><div class="line">    data[index_1] = <span class="number">1</span></div><div class="line">    data[index_2] = <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> data</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PerceptionMachine</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.max_iteration = <span class="number">10000</span></div><div class="line">        <span class="comment"># 迭代次数</span></div><div class="line">        self.step = <span class="number">0.001</span></div><div class="line">        <span class="comment"># 迭代步长</span></div><div class="line">        self.weight = []</div><div class="line">        <span class="comment"># 权重向量</span></div><div class="line">        self.bias = <span class="number">1</span></div><div class="line">        <span class="comment"># 偏置</span></div><div class="line">        self.object_num = <span class="number">1</span></div><div class="line">        <span class="comment"># 此处认为标签为1的为+1类，为0的为-1类</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, train_data, train_label)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :param train_data: 训练数据</div><div class="line">        :param train_label: 训练标签</div><div class="line">        :return:</div><div class="line">        """</div><div class="line">        num_sample, num_feature = train_data.shape</div><div class="line">        <span class="comment"># 得到输入训练数据的样本数和每个样本的维度</span></div><div class="line">        self.weight = np.zeros(num_feature, float)</div><div class="line">        <span class="comment"># 初始化权重向量为全0向量</span></div><div class="line">        time = <span class="number">0</span></div><div class="line">        <span class="comment"># 记录当前迭代次数</span></div><div class="line">        <span class="keyword">while</span> time &lt; self.max_iteration:</div><div class="line">            index = random.randint(<span class="number">0</span>, num_sample - <span class="number">1</span>)</div><div class="line">            <span class="comment"># 随机选取一个训练样本</span></div><div class="line">            sample = train_data[index, :]</div><div class="line">            label = train_label[index]</div><div class="line">            <span class="comment"># 得到这个样本的标签和数据</span></div><div class="line"></div><div class="line">            y = int(label == self.object_num) * <span class="number">2</span> - <span class="number">1</span></div><div class="line">            <span class="comment"># 判断是属于+1类还是-1类</span></div><div class="line">            result = (np.dot(sample, self.weight) + self.bias) * y</div><div class="line">            <span class="comment"># 计算是否被误分类</span></div><div class="line">            <span class="keyword">if</span> result &lt;= <span class="number">0</span>:</div><div class="line">                self.weight += self.step * y * sample</div><div class="line">                self.bias += self.step * y</div><div class="line">                time += <span class="number">1</span></div><div class="line">                <span class="comment"># 被误分类的情况下，更新权重和偏置，然后迭代次数加1</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, features)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"></div><div class="line">        :param features: 预测数据集合</div><div class="line">        :return: 返回集合中每个sample的预测标签</div><div class="line">        """</div><div class="line">        res = []</div><div class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> range(features.shape[<span class="number">0</span>]):</div><div class="line">            <span class="keyword">if</span> np.dot(features[index], self.weight) + self.bias &gt; <span class="number">0</span>:</div><div class="line">                <span class="comment"># 如果对应的线性函数大于0，则判断为1</span></div><div class="line">                res.append(<span class="number">1</span>)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                res.append(<span class="number">0</span>)</div><div class="line">        <span class="keyword">return</span> res</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    print(<span class="string">"Start reading the data:"</span>)</div><div class="line">    time1 = time.time()</div><div class="line"></div><div class="line">    raw_path = <span class="string">r'F:\work and learn\ML\dataset\MNIST\train.csv'</span></div><div class="line">    raw_data = np.loadtxt(raw_path, delimiter=<span class="string">','</span>, skiprows=<span class="number">1</span>)</div><div class="line">    <span class="comment"># 读入原始数据</span></div><div class="line">    label = raw_data[:, <span class="number">0</span>]</div><div class="line">    data = raw_data[:, <span class="number">1</span>:]</div><div class="line">    <span class="comment"># 区分标签数据和原始数据</span></div><div class="line">    data = binary(data, <span class="number">125</span>)</div><div class="line">    label[label != <span class="number">0</span>] = <span class="number">1</span></div><div class="line">    <span class="comment"># 进行二值化和对标签二值化（这边做的是二分类）</span></div><div class="line"></div><div class="line">    train_data, test_data, train_label, test_label = train_test_split(data, label, test_size=<span class="number">0.333</span>, random_state=<span class="number">23333</span>)</div><div class="line">    <span class="comment"># 将数据随机切分用于训练和预测</span></div><div class="line">    time2 = time.time()</div><div class="line">    print(<span class="string">"read data cost:"</span>, time2 - time1, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line"></div><div class="line">    print(<span class="string">"Start training:"</span>)</div><div class="line">    perception = PerceptionMachine()</div><div class="line">    perception.train(train_data, train_label)</div><div class="line">    <span class="comment"># 生成感知机模型并进行训练</span></div><div class="line">    time3 = time.time()</div><div class="line">    print(<span class="string">"training cost:"</span>, time3 - time2, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line"></div><div class="line">    print(<span class="string">"Start predicting:"</span>)</div><div class="line">    res = perception.predict(test_data)</div><div class="line">    score = accuracy_score(test_label, res)</div><div class="line">    time4 = time.time()</div><div class="line">    print(<span class="string">"predict cost"</span>, time4 - time3, <span class="string">" seconds"</span>, <span class="string">'\n'</span>)</div><div class="line">    <span class="comment"># 对数据进行预测并计算正确率</span></div><div class="line">    print(<span class="string">"the accuracy_score is"</span>, score)</div></pre></td></tr></table></figure>
-<h3 id="代码运行结果："><a href="#代码运行结果：" class="headerlink" title="代码运行结果："></a>代码运行结果：</h3><p><img src="http://oov4rmeff.bkt.clouddn.com/perception.png" alt="img"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/20/20170420-Tree-TheBoundaryOfTree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/20/20170420-Tree-TheBoundaryOfTree/" itemprop="url">
-                  Find The Boundary Of Tree
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T20:46:02+08:00">
-                2017-04-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Find-The-Boundary-Of-Tree-找到树的边界节点"><a href="#Find-The-Boundary-Of-Tree-找到树的边界节点" class="headerlink" title="Find The Boundary Of Tree(找到树的边界节点)"></a>Find The Boundary Of Tree(找到树的边界节点)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>来自leetcode的contest。具体的题目描述可以在<a href="https://leetcode.com/contest/leetcode-weekly-contest-25/problems/boundary-of-binary-tree/" target="_blank" rel="external">这里</a>找到。</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>本题主要的难点有：怎么找到左侧边界；怎么找到右侧边界；怎么找到下边界；以及如何将边界连接已经右侧边界的逆序。 根据代码解释一下思路；首先判断根节点是否为空决定是否返回空的vector；其次定义用于保存边界的vector并将根节点的值导入；定义用于保存遍历过程节点的集合，将根节点导入；分别定义vector用于保存左侧边界、右侧边界和下边界；根据遍历函数得到的左右下边界，遍历其中的节点找到不重复的节点连接即为整颗树的边界。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; boundaryOfBinaryTree(TreeNode* root) &#123;</div><div class="line">        <span class="keyword">if</span> (!root)</div><div class="line">            <span class="keyword">return</span> &#123;&#125;; <span class="comment">// 返回空边界</span></div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res = &#123;root-&gt;val&#125;;<span class="comment">//导入根值到边界结果</span></div><div class="line">        <span class="built_in">unordered_set</span>&lt;TreeNode*&gt; hash = &#123;root&#125;;<span class="comment">//导入根到遍历节点集合</span></div><div class="line">        </div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; left;</div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; right;</div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; leaf;<span class="comment">// 定义三个边界的vector</span></div><div class="line">        </div><div class="line">        leftBoundary(root-&gt;left, left);</div><div class="line">        leafNode(root, leaf);</div><div class="line">        rightBoundary(root-&gt;right, right);</div><div class="line">        <span class="comment">// 通过遍历函数找到各自边界的集合，其中集合可能存在重合</span></div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> l : left)&#123;<span class="keyword">if</span> (hash.count(l)) <span class="keyword">continue</span>; res.push_back(l-&gt;val); hash.insert(l);&#125;</div><div class="line">        <span class="comment">//连接左侧边界</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> m : leaf)&#123;<span class="keyword">if</span> (hash.count(m)) <span class="keyword">continue</span>; res.push_back(m-&gt;val); hash.insert(m);&#125;</div><div class="line">        <span class="comment">//连接下侧边界</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> r: right)&#123;<span class="keyword">if</span> (hash.count(r)) <span class="keyword">continue</span>; res.push_back(r-&gt;val); hash.insert(r);&#125;</div><div class="line">        <span class="comment">// 连接右侧边界</span></div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">leftBoundary</span><span class="params">(TreeNode* node, <span class="built_in">vector</span>&lt;TreeNode*&gt;&amp; left)</span></span>&#123;</div><div class="line">        <span class="keyword">while</span>(node)&#123;</div><div class="line">            left.push_back(node);</div><div class="line">            <span class="keyword">if</span> (node-&gt;left) node = node-&gt;left;</div><div class="line">            <span class="keyword">else</span> node = node-&gt;right;</div><div class="line">            <span class="comment">// 找到最左侧的边界；不断向左侧遍历，为空就向右侧遍历知道为空</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">leafNode</span><span class="params">(TreeNode* root, <span class="built_in">vector</span>&lt;TreeNode*&gt;&amp;leaf)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        <span class="keyword">if</span> (root-&gt;left == <span class="literal">NULL</span> &amp;&amp; root-&gt;right == <span class="literal">NULL</span>) leaf.push_back(root);</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            leafNode(root-&gt;left, leaf);</div><div class="line">            leafNode(root-&gt;right, leaf);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//找到所有叶节点的集合即为下边界集合；先判断是否是空节点；然后判断是否是叶节点；然后递归左侧和右侧节点。</span></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rightBoundary</span><span class="params">(TreeNode* node, <span class="built_in">vector</span>&lt;TreeNode*&gt;&amp; right)</span></span>&#123;</div><div class="line">        <span class="keyword">while</span>(node)&#123;</div><div class="line">            right.push_back(node);</div><div class="line">            <span class="keyword">if</span> (node-&gt;right) node = node-&gt;right;</div><div class="line">            <span class="keyword">else</span> node = node-&gt;left;</div><div class="line">        &#125;<span class="comment">//找到右侧边界；同左侧；需要注意的是需要将结果逆序。</span></div><div class="line">        reverse(right.begin(), right.end());</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/19/20170419-Array-PermutationII/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/19/20170419-Array-PermutationII/" itemprop="url">
-                  Permutation II
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-19T18:45:02+08:00">
-                2017-04-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Array-Permutation-数组的全排列"><a href="#Array-Permutation-数组的全排列" class="headerlink" title="Array Permutation(数组的全排列)"></a>Array Permutation(数组的全排列)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个数字n，和一个关于需要生成排列的长度k。要求根据这两个数字，从[1…n]的数组中生成长度为k的排列。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 例如给定数字为n=4，k=2；则根据要求生成的排列为[[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]。</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>这道题理解上问题不大，主要是在于用什么方法去解决。我们首先想到的是使用回溯的方法来解决。首先是使用一个标签变量来记录我们当前要确定排列中的第几个位置，然后递归的调用函数来确定下面位置的数字。主要的思路体现在代码中，可以看代码中的注释来理解。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; combine(<span class="keyword">int</span> n, <span class="keyword">int</span> k) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path;</div><div class="line">        <span class="comment">//保存当前的遍历结果</span></div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</div><div class="line">        <span class="comment">//保存结果</span></div><div class="line">        helper(res, path, n, k);</div><div class="line">        <span class="comment">//调用函数</span></div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">helper</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; path, <span class="keyword">int</span> n, <span class="keyword">int</span> k)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (k == <span class="number">0</span>)&#123;</div><div class="line">            res.push_back(path);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//如果确定位置已经到了0，将其保存到结果中</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt; <span class="number">0</span>; i--)&#123;</div><div class="line">            path.push_back(i);</div><div class="line">            <span class="comment">//先确定一个数</span></div><div class="line">            helper(res, path, i - <span class="number">1</span>, k - <span class="number">1</span>);</div><div class="line">            <span class="comment">//确定下一个数</span></div><div class="line">            path.pop_back();</div><div class="line">            <span class="comment">//回溯一步，将刚才的数弹出</span></div><div class="line">        &#125;       </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="解题思路2："><a href="#解题思路2：" class="headerlink" title="解题思路2："></a>解题思路2：</h3><blockquote>
-<p>当然这道题也可以使用递归的方法来解决。主要不同的是直接生成一个当前路径数组，然后不断的确定当前位置的数字即可。</p>
-</blockquote>
-<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; combine(<span class="keyword">int</span> n, <span class="keyword">int</span> k) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; rslt;</div><div class="line">        <span class="comment">//保存结果</span></div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path(k, <span class="number">0</span>);</div><div class="line">        <span class="comment">//保存当前遍历的排列结果</span></div><div class="line">        combine(n, k, rslt, path);</div><div class="line">        <span class="comment">//调用函数</span></div><div class="line">        <span class="keyword">return</span> rslt;</div><div class="line">    &#125;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">combine</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;rslt, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;path)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (k == <span class="number">0</span>) &#123;</div><div class="line">            rslt.push_back(path);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//从排列的尾部开始确定这个位置需要填入什么数字</span></div><div class="line">        <span class="comment">//当达到第0个位置的时候将其保存入结果</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; i--) &#123;</div><div class="line">            path[k - <span class="number">1</span>] = i;</div><div class="line">            <span class="comment">//确定第k个位置的数，从n到1中挑选</span></div><div class="line">            combine(i - <span class="number">1</span>, k - <span class="number">1</span>, rslt, path);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1811,7 +1822,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-count">90</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
