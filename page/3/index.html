@@ -260,6 +260,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/27/20170527-String-ReverseString/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/27/20170527-String-ReverseString/" itemprop="url">
+                  Reverse String
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T14:46:02+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Reverse-String"><a href="#Reverse-String" class="headerlink" title="Reverse String"></a>Reverse String</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定字符串返回其逆序后的结果</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p> 具体描述看<a href="https://leetcode.com/problems/reverse-string/#/description" target="_blank" rel="external">LeetCode344</a></p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>利用swap函数交换对应位置上的字符即可。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">reverseString</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="built_in">string</span> res = s;</div><div class="line">        <span class="keyword">int</span> length = s.size();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length / <span class="number">2</span>; i++)&#123;</div><div class="line">            swap(res[i], res[length - i - <span class="number">1</span>]);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/26/20170526-String-IsIsomorphic/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1584,158 +1736,6 @@
 <p>本题的解题思路是将原始链表中的奇数位置节点连接成奇数链表，偶数位置连接成偶数链表；然后重新连接这两个链表即可。主要需要注意的是：在遍历next节点的时候，我们需要判断链表的下一个节点是否为空。</p>
 </blockquote>
 <h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for singly-linked list.</div><div class="line"> * struct ListNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     ListNode *next;</div><div class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">oddEvenList</span><span class="params">(ListNode* head)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!head || !head-&gt;next) <span class="keyword">return</span> head;</div><div class="line">        <span class="comment">// 单个节点或者空链表直接返回</span></div><div class="line">        ListNode* odd = head;</div><div class="line">        ListNode* even = head-&gt;next;</div><div class="line">        <span class="comment">// 定义奇偶链表的头节点</span></div><div class="line">        ListNode* even_head = even;</div><div class="line">        ListNode* odd_head = odd;</div><div class="line">        <span class="comment">// 保存奇偶链表的头节点用于最后的连接</span></div><div class="line">        <span class="keyword">while</span>(odd-&gt;next &amp;&amp; even-&gt;next)&#123;</div><div class="line">            <span class="keyword">if</span> (even-&gt;next)&#123;</div><div class="line">                odd-&gt;next = even-&gt;next;</div><div class="line">                odd = odd-&gt;next;</div><div class="line">                <span class="comment">// 连接奇数链表</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (odd-&gt;next)&#123;</div><div class="line">                even-&gt;next = odd-&gt;next;</div><div class="line">                even = even-&gt;next;</div><div class="line">                <span class="comment">//连接偶数链表</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        even-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        odd-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        <span class="comment">// 定义链表尾部节点</span></div><div class="line">        odd-&gt;next = even_head;</div><div class="line">        <span class="keyword">return</span> odd_head;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/17/20170517-List-ReversePartList/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/17/20170517-List-ReversePartList/" itemprop="url">
-                  Reverse Part List
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-17T11:36:02+08:00">
-                2017-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Reverse-Part-List"><a href="#Reverse-Part-List" class="headerlink" title="Reverse Part List"></a>Reverse Part List</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个链表的头结点，然后指定起始位置m和终止位置n；要求逆序链表中从第m个节点到n个节点的部分。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 详细描述可以看<a href="https://leetcode.com/problems/reverse-linked-list-ii/#/description" target="_blank" rel="external">LeetCode92</a>。</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>链表的题目需要注意的是关于头节点的处理。我们定义了一个虚拟头节点用来处理这种情况；另外需要注意的是关于链表被逆序后的重新连接的问题，我们在开始部分需要找到需要逆序部分的上一个节点和下一个节点用来将逆序结果重新连接到链表中。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">reverseBetween</span><span class="params">(ListNode* head, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!head || (m == n)) <span class="keyword">return</span> head;</div><div class="line">        # 如果是空链表或者起始位置和终止位置相同，则直接返回</div><div class="line">        ListNode* dummy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</div><div class="line">        # 定义虚拟头结点</div><div class="line">        dummy-&gt;next = head;</div><div class="line">        ListNode* pre = dummy;</div><div class="line">        # 定义前节点</div><div class="line">        ListNode* back = head;</div><div class="line">        # 定义后节点</div><div class="line">        <span class="keyword">while</span>(m - <span class="number">1</span> &gt; <span class="number">0</span>)&#123;</div><div class="line">            pre = pre-&gt;next;</div><div class="line">            m--;</div><div class="line">        &#125;</div><div class="line">        # 找到待逆序节点的前一个位置</div><div class="line">        ListNode* front = pre-&gt;next;</div><div class="line">        # 逆序部分的第一个节点</div><div class="line">        <span class="keyword">while</span>(n - <span class="number">1</span> &gt; <span class="number">0</span>)&#123;</div><div class="line">            back = back-&gt;next;</div><div class="line">            n--;</div><div class="line">        &#125;</div><div class="line">        # 逆序部分的尾节点</div><div class="line">        ListNode* next = back-&gt;next;</div><div class="line">        # 逆序部分尾部的下一个节点</div><div class="line">        </div><div class="line">        ListNode* left = front;</div><div class="line">        ListNode* right = front-&gt;next;</div><div class="line">        # 定义逆序部分的前后节点</div><div class="line">        left-&gt;next = <span class="literal">NULL</span>;</div><div class="line">        # 前节点next指针改变</div><div class="line">        <span class="keyword">while</span>(right != next)&#123;</div><div class="line">            ListNode* tmp = right-&gt;next;</div><div class="line">            # 保存好下一个指针</div><div class="line">            right-&gt;next = left;</div><div class="line">            # 逆序前后位置</div><div class="line">            left = right;</div><div class="line">            # 前指针前进一个位置</div><div class="line">            right = tmp;</div><div class="line">            # 后指针前进一个位置</div><div class="line">        &#125;</div><div class="line">        pre-&gt;next = left;</div><div class="line">        front-&gt;next = next;</div><div class="line">        # 重新连接链表的头和尾</div><div class="line">        <span class="keyword">return</span> dummy-&gt;next;     </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
           
         
