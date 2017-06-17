@@ -260,6 +260,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/07/20170607-String-letterCombinations/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/07/20170607-String-letterCombinations/" itemprop="url">
+                  Letter Combinations
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-07T11:23:02+08:00">
+                2017-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Letter-Combinations"><a href="#Letter-Combinations" class="headerlink" title="Letter Combinations"></a>Letter Combinations</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定手机键盘上的数字字符的字符串，要求输出所有可能由该数字字符串得到英文字符串。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>具体描述看<a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/#/description" target="_blank" rel="external">LeetCode17</a></p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>主要的思路是递归的方式。我们针对每一位的数字字符进行遍历，然后不断递归到下一层得到字符串的组合。其中需要注意的是我们每次加上字符后需要回溯一步。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; letterCombinations(<span class="built_in">string</span> digits) &#123;</div><div class="line">        <span class="built_in">string</span> str;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</div><div class="line">        <span class="built_in">map</span>&lt;<span class="keyword">char</span>, <span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt; hash;</div><div class="line">        <span class="keyword">if</span> (digits == <span class="string">""</span>) <span class="keyword">return</span> res;</div><div class="line">        hash.insert(&#123;<span class="string">'2'</span>,&#123;<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>&#125;&#125;);</div><div class="line">        hash.insert(&#123;<span class="string">'3'</span>,&#123;<span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span>&#125;&#125;);</div><div class="line">        hash.insert(&#123;<span class="string">'4'</span>,&#123;<span class="string">'g'</span>, <span class="string">'h'</span>, <span class="string">'i'</span>&#125;&#125;);</div><div class="line">        hash.insert(&#123;<span class="string">'5'</span>,&#123;<span class="string">'j'</span>, <span class="string">'k'</span>, <span class="string">'l'</span>&#125;&#125;);</div><div class="line">        hash.insert(&#123;<span class="string">'6'</span>,&#123;<span class="string">'m'</span>, <span class="string">'n'</span>, <span class="string">'o'</span>&#125;&#125;);</div><div class="line">        hash.insert(&#123;<span class="string">'7'</span>,&#123;<span class="string">'p'</span>, <span class="string">'q'</span>, <span class="string">'r'</span>, <span class="string">'s'</span>&#125;&#125;);</div><div class="line">        hash.insert(&#123;<span class="string">'8'</span>,&#123;<span class="string">'t'</span>, <span class="string">'u'</span>, <span class="string">'v'</span>&#125;&#125;);</div><div class="line">        hash.insert(&#123;<span class="string">'9'</span>,&#123;<span class="string">'w'</span>, <span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>&#125;&#125;);</div><div class="line">        hash.insert(&#123;<span class="string">'0'</span>,&#123;<span class="string">' '</span>&#125;&#125;);</div><div class="line">        <span class="comment">//构建各个数字对应字符的哈希表</span></div><div class="line">        permutation(res, str, hash, <span class="number">0</span>, digits.size(), digits);</div><div class="line">        <span class="comment">//调用递归函数来得到所有的组合</span></div><div class="line">        <span class="comment">//其中res是保存组合结果；str是当前的组合结果；</span></div><div class="line">        <span class="comment">//begin和end表示要找到源字符begin到end的位置的所有组合字符</span></div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">permutation</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; res, <span class="built_in">string</span>&amp; str, <span class="built_in">map</span>&lt;<span class="keyword">char</span>, <span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt;&amp; hash, <span class="keyword">int</span> begin, <span class="keyword">int</span> end, <span class="built_in">string</span> digits)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (begin &gt;= end)&#123;</div><div class="line">            res.push_back(str);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">            <span class="comment">//begin大于等于end的情况说明到达尾部，将结果保存即可</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; hash[digits[begin]].size(); i++)&#123;</div><div class="line">        <span class="comment">//对当前的begin位置的所有可能进行遍历</span></div><div class="line">            str = str + hash[digits[begin]][i];</div><div class="line">            <span class="comment">//将每种可能加到str字符串上</span></div><div class="line">            permutation(res, str, hash, begin + <span class="number">1</span>, end, digits);</div><div class="line">            <span class="comment">//进行下一层的遍历，注意此时的begin加1</span></div><div class="line">            str.pop_back();</div><div class="line">            <span class="comment">//另外需要回溯一步</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/06/20170606-String-LongestCommonPrefix/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1615,158 +1767,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/28/20170528-String-ReverseVowels/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/28/20170528-String-ReverseVowels/" itemprop="url">
-                  Reverse Vowels
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-28T23:36:02+08:00">
-                2017-05-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Reverse-Vowels"><a href="#Reverse-Vowels" class="headerlink" title="Reverse Vowels"></a>Reverse Vowels</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>逆序给定字符串中的元音字母</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 具体描述看<a href="https://leetcode.com/problems/reverse-vowels-of-a-string/#/description" target="_blank" rel="external">LeetCode345</a></p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>我们利用vector保存下字符串中是元音的字符的对应位置。然后对字符串中的这些字符进行逆序即可。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">reverseVowels</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="built_in">set</span>&lt;<span class="keyword">char</span>&gt; hash = &#123;<span class="string">'a'</span>,<span class="string">'e'</span>,<span class="string">'i'</span>,<span class="string">'o'</span>,<span class="string">'u'</span>,<span class="string">'A'</span>,<span class="string">'E'</span>,<span class="string">'I'</span>,<span class="string">'O'</span>,<span class="string">'U'</span>&#125;;</div><div class="line">        <span class="comment">//记录元音字符集合</span></div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec = &#123;&#125;;</div><div class="line">        <span class="comment">//保存下元音字符的位置</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); i++)&#123;</div><div class="line">            <span class="keyword">if</span> (hash.find(s[i]) != hash.end())&#123;</div><div class="line">                vec.push_back(i);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; vec.size() / <span class="number">2</span>; j++)&#123;</div><div class="line">            swap(s[vec[j]], s[vec[vec.size() - j - <span class="number">1</span>]]);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> s;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1816,7 +1816,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">94</span>
+                <span class="site-state-item-count">95</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
