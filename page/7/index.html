@@ -260,6 +260,162 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/19/20170419-Array-PermutationII/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/19/20170419-Array-PermutationII/" itemprop="url">
+                  Permutation II
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-19T18:45:02+08:00">
+                2017-04-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Array-Permutation-数组的全排列"><a href="#Array-Permutation-数组的全排列" class="headerlink" title="Array Permutation(数组的全排列)"></a>Array Permutation(数组的全排列)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一个数字n，和一个关于需要生成排列的长度k。要求根据这两个数字，从[1…n]的数组中生成长度为k的排列。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p> 例如给定数字为n=4，k=2；则根据要求生成的排列为[[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]。</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>这道题理解上问题不大，主要是在于用什么方法去解决。我们首先想到的是使用回溯的方法来解决。首先是使用一个标签变量来记录我们当前要确定排列中的第几个位置，然后递归的调用函数来确定下面位置的数字。主要的思路体现在代码中，可以看代码中的注释来理解。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; combine(<span class="keyword">int</span> n, <span class="keyword">int</span> k) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path;</div><div class="line">        <span class="comment">//保存当前的遍历结果</span></div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</div><div class="line">        <span class="comment">//保存结果</span></div><div class="line">        helper(res, path, n, k);</div><div class="line">        <span class="comment">//调用函数</span></div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">helper</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; path, <span class="keyword">int</span> n, <span class="keyword">int</span> k)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (k == <span class="number">0</span>)&#123;</div><div class="line">            res.push_back(path);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//如果确定位置已经到了0，将其保存到结果中</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt; <span class="number">0</span>; i--)&#123;</div><div class="line">            path.push_back(i);</div><div class="line">            <span class="comment">//先确定一个数</span></div><div class="line">            helper(res, path, i - <span class="number">1</span>, k - <span class="number">1</span>);</div><div class="line">            <span class="comment">//确定下一个数</span></div><div class="line">            path.pop_back();</div><div class="line">            <span class="comment">//回溯一步，将刚才的数弹出</span></div><div class="line">        &#125;       </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解题思路2："><a href="#解题思路2：" class="headerlink" title="解题思路2："></a>解题思路2：</h3><blockquote>
+<p>当然这道题也可以使用递归的方法来解决。主要不同的是直接生成一个当前路径数组，然后不断的确定当前位置的数字即可。</p>
+</blockquote>
+<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; combine(<span class="keyword">int</span> n, <span class="keyword">int</span> k) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; rslt;</div><div class="line">        <span class="comment">//保存结果</span></div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path(k, <span class="number">0</span>);</div><div class="line">        <span class="comment">//保存当前遍历的排列结果</span></div><div class="line">        combine(n, k, rslt, path);</div><div class="line">        <span class="comment">//调用函数</span></div><div class="line">        <span class="keyword">return</span> rslt;</div><div class="line">    &#125;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">combine</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;rslt, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;path)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (k == <span class="number">0</span>) &#123;</div><div class="line">            rslt.push_back(path);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//从排列的尾部开始确定这个位置需要填入什么数字</span></div><div class="line">        <span class="comment">//当达到第0个位置的时候将其保存入结果</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; i--) &#123;</div><div class="line">            path[k - <span class="number">1</span>] = i;</div><div class="line">            <span class="comment">//确定第k个位置的数，从n到1中挑选</span></div><div class="line">            combine(i - <span class="number">1</span>, k - <span class="number">1</span>, rslt, path);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/18/20170418-String-StringToNum/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1662,165 +1818,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/09/20170409-Matrix-GameLife/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/09/20170409-Matrix-GameLife/" itemprop="url">
-                  Game Life
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T13:56:02+08:00">
-                2017-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Game-Life-生存游戏"><a href="#Game-Life-生存游戏" class="headerlink" title="Game Life(生存游戏)"></a>Game Life(生存游戏)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个矩阵，矩阵中只包含着0，1数字。有如下游戏规则：</p>
-</blockquote>
-<ul>
-<li>如果矩阵中的一个点当前值为1，且其周围为1的个数大于3或者小于2的时候，下一轮这个点为0；</li>
-<li>如果矩阵中的一个点当前值为0，当且仅当周围为1的个数为3的时候，这个点下一轮为1；</li>
-</ul>
-<blockquote>
-<p>要求在O(1)的空间下找到下一轮的每个点的生存情况。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>详细说明见<a href="https://leetcode.com/problems/game-of-life/" target="_blank" rel="external">leetcode</a></p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>本题主要是在于空间上我们不能利用保存一个和当前矩阵相同的矩阵用来判断下一轮的节点情况；所以这边主要利用的是哈希表，我们建立一个哈希表；分别表示由1变1，由0变0，由1变0，由0变1的4种情况。在遍历矩阵的过程中，找到周围的8个点，从哈希表中找到对应的上一轮的节点情况用来判断当前节点的下一轮的情况。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">gameOfLife</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; board)</span> </span>&#123;</div><div class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; hash = &#123;&#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">-2</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">0</span>&#125;&#125;;</div><div class="line">        <span class="comment">//表示4种变化情况</span></div><div class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> row = board.size();</div><div class="line">        <span class="keyword">int</span> col = board[<span class="number">0</span>].size();</div><div class="line">        <span class="comment">//找到行和列</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; col; j++)&#123;</div><div class="line">                count = <span class="number">0</span>;</div><div class="line">                count += (i - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; j - <span class="number">1</span> &gt;= <span class="number">0</span>) ? hash[board[i - <span class="number">1</span>][j - <span class="number">1</span>]] : <span class="number">0</span>;</div><div class="line">                count += (i - <span class="number">1</span> &gt;= <span class="number">0</span>) ? hash[board[i - <span class="number">1</span>][j]] : <span class="number">0</span>;</div><div class="line">                count += (i - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; j + <span class="number">1</span> &lt; col) ? hash[board[i - <span class="number">1</span>][j + <span class="number">1</span>]] : <span class="number">0</span>;</div><div class="line">                count += (j - <span class="number">1</span> &gt;= <span class="number">0</span>) ? hash[board[i][j - <span class="number">1</span>]] : <span class="number">0</span>;</div><div class="line">                count += (j + <span class="number">1</span> &lt; col) ? hash[board[i][j + <span class="number">1</span>]] : <span class="number">0</span>;</div><div class="line">                count += (i + <span class="number">1</span> &lt; row &amp;&amp; j - <span class="number">1</span> &gt;= <span class="number">0</span>) ? hash[board[i + <span class="number">1</span>][j - <span class="number">1</span>]] : <span class="number">0</span>;</div><div class="line">                count += (i + <span class="number">1</span> &lt; row) ? hash[board[i + <span class="number">1</span>][j]] : <span class="number">0</span>;</div><div class="line">                count += (i + <span class="number">1</span> &lt; row &amp;&amp; j + <span class="number">1</span> &lt; col) ? hash[board[i + <span class="number">1</span>][j + <span class="number">1</span>]]: <span class="number">0</span>; </div><div class="line">                <span class="comment">//计算周围8个节点的情况</span></div><div class="line">                <span class="keyword">if</span> (board[i][j] == <span class="number">1</span> &amp;&amp; (count &gt; <span class="number">3</span> || count &lt; <span class="number">2</span>))</div><div class="line">                    board[i][j] = <span class="number">-2</span>;</div><div class="line">                    <span class="comment">//针对两种情况进行变化</span></div><div class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (board[i][j] == <span class="number">0</span> &amp;&amp; count == <span class="number">3</span>)</div><div class="line">                    board[i][j] = <span class="number">-1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; col; j++)&#123;</div><div class="line">                <span class="keyword">if</span> (board[i][j] == <span class="number">-1</span>)</div><div class="line">                    board[i][j] = <span class="number">1</span>;</div><div class="line">                <span class="keyword">if</span> (board[i][j] == <span class="number">-2</span>)</div><div class="line">                    board[i][j] = <span class="number">0</span>;</div><div class="line">                    <span class="comment">//根据哈希表重建当前表</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1870,7 +1867,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">95</span>
+                <span class="site-state-item-count">96</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
