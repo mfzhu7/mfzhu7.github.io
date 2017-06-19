@@ -260,6 +260,170 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/31/20170331-Tree-TheTypeOfTree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/31/20170331-Tree-TheTypeOfTree/" itemprop="url">
+                  The Type Of Tree
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-31T12:12:02+08:00">
+                2017-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="The-Type-Of-Tree"><a href="#The-Type-Of-Tree" class="headerlink" title="The Type Of Tree"></a>The Type Of Tree</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一个树的头结点，判断这棵树是不平衡二叉树。平衡二叉树的定义是左右对当前节点而言，左子树和右子树的深度差值不超过1；且左右子树也是平衡二叉树。</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>对于树的问题大部分都是采用递归的方式进行求解的，这一题也是。不过在判断是否是平衡儿叉树的过程需要记录当前节点的深度用来判断左右节点高度的差值；另外利用一个state变量来保存当前遍历过程中得到树的状态，如果已经知道是非平衡二叉树直接返回即可。 </p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> isBalanceTree1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isBalanceTree</span><span class="params">(treeNode* root)</span></span>&#123;</div><div class="line">        <span class="keyword">bool</span> cur_state = <span class="literal">true</span>;<span class="comment">//记录当前的树的状态</span></div><div class="line">        <span class="keyword">int</span> level = <span class="number">1</span>; <span class="comment">//树的高度从1开始算起</span></div><div class="line">        getHeight(root, level, cur_state);</div><div class="line">        <span class="keyword">return</span> cur_state;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getHeight</span><span class="params">(treeNode* root1, <span class="keyword">int</span> level, <span class="keyword">bool</span>&amp; cur_state)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (root1 == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> level;</div><div class="line">            <span class="comment">//如果节点是空，直接返回当前节点的深度</span></div><div class="line">        <span class="keyword">int</span> LH = getHeight(root1-&gt;left, level + <span class="number">1</span>, cur_state);</div><div class="line">        <span class="comment">//获取左子树的高度</span></div><div class="line">        <span class="keyword">if</span> (!cur_state)</div><div class="line">            <span class="keyword">return</span> level;</div><div class="line">        <span class="comment">// 如果已经知道是非平衡二叉树，直接返回即可。</span></div><div class="line">        <span class="keyword">int</span> RH = getHeight(root1-&gt;right, level + <span class="number">1</span>, cur_state);</div><div class="line">        <span class="keyword">if</span> (!cur_state)</div><div class="line">            <span class="keyword">return</span> level;</div><div class="line">         <span class="comment">//获取右子树的平衡状态</span></div><div class="line">        <span class="keyword">if</span> (RH - LH &gt; <span class="number">1</span> || LH - RH &gt; <span class="number">1</span>)</div><div class="line">            cur_state = <span class="literal">false</span>;</div><div class="line">        <span class="comment">// 如果深度差值超过1，平衡状态改变</span></div><div class="line">        <span class="keyword">return</span> LH &gt;= RH ? LH : RH;</div><div class="line">        <span class="comment">// 获取子树中高度较深的那个节点</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="题目描述2："><a href="#题目描述2：" class="headerlink" title="题目描述2："></a>题目描述2：</h3><blockquote>
+<p>给定一棵树的头节点，要求判断这棵树是不是二叉搜索树。<br>具体的题目描述可以看<a href="https://leetcode.com/problems/validate-binary-search-tree/#/description" target="_blank" rel="external">LeetCode98</a>.</p>
+</blockquote>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路:"></a>解题思路:</h3><blockquote>
+<p>因为是搜索二叉树，所以我们可以通过中序遍历的结果看其是否是升序的来判断是否是搜索二叉树。自然还有递归的解法待下次补上。</p>
+</blockquote>
+<h3 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下:"></a>代码如下:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//是不是有效的二叉搜索树</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</div><div class="line">        inOrder(root, vec);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; vec.size(); i++)&#123;</div><div class="line">            <span class="keyword">if</span> (vec[i] &lt;= vec[i - <span class="number">1</span>]) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inOrder</span><span class="params">(TreeNode* head, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; vec)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span>;</div><div class="line">        inOrder(head-&gt;left, vec);</div><div class="line">        vec.push_back(head-&gt;val);</div><div class="line">        inOrder(head-&gt;right, vec);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="题目描述3："><a href="#题目描述3：" class="headerlink" title="题目描述3："></a>题目描述3：</h3><blockquote>
+<p>给定两棵树，要求判断这两棵树是否相等。<br>具体描述可以看<a href="https://leetcode.com/problems/same-tree/#/description" target="_blank" rel="external">LeetCode100</a>.</p>
+</blockquote>
+<h3 id="代码如下-1"><a href="#代码如下-1" class="headerlink" title="代码如下:"></a>代码如下:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isSameTree</span><span class="params">(TreeNode* p, TreeNode* q)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> check(p, q);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(TreeNode* t1, TreeNode* t2)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (t1 == <span class="literal">NULL</span> &amp;&amp; t2 == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        <span class="keyword">if</span> ((t1 == <span class="literal">NULL</span> &amp;&amp; t2 != <span class="literal">NULL</span>) || (t1 != <span class="literal">NULL</span> &amp;&amp; t2 == <span class="literal">NULL</span>))</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        <span class="keyword">if</span> (t1-&gt;val == t2-&gt;val)</div><div class="line">            <span class="keyword">return</span> check(t1-&gt;left, t2-&gt;left) &amp;&amp; check(t1-&gt;right, t2-&gt;right);</div><div class="line">        <span class="keyword">else</span> </div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="题目描述4"><a href="#题目描述4" class="headerlink" title="题目描述4:"></a>题目描述4:</h3><blockquote>
+<p>给定两棵树的头节点，要求判断这两棵树是否是互为镜像。<br>具体描述可以看<a href="https://leetcode.com/problems/symmetric-tree/#/description" target="_blank" rel="external">LeetCode101</a>.</p>
+</blockquote>
+<h3 id="代码如下-2"><a href="#代码如下-2" class="headerlink" title="代码如下:"></a>代码如下:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isSymmetric</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        <span class="keyword">return</span> check(root-&gt;left, root-&gt;right);</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(TreeNode* p, TreeNode* q)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (p == <span class="literal">NULL</span> &amp;&amp; q == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        <span class="keyword">if</span> ((p == <span class="literal">NULL</span> &amp;&amp; q != <span class="literal">NULL</span>) || (p != <span class="literal">NULL</span> &amp;&amp; q == <span class="literal">NULL</span>))</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        <span class="keyword">if</span> (p-&gt;val == q-&gt;val)</div><div class="line">            <span class="keyword">return</span> check(p-&gt;left, q-&gt;right) &amp;&amp; check(p-&gt;right, q-&gt;left);</div><div class="line">        <span class="keyword">if</span> (p-&gt;val != q-&gt;val)</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/30/20170330-Tree-TreeContainAnotherTree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1689,162 +1853,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/21/20170321-List-ReverseEveryKNode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/21/20170321-List-ReverseEveryKNode/" itemprop="url">
-                  Reverse Every K Node In List
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-21T12:46:02+08:00">
-                2017-03-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Reverse-Every-K-Node-In-List-将每k个节点逆序"><a href="#Reverse-Every-K-Node-In-List-将每k个节点逆序" class="headerlink" title="Reverse Every K Node In List(将每k个节点逆序)"></a>Reverse Every K Node In List(将每k个节点逆序)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个链表的头结点head，和一个整数K。将链表中从头到尾链表中的每k个节点逆序，如果最后一段不足k个节点的不进行逆序。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6-&gt;7-&gt;8-&gt;NULL.给定的k值为3.则返回的链表排列为:3-&gt;2-&gt;1-&gt;6-&gt;5-&gt;4-&gt;7-&gt;8-&gt;NULL。</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>首先涉及到了逆序，第一个想法是利用栈的结构，能够帮助我们将链表中的数据逆序。所以新建一个栈结构和一个计数值，将链表中的值不断压栈，利用计数值来判断是否达到了K个节点。如果达到的话，则从栈中不断出栈数据，然后修改链表中的数据即可。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ListNode.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">class</span> reverseKNodes1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">reverseKNodes</span><span class="params">(ListNode*head, <span class="keyword">int</span> K)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (K &lt; <span class="number">2</span>)</div><div class="line">            <span class="keyword">return</span> head; <span class="comment">// 逆序K小于2的情况直接返回</span></div><div class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</div><div class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">        ListNode* cur = head;<span class="comment">//用来记录当前的遍历节点</span></div><div class="line">        ListNode* tmp = head;<span class="comment">//用来保存每k个节点的头节点</span></div><div class="line"></div><div class="line">        <span class="keyword">while</span>(cur != <span class="literal">NULL</span>)&#123;</div><div class="line">            <span class="keyword">if</span> (count != K)&#123;</div><div class="line">                stk.push(cur-&gt;val);</div><div class="line">                count = count + <span class="number">1</span>;</div><div class="line">                cur = cur-&gt;next;</div><div class="line">            &#125;<span class="comment">// 将数据进栈，直到栈中k个数</span></div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                <span class="keyword">while</span>(!stk.empty())&#123;</div><div class="line">                    tmp-&gt;val = stk.top();</div><div class="line">                    stk.pop();</div><div class="line">                    tmp = tmp-&gt;next;</div><div class="line">                &#125;<span class="comment">//根据出栈的数修改链表中的数据</span></div><div class="line">                tmp = cur;<span class="comment">// 重新修改当前每k个小链表的头节点</span></div><div class="line">                count = <span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> head;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="解题思路2："><a href="#解题思路2：" class="headerlink" title="解题思路2："></a>解题思路2：</h3><blockquote>
-<p>当然我们也可以不用栈结构直接进行链表的调整。主要的思路是用start记录每k个节点的头，end用来记录k个节点的尾。然后直接将k个节点进行逆序。主要需要注意的地方有：第一组k个节点的尾部成为返回的头节点，需要记录；另外后面的每组k个节点，我们都需要将逆序后的k个节点的头部与上一组的k个节点的尾部重新连接。</p>
-</blockquote>
-<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> reverseKNodes2&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">reverseKNodes</span><span class="params">(ListNode* head, <span class="keyword">int</span> K)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (K &lt; <span class="number">2</span>)</div><div class="line">            <span class="keyword">return</span> head;</div><div class="line">        ListNode* cur = head; <span class="comment">//遍历节点</span></div><div class="line">        ListNode* start = <span class="literal">NULL</span>;</div><div class="line">        ListNode* pre = <span class="literal">NULL</span>; <span class="comment">// 上一组k个节点的尾部</span></div><div class="line">        ListNode* next = <span class="literal">NULL</span>; <span class="comment">//下一组k个节点的头部</span></div><div class="line">        <span class="keyword">int</span> count = <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(cur != <span class="literal">NULL</span>)&#123;</div><div class="line">            next = cur-&gt;next;</div><div class="line">            <span class="keyword">if</span> (count == K)&#123;</div><div class="line">                start = pre == <span class="literal">NULL</span> ? head : pre-&gt;next;</div><div class="line">                head = pre == <span class="literal">NULL</span> ? cur : head;<span class="comment">// 记录返回的头结点</span></div><div class="line">                resign(pre, start, cur, next);<span class="comment">// 逆序函数</span></div><div class="line">                pre = start;<span class="comment">// 修改pre节点</span></div><div class="line">                count = <span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">            count++;</div><div class="line">            cur = next;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> head;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">resign</span><span class="params">(ListNode* left, ListNode* start, ListNode* end, ListNode* right)</span></span>&#123;</div><div class="line">        ListNode* pre = start;</div><div class="line">        ListNode* cur = start-&gt;next;</div><div class="line">        ListNode* next = <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">while</span> (cur != right)&#123;</div><div class="line">            next = cur-&gt;next;</div><div class="line">            cur-&gt;next = pre;</div><div class="line">            pre = cur;</div><div class="line">            cur = next;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (left != <span class="literal">NULL</span>)&#123;</div><div class="line">            left-&gt;next = end;</div><div class="line">        &#125;</div><div class="line">        start-&gt;next = cur;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1894,7 +1902,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">96</span>
+                <span class="site-state-item-count">97</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -260,6 +260,155 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/20/20170420-Tree-TheBoundaryOfTree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/20/20170420-Tree-TheBoundaryOfTree/" itemprop="url">
+                  Find The Boundary Of Tree
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T20:46:02+08:00">
+                2017-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Find-The-Boundary-Of-Tree-找到树的边界节点"><a href="#Find-The-Boundary-Of-Tree-找到树的边界节点" class="headerlink" title="Find The Boundary Of Tree(找到树的边界节点)"></a>Find The Boundary Of Tree(找到树的边界节点)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>来自leetcode的contest。具体的题目描述可以在<a href="https://leetcode.com/contest/leetcode-weekly-contest-25/problems/boundary-of-binary-tree/" target="_blank" rel="external">这里</a>找到。</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>本题主要的难点有：怎么找到左侧边界；怎么找到右侧边界；怎么找到下边界；以及如何将边界连接已经右侧边界的逆序。 根据代码解释一下思路；首先判断根节点是否为空决定是否返回空的vector；其次定义用于保存边界的vector并将根节点的值导入；定义用于保存遍历过程节点的集合，将根节点导入；分别定义vector用于保存左侧边界、右侧边界和下边界；根据遍历函数得到的左右下边界，遍历其中的节点找到不重复的节点连接即为整颗树的边界。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; boundaryOfBinaryTree(TreeNode* root) &#123;</div><div class="line">        <span class="keyword">if</span> (!root)</div><div class="line">            <span class="keyword">return</span> &#123;&#125;; <span class="comment">// 返回空边界</span></div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res = &#123;root-&gt;val&#125;;<span class="comment">//导入根值到边界结果</span></div><div class="line">        <span class="built_in">unordered_set</span>&lt;TreeNode*&gt; hash = &#123;root&#125;;<span class="comment">//导入根到遍历节点集合</span></div><div class="line">        </div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; left;</div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; right;</div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; leaf;<span class="comment">// 定义三个边界的vector</span></div><div class="line">        </div><div class="line">        leftBoundary(root-&gt;left, left);</div><div class="line">        leafNode(root, leaf);</div><div class="line">        rightBoundary(root-&gt;right, right);</div><div class="line">        <span class="comment">// 通过遍历函数找到各自边界的集合，其中集合可能存在重合</span></div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> l : left)&#123;<span class="keyword">if</span> (hash.count(l)) <span class="keyword">continue</span>; res.push_back(l-&gt;val); hash.insert(l);&#125;</div><div class="line">        <span class="comment">//连接左侧边界</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> m : leaf)&#123;<span class="keyword">if</span> (hash.count(m)) <span class="keyword">continue</span>; res.push_back(m-&gt;val); hash.insert(m);&#125;</div><div class="line">        <span class="comment">//连接下侧边界</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> r: right)&#123;<span class="keyword">if</span> (hash.count(r)) <span class="keyword">continue</span>; res.push_back(r-&gt;val); hash.insert(r);&#125;</div><div class="line">        <span class="comment">// 连接右侧边界</span></div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">leftBoundary</span><span class="params">(TreeNode* node, <span class="built_in">vector</span>&lt;TreeNode*&gt;&amp; left)</span></span>&#123;</div><div class="line">        <span class="keyword">while</span>(node)&#123;</div><div class="line">            left.push_back(node);</div><div class="line">            <span class="keyword">if</span> (node-&gt;left) node = node-&gt;left;</div><div class="line">            <span class="keyword">else</span> node = node-&gt;right;</div><div class="line">            <span class="comment">// 找到最左侧的边界；不断向左侧遍历，为空就向右侧遍历知道为空</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">leafNode</span><span class="params">(TreeNode* root, <span class="built_in">vector</span>&lt;TreeNode*&gt;&amp;leaf)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        <span class="keyword">if</span> (root-&gt;left == <span class="literal">NULL</span> &amp;&amp; root-&gt;right == <span class="literal">NULL</span>) leaf.push_back(root);</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            leafNode(root-&gt;left, leaf);</div><div class="line">            leafNode(root-&gt;right, leaf);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//找到所有叶节点的集合即为下边界集合；先判断是否是空节点；然后判断是否是叶节点；然后递归左侧和右侧节点。</span></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rightBoundary</span><span class="params">(TreeNode* node, <span class="built_in">vector</span>&lt;TreeNode*&gt;&amp; right)</span></span>&#123;</div><div class="line">        <span class="keyword">while</span>(node)&#123;</div><div class="line">            right.push_back(node);</div><div class="line">            <span class="keyword">if</span> (node-&gt;right) node = node-&gt;right;</div><div class="line">            <span class="keyword">else</span> node = node-&gt;left;</div><div class="line">        &#125;<span class="comment">//找到右侧边界；同左侧；需要注意的是需要将结果逆序。</span></div><div class="line">        reverse(right.begin(), right.end());</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/19/20170419-Array-PermutationII/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1647,177 +1796,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/10/20170410-Array-Permutation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/10/20170410-Array-Permutation/" itemprop="url">
-                  Permutation
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T14:36:02+08:00">
-                2017-04-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="全排列专题"><a href="#全排列专题" class="headerlink" title="全排列专题"></a>全排列专题</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>全排列是面试中经常出现的题目，所以这边有需要做一下关于这一类的专题。首先我们从最简单的题目开始。给定一个数组，根据全排列的规律，找到当前排列的下一个全排列。</p>
-<p>我们已知对于1，2，3排列而言，它的全排列依次如下：<br> 1-2-3 1-3-2 2-1-3 2-3-1 3-1-2 3-2-1</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>以数组[1,3,8,7,6,5,4,2]为例子，我们首先找到第一次出现降序的位置3；再找到第一次比3大的位置4；交换二者的数据得到[1,4,8,7,6,5,3,2]；再将4后面的数组逆序即可得到[1,4,2,3,5,6,7,8]</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>初看例子我们还无法看出前后排列之间的关系。通过网上资料查询我们可以知道，从当前排列得到下一个排列的算法：</p>
-</blockquote>
-<ul>
-<li>首先我们从数组的末端开始遍历数组，直到第一次遇到num[i] &lt; num[i + 1]的地方</li>
-<li>然后我们从数组末尾开始找到第一次出现比num[i]大的数的位置num[j]</li>
-<li>交换num[i]和num[j]</li>
-<li>将i后面的数组逆序后即可以得到当前排列的下一个排列</li>
-</ul>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">nextPermutation</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> k = <span class="number">-1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.size() - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--)&#123;</div><div class="line">            <span class="keyword">if</span> (nums[i] &lt; nums[i + <span class="number">1</span>])&#123;</div><div class="line">                k = i;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//先找到第一次降序的位置k，如果k是-1说明整个数组降序即为最后一个全排列，直接逆序全数组得到第一个全排列</span></div><div class="line">        <span class="keyword">if</span> (k == - <span class="number">1</span>)&#123;</div><div class="line">            reverse(nums.begin(), nums.end());</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> l = <span class="number">-1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</div><div class="line">            <span class="keyword">if</span> (nums[i] &gt; nums[k])&#123;</div><div class="line">                l = i;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//从数组末尾开始找到第一次大于待交换数字的位置</span></div><div class="line">        swap(nums[l], nums[k]);</div><div class="line">        <span class="comment">//交换二者的数据</span></div><div class="line">        reverse(nums.begin() + k + <span class="number">1</span>, nums.end());</div><div class="line">        <span class="comment">//逆序从降序位置后开始到数组末尾的数字</span></div><div class="line">        </div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="题目描述2"><a href="#题目描述2" class="headerlink" title="题目描述2"></a>题目描述2</h3><blockquote>
-<p>在上述题目中，我们没有考虑到关于在数组中可能存在重复数字的情况。现在给定一个数组，其中可能包含重复数字，要求返回所有不重复的可能的排列结果。上文中所述的方法恰好排除了这种可能重复出现的情况。所以基本还是沿用上一题的思路来解决这个问题。</p>
-</blockquote>
-<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; permuteUnique(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</div><div class="line">        sort(nums.begin(), nums.end());<span class="comment">//先进行排序</span></div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;<span class="comment">//用于保存结果</span></div><div class="line">        res.push_back(nums);<span class="comment">//先将当前结果保存</span></div><div class="line">        </div><div class="line">        <span class="keyword">while</span>(<span class="number">1</span>)&#123;</div><div class="line">            <span class="keyword">int</span> k = <span class="number">-1</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.size() - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--)&#123;</div><div class="line">                <span class="keyword">if</span> (nums[i] &lt; nums[i + <span class="number">1</span>])&#123;</div><div class="line">                    k = i;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;<span class="comment">//找到降序</span></div><div class="line">            <span class="keyword">if</span> (k == <span class="number">-1</span>)<span class="keyword">break</span>;</div><div class="line">            <span class="keyword">int</span> l = <span class="number">-1</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = nums.size() - <span class="number">1</span>; j &gt; k; j--)&#123;</div><div class="line">                <span class="keyword">if</span> (nums[j] &gt; nums[k])&#123;</div><div class="line">                    l = j;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;<span class="comment">//找到小于待交换的位置</span></div><div class="line">            swap(nums[k], nums[l]);</div><div class="line">            reverse(nums.begin() + k + <span class="number">1</span>, nums.end());</div><div class="line">            res.push_back(nums);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="题目描述3："><a href="#题目描述3：" class="headerlink" title="题目描述3："></a>题目描述3：</h3><blockquote>
-<p>在以上的解题过程中用的都是非递归的方法实现，现在要求使用递归的方式实现找到某个数组的全排列。主要的思路是用begin来标记当前要确定的排列位置，然后在从begin到数组末尾的各个数和begin进行交换得到不同的可能排列，而后进行下一个位置的寻找。遍历的停止条件是当前遍历位置大于数组长度的时候。需要注意的是，我们在遍历后需要进行一步回溯。比如在找到[1,3,2]后我们需要交换3和2变回[1,2,3]，便于下一步进行得到[2,1,3]结果。</p>
-</blockquote>
-<h3 id="代码如下：-2"><a href="#代码如下：-2" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; permute(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</div><div class="line">        permutation(nums, <span class="number">0</span>, ans);</div><div class="line">        <span class="keyword">return</span> ans;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">permutation</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp;nums, <span class="keyword">int</span> begin, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; ans)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (begin &gt;= nums.size())&#123;</div><div class="line">            ans.push_back(nums);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//如果当前遍历的位置到达数组的末尾，将数组保存即可</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = begin; i &lt; nums.size(); i++)&#123;</div><div class="line">            swap(nums[i], nums[begin]);</div><div class="line">            <span class="comment">//与当前遍历位置的各个数进行交换，然后进入下一层递归</span></div><div class="line">            permutation(nums, begin+<span class="number">1</span>, ans);</div><div class="line">            swap(nums[i], nums[begin]);</div><div class="line">            <span class="comment">//需要回溯一步</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="题目描述4"><a href="#题目描述4" class="headerlink" title="题目描述4"></a>题目描述4</h3><blockquote>
-<p>在使用递归方法中，上述的方法无法解决出现重复数字的情况。比如[1,1,2]。因为在begin=0的情况中，i=0,1,2；而对于i=0得到[1,1,2]和i=1得到[1,1,2]得到的情况相同，后序的全排列重复。所以我们需要其他的方法来解决这个问题。其中之一就是哈希表。主要的思路是:我们用哈希表来记录数组中出现数字的次数，用vec来保存当前得到的全排列；每次从哈希表中找到一个数将其push到vec中，而哈希表中对应的出现个数减1；然后进入下一层递归即可。需要注意的是：我们每次push完一个数递归结束后，需要将这个数pop进行回溯；另外需要对哈希表中数字出现的个数进行增加和减少操作。</p>
-</blockquote>
-<h3 id="代码如下：-3"><a href="#代码如下：-3" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; permuteUnique(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;<span class="comment">//保存结果</span></div><div class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; hash;<span class="comment">//记录个数</span></div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;vec;<span class="comment">//保存当前排列</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)&#123;</div><div class="line">            hash[nums[i]]++;</div><div class="line">        &#125;<span class="comment">//生成哈希表</span></div><div class="line">        permutation(ans, vec, hash, nums.size());</div><div class="line">        <span class="comment">//递归找到全排列</span></div><div class="line">        <span class="keyword">return</span> ans;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">permutation</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; ans, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; vec, <span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&amp; hash, <span class="keyword">int</span> end)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (end &lt;= <span class="number">0</span>)&#123;</div><div class="line">            ans.push_back(vec);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">            <span class="comment">//如果已经得到符合条件的全排列</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;it: hash)&#123;</div><div class="line">            <span class="keyword">if</span> (it.second &lt;= <span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">            <span class="comment">//如果当前元素已被使用完，查找下一个元素</span></div><div class="line">            vec.push_back(it.first);</div><div class="line">            <span class="comment">//将当前元素导入保存</span></div><div class="line">            it.second--;<span class="comment">//对应元素个数减少</span></div><div class="line">            permutation(ans, vec, hash, end - <span class="number">1</span>);</div><div class="line">            <span class="comment">//进行下一轮递归调用</span></div><div class="line">            it.second++;</div><div class="line">            <span class="comment">//调用完记得恢复哈希表</span></div><div class="line">            vec.pop_back();</div><div class="line">            <span class="comment">//恢复记录的排列</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1867,7 +1845,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">96</span>
+                <span class="site-state-item-count">97</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
