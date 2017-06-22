@@ -260,6 +260,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/20170602-String-ReverseWordsinString/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/02/20170602-String-ReverseWordsinString/" itemprop="url">
+                  Reverse Words in a String
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-02T12:36:02+08:00">
+                2017-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Reverse-Words-in-a-String"><a href="#Reverse-Words-in-a-String" class="headerlink" title="Reverse Words in a String"></a>Reverse Words in a String</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一个字符串，其中包含着单词和空格；要求原地逆序字符串中的每个单词。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>具体描述看<a href="https://leetcode.com/problems/reverse-words-in-a-string-iii/#/description" target="_blank" rel="external">LeetCode557</a></p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>解题的想法很直接，我们定义一个函数用于逆序字符串中的单词，在主函数中找到需要逆序的字符起始位置和结束位置即可。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">reverseWords</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> cur = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(cur &lt; s.size())&#123;</div><div class="line">            <span class="keyword">while</span>(cur &lt; s.size() &amp;&amp; s[cur] == <span class="string">' '</span>)cur++;</div><div class="line">            start = cur;</div><div class="line">            <span class="comment">//找到非空字符的起始位置</span></div><div class="line">            <span class="keyword">while</span>(cur &lt; s.size() &amp;&amp; s[cur] != <span class="string">' '</span>)cur++;</div><div class="line">            <span class="comment">//非空的结束位置</span></div><div class="line">            reverseword(s, start, cur - <span class="number">1</span>);</div><div class="line">            <span class="comment">//逆序函数</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> s;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">reverseword</span><span class="params">(<span class="built_in">string</span>&amp; s, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>&#123;</div><div class="line">    <span class="comment">//逆序字符串中的一部分字符</span></div><div class="line">        <span class="keyword">while</span>(start &lt; end)&#123;</div><div class="line">            swap(s[start], s[end]);</div><div class="line">            start++;</div><div class="line">            end--;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/01/20170601-String-PermutationInString/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1619,158 +1771,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/23/20170523-String-LastWordLength/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/23/20170523-String-LastWordLength/" itemprop="url">
-                  Last Word Length
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-23T10:26:02+08:00">
-                2017-05-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Last-Word-Length"><a href="#Last-Word-Length" class="headerlink" title="Last Word Length"></a>Last Word Length</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个字符串，找到字符串中最后一个单词的长度。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 具体描述见<a href="https://leetcode.com/problems/length-of-last-word/#/description" target="_blank" rel="external">LeetCode58</a></p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>本题主要的难点在于各种边界条件的判断。首先是字符串是空的情况；其次字符串结尾是空格的情况；找到非空格字符后我们需要判断是不是已经到达字符的首位；最后是找到结尾单词的起始位置。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLastWord</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (s.size() == <span class="number">0</span> || s == <span class="string">" "</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="comment">//字符串为空的情况</span></div><div class="line">        <span class="keyword">int</span> end = s.size() - <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(end &gt;= <span class="number">0</span> &amp;&amp; s[end] == <span class="string">' '</span>) end--;</div><div class="line">        <span class="comment">//先找到结尾开始的非空字符</span></div><div class="line">        <span class="keyword">if</span> (end == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">        <span class="comment">//如果整个字符为空返回0</span></div><div class="line">        <span class="keyword">int</span> left = end;</div><div class="line">        <span class="keyword">while</span>(end &gt;= <span class="number">0</span> &amp;&amp;s[end] != <span class="string">' '</span>) end--;</div><div class="line">        <span class="comment">//找到单词的另外一侧</span></div><div class="line">        <span class="keyword">return</span> left - end;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1820,7 +1820,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">99</span>
+                <span class="site-state-item-count">100</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
