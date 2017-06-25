@@ -260,6 +260,152 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/06/20170406-DS-BST/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/06/20170406-DS-BST/" itemprop="url">
+                  Binary Search Tree
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-06T11:36:02+08:00">
+                2017-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Binary-Search-Tree"><a href="#Binary-Search-Tree" class="headerlink" title="Binary Search Tree"></a>Binary Search Tree</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>用C++语言构造搜索二叉树。包括基本的功能；先序遍历，中序遍历，后序遍历，取最大值，取最小值，插入，删除，查找。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> TreeNode&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    TreeNode* left;</div><div class="line">    TreeNode* right;</div><div class="line">    T value;</div><div class="line">    TreeNode(T key): value(key), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>)&#123;&#125;;</div><div class="line">    TreeNode(T key, TreeNode* l, TreeNode* r): value(key), left(l), right(r)&#123;&#125;;</div><div class="line">&#125;;</div><div class="line"><span class="comment">//构造二叉树的节点类</span></div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> BSTree&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    BSTree() = <span class="keyword">default</span>;</div><div class="line">    BSTree(TreeNode&lt;T&gt;* node): root(node) &#123;&#125;;</div><div class="line">    ~BSTree()&#123;&#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inOrder</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">postOrder</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(T value)</span></span>;</div><div class="line"><span class="comment">//    void insert(TreeNode* node);</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">search</span><span class="params">(T value)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//    void del(T value);</span></div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    TreeNode&lt;T&gt;* getMin();</div><div class="line">    TreeNode&lt;T&gt;* getMax();</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">    TreeNode&lt;T&gt;* root;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(TreeNode&lt;T&gt;* <span class="keyword">const</span> node)</span> <span class="keyword">const</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inOrder</span><span class="params">(TreeNode&lt;T&gt;* <span class="keyword">const</span> node)</span> <span class="keyword">const</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">postOrder</span><span class="params">(TreeNode&lt;T&gt;* <span class="keyword">const</span> node)</span> <span class="keyword">const</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">search</span><span class="params">(TreeNode&lt;T&gt;* node, T key)</span></span>;</div><div class="line">    TreeNode&lt;T&gt;* getMin(TreeNode&lt;T&gt;* <span class="keyword">const</span> node);</div><div class="line">    TreeNode&lt;T&gt;* getMax(TreeNode&lt;T&gt;* <span class="keyword">const</span> node);</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">(TreeNode&lt;T&gt;* node)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(TreeNode&lt;T&gt;* node, T value)</span></span>;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> BSTree&lt;T&gt;::preOrder(TreeNode&lt;T&gt;* <span class="keyword">const</span> node) <span class="keyword">const</span> &#123;</div><div class="line">    <span class="keyword">if</span> (node) &#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; node-&gt;value &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        preOrder(node-&gt;left);</div><div class="line">        preOrder(node-&gt;right);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> BSTree&lt;T&gt;::preOrder() &#123;</div><div class="line">    preOrder(root);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> BSTree&lt;T&gt;::inOrder(TreeNode&lt;T&gt;* <span class="keyword">const</span> node) <span class="keyword">const</span> &#123;</div><div class="line">    <span class="keyword">if</span> (node)&#123;</div><div class="line">        inOrder(node-&gt;left);</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; node-&gt;value &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        inOrder(node-&gt;right);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> BSTree&lt;T&gt;::inOrder() &#123;</div><div class="line">    inOrder(root);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> BSTree&lt;T&gt;::postOrder(TreeNode&lt;T&gt;* <span class="keyword">const</span> node) <span class="keyword">const</span> &#123;</div><div class="line">    <span class="keyword">if</span> (node)&#123;</div><div class="line">        postOrder(node-&gt;left);</div><div class="line">        postOrder(node-&gt;right);</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; node-&gt;value &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> BSTree&lt;T&gt;::postOrder() &#123;</div><div class="line">    postOrder(root);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> BSTree&lt;T&gt;::search(TreeNode&lt;T&gt; * node, T value) &#123;</div><div class="line">    <span class="keyword">if</span> (!node) &#123;</div><div class="line">        <span class="keyword">if</span> (value == node-&gt;value) &#123;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"the value is in this tree"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (value &gt; node-&gt;value)</div><div class="line">            search(node-&gt;right, value);</div><div class="line">        <span class="keyword">if</span> (value &lt; node-&gt;value)</div><div class="line">            search(node-&gt;left, value);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> BSTree&lt;T&gt;::search(T value) &#123;</div><div class="line">    search(root, value);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">TreeNode&lt;T&gt;* BSTree&lt;T&gt;::getMin(TreeNode&lt;T&gt; *<span class="keyword">const</span> node) &#123;</div><div class="line">    TreeNode&lt;T&gt;* tmp = node;</div><div class="line">    <span class="keyword">while</span>(tmp-&gt;left)&#123;</div><div class="line">        tmp = tmp-&gt;left;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> tmp;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">TreeNode&lt;T&gt;* BSTree&lt;T&gt;::getMin() &#123;</div><div class="line">    getMin(root);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">TreeNode&lt;T&gt;* BSTree&lt;T&gt;::getMax(TreeNode&lt;T&gt; *<span class="keyword">const</span> node) &#123;</div><div class="line">    TreeNode&lt;T&gt;* tmp = node;</div><div class="line">    <span class="keyword">while</span>(tmp-&gt;right)&#123;</div><div class="line">        tmp = tmp-&gt;right;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> tmp;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">TreeNode&lt;T&gt;* BSTree&lt;T&gt;::getMax() &#123;</div><div class="line">    getMax(root);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">bool</span> BSTree&lt;T&gt;::empty(TreeNode&lt;T&gt;* node)&#123;</div><div class="line">    <span class="keyword">return</span> node == <span class="literal">NULL</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">bool</span> BSTree&lt;T&gt;::empty()&#123;</div><div class="line">    <span class="keyword">return</span> empty(root);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> BSTree&lt;T&gt;::insert(TreeNode&lt;T&gt;* node, T value) &#123;</div><div class="line">    <span class="keyword">if</span> (node == <span class="literal">NULL</span>)&#123;</div><div class="line">        TreeNode&lt;T&gt;* tmp = <span class="keyword">new</span> TreeNode&lt;T&gt;(value);</div><div class="line">        node = tmp;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (node-&gt;value &gt; value)&#123;</div><div class="line">        <span class="keyword">if</span> (node-&gt;left == <span class="literal">NULL</span>)&#123;</div><div class="line">            TreeNode&lt;T&gt;* tmp = <span class="keyword">new</span> TreeNode&lt;T&gt;(value);</div><div class="line">            node-&gt;left = tmp;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            insert(node-&gt;left, value);</div><div class="line">        &#125;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">if</span> (node-&gt;right == <span class="literal">NULL</span>)&#123;</div><div class="line">            TreeNode&lt;T&gt;* tmp = <span class="keyword">new</span> TreeNode&lt;T&gt;(value);</div><div class="line">            node-&gt;right = tmp;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            insert(node-&gt;right, value);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> BSTree&lt;T&gt;::insert(T value) &#123;</div><div class="line">    insert(root, value);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/05/20170405-Tree-LongestDistanceInTree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1739,163 +1885,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/20170327-Tree-TheTraversalOfTree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/27/20170327-Tree-TheTraversalOfTree/" itemprop="url">
-                  Traverse Tree
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-27T11:56:02+08:00">
-                2017-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Traverse-Tree-遍历树的三种方法"><a href="#Traverse-Tree-遍历树的三种方法" class="headerlink" title="Traverse Tree(遍历树的三种方法)"></a>Traverse Tree(遍历树的三种方法)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一棵树的头结点；给出先序遍历、中序遍历和后序遍历树的结果。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 先序遍历是先遍历根节点，然后左节点，最后右节点；中序遍历是先遍历左节点，然后根节点最后右节点；后序遍历是最后遍历根节点。先序中序后序是以根节点为标准。</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>树的遍历主要是利用递归的方式进行查找。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> printTree&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(treeNode* root)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        <span class="built_in">std</span> :: <span class="built_in">cout</span> &lt;&lt; root-&gt;val &lt;&lt; <span class="built_in">std</span> :: <span class="built_in">endl</span>;<span class="comment">//先根遍历</span></div><div class="line">        preOrder(root-&gt;left);</div><div class="line">        preOrder(root-&gt;right);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inOrder</span><span class="params">(treeNode* root)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        inOrder(root-&gt;left);</div><div class="line">        <span class="built_in">std</span> :: <span class="built_in">cout</span> &lt;&lt; root-&gt;val &lt;&lt; <span class="built_in">std</span> :: <span class="built_in">endl</span>; <span class="comment">//中序遍历</span></div><div class="line">        inOrder(root-&gt;right);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">postOrder</span><span class="params">(treeNode* root)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        postOrder(root-&gt;left);</div><div class="line">        postOrder(root-&gt;right);</div><div class="line">        <span class="built_in">std</span> :: <span class="built_in">cout</span> &lt;&lt; root-&gt;val &lt;&lt; <span class="built_in">std</span> :: <span class="built_in">endl</span>;<span class="comment">//后序遍历</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="解题思路2："><a href="#解题思路2：" class="headerlink" title="解题思路2："></a>解题思路2：</h3><blockquote>
-<p>当然我们也可以使用非递归的方式对树进行遍历；主要的思路是在于将节点入栈后，根据不同的将左节点和右节点的压栈方式能够得到不同的遍历结果。</p>
-<p>对于先根遍历而言，我们将某节点出栈后，先将该节点的右节点入栈，然后左节点入栈；对于中序遍历而言，我们是不断将最左侧的节点入栈，然后在弹出某节点后，将该节点的右侧节点入栈即可实现中序遍历；对于后序遍历而言我们利用了2个栈的方式，首先将根节点放入栈1，每次弹出的节点都放入栈2，并且将弹出节点的左侧和右侧节点压入栈1；不断进行直到栈1为空即可。</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> printTreeUnrecur&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(treeNode* root)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        <span class="built_in">std</span>::<span class="built_in">stack</span>&lt;treeNode*&gt; stk;</div><div class="line">        stk.push(root);</div><div class="line">        treeNode* tmp;</div><div class="line">        <span class="keyword">while</span>(!stk.empty())&#123;</div><div class="line">            <span class="keyword">if</span> (stk.top() != <span class="literal">NULL</span>)&#123;</div><div class="line">                tmp = stk.top();</div><div class="line">                <span class="built_in">cout</span> &lt;&lt; tmp-&gt;val &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">                stk.pop(); <span class="comment">//先打印出栈节点</span></div><div class="line"></div><div class="line">                stk.push(tmp-&gt;right);</div><div class="line">                stk.push(tmp-&gt;left);<span class="comment">//先压入右侧节点在压入左侧节点</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                stk.pop();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inOrder</span><span class="params">(treeNode* root)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        <span class="built_in">stack</span>&lt;treeNode*&gt; stk;</div><div class="line">        treeNode* tmp;</div><div class="line">        <span class="keyword">while</span>(root != <span class="literal">NULL</span> || !stk.empty())&#123;</div><div class="line">            <span class="keyword">if</span> (root != <span class="literal">NULL</span>)&#123;</div><div class="line">                stk.push(root);</div><div class="line">                root = root-&gt;left;<span class="comment">//先不断将左侧节点压栈</span></div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                tmp = stk.top();</div><div class="line">                <span class="built_in">cout</span> &lt;&lt; tmp-&gt;val &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//打印出栈的节点</span></div><div class="line">                stk.pop();</div><div class="line">                root = tmp-&gt;right; <span class="comment">//遍历出栈节点的右侧节点</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">postOrder</span><span class="params">(treeNode* root)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        <span class="built_in">std</span>::<span class="built_in">stack</span>&lt;treeNode*&gt; stk1;</div><div class="line">        <span class="built_in">std</span>::<span class="built_in">stack</span>&lt;treeNode*&gt; stk2;</div><div class="line">        stk1.push(root);</div><div class="line">        treeNode* tmp;</div><div class="line">        <span class="keyword">while</span>(!stk1.empty())&#123;</div><div class="line">            tmp = stk1.top();</div><div class="line">            stk1.pop();</div><div class="line">            stk2.push(tmp); <span class="comment">//出栈压入栈2中</span></div><div class="line">            <span class="keyword">if</span> (tmp-&gt;left != <span class="literal">NULL</span>)</div><div class="line">                stk1.push(tmp-&gt;left);</div><div class="line">            <span class="keyword">if</span> (tmp-&gt;right != <span class="literal">NULL</span>)</div><div class="line">                stk1.push(tmp-&gt;right);</div><div class="line">                <span class="comment">//将出栈节点的左侧和右侧节点压入栈1</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">while</span>(!stk2.empty())&#123;</div><div class="line">            tmp = stk2.top();</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; tmp-&gt;val &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">            stk2.pop();<span class="comment">//打印栈2中的数据即为遍历结果</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1945,7 +1934,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-count">103</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
