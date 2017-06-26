@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="List," />
+  <meta name="keywords" content="Array," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="Last Word Length题目描述： 给定一个字符串，找到字符串中最后一个单词的长度。  例子：  具体描述见LeetCode58  解题思路： 本题主要的难点在于各种边界条件的判断。首先是字符串是空的情况；其次字符串结尾是空格的情况；找到非空格字符后我们需要判断是不是已经到达字符的首位；最后是找到结尾单词的起始位置。  代码如下：1234567891011121314151617class">
-<meta name="keywords" content="List">
+<meta name="description" content="Course Schedule III题目描述： 给定一个数组，数组中包含的数据[a, b]; a代表着课程的所需时间，b代表这个课程必须在这个时间前完成。要求找到能完成最多课程的选课方法和数量。  例子：  具体描述见LeetCode630  解题思路： 这题主要用的想法是贪心；首先我们对数据进行排序，排序的规则是课程结束时间。然后我们利用一个multiset来保存当前选择的每个课程的时间长度和">
+<meta name="keywords" content="Array">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Last Word Length">
-<meta property="og:url" content="http://yoursite.com/2017/05/23/20170523-String-LastWordLength/index.html">
+<meta property="og:title" content="Course Schedule III">
+<meta property="og:url" content="http://yoursite.com/2017/06/26/20170626-Array-CourseScheduleIII/index.html">
 <meta property="og:site_name" content="Tech">
-<meta property="og:description" content="Last Word Length题目描述： 给定一个字符串，找到字符串中最后一个单词的长度。  例子：  具体描述见LeetCode58  解题思路： 本题主要的难点在于各种边界条件的判断。首先是字符串是空的情况；其次字符串结尾是空格的情况；找到非空格字符后我们需要判断是不是已经到达字符的首位；最后是找到结尾单词的起始位置。  代码如下：1234567891011121314151617class">
-<meta property="og:updated_time" content="2017-06-01T08:35:21.000Z">
+<meta property="og:description" content="Course Schedule III题目描述： 给定一个数组，数组中包含的数据[a, b]; a代表着课程的所需时间，b代表这个课程必须在这个时间前完成。要求找到能完成最多课程的选课方法和数量。  例子：  具体描述见LeetCode630  解题思路： 这题主要用的想法是贪心；首先我们对数据进行排序，排序的规则是课程结束时间。然后我们利用一个multiset来保存当前选择的每个课程的时间长度和">
+<meta property="og:updated_time" content="2017-06-26T02:47:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Last Word Length">
-<meta name="twitter:description" content="Last Word Length题目描述： 给定一个字符串，找到字符串中最后一个单词的长度。  例子：  具体描述见LeetCode58  解题思路： 本题主要的难点在于各种边界条件的判断。首先是字符串是空的情况；其次字符串结尾是空格的情况；找到非空格字符后我们需要判断是不是已经到达字符的首位；最后是找到结尾单词的起始位置。  代码如下：1234567891011121314151617class">
+<meta name="twitter:title" content="Course Schedule III">
+<meta name="twitter:description" content="Course Schedule III题目描述： 给定一个数组，数组中包含的数据[a, b]; a代表着课程的所需时间，b代表这个课程必须在这个时间前完成。要求找到能完成最多课程的选课方法和数量。  例子：  具体描述见LeetCode630  解题思路： 这题主要用的想法是贪心；首先我们对数据进行排序，排序的规则是课程结束时间。然后我们利用一个multiset来保存当前选择的每个课程的时间长度和">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/23/20170523-String-LastWordLength/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/26/20170626-Array-CourseScheduleIII/"/>
 
 
 
 
 
-  <title> Last Word Length | Tech </title>
+  <title> Course Schedule III | Tech </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/23/20170523-String-LastWordLength/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/26/20170626-Array-CourseScheduleIII/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mfzhu7">
@@ -281,7 +281,7 @@
             
             
               
-                Last Word Length
+                Course Schedule III
               
             
           </h1>
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-23T10:26:02+08:00">
-                2017-05-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-26T10:36:02+08:00">
+                2017-06-26
               </time>
             
 
@@ -354,16 +354,16 @@
       
 
       
-        <h3 id="Last-Word-Length"><a href="#Last-Word-Length" class="headerlink" title="Last Word Length"></a>Last Word Length</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个字符串，找到字符串中最后一个单词的长度。</p>
+        <h3 id="Course-Schedule-III"><a href="#Course-Schedule-III" class="headerlink" title="Course Schedule III"></a>Course Schedule III</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一个数组，数组中包含的数据[a, b]; a代表着课程的所需时间，b代表这个课程必须在这个时间前完成。要求找到能完成最多课程的选课方法和数量。</p>
 </blockquote>
 <h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 具体描述见<a href="https://leetcode.com/problems/length-of-last-word/#/description" target="_blank" rel="external">LeetCode58</a></p>
+<p> 具体描述见<a href="https://leetcode.com/problems/course-schedule-iii/#/description" target="_blank" rel="external">LeetCode630</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>本题主要的难点在于各种边界条件的判断。首先是字符串是空的情况；其次字符串结尾是空格的情况；找到非空格字符后我们需要判断是不是已经到达字符的首位；最后是找到结尾单词的起始位置。</p>
+<p>这题主要用的想法是贪心；首先我们对数据进行排序，排序的规则是课程结束时间。然后我们利用一个multiset来保存当前选择的每个课程的时间长度和consume来记录我们当前使用的时间长度。然后遍历数组，如果加上当前课程不会超过结束时间就将其加入到multiset和consume中，如果已经超过的情况下，我们将保存课程时间的最后一个数据和当前的课程时间比较，如果较大的情况下，说明我们可以放弃上一个选择的课程然后选择当前课程。因为我们总是需要尽可能的在一个时间段内选择更多的花费时间长度小的课程这样我们就能选择更多的课程。</p>
 </blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLastWord</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (s.size() == <span class="number">0</span> || s == <span class="string">" "</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="comment">//字符串为空的情况</span></div><div class="line">        <span class="keyword">int</span> end = s.size() - <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(end &gt;= <span class="number">0</span> &amp;&amp; s[end] == <span class="string">' '</span>) end--;</div><div class="line">        <span class="comment">//先找到结尾开始的非空字符</span></div><div class="line">        <span class="keyword">if</span> (end == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">        <span class="comment">//如果整个字符为空返回0</span></div><div class="line">        <span class="keyword">int</span> left = end;</div><div class="line">        <span class="keyword">while</span>(end &gt;= <span class="number">0</span> &amp;&amp;s[end] != <span class="string">' '</span>) end--;</div><div class="line">        <span class="comment">//找到单词的另外一侧</span></div><div class="line">        <span class="keyword">return</span> left - end;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">scheduleCourse</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; courses)</span> </span>&#123;</div><div class="line">        sort(courses.begin(), courses.end(), [](<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; a, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;b)&#123; <span class="keyword">return</span> a.back() &lt; b.back();&#125;);</div><div class="line">        <span class="built_in">multiset</span>&lt;<span class="keyword">int</span>&gt; cls;</div><div class="line">        <span class="keyword">int</span> consume = <span class="number">0</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; courses.size(); i++)&#123;</div><div class="line">            <span class="keyword">if</span> (consume + courses[i].front() &lt;= courses[i].back())&#123;</div><div class="line">                consume += courses[i].front();</div><div class="line">                cls.insert(courses[i].front());</div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (*cls.rbegin() &gt; courses[i].front())&#123;</div><div class="line">                consume += courses[i].front() - *cls.rbegin();</div><div class="line">                cls.erase(--cls.end());</div><div class="line">                cls.insert(courses[i].front());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> cls.size();</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -393,7 +393,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/List/" rel="tag"># List</a>
+            <a href="/tags/Array/" rel="tag"># Array</a>
           
         </div>
       
@@ -406,18 +406,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/24/20170524-String-SimplifyPath/" rel="next" title="Simplify Path">
-                <i class="fa fa-chevron-left"></i> Simplify Path
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/22/20170522-String-GroupString/" rel="prev" title="Group String">
-                Group String <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/25/20170625-Array-IntersectionofTwoArraysII/" rel="prev" title="Intersection of Two Arrays II">
+                Intersection of Two Arrays II <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -547,7 +543,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Last-Word-Length"><span class="nav-number">1.</span> <span class="nav-text">Last Word Length</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子："><span class="nav-number">3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">4.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">5.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Course-Schedule-III"><span class="nav-number">1.</span> <span class="nav-text">Course Schedule III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子："><span class="nav-number">3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">4.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">5.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
             
 
           </div>
