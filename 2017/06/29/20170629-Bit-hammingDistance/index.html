@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Array," />
+  <meta name="keywords" content="Bit," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="Can Place Flowers题目描述： 给定一个数组，数组中1表示该位置栽花；0则代表没有。则要求返回该数组是否能种n株花，在花的栽种间隔为1的情况下。  例子： 具体描述看LeetCode605  解题思路： 本题中的主要难点有两个(1)0的个数和栽种花的数量的关系(2)如何处理好数组头部和尾部的情况和全0的情况。代码中先设置的c=1是为了处理开头为0的情况；在循环的外部是为了处理尾部结尾">
-<meta name="keywords" content="Array">
+<meta name="description" content="hammingDistance题目描述： 给定两个数字，要求返回这两个数的二进制数对应位上不同的位置的个数。  例子： 具体描述见LeetCode461  解题思路： 具体思路是我们对输入的两个数进行异或操作，然后计算结果中1的个数即可。至于计算数字中1的个数，我们利用flag开始不断地左移，然后和结果进行与操作就可以判断每个位置上的情况了。  代码如下：1234567891011121314cl">
+<meta name="keywords" content="Bit">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Can Place Flowers">
-<meta property="og:url" content="http://yoursite.com/2017/06/04/20170604-Array-CanPlaceFlowers/index.html">
+<meta property="og:title" content="hammingDistance">
+<meta property="og:url" content="http://yoursite.com/2017/06/29/20170629-Bit-hammingDistance/index.html">
 <meta property="og:site_name" content="Tech">
-<meta property="og:description" content="Can Place Flowers题目描述： 给定一个数组，数组中1表示该位置栽花；0则代表没有。则要求返回该数组是否能种n株花，在花的栽种间隔为1的情况下。  例子： 具体描述看LeetCode605  解题思路： 本题中的主要难点有两个(1)0的个数和栽种花的数量的关系(2)如何处理好数组头部和尾部的情况和全0的情况。代码中先设置的c=1是为了处理开头为0的情况；在循环的外部是为了处理尾部结尾">
-<meta property="og:updated_time" content="2017-06-05T07:14:47.000Z">
+<meta property="og:description" content="hammingDistance题目描述： 给定两个数字，要求返回这两个数的二进制数对应位上不同的位置的个数。  例子： 具体描述见LeetCode461  解题思路： 具体思路是我们对输入的两个数进行异或操作，然后计算结果中1的个数即可。至于计算数字中1的个数，我们利用flag开始不断地左移，然后和结果进行与操作就可以判断每个位置上的情况了。  代码如下：1234567891011121314cl">
+<meta property="og:updated_time" content="2017-06-29T06:10:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Can Place Flowers">
-<meta name="twitter:description" content="Can Place Flowers题目描述： 给定一个数组，数组中1表示该位置栽花；0则代表没有。则要求返回该数组是否能种n株花，在花的栽种间隔为1的情况下。  例子： 具体描述看LeetCode605  解题思路： 本题中的主要难点有两个(1)0的个数和栽种花的数量的关系(2)如何处理好数组头部和尾部的情况和全0的情况。代码中先设置的c=1是为了处理开头为0的情况；在循环的外部是为了处理尾部结尾">
+<meta name="twitter:title" content="hammingDistance">
+<meta name="twitter:description" content="hammingDistance题目描述： 给定两个数字，要求返回这两个数的二进制数对应位上不同的位置的个数。  例子： 具体描述见LeetCode461  解题思路： 具体思路是我们对输入的两个数进行异或操作，然后计算结果中1的个数即可。至于计算数字中1的个数，我们利用flag开始不断地左移，然后和结果进行与操作就可以判断每个位置上的情况了。  代码如下：1234567891011121314cl">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/06/04/20170604-Array-CanPlaceFlowers/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/29/20170629-Bit-hammingDistance/"/>
 
 
 
 
 
-  <title> Can Place Flowers | Tech </title>
+  <title> hammingDistance | Tech </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/04/20170604-Array-CanPlaceFlowers/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/29/20170629-Bit-hammingDistance/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mfzhu7">
@@ -281,7 +281,7 @@
             
             
               
-                Can Place Flowers
+                hammingDistance
               
             
           </h1>
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-04T11:13:02+08:00">
-                2017-06-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-29T14:07:02+08:00">
+                2017-06-29
               </time>
             
 
@@ -354,16 +354,16 @@
       
 
       
-        <h3 id="Can-Place-Flowers"><a href="#Can-Place-Flowers" class="headerlink" title="Can Place Flowers"></a>Can Place Flowers</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个数组，数组中1表示该位置栽花；0则代表没有。则要求返回该数组是否能种n株花，在花的栽种间隔为1的情况下。</p>
+        <h3 id="hammingDistance"><a href="#hammingDistance" class="headerlink" title="hammingDistance"></a>hammingDistance</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定两个数字，要求返回这两个数的二进制数对应位上不同的位置的个数。</p>
 </blockquote>
 <h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>具体描述看<a href="https://leetcode.com/contest/leetcode-weekly-contest-35/problems/can-place-flowers/" target="_blank" rel="external">LeetCode605</a></p>
+<p>具体描述见<a href="https://leetcode.com/problems/hamming-distance/#/description" target="_blank" rel="external">LeetCode461</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>本题中的主要难点有两个(1)0的个数和栽种花的数量的关系(2)如何处理好数组头部和尾部的情况和全0的情况。代码中先设置的c=1是为了处理开头为0的情况；在循环的外部是为了处理尾部结尾为0的情况。因为在开头为0和结尾为0的情况，0的个数和栽花数量的关系较为特殊。</p>
+<p>具体思路是我们对输入的两个数进行异或操作，然后计算结果中1的个数即可。至于计算数字中1的个数，我们利用flag开始不断地左移，然后和结果进行与操作就可以判断每个位置上的情况了。</p>
 </blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canPlaceFlowers</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; flowerbed, <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> c = <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> m = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : flowerbed)&#123;</div><div class="line">            <span class="keyword">if</span> (i == <span class="number">0</span>)&#123;</div><div class="line">                c++;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                m += (c - <span class="number">1</span>) / <span class="number">2</span>;</div><div class="line">                c = <span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        c++;</div><div class="line">        m += (c - <span class="number">1</span>) / <span class="number">2</span>;</div><div class="line">        <span class="keyword">return</span> m &gt;= n;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hammingDistance</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> num = x ^ y;</div><div class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> flag = <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(flag)&#123;</div><div class="line">            <span class="keyword">if</span> (num &amp; flag)</div><div class="line">                count++;</div><div class="line">            flag = flag &lt;&lt; <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> count;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -393,7 +393,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Array/" rel="tag"># Array</a>
+            <a href="/tags/Bit/" rel="tag"># Bit</a>
           
         </div>
       
@@ -406,18 +406,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/05/20170605-Tree-ConstructStringfromBinaryTree/" rel="next" title="Construct String from Binary Tree">
-                <i class="fa fa-chevron-left"></i> Construct String from Binary Tree
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/03/20170603-String-BasicCalculator/" rel="prev" title="Basic Calculator">
-                Basic Calculator <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/28/20170628-String-AddStrings/" rel="prev" title="Add Strings">
+                Add Strings <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -547,7 +543,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Can-Place-Flowers"><span class="nav-number">1.</span> <span class="nav-text">Can Place Flowers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子："><span class="nav-number">3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">4.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">5.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hammingDistance"><span class="nav-number">1.</span> <span class="nav-text">hammingDistance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述："><span class="nav-number">2.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子："><span class="nav-number">3.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">4.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">5.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
             
 
           </div>
