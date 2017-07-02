@@ -260,6 +260,166 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/13/20170513-String-ValidIPAddress/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/13/20170513-String-ValidIPAddress/" itemprop="url">
+                  Valid IP Address
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-13T11:36:02+08:00">
+                2017-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Valid-IP-Address"><a href="#Valid-IP-Address" class="headerlink" title="Valid IP Address"></a>Valid IP Address</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一个字符串；判断其是否是有效的IPV4或者IPV6的字符串。其中字符串不包含空格和特殊字符。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p> 具体的例子和描述可以参考<a href="https://leetcode.com/problems/validate-ip-address/" target="_blank" rel="external">LeetCode_468</a></p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>本题中首先主要的难点在于如何分割字符串；利用C++的stringstream函数和getline函数可以将字符串按照指定的方式进行分割；然后就是边界条件的判断，主要包括：</p>
+</blockquote>
+<ul>
+<li>每个分割子串长度判断，IPV4不超过3，IPV6长度不超过4</li>
+<li>当前的子串个数判断，IPV4个数为4，IPV6个数为6</li>
+<li>IPV4中的首字母为0的判断</li>
+<li>子串为空的判断，IPV4和IPV6长度均不能为空</li>
+<li>子串中各个字符的判断，IPV4中只能是数字类型，IPV6的字母是16进制范围</li>
+<li>字符串结尾的判断，字符串的结尾不能是”:”和”.”</li>
+</ul>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">validIPAddress</span><span class="params">(<span class="built_in">string</span> IP)</span> </span>&#123;</div><div class="line">        <span class="function"><span class="built_in">stringstream</span> <span class="title">is</span><span class="params">(IP)</span></span>;</div><div class="line">        <span class="built_in">string</span> tmp = <span class="string">""</span>;</div><div class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span> (IP.find(<span class="string">':'</span>) == <span class="built_in">string</span>::npos)&#123;</div><div class="line">            <span class="keyword">while</span>(getline(is, tmp, <span class="string">'.'</span>))&#123;</div><div class="line">                count++;</div><div class="line">                <span class="keyword">if</span> (tmp.empty() || tmp.size() &gt; <span class="number">3</span> || (tmp.size() &gt; <span class="number">1</span> &amp;&amp; tmp[<span class="number">0</span>] == <span class="string">'0'</span>) || count &gt; <span class="number">4</span>) <span class="keyword">return</span> <span class="string">"Neither"</span>;</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">char</span> c : tmp)&#123;</div><div class="line">                    <span class="keyword">if</span> (c &lt; <span class="string">'0'</span> || c &gt; <span class="string">'9'</span>)</div><div class="line">                        <span class="keyword">return</span> <span class="string">"Neither"</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">int</span> val = stoi(tmp);</div><div class="line">                <span class="keyword">if</span> (val &lt; <span class="number">0</span> || val &gt; <span class="number">255</span>) <span class="keyword">return</span> <span class="string">"Neither"</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> (IP.back() != <span class="string">'.'</span> &amp;&amp; count == <span class="number">4</span>) ? <span class="string">"IPv4"</span> : <span class="string">"Neither"</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">while</span>(getline(is, tmp, <span class="string">':'</span>))&#123;</div><div class="line">                count++;</div><div class="line">                <span class="keyword">if</span> (tmp.empty() || tmp.size() &gt; <span class="number">4</span> || count &gt; <span class="number">8</span>) <span class="keyword">return</span> <span class="string">"Neither"</span>;</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">char</span> c : tmp)&#123;</div><div class="line">                    <span class="keyword">if</span> (!(c &lt;= <span class="string">'9'</span> &amp;&amp; c &gt;= <span class="string">'0'</span>) &amp;&amp; !(c &lt;= <span class="string">'f'</span> &amp;&amp; c &gt;= <span class="string">'a'</span>) &amp;&amp; !(c &lt;= <span class="string">'F'</span> &amp;&amp; c &gt;= <span class="string">'A'</span>))</div><div class="line">                        <span class="keyword">return</span> <span class="string">"Neither"</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> (count == <span class="number">8</span> &amp;&amp; IP.back() != <span class="string">':'</span>) ? <span class="string">"IPv6"</span> : <span class="string">"Neither"</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/12/20170512-ML-SVM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1770,203 +1930,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/03/20170503-Tree-OtherTraversalInTree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/03/20170503-Tree-OtherTraversalInTree/" itemprop="url">
-                  Other Traversal Problem
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-03T12:36:02+08:00">
-                2017-05-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Other-Traversal-Problem"><a href="#Other-Traversal-Problem" class="headerlink" title="Other Traversal Problem"></a>Other Traversal Problem</h3><h3 id="题目描述1："><a href="#题目描述1：" class="headerlink" title="题目描述1："></a>题目描述1：</h3><blockquote>
-<p>给定一棵搜索二叉树的头结点，要求找到树中出现次数最多的那个数。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>见<a href="https://leetcode.com/problems/find-mode-in-binary-search-tree/#/description" target="_blank" rel="external">LeetCode501</a></p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>最基础的方法是遍历这棵树的所有节点，然后将节点保存到哈希表中，而后从哈希表中找到出现最多的那个数。自然有其他的解法，待补全。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; findMode(TreeNode* root) &#123;</div><div class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;hash;</div><div class="line">        helper(root, hash);</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</div><div class="line">        <span class="keyword">int</span> most = <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = hash.begin(); it != hash.end(); it++)&#123;</div><div class="line">            <span class="keyword">if</span> (it-&gt;second &gt; most) most = it-&gt;second;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = hash.begin(); it != hash.end(); it++)&#123;</div><div class="line">            <span class="keyword">if</span> (it-&gt;second == most) res.push_back(it-&gt;first);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">helper</span><span class="params">(TreeNode* root, <span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&amp; hash)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        helper(root-&gt;left, hash);</div><div class="line">        hash[root-&gt;val]++;</div><div class="line">        helper(root-&gt;right, hash);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="题目描述2："><a href="#题目描述2：" class="headerlink" title="题目描述2："></a>题目描述2：</h3><blockquote>
-<p>给定一棵树的头结点，然后要求找到所有的子树和中最经常出现的那个数。</p>
-</blockquote>
-<h3 id="例子：-1"><a href="#例子：-1" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>见<a href="https://leetcode.com/problems/most-frequent-subtree-sum/#/description" target="_blank" rel="external">LeetCode508</a></p>
-</blockquote>
-<h3 id="解题思路：-1"><a href="#解题思路：-1" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>主要的思路和上一题类似，用vector保存子树中的节点和，然后遍历这个和，找到出现最多次的那个数。</p>
-</blockquote>
-<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; findFrequentTreeSum(TreeNode* root) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</div><div class="line">        findSumOfNode(root, vec);</div><div class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; hash;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; vec.size(); i++)&#123;</div><div class="line">            hash[vec[i]]++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> most = <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = hash.begin(); it != hash.end(); it++)&#123;</div><div class="line">            <span class="keyword">if</span> (it-&gt;second &gt; most) most = it-&gt;second;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = hash.begin(); it != hash.end(); it++)&#123;</div><div class="line">            <span class="keyword">if</span> (it-&gt;second == most) res.push_back(it-&gt;first);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findSumOfNode</span><span class="params">(TreeNode* node, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; vec)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!node) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span> (!node-&gt;left &amp;&amp; !node-&gt;right)&#123;</div><div class="line">            vec.push_back(node-&gt;val);</div><div class="line">            <span class="keyword">return</span> node-&gt;val;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> left = findSumOfNode(node-&gt;left, vec);</div><div class="line">        <span class="keyword">int</span> right = findSumOfNode(node-&gt;right, vec);</div><div class="line">        <span class="keyword">int</span> res = left + right + node-&gt;val;</div><div class="line">        vec.push_back(res);</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="题目描述3："><a href="#题目描述3：" class="headerlink" title="题目描述3："></a>题目描述3：</h3><blockquote>
-<p>给定一棵搜索二叉树的头结点，要求找到树中的第k小的的值。</p>
-</blockquote>
-<h3 id="例子：-2"><a href="#例子：-2" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>见<a href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/#/description" target="_blank" rel="external">LeetCode230</a></p>
-</blockquote>
-<h3 id="解题思路：-2"><a href="#解题思路：-2" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>因为是搜索二叉树，所以我们可以中序遍历整个树，然后返回第k个数即可。</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//树中的k小数</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">kthSmallest</span><span class="params">(TreeNode* root, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</div><div class="line">        inOrder(root, vec);</div><div class="line">        <span class="keyword">return</span> vec[k - <span class="number">1</span>];</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inOrder</span><span class="params">(TreeNode* head, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; vec)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span>;</div><div class="line">        inOrder(head-&gt;left, vec);</div><div class="line">        vec.push_back(head-&gt;val);</div><div class="line">        inOrder(head-&gt;right, vec);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="题目描述4："><a href="#题目描述4：" class="headerlink" title="题目描述4："></a>题目描述4：</h3><blockquote>
-<p>给定一棵树的头结点，要求找到树的最小深度。</p>
-</blockquote>
-<h3 id="例子：-3"><a href="#例子：-3" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>见<a href="https://leetcode.com/problems/minimum-depth-of-binary-tree/#/description" target="_blank" rel="external">LeetCode111</a></p>
-</blockquote>
-<h3 id="代码如下：-2"><a href="#代码如下：-2" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span> (!root-&gt;left &amp;&amp; !root-&gt;right) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> (!root-&gt;left) <span class="keyword">return</span> min(root-&gt;right) + <span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> (!root-&gt;right) <span class="keyword">return</span> min(root-&gt;left) + <span class="number">1</span>;</div><div class="line">        <span class="keyword">return</span> min(root);</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">min</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root-&gt;left &amp;&amp; !root-&gt;right) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> left = (root-&gt;left) ? (min(root-&gt;left) + <span class="number">1</span>) : INT_MAX; </div><div class="line">        <span class="keyword">int</span> right = (root-&gt;right) ? (min(root-&gt;right) + <span class="number">1</span>): INT_MAX;</div><div class="line">        <span class="keyword">return</span> left &gt; right ?  right : left;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="题目描述4：-1"><a href="#题目描述4：-1" class="headerlink" title="题目描述4："></a>题目描述4：</h3><blockquote>
-<p>给定一棵树的头结点，要求找到树的最大深度。</p>
-</blockquote>
-<h3 id="例子：-4"><a href="#例子：-4" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>见<a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/#/description" target="_blank" rel="external">LeetCode104</a></p>
-</blockquote>
-<h3 id="代码如下：-3"><a href="#代码如下：-3" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; q;</div><div class="line">        q.push(root);</div><div class="line">        <span class="keyword">while</span>(!q.empty())&#123;</div><div class="line">            res++;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, n = q.size(); i &lt; n; i++)&#123;</div><div class="line">                TreeNode* p = q.front();</div><div class="line">                q.pop();</div><div class="line">                <span class="keyword">if</span> (p-&gt;left != <span class="literal">NULL</span>)</div><div class="line">                    q.push(p-&gt;left);</div><div class="line">                <span class="keyword">if</span> (p-&gt;right != <span class="literal">NULL</span>)</div><div class="line">                    q.push(p-&gt;right);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="题目描述5："><a href="#题目描述5：" class="headerlink" title="题目描述5："></a>题目描述5：</h3><blockquote>
-<p>给定一棵树的头结点，要求找到所有左叶节点的和。</p>
-</blockquote>
-<h3 id="例子：-5"><a href="#例子：-5" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>见<a href="https://leetcode.com/problems/sum-of-left-leaves/#/description" target="_blank" rel="external">LeetCode404</a></p>
-</blockquote>
-<h3 id="代码如下：-4"><a href="#代码如下：-4" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//左侧子树的叶节点的和</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumOfLeftLeaves</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">        preOrder(root, res);</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(TreeNode* head, <span class="keyword">int</span>&amp; res)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (head-&gt;left != <span class="literal">NULL</span> &amp;&amp; head-&gt;left-&gt;left == <span class="literal">NULL</span> &amp;&amp; head-&gt;left-&gt;right == <span class="literal">NULL</span>)&#123;</div><div class="line">            res = res + head-&gt;left-&gt;val;</div><div class="line">            preOrder(head-&gt;right, res);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            preOrder(head-&gt;left, res);</div><div class="line">            preOrder(head-&gt;right, res);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumOfLeftLeaves</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">        helper(root, res);</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">helper</span><span class="params">(TreeNode* root, <span class="keyword">int</span>&amp; left)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (root-&gt;left &amp;&amp; (!root-&gt;left-&gt;left &amp;&amp; !root-&gt;left-&gt;right))&#123;</div><div class="line">            left += root-&gt;left-&gt;val;</div><div class="line">            helper(root-&gt;right, left);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            helper(root-&gt;left, left);</div><div class="line">            helper(root-&gt;right, left);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="题目描述6："><a href="#题目描述6：" class="headerlink" title="题目描述6："></a>题目描述6：</h3><blockquote>
-<p>见<a href="https://leetcode.com/problems/house-robber-iii/#/description" target="_blank" rel="external">LeetCode337</a></p>
-</blockquote>
-<h3 id="代码如下：-5"><a href="#代码如下：-5" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">rob</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> rootValue = root-&gt;val;</div><div class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> right = <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span> (root-&gt;left)&#123;</div><div class="line">            <span class="keyword">int</span> l1 = rob(root-&gt;left-&gt;left);</div><div class="line">            <span class="keyword">int</span> l2 = rob(root-&gt;left-&gt;right);</div><div class="line">            rootValue += l1 + l2;</div><div class="line">            left = rob(root-&gt;left);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (root-&gt;right)&#123;</div><div class="line">            <span class="keyword">int</span> r1 = rob(root-&gt;right-&gt;left);</div><div class="line">            <span class="keyword">int</span> r2 = rob(root-&gt;right-&gt;right);</div><div class="line">            rootValue += r1 + r2;</div><div class="line">            right = rob(root-&gt;right);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (rootValue &lt; (left + right))</div><div class="line">            <span class="keyword">return</span> left + right;</div><div class="line">        <span class="keyword">return</span> rootValue;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2016,7 +1979,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">109</span>
+                <span class="site-state-item-count">110</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
