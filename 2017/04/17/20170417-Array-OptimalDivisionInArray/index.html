@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/17/20170417-Array-OptimalDivisionInArray/index.html">
 <meta property="og:site_name" content="Tech">
 <meta property="og:description" content="题目描述：Optimal Division In Array(数组中除法的最优切分) 给定一个数组[x1,x2,x3….xn]。我们定义其为连除模式，即x1/x2/x3/x4..xn。在这个序列中我们可以在任意位置中加上括号改变其计算顺序。要求找到其中所有加入括号的结果中最大的那个加入括号的方式，并返回加入括号所形成的字符串。  例子：  [1000,100,10,2],我们可以加入括号形成(10">
-<meta property="og:updated_time" content="2017-05-05T07:28:16.000Z">
+<meta property="og:updated_time" content="2017-07-04T02:50:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Optimal Division In Array">
 <meta name="twitter:description" content="题目描述：Optimal Division In Array(数组中除法的最优切分) 给定一个数组[x1,x2,x3….xn]。我们定义其为连除模式，即x1/x2/x3/x4..xn。在这个序列中我们可以在任意位置中加上括号改变其计算顺序。要求找到其中所有加入括号的结果中最大的那个加入括号的方式，并返回加入括号所形成的字符串。  例子：  [1000,100,10,2],我们可以加入括号形成(10">
@@ -358,7 +358,7 @@
 <p>给定一个数组[x1,x2,x3….xn]。我们定义其为连除模式，即x1/x2/x3/x4..xn。在这个序列中我们可以在任意位置中加上括号改变其计算顺序。要求找到其中所有加入括号的结果中最大的那个加入括号的方式，并返回加入括号所形成的字符串。</p>
 </blockquote>
 <h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> [1000,100,10,2],我们可以加入括号形成(1000/100)/(10/2),或者1000/(100/(10/2))等。详细解释可以看 <a href="https://leetcode.com/problems/optimal-division/#/description" target="_blank" rel="external">leetcode</a></p>
+<p> [1000,100,10,2],我们可以加入括号形成(1000/100)/(10/2),或者1000/(100/(10/2))等。详细解释可以看 <a href="https://leetcode.com/problems/optimal-division/#/description" target="_blank" rel="external">leetcode553</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
 <p>初看这个题目会觉得非常的难，因为需要考虑到所有的情况中最大的那一种；并且需要在不同的位置上加上括号形成字符串。但是其实仔细考虑后我们就会发下：即不管在任意位置上加上括号，x1永远是除数，而x2永远中是被除数中的一个。所以我们就可以写成等价的方式x1/(x2/y)，其中y的方式可以是任意的。通过调整分子分母可以发现：x1/(x2/y) = x1<em>y/(x2).所以最大值的情况在y最大的情况下出现，而y的最大化即为(x3 </em> x4 * x5….)。所以最后的最大结果肯定是：x1/(x2/(x3/x4/x5….xn))，所以我们直接返回这样的结果即可。</p>

@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="String To Num题目描述： 给定一个字符串，将其转化为对应的合法的数字。其中字符串可能的输入存在多种情况，需要考虑。如果是非法的转化，返回0；如果是大于2147483647则返回INT_MAX(2147483647)；如果是小于-2147483648则返回INT_MIN(-2147483648).  解题思路： 题目的整体思路不难，主要利用’9’-‘0’来得到对应位数代表的数字，用上一位">
+<meta name="description" content="String To Num题目描述： 给定一个字符串，将其转化为对应的合法的数字。其中字符串可能的输入存在多种情况，需要考虑。如果是非法的转化，返回0；如果是大于2147483647则返回INT_MAX(2147483647)；如果是小于-2147483648则返回INT_MIN(-2147483648).见LeetCode8  解题思路： 题目的整体思路不难，主要利用’9’-‘0’来得到对应位数">
 <meta name="keywords" content="String">
 <meta property="og:type" content="article">
 <meta property="og:title" content="String To Num">
 <meta property="og:url" content="http://yoursite.com/2017/04/18/20170418-String-StringToNum/index.html">
 <meta property="og:site_name" content="Tech">
-<meta property="og:description" content="String To Num题目描述： 给定一个字符串，将其转化为对应的合法的数字。其中字符串可能的输入存在多种情况，需要考虑。如果是非法的转化，返回0；如果是大于2147483647则返回INT_MAX(2147483647)；如果是小于-2147483648则返回INT_MIN(-2147483648).  解题思路： 题目的整体思路不难，主要利用’9’-‘0’来得到对应位数代表的数字，用上一位">
-<meta property="og:updated_time" content="2017-05-05T07:26:56.000Z">
+<meta property="og:description" content="String To Num题目描述： 给定一个字符串，将其转化为对应的合法的数字。其中字符串可能的输入存在多种情况，需要考虑。如果是非法的转化，返回0；如果是大于2147483647则返回INT_MAX(2147483647)；如果是小于-2147483648则返回INT_MIN(-2147483648).见LeetCode8  解题思路： 题目的整体思路不难，主要利用’9’-‘0’来得到对应位数">
+<meta property="og:updated_time" content="2017-07-04T03:11:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="String To Num">
-<meta name="twitter:description" content="String To Num题目描述： 给定一个字符串，将其转化为对应的合法的数字。其中字符串可能的输入存在多种情况，需要考虑。如果是非法的转化，返回0；如果是大于2147483647则返回INT_MAX(2147483647)；如果是小于-2147483648则返回INT_MIN(-2147483648).  解题思路： 题目的整体思路不难，主要利用’9’-‘0’来得到对应位数代表的数字，用上一位">
+<meta name="twitter:description" content="String To Num题目描述： 给定一个字符串，将其转化为对应的合法的数字。其中字符串可能的输入存在多种情况，需要考虑。如果是非法的转化，返回0；如果是大于2147483647则返回INT_MAX(2147483647)；如果是小于-2147483648则返回INT_MIN(-2147483648).见LeetCode8  解题思路： 题目的整体思路不难，主要利用’9’-‘0’来得到对应位数">
 
 
 
@@ -355,7 +355,7 @@
 
       
         <h3 id="String-To-Num"><a href="#String-To-Num" class="headerlink" title="String To Num"></a>String To Num</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个字符串，将其转化为对应的合法的数字。其中字符串可能的输入存在多种情况，需要考虑。如果是非法的转化，返回0；如果是大于2147483647则返回INT_MAX(2147483647)；如果是小于-2147483648则返回INT_MIN(-2147483648).</p>
+<p>给定一个字符串，将其转化为对应的合法的数字。其中字符串可能的输入存在多种情况，需要考虑。如果是非法的转化，返回0；如果是大于2147483647则返回INT_MAX(2147483647)；如果是小于-2147483648则返回INT_MIN(-2147483648).见<a href="https://leetcode.com/problems/string-to-integer-atoi/#/description" target="_blank" rel="external">LeetCode8</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
 <p>题目的整体思路不难，主要利用’9’-‘0’来得到对应位数代表的数字，用上一位的累加和乘以10加上当前位数得到结果。需要考虑的部分有：输入的开头可能是空格，我们需要跳过这些字符；当到达第一位非空格的时候，记录下数字的符号；最后需要考虑的是超过整形数字的范围；我们的做法是用base=INT_MAX/10来作为标记；如果在还没到达最后一位的时候，当前已经大于base，则结果一定溢出，所以返回对应符号的数即可，如果是当前值等于base的情况下，判断当前为是否大于7，如果大于7也是同样的做法。当然好几种情况在返回0的情况可以全部合并，写入注释用于提醒。所以做题之前需要多考虑Corner case。</p>

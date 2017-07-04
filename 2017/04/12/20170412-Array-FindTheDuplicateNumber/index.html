@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="Find The Duplicate Number(找到数组中的重复数字)题目描述： 给定一个数组，其长度为n + 1，数组中的数的范围为1到n。其中有且只有一个数重复了，但是可能重复了很多次。要求在O(1)的空间，小于O(n^2)的复杂度，不改变数组的前提下找到该数。  解题思路： 要求的空间过小，所以哈希表方法排除；要求复杂度小，所以暴力解法排除；不改变数组，所以交换数组的数排除；所以本题使用">
+<meta name="description" content="Find The Duplicate Number(找到数组中的重复数字)题目描述： 给定一个数组，其长度为n + 1，数组中的数的范围为1到n。其中有且只有一个数重复了，但是可能重复了很多次。要求在O(1)的空间，小于O(n^2)的复杂度，不改变数组的前提下找到该数。具体描述见LeetCode289  解题思路： 要求的空间过小，所以哈希表方法排除；要求复杂度小，所以暴力解法排除；不改变数组，所">
 <meta name="keywords" content="Array">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Find The Duplicate Number">
 <meta property="og:url" content="http://yoursite.com/2017/04/12/20170412-Array-FindTheDuplicateNumber/index.html">
 <meta property="og:site_name" content="Tech">
-<meta property="og:description" content="Find The Duplicate Number(找到数组中的重复数字)题目描述： 给定一个数组，其长度为n + 1，数组中的数的范围为1到n。其中有且只有一个数重复了，但是可能重复了很多次。要求在O(1)的空间，小于O(n^2)的复杂度，不改变数组的前提下找到该数。  解题思路： 要求的空间过小，所以哈希表方法排除；要求复杂度小，所以暴力解法排除；不改变数组，所以交换数组的数排除；所以本题使用">
-<meta property="og:updated_time" content="2017-05-05T07:43:48.000Z">
+<meta property="og:description" content="Find The Duplicate Number(找到数组中的重复数字)题目描述： 给定一个数组，其长度为n + 1，数组中的数的范围为1到n。其中有且只有一个数重复了，但是可能重复了很多次。要求在O(1)的空间，小于O(n^2)的复杂度，不改变数组的前提下找到该数。具体描述见LeetCode289  解题思路： 要求的空间过小，所以哈希表方法排除；要求复杂度小，所以暴力解法排除；不改变数组，所">
+<meta property="og:updated_time" content="2017-07-04T02:54:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Find The Duplicate Number">
-<meta name="twitter:description" content="Find The Duplicate Number(找到数组中的重复数字)题目描述： 给定一个数组，其长度为n + 1，数组中的数的范围为1到n。其中有且只有一个数重复了，但是可能重复了很多次。要求在O(1)的空间，小于O(n^2)的复杂度，不改变数组的前提下找到该数。  解题思路： 要求的空间过小，所以哈希表方法排除；要求复杂度小，所以暴力解法排除；不改变数组，所以交换数组的数排除；所以本题使用">
+<meta name="twitter:description" content="Find The Duplicate Number(找到数组中的重复数字)题目描述： 给定一个数组，其长度为n + 1，数组中的数的范围为1到n。其中有且只有一个数重复了，但是可能重复了很多次。要求在O(1)的空间，小于O(n^2)的复杂度，不改变数组的前提下找到该数。具体描述见LeetCode289  解题思路： 要求的空间过小，所以哈希表方法排除；要求复杂度小，所以暴力解法排除；不改变数组，所">
 
 
 
@@ -355,7 +355,7 @@
 
       
         <h3 id="Find-The-Duplicate-Number-找到数组中的重复数字"><a href="#Find-The-Duplicate-Number-找到数组中的重复数字" class="headerlink" title="Find The Duplicate Number(找到数组中的重复数字)"></a>Find The Duplicate Number(找到数组中的重复数字)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个数组，其长度为n + 1，数组中的数的范围为1到n。其中有且只有一个数重复了，但是可能重复了很多次。要求在O(1)的空间，小于O(n^2)的复杂度，不改变数组的前提下找到该数。</p>
+<p>给定一个数组，其长度为n + 1，数组中的数的范围为1到n。其中有且只有一个数重复了，但是可能重复了很多次。要求在O(1)的空间，小于O(n^2)的复杂度，不改变数组的前提下找到该数。具体描述见<a href="https://leetcode.com/problems/find-the-duplicate-number/#/description" target="_blank" rel="external">LeetCode289</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
 <p>要求的空间过小，所以哈希表方法排除；要求复杂度小，所以暴力解法排除；不改变数组，所以交换数组的数排除；所以本题使用的是二分查找法。原理是我们假设有6个抽屉，如果一共有7个苹果，则在其中的一个抽屉中肯定有2个或者2个以上的苹果。同理，我们假设low = 1, high = n(因为数组的范围是这样)。计算得到mid = (low + high) / 2；然后遍历数组中小于或者等于mid的数。如果该数大于mid，则说明在[low, mid]中一定存在重复的数，此时将high = mid；反之，如果该数小于mid,说明在[low, mid]中肯定不存在重复的数；将low = mid + 1(注意不是low = mid,因为这种情况下，我们已经排除了这个数是mid的可能)。</p>

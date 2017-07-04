@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/01/20170401-String-LongestUncommonSubsequence/index.html">
 <meta property="og:site_name" content="Tech">
 <meta property="og:description" content="Longest Uncommon Subsequence(最长非公共子序列)题目描述： 给定两个字符串，找到两个字符串的最长非公共子序列。其中子序列的定义为：原序列中删除部分字符所得到，即原始序列中的字符顺序不改变。即假设字符串str1和str2。找到str1中的最长子序列，且该序列无法由str2得到。另外我们设定str1和””都是str1的子序列。如果”aa”和”aa”的话，不存在非公共子序列，">
-<meta property="og:updated_time" content="2017-05-05T07:30:12.000Z">
+<meta property="og:updated_time" content="2017-07-04T03:19:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Longest Uncommon Subsequence">
 <meta name="twitter:description" content="Longest Uncommon Subsequence(最长非公共子序列)题目描述： 给定两个字符串，找到两个字符串的最长非公共子序列。其中子序列的定义为：原序列中删除部分字符所得到，即原始序列中的字符顺序不改变。即假设字符串str1和str2。找到str1中的最长子序列，且该序列无法由str2得到。另外我们设定str1和””都是str1的子序列。如果”aa”和”aa”的话，不存在非公共子序列，">
@@ -358,7 +358,7 @@
 <p>给定两个字符串，找到两个字符串的最长非公共子序列。其中子序列的定义为：原序列中删除部分字符所得到，即原始序列中的字符顺序不改变。即假设字符串str1和str2。找到str1中的最长子序列，且该序列无法由str2得到。另外我们设定str1和””都是str1的子序列。如果”aa”和”aa”的话，不存在非公共子序列，返回-1.</p>
 </blockquote>
 <h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>“abc”和”cdc”的最长子序列是”abc”(“cdc”)。所以最长的非公共子序列长度为3.</p>
+<p>“abc”和”cdc”的最长子序列是”abc”(“cdc”)。所以最长的非公共子序列长度为3.见<a href="https://leetcode.com/problems/longest-uncommon-subsequence-i/#/description" target="_blank" rel="external">LeetCode521</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
 <p>初看题目会陷入困局；想要找到”abc”中的所有子序列然后和”cdc”一一验证。但是其实我们从另外一个角度看，我们可以先将两个字符串相同的情况排除后;在两个字符串不同长度的情况下，肯定是较长的字符串的本身是我们需要的结果。因为较长的字符串肯定无法通过另外一个串得到，所以较长的串就是我们所求的。</p>

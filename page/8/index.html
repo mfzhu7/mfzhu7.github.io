@@ -670,7 +670,7 @@
         
           
             <h3 id="Longest-Palindromic-Substring-最长的回文子串"><a href="#Longest-Palindromic-Substring-最长的回文子串" class="headerlink" title="Longest Palindromic Substring(最长的回文子串)"></a>Longest Palindromic Substring(最长的回文子串)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个字符串，找到字符串中的最长回文子串。</p>
+<p>给定一个字符串，找到字符串中的最长回文子串。见<a href="https://leetcode.com/problems/longest-palindromic-substring/#/description" target="_blank" rel="external">LeetCode5</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
 <p>本题的常见解法有三种。第一种是中心扩展的方法。在遍历字符串的过程，以当前字符串为中心向左右两侧扩展，扩展结束后判断子串的长度。需要注意的是：这种方法中有偶回文串和奇数回文串的区别，遍历的过程需要区别对待。aba奇回文子串，abba是偶回文子串。</p>
@@ -1280,7 +1280,7 @@
 <p>给定一个数字n，和一个关于需要生成排列的长度k。要求根据这两个数字，从[1…n]的数组中生成长度为k的排列。</p>
 </blockquote>
 <h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 例如给定数字为n=4，k=2；则根据要求生成的排列为[[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]。</p>
+<p> 例如给定数字为n=4，k=2；则根据要求生成的排列为[[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]。见<a href="https://leetcode.com/problems/combinations/#/description" target="_blank" rel="external">LeetCode77</a>.</p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
 <p>这道题理解上问题不大，主要是在于用什么方法去解决。我们首先想到的是使用回溯的方法来解决。首先是使用一个标签变量来记录我们当前要确定排列中的第几个位置，然后递归的调用函数来确定下面位置的数字。主要的思路体现在代码中，可以看代码中的注释来理解。</p>
@@ -1433,7 +1433,7 @@
         
           
             <h3 id="String-To-Num"><a href="#String-To-Num" class="headerlink" title="String To Num"></a>String To Num</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个字符串，将其转化为对应的合法的数字。其中字符串可能的输入存在多种情况，需要考虑。如果是非法的转化，返回0；如果是大于2147483647则返回INT_MAX(2147483647)；如果是小于-2147483648则返回INT_MIN(-2147483648).</p>
+<p>给定一个字符串，将其转化为对应的合法的数字。其中字符串可能的输入存在多种情况，需要考虑。如果是非法的转化，返回0；如果是大于2147483647则返回INT_MAX(2147483647)；如果是小于-2147483648则返回INT_MIN(-2147483648).见<a href="https://leetcode.com/problems/string-to-integer-atoi/#/description" target="_blank" rel="external">LeetCode8</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
 <p>题目的整体思路不难，主要利用’9’-‘0’来得到对应位数代表的数字，用上一位的累加和乘以10加上当前位数得到结果。需要考虑的部分有：输入的开头可能是空格，我们需要跳过这些字符；当到达第一位非空格的时候，记录下数字的符号；最后需要考虑的是超过整形数字的范围；我们的做法是用base=INT_MAX/10来作为标记；如果在还没到达最后一位的时候，当前已经大于base，则结果一定溢出，所以返回对应符号的数即可，如果是当前值等于base的情况下，判断当前为是否大于7，如果大于7也是同样的做法。当然好几种情况在返回0的情况可以全部合并，写入注释用于提醒。所以做题之前需要多考虑Corner case。</p>
@@ -1586,7 +1586,7 @@
 <p>给定一个数组[x1,x2,x3….xn]。我们定义其为连除模式，即x1/x2/x3/x4..xn。在这个序列中我们可以在任意位置中加上括号改变其计算顺序。要求找到其中所有加入括号的结果中最大的那个加入括号的方式，并返回加入括号所形成的字符串。</p>
 </blockquote>
 <h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> [1000,100,10,2],我们可以加入括号形成(1000/100)/(10/2),或者1000/(100/(10/2))等。详细解释可以看 <a href="https://leetcode.com/problems/optimal-division/#/description" target="_blank" rel="external">leetcode</a></p>
+<p> [1000,100,10,2],我们可以加入括号形成(1000/100)/(10/2),或者1000/(100/(10/2))等。详细解释可以看 <a href="https://leetcode.com/problems/optimal-division/#/description" target="_blank" rel="external">leetcode553</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
 <p>初看这个题目会觉得非常的难，因为需要考虑到所有的情况中最大的那一种；并且需要在不同的位置上加上括号形成字符串。但是其实仔细考虑后我们就会发下：即不管在任意位置上加上括号，x1永远是除数，而x2永远中是被除数中的一个。所以我们就可以写成等价的方式x1/(x2/y)，其中y的方式可以是任意的。通过调整分子分母可以发现：x1/(x2/y) = x1<em>y/(x2).所以最大值的情况在y最大的情况下出现，而y的最大化即为(x3 </em> x4 * x5….)。所以最后的最大结果肯定是：x1/(x2/(x3/x4/x5….xn))，所以我们直接返回这样的结果即可。</p>

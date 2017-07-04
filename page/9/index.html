@@ -360,7 +360,7 @@
         
           
             <h3 id="Longest-Substring-Without-Repeating-Characters"><a href="#Longest-Substring-Without-Repeating-Characters" class="headerlink" title="Longest Substring Without Repeating Characters"></a>Longest Substring Without Repeating Characters</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个字符串，找到字符串中最长的子串的长度，其子串中的所有字母不重复。</p>
+<p>给定一个字符串，找到字符串中最长的子串的长度，其子串中的所有字母不重复。见<a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/#/description" target="_blank" rel="external">LeetCode3</a></p>
 </blockquote>
 <h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
 <p>‘abcabcbb’其中最长的不重复子串的长度是3；’abba’其中最长的不重复的子串的长度是2。</p>
@@ -515,7 +515,7 @@
 <p>给定一个目标值，以及表示累加和数字的个数k。要求得到找到1-9中k个数为目标值的所有可能，要求结果中不存在重复值，且各个数字只能用一次。</p>
 </blockquote>
 <h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 给定k=3,target=7，则结果为[[1,2,4]];给定k=3,target=9,则结果为[[1,2,6],[1,3,5],[2,3,4]]</p>
+<p> 给定k=3,target=7，则结果为[[1,2,4]];给定k=3,target=9,则结果为[[1,2,6],[1,3,5],[2,3,4]],见<a href="https://leetcode.com/problems/combination-sum-iii/#/description" target="_blank" rel="external">LeetCode216</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
 <p>首先已知我们只能用1-9的数，所以用过的数不能再次使用。这样相当于构建一棵树，新的节点的可能只能在上一个节点较大值中取。例如我们当前取值了5，则下一个节点的可能值只有6，7，8，9。基于以上事实，我们使用回溯的算法，在不断寻找的过程中，如果条件不满足则返回，如果满足题意则加入到结果中。</p>
@@ -843,7 +843,7 @@
         
           
             <h3 id="Find-The-Duplicate-Number-找到数组中的重复数字"><a href="#Find-The-Duplicate-Number-找到数组中的重复数字" class="headerlink" title="Find The Duplicate Number(找到数组中的重复数字)"></a>Find The Duplicate Number(找到数组中的重复数字)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个数组，其长度为n + 1，数组中的数的范围为1到n。其中有且只有一个数重复了，但是可能重复了很多次。要求在O(1)的空间，小于O(n^2)的复杂度，不改变数组的前提下找到该数。</p>
+<p>给定一个数组，其长度为n + 1，数组中的数的范围为1到n。其中有且只有一个数重复了，但是可能重复了很多次。要求在O(1)的空间，小于O(n^2)的复杂度，不改变数组的前提下找到该数。具体描述见<a href="https://leetcode.com/problems/find-the-duplicate-number/#/description" target="_blank" rel="external">LeetCode289</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
 <p>要求的空间过小，所以哈希表方法排除；要求复杂度小，所以暴力解法排除；不改变数组，所以交换数组的数排除；所以本题使用的是二分查找法。原理是我们假设有6个抽屉，如果一共有7个苹果，则在其中的一个抽屉中肯定有2个或者2个以上的苹果。同理，我们假设low = 1, high = n(因为数组的范围是这样)。计算得到mid = (low + high) / 2；然后遍历数组中小于或者等于mid的数。如果该数大于mid，则说明在[low, mid]中一定存在重复的数，此时将high = mid；反之，如果该数小于mid,说明在[low, mid]中肯定不存在重复的数；将low = mid + 1(注意不是low = mid,因为这种情况下，我们已经排除了这个数是mid的可能)。</p>
@@ -1474,6 +1474,7 @@
 <p>给定一个字符串由括号构成；判断其是否有效。</p>
 </blockquote>
 <h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>具体描述见<a href="https://leetcode.com/problems/valid-parentheses/#/description" target="_blank" rel="external">LeetCode20</a></p>
 </blockquote>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
 <p>对于这种题目；主要利用栈的数据结构来判断。我们可以将碰到左括号的字符全部入栈；然后一旦碰到右括号；就从栈顶弹出字符，并且判断这两个字符是否能够构成合法的字符串直到栈为空。需要注意的是，假设字符前部的字符都有效，但是末尾是一个左括号，这样需要在函数末尾判断当前栈是否为空，不为空的情况也是不合法的字符串。</p>
