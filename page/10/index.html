@@ -260,6 +260,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/07/20170407-Tree-GreaterTree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/07/20170407-Tree-GreaterTree/" itemprop="url">
+                  Greater Tree
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-07T20:56:02+08:00">
+                2017-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Greater-Tree"><a href="#Greater-Tree" class="headerlink" title="Greater Tree"></a>Greater Tree</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一颗二叉搜索树的头结点，将树中的每个节点变大；变大的规则在于：对于某个节点而言，找到树中大于该节点值的所有节点值的和，并将其加到该节点上。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>这是leetcode上的<a href="https://leetcode.com/problems/convert-bst-to-greater-tree/" target="_blank" rel="external">题目</a></p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>初看题目可能觉得比较麻烦，因为要找到所有的大于某个节点的和。但是注意题目中给定的：这棵树是二叉搜索树。我们可以利用右侧节点大于根节点；左侧节点小于根节点这个特性来解题。我们从最右侧节点开始，对于最右侧节点而言，其为最大，所以不需要改变；对于这个节点的父母节点我们需要将其右侧的节点的和加上即可；所以在遍历的过程中不断的将遍历的过程节点累加即可。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">int</span> cur_sum = <span class="number">0</span>;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">convertBST</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        greater(root);</div><div class="line">        <span class="keyword">return</span> root;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">greater</span><span class="params">(TreeNode* &amp;head)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!head) <span class="keyword">return</span>;</div><div class="line">        <span class="keyword">if</span> (head-&gt;right) greater(head-&gt;right);</div><div class="line">        cur_sum += head-&gt;val;<span class="comment">//计算累加和</span></div><div class="line">        head-&gt;val = cur_sum;<span class="comment">//将右侧的和加上到当前节点</span></div><div class="line">        <span class="keyword">if</span> (head-&gt;left) greater(head-&gt;left);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/06/20170406-DS-BST/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1726,165 +1878,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/28/20170328-Tree-SerializationOfTree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/28/20170328-Tree-SerializationOfTree/" itemprop="url">
-                  Serialization Of Tree
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-28T11:48:02+08:00">
-                2017-03-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Serialization-Of-Tree-树的序列化和反序列化"><a href="#Serialization-Of-Tree-树的序列化和反序列化" class="headerlink" title="Serialization Of Tree(树的序列化和反序列化)"></a>Serialization Of Tree(树的序列化和反序列化)</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>二叉树被记录文件的过程称为二叉树的序列化。通过文件来重建二叉树的过程称为二叉树的反序列化。给定一棵树的头结点head，设计一种二叉树序列化和反序列化的方案。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p> 我们用！放在遍历结果的后面表示当前节点的结束，用#！表示当前节点为空结束。这样通过先序遍历一棵树得到的结果为：12!3!#!#!#!.</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>所以我们可以利用树的先序遍历来得到一棵树的序列化结果。在遍历每个节点后加上!,在每个根节点后面加上#!.</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> serialByPre1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">serialByPre</span><span class="params">(treeNode* root)</span></span>&#123;</div><div class="line">        <span class="built_in">string</span> res = <span class="string">""</span>;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> <span class="string">"#!"</span>;</div><div class="line">        res = to_string(root-&gt;val) + <span class="string">"!"</span>;</div><div class="line">        res = res + serialByPre(root-&gt;left);</div><div class="line">        res = res + serialByPre(root-&gt;right);</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="解题思路2："><a href="#解题思路2：" class="headerlink" title="解题思路2："></a>解题思路2：</h3><blockquote>
-<p>对于树我们也可以使用按层遍历的方法得到其序列化的结果。使用的规则和上诉的一致，我们在节点结束后加上!,在空节点上加上#!.</p>
-</blockquote>
-<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> serialByLevel1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">serialByLevel</span><span class="params">(treeNode* root)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">        <span class="built_in">string</span> result = <span class="string">""</span>;</div><div class="line">        <span class="built_in">queue</span>&lt;treeNode*&gt; q;</div><div class="line">        <span class="built_in">stack</span>&lt;treeNode*&gt; stk;<span class="comment">//按层遍历利用两个栈来实现</span></div><div class="line">        q.push(root);</div><div class="line">        <span class="keyword">while</span>(!q.empty())&#123;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt;  q.front()-&gt;val &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">            <span class="keyword">if</span> (q.front()-&gt;left != <span class="literal">NULL</span>)&#123;</div><div class="line">            		result += <span class="string">"#!"</span>;</div><div class="line">                q.push(q.front()-&gt;left);</div><div class="line">                &#125;</div><div class="line">            <span class="keyword">if</span> (q.front()-&gt;right != <span class="literal">NULL</span>)</div><div class="line">                q.push(q.front()-&gt;right);</div><div class="line">            q.pop();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="解题思路3"><a href="#解题思路3" class="headerlink" title="解题思路3"></a>解题思路3</h3><blockquote>
-<p>对于反序列化而言，我们首先要将拿到的字符串根据!隔开，分隔出每个节点的数值。因为原始数据是根据先序遍历得到的，所以假设在分隔后得到的字符串数组是[“12”,”3”,”#”,”#”,”#”].我们首先取出第一个字符串，开辟空间新建节点，用剩下的数据作为其左子树；取出第二个节点3生成节点，用剩下的作为左子树，发现是空节点，所以用剩下的构建右子树依旧是空节点；所以用[“#”,”#”]构建12节点的右子树。</p>
-</blockquote>
-<h3 id="代码如下：-2"><a href="#代码如下：-2" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> reconBySerialString1 &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">queue</span>&lt;<span class="built_in">string</span>&gt; splitStrByDelimiter(<span class="built_in">string</span> str) &#123;</div><div class="line">        <span class="built_in">queue</span>&lt;<span class="built_in">string</span>&gt; p;</div><div class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> distance = <span class="number">0</span>;</div><div class="line">        <span class="built_in">string</span> tmp = <span class="string">""</span>;</div><div class="line">        <span class="keyword">while</span> (start &lt; str.size()) &#123;</div><div class="line">            distance = str.substr(start, <span class="number">11</span>).find(<span class="string">'!'</span>);</div><div class="line">            tmp = str.substr(start, <span class="number">11</span>).substr(<span class="number">0</span>, distance);</div><div class="line">            p.push(tmp);</div><div class="line">            start = start + distance + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> p;</div><div class="line">    &#125;</div><div class="line">    <span class="function">treeNode* <span class="title">reconBySerialString</span><span class="params">(<span class="built_in">queue</span>&lt;<span class="built_in">string</span>&gt; p)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (p.empty())</div><div class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">        <span class="built_in">queue</span>&lt;treeNode*&gt; q1;</div><div class="line">        treeNode* head = <span class="keyword">new</span> treeNode(stoi(p.front()));</div><div class="line">        treeNode* result = head;</div><div class="line">        q1.push(head);</div><div class="line">        p.pop();</div><div class="line">        <span class="keyword">while</span>(!p.empty())&#123;</div><div class="line">            <span class="keyword">if</span> (p.front() != <span class="string">"#"</span>)&#123;</div><div class="line">                treeNode* left = <span class="keyword">new</span> treeNode(stoi(p.front()));</div><div class="line">                q1.push(left);</div><div class="line">                p.pop();</div><div class="line">                head-&gt;left = left;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                p.pop();</div><div class="line">                head-&gt;left = <span class="literal">NULL</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (p.front() != <span class="string">"#"</span>)&#123;</div><div class="line">                treeNode* right = <span class="keyword">new</span> treeNode(stoi(p.front()));</div><div class="line">                p.pop();</div><div class="line">                q1.push(right);</div><div class="line">                head-&gt;right = right;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                p.pop();</div><div class="line">                head-&gt;right = <span class="literal">NULL</span>;</div><div class="line">            &#125;</div><div class="line">            q1.pop();</div><div class="line">            head = q1.front();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1934,7 +1927,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">113</span>
+                <span class="site-state-item-count">114</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
