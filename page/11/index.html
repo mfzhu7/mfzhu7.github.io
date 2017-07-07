@@ -260,6 +260,184 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/20170329-Tree-TheLevelInTree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/29/20170329-Tree-TheLevelInTree/" itemprop="url">
+                  The Level In Tree
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-29T12:16:02+08:00">
+                2017-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="The-Level-In-Tree-树中按层遍历相关的问题"><a href="#The-Level-In-Tree-树中按层遍历相关的问题" class="headerlink" title="The Level In Tree(树中按层遍历相关的问题)"></a>The Level In Tree(树中按层遍历相关的问题)</h3><h3 id="题目描述1："><a href="#题目描述1：" class="headerlink" title="题目描述1："></a>题目描述1：</h3><blockquote>
+<p>给定一棵树的头结点head，实现按层遍历打印。</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>按层遍历的思路通常是借助于队列数据结构。我们先将节点入队，出队的时候将该节点的左右节点各自入队，当上一层的节点出队结束后，我们继续将刚刚入队的这一层节点出队，实现了按层遍历。我们可以使用两个队列分别来记录上一层和当前层的节点；也可以只用一个队的方法，每次记录当前入队的最后一个节点，下一层遍历的时候我们就只要出队到该节点即可。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> printByLevel1&#123; <span class="comment">//利用两个队的方法</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printByLevel</span><span class="params">(treeNode* root)</span></span>&#123;</div><div class="line">        <span class="built_in">queue</span>&lt;treeNode*&gt; q1;</div><div class="line">        <span class="built_in">queue</span>&lt;treeNode*&gt; q2; <span class="comment">//定义两个队列</span></div><div class="line">        <span class="built_in">queue</span>&lt;treeNode*&gt; tmp;</div><div class="line">        <span class="keyword">int</span> level = <span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        q1.push(root);<span class="comment">//先将根节点入队</span></div><div class="line">        <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Level"</span> &lt;&lt; level &lt;&lt; <span class="string">":"</span>;</div><div class="line">            <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">                <span class="keyword">if</span> (q1.front()-&gt;left != <span class="literal">NULL</span>)&#123;</div><div class="line">                    q2.push(q1.front()-&gt;left);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (q1.front()-&gt;right != <span class="literal">NULL</span>)&#123;</div><div class="line">                    q2.push(q1.front()-&gt;right);</div><div class="line">                &#125;</div><div class="line">                <span class="built_in">cout</span> &lt;&lt; q1.front()-&gt;val &lt;&lt; <span class="string">" "</span>;</div><div class="line">                q1.pop();</div><div class="line">            &#125;<span class="comment">//不断的将当前层的左右节点压入到另外一个队中</span></div><div class="line">            tmp = q2;</div><div class="line">            q2 = q1;</div><div class="line">            q1 = tmp; <span class="comment">//交换当前队和上一层队，对下一层节点遍历</span></div><div class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="解法2-只用一个队列的情况"><a href="#解法2-只用一个队列的情况" class="headerlink" title="解法2(只用一个队列的情况)"></a>解法2(只用一个队列的情况)</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">lass printByLevel2&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printByLevel</span><span class="params">(treeNode* head)</span></span>&#123;</div><div class="line">        <span class="built_in">queue</span>&lt;treeNode*&gt; q;</div><div class="line">        treeNode* flag = head; <span class="comment">//保存上一层的最后一个节点</span></div><div class="line">        treeNode* next_flag = <span class="literal">NULL</span>; <span class="comment">//保存当前层的最后一个节点</span></div><div class="line">        q.push(head);</div><div class="line">        <span class="keyword">while</span>(!q.empty())&#123;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; q.front()-&gt;val;</div><div class="line">            <span class="keyword">if</span> (q.front()-&gt;left != <span class="literal">NULL</span>)&#123;</div><div class="line">                q.push(q.front()-&gt;left);</div><div class="line">                next_flag = q.front()-&gt;left; </div><div class="line">                <span class="comment">//左节点入队，更新最后一个节点</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (q.front()-&gt;right != <span class="literal">NULL</span>)&#123;</div><div class="line">                q.push(q.front()-&gt;right);</div><div class="line">                next_flag = q.front()-&gt;right;</div><div class="line">                <span class="comment">//右节点入队，更新最后一个节点</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (q.front() == flag)&#123;</div><div class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">                flag = next_flag;</div><div class="line">                <span class="comment">//如果当前是最后一个节点，输出换行符，更新最后一个节点</span></div><div class="line">            &#125;</div><div class="line">            q.pop();<span class="comment">//出队头节点</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="题目描述2："><a href="#题目描述2：" class="headerlink" title="题目描述2："></a>题目描述2：</h3><blockquote>
+<p>自底向上按层遍历树的每一层节点并返回结果。与上面题目类似，具体的题目描述可以看<a href="https://leetcode.com/problems/binary-tree-level-order-traversal-ii/#/description" target="_blank" rel="external">LeetCode107</a>.</p>
+</blockquote>
+<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; levelOrderBottom(TreeNode* root) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> res;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; q1;</div><div class="line">        q1.push(root);</div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt;q2;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt;tmp;</div><div class="line">        <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</div><div class="line">            <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">                vec.push_back(q1.front()-&gt;val);</div><div class="line">                <span class="keyword">if</span> (q1.front()-&gt;left) q2.push(q1.front()-&gt;left);</div><div class="line">                <span class="keyword">if</span> (q1.front()-&gt;right) q2.push(q1.front()-&gt;right);</div><div class="line">                q1.pop();</div><div class="line">            &#125;</div><div class="line">            res.push_back(vec);</div><div class="line">            tmp = q1;</div><div class="line">            q1 = q2;</div><div class="line">            q2 = tmp;</div><div class="line">        &#125;</div><div class="line">        reverse(res.begin(), res.end());</div><div class="line">        <span class="comment">//主要不同之处将遍历的结果逆序后返回即可</span></div><div class="line">        <span class="keyword">return</span> res;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="题目描述3："><a href="#题目描述3：" class="headerlink" title="题目描述3："></a>题目描述3：</h3><blockquote>
+<p>定义树中的节点增加一个next节点，要求给定一棵树的头结点，要求每层的树的节点的next指针指向其同层右侧的指针。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>详细的描述说明可以看leetcode上<a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node/" target="_blank" rel="external">题目1</a>，以及<a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/#/description" target="_blank" rel="external">题目2</a>.</p>
+</blockquote>
+<h3 id="解题思路：-1"><a href="#解题思路：-1" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>初看题目可能会觉得思路上会有点卡壳，但是如果之前做过树的按层遍历的话，应该不难想到，我们可以一层一层的遍历树的节点，然后将每一层的树的节点连接起来就可以。</p>
+</blockquote>
+<h3 id="代码如下：-2"><a href="#代码如下：-2" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for binary tree with next pointer.</div><div class="line"> * struct TreeLinkNode &#123;</div><div class="line"> *  int val;</div><div class="line"> *  TreeLinkNode *left, *right, *next;</div><div class="line"> *  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">connect</span><span class="params">(TreeLinkNode *root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeLinkNode*&gt; q1;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeLinkNode*&gt; q2;</div><div class="line">        <span class="comment">//定义两个队列用于保存上一层和当前层的树的节点</span></div><div class="line">        q1.push(root);</div><div class="line">        <span class="comment">//先将树的头结点入队</span></div><div class="line">        <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">            TreeLinkNode* pre = q1.front();</div><div class="line">            q1.pop();</div><div class="line">            <span class="keyword">if</span> (pre-&gt;left) q2.push(pre-&gt;left);</div><div class="line">            <span class="keyword">if</span> (pre-&gt;right) q2.push(pre-&gt;right);</div><div class="line">            <span class="comment">//因为要将树的节点连接所以先将当前层的节点作为pre，剩下不断的往下遍历同层节点即可</span></div><div class="line">            <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">                TreeLinkNode* next = q1.front();</div><div class="line">                <span class="keyword">if</span> (next-&gt;left) q2.push(next-&gt;left);</div><div class="line">                <span class="keyword">if</span> (next-&gt;right) q2.push(next-&gt;right);</div><div class="line">                <span class="comment">//每pop一个节点就将其左右节点入队，作为下一层的节点</span></div><div class="line">                pre-&gt;next = next;</div><div class="line">                <span class="comment">//建立新的连接</span></div><div class="line">                pre = next;</div><div class="line">                <span class="comment">//改变pre指针</span></div><div class="line">                q1.pop();</div><div class="line">            &#125;</div><div class="line">            pre-&gt;next = <span class="literal">NULL</span>;</div><div class="line">            <span class="built_in">queue</span>&lt;TreeLinkNode*&gt;tmp = q1;</div><div class="line">            q1 = q2;</div><div class="line">            q2 = tmp;</div><div class="line">            <span class="comment">//这步将下一层的数据保存到当前层的队列中，然后将下一层队列置空</span></div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="题目描述4"><a href="#题目描述4" class="headerlink" title="题目描述4"></a>题目描述4</h3><blockquote>
+<p>类似用到树的按层遍历的性质的有，给定一棵树的头结点，要求输出从右侧看这棵树，从第一层到最后一层所看见的树的节点。其实这题的主要思路也是类似的，因为我们知道每层的节点后，我们只要将当前层的末尾节点保存到结果中就可以了。所以需要举一反三，利用之前的题目的解法可以很快的解答出。</p>
+</blockquote>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子:"></a>例子:</h3><blockquote>
+<p>这题也是leetcode上的题目，具体的题目描述可以看<a href="https://leetcode.com/problems/binary-tree-right-side-view/#/description" target="_blank" rel="external">这边</a>.</p>
+</blockquote>
+<h3 id="代码如下：-3"><a href="#代码如下：-3" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; rightSideView(TreeNode* root) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> res;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; q1;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; q2;</div><div class="line">        <span class="comment">//同样定义两个队列保存当前层和下一层的节点</span></div><div class="line">        q1.push(root);</div><div class="line">        <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">            res.push_back(q1.back()-&gt;val);</div><div class="line">            <span class="comment">//直接将当前层的末尾入队，即为最右侧的节点</span></div><div class="line">            <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">                TreeNode* front = q1.front();</div><div class="line">                <span class="keyword">if</span> (front-&gt;left) q2.push(front-&gt;left);</div><div class="line">                <span class="keyword">if</span> (front-&gt;right) q2.push(front-&gt;right);</div><div class="line">                q1.pop();</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">queue</span>&lt;TreeNode*&gt; tmp = q1;</div><div class="line">            q1 = q2;</div><div class="line">            q2 = tmp;</div><div class="line">            <span class="comment">//更新当前层和下一层的数据</span></div><div class="line">        &#125;</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="题目描述5"><a href="#题目描述5" class="headerlink" title="题目描述5"></a>题目描述5</h3><blockquote>
+<p>给定一棵树的头结点，要求返回树的最左侧下方的那个节点。具体的描述可以看<a href="https://leetcode.com/problems/find-bottom-left-tree-value/#/description" target="_blank" rel="external">LeetCode513</a>.解题思路是按层遍历，找到最后一层的最左侧节点返回即可。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findBottomLeftValue</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; cur;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; next;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</div><div class="line">        cur.push(root);</div><div class="line">        <span class="keyword">while</span>(!cur.empty())&#123;</div><div class="line">            res.push_back(cur.front()-&gt;val);</div><div class="line">            <span class="keyword">while</span>(!cur.empty())&#123;</div><div class="line">                TreeNode* front = cur.front();</div><div class="line">                cur.pop();</div><div class="line">                <span class="keyword">if</span> (front-&gt;left) next.push(front-&gt;left);</div><div class="line">                <span class="keyword">if</span> (front-&gt;right) next.push(front-&gt;right);</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">queue</span>&lt;TreeNode*&gt; tmp = cur;</div><div class="line">            cur = next;</div><div class="line">            next = tmp;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res[res.size() - <span class="number">1</span>];</div><div class="line">        <span class="comment">//保存每一层的最左侧，返回最后一层的那个节点即可。</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="题目描述6"><a href="#题目描述6" class="headerlink" title="题目描述6"></a>题目描述6</h3><blockquote>
+<p>给定一棵树的头结点，要求我们按照Z字型分层打印树的内容。<br>同样我们可以利用按层遍历树的方式，不同之处是需要加上一个direction标识用于判断当前层是从前往后还是从后往前答应。具体的题目描述可以看<a href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/#/description" target="_blank" rel="external">LeetCode103</a>。</p>
+</blockquote>
+<h3 id="代码如下：-4"><a href="#代码如下：-4" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;w</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="comment">//按照锯齿状分层遍历树</span></div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; zigzagLevelOrder(TreeNode* root) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> res;</div><div class="line">        </div><div class="line">        <span class="built_in">deque</span>&lt;TreeNode*&gt; q1;</div><div class="line">        <span class="built_in">deque</span>&lt;TreeNode*&gt; q2;</div><div class="line">        <span class="built_in">deque</span>&lt;TreeNode*&gt; tmp;</div><div class="line">        <span class="keyword">bool</span> direction = <span class="literal">true</span>;</div><div class="line">        q1.push_back(root);</div><div class="line">        <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</div><div class="line">            <span class="keyword">while</span>(!q1.empty() &amp;&amp; direction)&#123;</div><div class="line">                vec.push_back(q1.front()-&gt;val);</div><div class="line">                <span class="keyword">if</span> (q1.front()-&gt;left)&#123;</div><div class="line">                    q2.push_front(q1.front()-&gt;left);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (q1.front()-&gt;right)&#123;</div><div class="line">                    q2.push_front(q1.front()-&gt;right);</div><div class="line">                &#125;</div><div class="line">                q1.pop_front();</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">while</span>(!q1.empty() &amp;&amp; !direction)&#123;</div><div class="line">                vec.push_back(q1.front()-&gt;val);</div><div class="line">                <span class="keyword">if</span> (q1.front()-&gt;right) q2.push_front(q1.front()-&gt;right);</div><div class="line">                <span class="keyword">if</span> (q1.front()-&gt;left) q2.push_front(q1.front()-&gt;left);</div><div class="line"></div><div class="line">                q1.pop_front();</div><div class="line">            &#125;</div><div class="line">            res.push_back(vec);</div><div class="line">            direction = !direction;</div><div class="line">            <span class="comment">//每次遍历结束后都改变一下遍历的方向即可</span></div><div class="line">            tmp = q1;</div><div class="line">            q1 = q2;</div><div class="line">            q2 = tmp;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">        </div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/28/20170328-Tree-SerializationOfTree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1664,165 +1842,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/19/20170319-List-DeleteKthNode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/19/20170319-List-DeleteKthNode/" itemprop="url">
-                  Delete the Kth Node In List
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-19T12:26:02+08:00">
-                2017-03-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Delete-List-Node-删除链表中的第倒数第k个节点"><a href="#Delete-List-Node-删除链表中的第倒数第k个节点" class="headerlink" title="Delete List Node(删除链表中的第倒数第k个节点)"></a>Delete List Node(删除链表中的第倒数第k个节点)</h1><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个链表的第头节点，要求删除链表中的倒数第k个节点。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL.比如删除倒数第二个节点4，要求返回链表头节点包含1-&gt;2-&gt;3-&gt;5-&gt;NULL.</p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>因为单项链表无法向前遍历的特点，所以我们可以用一个指示节点来帮助我们找到链表中的倒数第k个节点。做法是：先定义一个指向指针，从链表头结点开始遍历先走k步；而后再定义个遍历指针从链表头部开始遍历，当指示节点遍历到链表尾部的时候，这个时候后遍历的指针刚好达到链表中的第k个节点。需要注意的是，我们删除第k个节点，需要知道第k-1个节点的指针，所以要定义一个pre指针用来保存待删除节点的前一个节点。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> removeLastKthNode1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">removeLastKthNode</span><span class="params">(ListNode* head, <span class="keyword">int</span> lastKth)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span> || lastKth &lt; <span class="number">1</span>)</div><div class="line">            <span class="keyword">return</span> head ;</div><div class="line">        ListNode* cur = head;</div><div class="line">        <span class="keyword">while</span>(cur != <span class="literal">NULL</span>)&#123;</div><div class="line">            cur = cur-&gt;next;</div><div class="line">            lastKth--;</div><div class="line">        &#125;     <span class="comment">// 先走k步的指示指针</span></div><div class="line">        <span class="keyword">if</span> (lastKth == <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">return</span> head-&gt;next;</div><div class="line">            <span class="comment">// k的大小大于链表长度的情况</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (lastKth &lt; <span class="number">0</span>)&#123;</div><div class="line">            cur = head;</div><div class="line">            <span class="keyword">while</span> (lastKth != <span class="number">-1</span>)&#123;</div><div class="line">                cur = cur-&gt;next;</div><div class="line">                lastKth++;</div><div class="line">            &#125;</div><div class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</div><div class="line">        &#125;    <span class="comment">// 删除找到的节点</span></div><div class="line">        <span class="keyword">return</span> head;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="延伸题目1"><a href="#延伸题目1" class="headerlink" title="延伸题目1:"></a>延伸题目1:</h3><blockquote>
-<p>链表中的中间节点。与上面的思路一样，利用快慢指针的方法就可以找到链表的中间节点。首先定义快指针fast和慢指针slow，快指针每次走两步，慢指针一次走一步。这样当快指针到达链表末尾的时候，慢指针刚好到达链表的中间节点部分。同样记得记录待删除节点的前一个节点。</p>
-</blockquote>
-<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> removeMidNode1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">removeMidNode</span><span class="params">(ListNode* head)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> head;</div><div class="line">        <span class="keyword">if</span> (head-&gt;next-&gt;next == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> head-&gt;next;</div><div class="line">        ListNode* slow = head;</div><div class="line">        ListNode* fast = head-&gt;next-&gt;next;<span class="comment">//定义快慢指针</span></div><div class="line">        <span class="keyword">while</span>(fast-&gt;next != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next-&gt;next != <span class="literal">NULL</span>)&#123;</div><div class="line">            slow = slow-&gt;next;</div><div class="line">            fast = fast-&gt;next-&gt;next;</div><div class="line">        &#125;                                 <span class="comment">//找到链表的中间节点</span></div><div class="line">        slow-&gt;next = slow-&gt;next-&gt;next;</div><div class="line">        <span class="keyword">return</span> head;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="延伸题目2"><a href="#延伸题目2" class="headerlink" title="延伸题目2:"></a>延伸题目2:</h3><blockquote>
-<p>给定一个链表的头节点和整数a和整数b。要求删除链表中a/b地方的节点。这一题的主要麻烦之处是找到要删除的节点在链表中的位置，所以a/b在链表中的位置该怎么找事关键。这边主要用到的是(a*n)/b公式，得到的数值即为要删除节点在链表中的位置。</p>
-</blockquote>
-<h3 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下:"></a>代码如下:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> removeByRation1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">removeByRation</span><span class="params">(ListNode* head, <span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (a &lt; <span class="number">0</span> || a &gt; b)</div><div class="line">            <span class="keyword">return</span> head;</div><div class="line">        <span class="keyword">int</span> n = <span class="number">0</span>;</div><div class="line">        ListNode* cur = head;</div><div class="line">        <span class="keyword">while</span>(cur != <span class="literal">NULL</span>)&#123;</div><div class="line">            cur = cur-&gt;next;</div><div class="line">            n++;</div><div class="line">        &#125;            <span class="comment">// 计算链表的长度</span></div><div class="line">        <span class="keyword">int</span> kth = <span class="keyword">int</span>(<span class="built_in">ceil</span>(<span class="keyword">double</span>(a * n) / <span class="keyword">double</span>(b)));</div><div class="line">                   <span class="comment">// 找到链表的位置</span></div><div class="line">        <span class="keyword">if</span> (kth == <span class="number">1</span>)</div><div class="line">            <span class="keyword">return</span> head-&gt;next;  <span class="comment">//如果是头节点的情况</span></div><div class="line">        <span class="keyword">if</span> (kth &gt; <span class="number">1</span>) &#123;</div><div class="line">            cur = head;</div><div class="line">            <span class="keyword">while</span> (--kth != <span class="number">1</span>) &#123;</div><div class="line">                cur = cur-&gt;next;</div><div class="line">            &#125;</div><div class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> head;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1872,7 +1891,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">114</span>
+                <span class="site-state-item-count">115</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
