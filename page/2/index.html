@@ -260,6 +260,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/28/20170628-String-AddStrings/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/28/20170628-String-AddStrings/" itemprop="url">
+                  Add Strings
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-28T14:36:02+08:00">
+                2017-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Add-Strings"><a href="#Add-Strings" class="headerlink" title="Add Strings"></a>Add Strings</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定两个代表数字的字符串，要求返回这两个数字和的结果。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>具体描述见<a href="https://leetcode.com/problems/add-strings/#/description" target="_blank" rel="external">LeetCode415</a></p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>主要的思路是想将字符串逆序，从低位开始加起；用carry来记录进位；然后找到较长的字符串的长度用于遍历的停止条件；其中一个小技巧是如果另外一个字符串已到末尾我们就用0来代替。需要注意的地方还有我们跳出遍历后需要判断当前的进位是否存在，以及我们需要对结果逆序再返回。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">addStrings</span><span class="params">(<span class="built_in">string</span> num1, <span class="built_in">string</span> num2)</span> </span>&#123;</div><div class="line">        reverse(num1.begin(), num1.end());</div><div class="line">        reverse(num2.begin(), num2.end());</div><div class="line">        <span class="keyword">int</span> carry = <span class="number">0</span>;</div><div class="line">        <span class="built_in">string</span> res;</div><div class="line">        <span class="keyword">int</span> length = num1.size() &gt; num2.size() ? num1.size(): num2.size();</div><div class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(index &lt; length)&#123;</div><div class="line">            <span class="keyword">int</span> n1 = index &gt;= num1.size() ? <span class="number">0</span> : num1[index] - <span class="string">'0'</span>;</div><div class="line">            <span class="keyword">int</span> n2 = index &gt;= num2.size() ? <span class="number">0</span> : num2[index] - <span class="string">'0'</span>;</div><div class="line">            <span class="keyword">int</span> sum = n1 + n2 + carry;</div><div class="line">            <span class="keyword">char</span> tmp = <span class="string">'0'</span> + sum % <span class="number">10</span>;</div><div class="line">            res += + tmp;</div><div class="line">            carry = sum / <span class="number">10</span>;</div><div class="line">            index++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (carry == <span class="number">1</span>) res += <span class="string">'1'</span>;</div><div class="line">        reverse(res.begin(), res.end());</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/27/20170627-Bit-isPowerOf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1619,159 +1771,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/18/20170618-Tree-AddOneRowToTree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/18/20170618-Tree-AddOneRowToTree/" itemprop="url">
-                  Add One Row to Tree
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-18T15:57:02+08:00">
-                2017-06-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Add-One-Row-to-Tree"><a href="#Add-One-Row-to-Tree" class="headerlink" title="Add One Row to Tree"></a>Add One Row to Tree</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一棵树的头结点，和插入行的深度depth和值value；要求在深度为depth的位置插入一行值为value的节点。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>具体描述见<a href="https://leetcode.com/problems/add-one-row-to-tree/#/description" target="_blank" rel="external">LeetCode623</a></p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>第一种想法是非递归的思路：我们可以通过按行遍历树的节点；然后找到需要插入节点的那一行的所有节点；然后遍历这些节点，不断增加新的节点和改变指针的指向即可。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">addOneRow</span><span class="params">(TreeNode* root, <span class="keyword">int</span> v, <span class="keyword">int</span> d)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(d == <span class="number">1</span>)&#123;</div><div class="line">            TreeNode* res = <span class="keyword">new</span> TreeNode(v);</div><div class="line">            res-&gt;left = root;</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;<span class="comment">//当深度为1的情况直接新增一个节点，然后将根节点连接到新节点的左子指针</span></div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; q1;</div><div class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; q2;</div><div class="line">        q1.push(root);</div><div class="line">        <span class="keyword">while</span>(!q1.empty() &amp;&amp; d != <span class="number">2</span>)&#123;</div><div class="line">            <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">                <span class="keyword">if</span> (q1.front()-&gt;left)&#123;</div><div class="line">                    q2.push(q1.front()-&gt;left);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (q1.front()-&gt;right)&#123;</div><div class="line">                    q2.push(q1.front()-&gt;right);</div><div class="line">                &#125;</div><div class="line">                q1.pop();</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">queue</span>&lt;TreeNode*&gt; tmp;</div><div class="line">            tmp = q2;</div><div class="line">            q2 = q1;</div><div class="line">            q1 = tmp;</div><div class="line">            d--;</div><div class="line">        &#125;<span class="comment">//以上通过两个队列找到需要插入节点的那一行</span></div><div class="line">        <span class="keyword">while</span>(!q1.empty())&#123;</div><div class="line">            TreeNode* node = q1.front();</div><div class="line">            TreeNode* left = node-&gt;left;</div><div class="line">            TreeNode* right = node-&gt;right;</div><div class="line">            TreeNode* new_left = <span class="keyword">new</span> TreeNode(v);</div><div class="line">            TreeNode* new_right = <span class="keyword">new</span> TreeNode(v);</div><div class="line">            node-&gt;left = new_left;</div><div class="line">            new_left-&gt;left = left;</div><div class="line">            node-&gt;right = new_right;</div><div class="line">            new_right-&gt;right = right;</div><div class="line">            q1.pop();</div><div class="line">        &#125;<span class="comment">//遍历这一行中的所有节点，不断增加新的节点和改变指针的指向即可</span></div><div class="line">        <span class="keyword">return</span> root;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="递归思路："><a href="#递归思路：" class="headerlink" title="递归思路："></a>递归思路：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">TreeNode* <span class="title">addOneRow</span><span class="params">(TreeNode* root, <span class="keyword">int</span> v, <span class="keyword">int</span> d)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(d == <span class="number">1</span>)&#123;</div><div class="line">            TreeNode* res = <span class="keyword">new</span> TreeNode(v);</div><div class="line">            res-&gt;left = root;</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">        TreeNode* res = helper(root, v, d);</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    <span class="function">TreeNode* <span class="title">helper</span><span class="params">(TreeNode* root, <span class="keyword">int</span> value, <span class="keyword">int</span> depth)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">if</span> (depth == <span class="number">2</span>)&#123;</div><div class="line">            TreeNode* new_left = <span class="keyword">new</span> TreeNode(value);</div><div class="line">            TreeNode* new_right = <span class="keyword">new</span> TreeNode(value);</div><div class="line">            TreeNode* left = root-&gt;left;</div><div class="line">            TreeNode* right = root-&gt;right;</div><div class="line">            root-&gt;left = new_left;</div><div class="line">            new_left-&gt;left = left;</div><div class="line">            root-&gt;right = new_right;</div><div class="line">            new_right-&gt;right = right;</div><div class="line">            <span class="keyword">return</span> root;</div><div class="line">        &#125;<span class="comment">//如果深度是2，直接增加节点然后改变指针指向</span></div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">            root-&gt;left = helper(root-&gt;left, value, depth - <span class="number">1</span>);</div><div class="line">            root-&gt;right = helper(root-&gt;right, value, depth - <span class="number">1</span>);</div><div class="line">            <span class="comment">//如果是深度是非目标行，继续往下一层遍历，记得记录指针的指向和深度的改变</span></div><div class="line">            <span class="keyword">return</span> root;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1821,7 +1820,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">115</span>
+                <span class="site-state-item-count">116</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
