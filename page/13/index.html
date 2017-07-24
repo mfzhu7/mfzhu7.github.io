@@ -260,6 +260,165 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/19/20170319-List-DeleteKthNode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/19/20170319-List-DeleteKthNode/" itemprop="url">
+                  Delete the Kth Node In List
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-19T12:26:02+08:00">
+                2017-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Delete-List-Node-删除链表中的第倒数第k个节点"><a href="#Delete-List-Node-删除链表中的第倒数第k个节点" class="headerlink" title="Delete List Node(删除链表中的第倒数第k个节点)"></a>Delete List Node(删除链表中的第倒数第k个节点)</h1><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一个链表的第头节点，要求删除链表中的倒数第k个节点。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL.比如删除倒数第二个节点4，要求返回链表头节点包含1-&gt;2-&gt;3-&gt;5-&gt;NULL.</p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>因为单项链表无法向前遍历的特点，所以我们可以用一个指示节点来帮助我们找到链表中的倒数第k个节点。做法是：先定义一个指向指针，从链表头结点开始遍历先走k步；而后再定义个遍历指针从链表头部开始遍历，当指示节点遍历到链表尾部的时候，这个时候后遍历的指针刚好达到链表中的第k个节点。需要注意的是，我们删除第k个节点，需要知道第k-1个节点的指针，所以要定义一个pre指针用来保存待删除节点的前一个节点。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> removeLastKthNode1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">removeLastKthNode</span><span class="params">(ListNode* head, <span class="keyword">int</span> lastKth)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span> || lastKth &lt; <span class="number">1</span>)</div><div class="line">            <span class="keyword">return</span> head ;</div><div class="line">        ListNode* cur = head;</div><div class="line">        <span class="keyword">while</span>(cur != <span class="literal">NULL</span>)&#123;</div><div class="line">            cur = cur-&gt;next;</div><div class="line">            lastKth--;</div><div class="line">        &#125;     <span class="comment">// 先走k步的指示指针</span></div><div class="line">        <span class="keyword">if</span> (lastKth == <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">return</span> head-&gt;next;</div><div class="line">            <span class="comment">// k的大小大于链表长度的情况</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (lastKth &lt; <span class="number">0</span>)&#123;</div><div class="line">            cur = head;</div><div class="line">            <span class="keyword">while</span> (lastKth != <span class="number">-1</span>)&#123;</div><div class="line">                cur = cur-&gt;next;</div><div class="line">                lastKth++;</div><div class="line">            &#125;</div><div class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</div><div class="line">        &#125;    <span class="comment">// 删除找到的节点</span></div><div class="line">        <span class="keyword">return</span> head;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="延伸题目1"><a href="#延伸题目1" class="headerlink" title="延伸题目1:"></a>延伸题目1:</h3><blockquote>
+<p>链表中的中间节点。与上面的思路一样，利用快慢指针的方法就可以找到链表的中间节点。首先定义快指针fast和慢指针slow，快指针每次走两步，慢指针一次走一步。这样当快指针到达链表末尾的时候，慢指针刚好到达链表的中间节点部分。同样记得记录待删除节点的前一个节点。</p>
+</blockquote>
+<h3 id="代码如下：-1"><a href="#代码如下：-1" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> removeMidNode1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">removeMidNode</span><span class="params">(ListNode* head)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> head;</div><div class="line">        <span class="keyword">if</span> (head-&gt;next-&gt;next == <span class="literal">NULL</span>)</div><div class="line">            <span class="keyword">return</span> head-&gt;next;</div><div class="line">        ListNode* slow = head;</div><div class="line">        ListNode* fast = head-&gt;next-&gt;next;<span class="comment">//定义快慢指针</span></div><div class="line">        <span class="keyword">while</span>(fast-&gt;next != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next-&gt;next != <span class="literal">NULL</span>)&#123;</div><div class="line">            slow = slow-&gt;next;</div><div class="line">            fast = fast-&gt;next-&gt;next;</div><div class="line">        &#125;                                 <span class="comment">//找到链表的中间节点</span></div><div class="line">        slow-&gt;next = slow-&gt;next-&gt;next;</div><div class="line">        <span class="keyword">return</span> head;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="延伸题目2"><a href="#延伸题目2" class="headerlink" title="延伸题目2:"></a>延伸题目2:</h3><blockquote>
+<p>给定一个链表的头节点和整数a和整数b。要求删除链表中a/b地方的节点。这一题的主要麻烦之处是找到要删除的节点在链表中的位置，所以a/b在链表中的位置该怎么找事关键。这边主要用到的是(a*n)/b公式，得到的数值即为要删除节点在链表中的位置。</p>
+</blockquote>
+<h3 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下:"></a>代码如下:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> removeByRation1&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">removeByRation</span><span class="params">(ListNode* head, <span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (a &lt; <span class="number">0</span> || a &gt; b)</div><div class="line">            <span class="keyword">return</span> head;</div><div class="line">        <span class="keyword">int</span> n = <span class="number">0</span>;</div><div class="line">        ListNode* cur = head;</div><div class="line">        <span class="keyword">while</span>(cur != <span class="literal">NULL</span>)&#123;</div><div class="line">            cur = cur-&gt;next;</div><div class="line">            n++;</div><div class="line">        &#125;            <span class="comment">// 计算链表的长度</span></div><div class="line">        <span class="keyword">int</span> kth = <span class="keyword">int</span>(<span class="built_in">ceil</span>(<span class="keyword">double</span>(a * n) / <span class="keyword">double</span>(b)));</div><div class="line">                   <span class="comment">// 找到链表的位置</span></div><div class="line">        <span class="keyword">if</span> (kth == <span class="number">1</span>)</div><div class="line">            <span class="keyword">return</span> head-&gt;next;  <span class="comment">//如果是头节点的情况</span></div><div class="line">        <span class="keyword">if</span> (kth &gt; <span class="number">1</span>) &#123;</div><div class="line">            cur = head;</div><div class="line">            <span class="keyword">while</span> (--kth != <span class="number">1</span>) &#123;</div><div class="line">                cur = cur-&gt;next;</div><div class="line">            &#125;</div><div class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> head;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/18/20170318-List-CopyRandomListNode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -961,7 +1120,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">124</span>
+                <span class="site-state-item-count">125</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
