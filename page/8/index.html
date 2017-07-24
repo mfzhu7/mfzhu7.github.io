@@ -260,6 +260,160 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/07/20170507-ML-HMM-Viterbi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/07/20170507-ML-HMM-Viterbi/" itemprop="url">
+                  HMM_Viterbi
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-07T18:36:02+08:00">
+                2017-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="HMM-Viterbi"><a href="#HMM-Viterbi" class="headerlink" title="HMM_Viterbi"></a>HMM_Viterbi</h3><h3 id="算法原理简述："><a href="#算法原理简述：" class="headerlink" title="算法原理简述："></a>算法原理简述：</h3><blockquote>
+<p>本篇博客中主要介绍的是关于HMM算法中的维特比算法。该算法主要是给定A,B,PI参数和观测序列的情况下要求求出最有可能出现的状态序列。利用的思想还是动态规划的思想。<br>主要是定义了两个函数:</p>
+</blockquote>
+<ul>
+<li>delta(t, i),表示在所有到t时刻的状态为i的状态序列中概率最大的那个状态序列。</li>
+<li>psi(t, i)表示在到t时刻状态为i的所有状态序列中概率最大序列的t-1时刻的状态。</li>
+</ul>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="comment"># @File  : HMM_Viterbi.py</span></div><div class="line"><span class="comment"># @Author: mfzhu</span></div><div class="line"><span class="comment"># @Date  : 2017/5/7</span></div><div class="line"><span class="comment"># @Desc  :</span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HMM_Vtterbi</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, state2state, state2observation, pi)</span>:</span></div><div class="line">        self.state2state = state2state</div><div class="line">        <span class="comment"># 初始化状态转移矩阵</span></div><div class="line">        self.state2observation = state2observation</div><div class="line">        <span class="comment"># 初始化观测转移矩阵</span></div><div class="line">        self.pi = pi</div><div class="line">        <span class="comment"># 初始化初始状态概率向量</span></div><div class="line">        self.num_state = len(state2state)</div><div class="line">        <span class="comment"># 确定模型中的状态数</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, sequence)</span>:</span></div><div class="line">        <span class="comment"># 预测序列的可能状态</span></div><div class="line">        res = []</div><div class="line">        <span class="comment"># 保存结果</span></div><div class="line">        delta = self.pi * self.state2observation[:, sequence[<span class="number">0</span>]]</div><div class="line">        <span class="comment"># 初始化delta函数向量</span></div><div class="line">        psi = np.zeros([self.num_state, len(sequence)], int)</div><div class="line">        <span class="comment"># 初始化psi函数矩阵</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">1</span>, len(sequence)):</div><div class="line">            <span class="comment"># 从时刻1开始迭代</span></div><div class="line">            new_delta = []</div><div class="line">            psi_col = []</div><div class="line">            <span class="comment"># 保存当前轮迭代的delta和psi</span></div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(self.num_state):</div><div class="line">                tmp = delta * self.state2state[:, i]</div><div class="line">                index = tmp.argmax()</div><div class="line">                <span class="comment"># 找到最大值所对应的index</span></div><div class="line">                psi_col.append(index)</div><div class="line">                new_delta.append(tmp[index] * self.state2observation[i, sequence[t]])</div><div class="line">                <span class="comment"># 更新当前轮的delta和psi</span></div><div class="line">            psi[:, t] = psi_col</div><div class="line">            delta = np.array(new_delta)</div><div class="line">            <span class="comment"># 保存结果</span></div><div class="line"></div><div class="line">        last = delta.argmax()</div><div class="line">        res.insert(<span class="number">0</span>, last)</div><div class="line">        <span class="comment"># 回溯找到最大概率所对应的状态序列</span></div><div class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> range(len(sequence) - <span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>):</div><div class="line">            res.insert(<span class="number">0</span>, psi[last, t])</div><div class="line">            last = int(psi[last, t])</div><div class="line">        <span class="keyword">return</span> res</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    state2state = np.array([[<span class="number">0.5</span>, <span class="number">0.2</span>, <span class="number">0.3</span>], [<span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.2</span>], [<span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.5</span>]])</div><div class="line">    state2observation = np.array([[<span class="number">0.5</span>, <span class="number">0.5</span>], [<span class="number">0.4</span>, <span class="number">0.6</span>], [<span class="number">0.7</span>, <span class="number">0.3</span>]])</div><div class="line">    pi = np.array([<span class="number">0.2</span>, <span class="number">0.4</span>, <span class="number">0.4</span>])</div><div class="line">    sequence = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>]</div><div class="line">    <span class="comment"># 以上数据初始化模型</span></div><div class="line">    v = HMM_Vtterbi(state2state, state2observation, pi)</div><div class="line">    print(v.predict(sequence))</div><div class="line">    <span class="comment"># 训练模型并预测对应的状态序列</span></div></pre></td></tr></table></figure>
+<h3 id="代码结果："><a href="#代码结果：" class="headerlink" title="代码结果："></a>代码结果：</h3><blockquote>
+<p>通过与李航老师书本上的例子进行比较可知，当前算法的运算结果是正确的。</p>
+</blockquote>
+<p><img src="http://oov4rmeff.bkt.clouddn.com/HMM_viterbi.png" alt="img"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/06/20170506-ML-HMM-Forward-Backward/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1825,149 +1979,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/27/20170427-DS-UndirectedWeightedGraph/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/27/20170427-DS-UndirectedWeightedGraph/" itemprop="url">
-                  UndirectedWeightedGraph
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-27T13:36:02+08:00">
-                2017-04-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="UndirectedWeightedGraph"><a href="#UndirectedWeightedGraph" class="headerlink" title="UndirectedWeightedGraph"></a>UndirectedWeightedGraph</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// Created by mfzhu on 2017/4/19.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ALGORITHM_DIJKSTRA_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> ALGORITHM_DIJKSTRA_H</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">class</span> Edge;</div><div class="line"><span class="keyword">struct</span> CmpByValue&#123;</div><div class="line">  <span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> pair&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt;&amp; lhs, <span class="keyword">const</span> pair&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt;&amp; rhs)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> lhs.second &lt; rhs.second;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">class</span> undirectedGraphNode&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> label;</div><div class="line">    <span class="built_in">vector</span>&lt;Edge*&gt; neighbors;</div><div class="line">    undirectedGraphNode(<span class="keyword">int</span> l): label(l) &#123;&#125;;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">class</span> Edge&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> weight;</div><div class="line">    undirectedGraphNode* start;</div><div class="line">    undirectedGraphNode* end;</div><div class="line">    Edge(undirectedGraphNode* s, undirectedGraphNode* e, <span class="keyword">int</span> w): weight(w), start(s), end(e)&#123;&#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> undirectedWeightedGraph&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    undirectedWeightedGraph();</div><div class="line">    ~undirectedWeightedGraph()&#123;&#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">prime</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">kruskal</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertEdge</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> weight)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertNode</span><span class="params">(<span class="keyword">int</span> val)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">int</span> nNode;</div><div class="line">    <span class="keyword">int</span> nEdge;</div><div class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; nodeTable;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertNode</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; &amp;nodeTable, <span class="keyword">int</span> val)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertEdge</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; &amp;nodeTable, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> val)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">kruskal</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; nodeTable)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">prime</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; nodeTable)</span></span>;</div><div class="line"></div><div class="line">&#125;;</div><div class="line">undirectedWeightedGraph::undirectedWeightedGraph() &#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the number of vertex:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cin</span> &gt;&gt; nNode;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the number of edge:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cin</span> &gt;&gt; nEdge;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nNode; i++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the label of vertex:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">int</span> label;</div><div class="line">        <span class="built_in">cin</span> &gt;&gt; label;</div><div class="line">        undirectedGraphNode* node = <span class="keyword">new</span> undirectedGraphNode(label);</div><div class="line">        nodeTable.insert(&#123;label, node&#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nEdge; i++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"please input the info of Edge:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">int</span> start;</div><div class="line">        <span class="keyword">int</span> end;</div><div class="line">        <span class="keyword">int</span> weight;</div><div class="line">        <span class="built_in">cin</span> &gt;&gt; start &gt;&gt; end &gt;&gt; weight;</div><div class="line">        Edge* edge1 = <span class="keyword">new</span> Edge(nodeTable[start], nodeTable[end], weight);</div><div class="line">        nodeTable[start]-&gt;neighbors.push_back(edge1);</div><div class="line">        Edge* edge2 = <span class="keyword">new</span> Edge(nodeTable[end], nodeTable[start], weight);</div><div class="line">        nodeTable[end]-&gt;neighbors.push_back(edge2);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::print() &#123;</div><div class="line">    <span class="keyword">auto</span> it = nodeTable.begin();</div><div class="line">    <span class="keyword">while</span>(it != nodeTable.end())&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the node label is :"</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the node info is:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : it-&gt;second-&gt;neighbors)&#123;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; i-&gt;start-&gt;label &lt;&lt; <span class="string">"-&gt;"</span> &lt;&lt; i-&gt;end-&gt;label &lt;&lt; <span class="string">"  weight:"</span> &lt;&lt; i-&gt;weight &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        &#125;</div><div class="line">        it++;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::insertNode(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode *&gt; &amp;nodeTable, <span class="keyword">int</span> val) &#123;</div><div class="line">    <span class="keyword">if</span> (nodeTable.find(val) == nodeTable.end())&#123;</div><div class="line">        undirectedGraphNode* node = <span class="keyword">new</span> undirectedGraphNode(val);</div><div class="line">        nodeTable.insert(&#123;val, node&#125;);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the node is existed"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::insertNode(<span class="keyword">int</span> node) &#123;</div><div class="line">    insertNode(nodeTable, node);</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::insertEdge(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode *&gt; &amp;nodeTable, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> w) &#123;</div><div class="line">    Edge* e = <span class="keyword">new</span> Edge(nodeTable[start], nodeTable[end], w);</div><div class="line">    nodeTable[start]-&gt;neighbors.push_back(e);</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::insertEdge(<span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> weight) &#123;</div><div class="line">    insertEdge(nodeTable, start, end, weight);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::kruskal(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode*&gt; nodeTable) &#123;</div><div class="line">    <span class="keyword">int</span> union_array[nNode + <span class="number">1</span>];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nNode + <span class="number">1</span>; i++)&#123;</div><div class="line">        union_array[i] = i;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; result;</div><div class="line">    <span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; Edge_map;</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it = nodeTable.begin(); it != nodeTable.end(); it++)&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> edge: it-&gt;second-&gt;neighbors)&#123;</div><div class="line">            pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; forward&#123;edge-&gt;start-&gt;label, edge-&gt;end-&gt;label&#125;;</div><div class="line">            pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; backward&#123;edge-&gt;end-&gt;label, edge-&gt;start-&gt;label&#125;;</div><div class="line">            <span class="keyword">if</span> (Edge_map.find(forward) == Edge_map.end() &amp;&amp; Edge_map.find(backward) == Edge_map.end())&#123;</div><div class="line">                Edge_map.insert(&#123;forward, edge-&gt;weight&#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">vector</span>&lt;pair&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt;&gt; Edge_vec(Edge_map.begin(), Edge_map.end());</div><div class="line">    sort(Edge_vec.begin(), Edge_vec.end(), CmpByValue());</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = Edge_vec.begin(); result.size() != nNode - <span class="number">1</span>; it++)&#123;</div><div class="line">        <span class="keyword">int</span> start = it-&gt;first.first;</div><div class="line">        <span class="keyword">int</span> end = it-&gt;first.second;</div><div class="line">        <span class="keyword">int</span> weight = it-&gt;second;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (union_array[start] == union_array[end])&#123;</div><div class="line">            <span class="keyword">continue</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            result.insert(&#123;&#123;start, end&#125;, weight&#125;);</div><div class="line">            <span class="keyword">int</span> head = union_array[start];</div><div class="line">            <span class="keyword">int</span> tail = union_array[end];</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nNode + <span class="number">1</span>; i++)&#123;</div><div class="line">                <span class="keyword">if</span> (union_array[i] == head || union_array[i] == tail)&#123;</div><div class="line">                    union_array[i] = head;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = result.begin(); it != result.end(); it++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; it-&gt;first.first &lt;&lt; <span class="string">"-&gt;"</span> &lt;&lt; it-&gt;first.second &lt;&lt; <span class="string">": "</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::kruskal() &#123;</div><div class="line">    kruskal(nodeTable);</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::prime(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, undirectedGraphNode *&gt; nodeTable) &#123;</div><div class="line">    <span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; result;</div><div class="line">    <span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; Edge_set;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = nodeTable.begin(); it != nodeTable.end(); it++)&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> edge : it-&gt;second-&gt;neighbors)&#123;</div><div class="line">            Edge_set.insert(&#123;&#123;edge-&gt;start-&gt;label, edge-&gt;end-&gt;label&#125;, edge-&gt;weight&#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">auto</span> index = nodeTable.begin();</div><div class="line">    <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; visited&#123;index-&gt;first&#125;;</div><div class="line">    <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; unvisited;</div><div class="line">    <span class="keyword">while</span>(++index != nodeTable.end())&#123;</div><div class="line">        unvisited.insert(index-&gt;first);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> cur_min_distance = INT8_MAX;</div><div class="line">    <span class="keyword">int</span> v_node = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> u_node = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(!unvisited.empty())&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i = visited.begin(); i != visited.end(); i++)&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> j = unvisited.begin(); j != unvisited.end(); j++)&#123;</div><div class="line">                pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; tmp&#123;*i,*j&#125;;</div><div class="line">                <span class="keyword">if</span> (Edge_set.find(tmp) != Edge_set.end() &amp;&amp; Edge_set[tmp] &lt; cur_min_distance)&#123;</div><div class="line">                    cur_min_distance = Edge_set[tmp];</div><div class="line">                    v_node = *i;</div><div class="line">                    u_node = *j;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        result.insert(&#123;&#123;v_node, u_node&#125;, cur_min_distance&#125;);</div><div class="line">        cur_min_distance = INT8_MAX;</div><div class="line">        visited.insert(u_node);</div><div class="line">        unvisited.erase(u_node);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = result.begin(); iter != result.end(); iter++)&#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first.first &lt;&lt; <span class="string">"-&gt;"</span> &lt;&lt; iter-&gt;first.second &lt;&lt; <span class="string">": "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> undirectedWeightedGraph::prime() &#123;</div><div class="line">    prime(nodeTable);</div><div class="line">&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//ALGORITHM_DIJKSTRA_H</span></span></div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2017,7 +2028,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">123</span>
+                <span class="site-state-item-count">124</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
