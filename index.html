@@ -1476,6 +1476,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/20170716-Array-FindtheDuplicateNumber/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mfzhu7">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/16/20170716-Array-FindtheDuplicateNumber/" itemprop="url">
+                  Find the Duplicate Number
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T23:36:02+08:00">
+                2017-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Find-the-Duplicate-Number"><a href="#Find-the-Duplicate-Number" class="headerlink" title="Find the Duplicate Number"></a>Find the Duplicate Number</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
+<p>给定一个数组长度为n+1;其中只包含着1~n的数且只有一个数出现了重复，要求找到这个数。</p>
+</blockquote>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
+<p>具体描述见<a href="https://leetcode.com/problems/find-the-duplicate-number/#/description" target="_blank" rel="external">LeetCode287</a></p>
+</blockquote>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
+<p>我们考虑用二分查找的方式来找到这个数。我们先找到中间数mid;然后找到数组中找到小于等于mid数的个数；如果个数大于mid说明重复的数在low~mid之间。</p>
+</blockquote>
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findDuplicate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> low = <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> high = nums.size() - <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> mid = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(low &lt; high)&#123;</div><div class="line">            mid = low + (high - low) / <span class="number">2</span>;</div><div class="line">            count = <span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)&#123;</div><div class="line">                <span class="keyword">if</span> (nums[i] &lt;= mid) count++;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (count &gt; mid) high = mid;</div><div class="line">            <span class="keyword">if</span> (count &lt;= mid) low = mid + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> low;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/14/20170714-Bit-ReverseBits/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1624,163 +1776,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/13/20170713-Bit-FactorialTrailingZeroes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="mfzhu7">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/87cf06a6c1ae27abe8b9a6f41ff4f4b8?s=80">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tech">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/07/13/20170713-Bit-FactorialTrailingZeroes/" itemprop="url">
-                  Factorial Trailing Zeroes
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-13T10:05:02+08:00">
-                2017-07-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Factorial-Trailing-Zeroes"><a href="#Factorial-Trailing-Zeroes" class="headerlink" title="Factorial Trailing Zeroes"></a>Factorial Trailing Zeroes</h3><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><blockquote>
-<p>给定一个数要求计算其阶乘结果尾部0的个数。</p>
-</blockquote>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><blockquote>
-<p>具体描述见<a href="https://leetcode.com/problems/factorial-trailing-zeroes/#/description" target="_blank" rel="external">LeetCode172</a></p>
-</blockquote>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>阶乘的结果中0的结果来至于5的个数，因为2的因子的个数远远多于5，所以只要找到了5的个数就可以知道阶乘尾部0的个数。又因为25，125等存在多个5，所以我们需要不断的找到这些因子的数量。将所有因子的数量相加即可得到0的个数。</p>
-</blockquote>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">trailingZeroes</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">long</span> <span class="keyword">long</span> i = <span class="number">5</span>; n / i &gt; <span class="number">0</span>; i *= <span class="number">5</span>)&#123;</div><div class="line">            result += (n / i);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1825,7 +1825,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">130</span>
+                <span class="site-state-item-count">131</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
